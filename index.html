@@ -5,6 +5,576 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>SkillBridge Africa – Connect | Opportunities | Talent</title>
+  <link rel="stylesheet" href="https://unpkg.com/tabler-icons@latest/iconfont/tabler-icons.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #1E3A5F;
+      --primary-dark: #0F2B45;
+      --secondary: #2A9D8F;
+      --secondary-light: #EAF8F5;
+      --accent: #E9C46A;
+      --accent-dark: #D4A52E;
+      --gray-50: #F8F9FA;
+      --gray-100: #F1F3F5;
+      --gray-200: #E9ECEF;
+      --gray-600: #6C757D;
+      --gray-800: #343A40;
+      --white: #FFFFFF;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-800);
+      line-height: 1.5;
+    }
+
+    .app-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      background: var(--white);
+      min-height: 100vh;
+      box-shadow: var(--shadow);
+    }
+
+    /* Header & Navigation */
+    .navbar {
+      background: var(--primary);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .logo i { font-size: 1.8rem; color: var(--accent); }
+    .logo span { font-size: 0.9rem; font-weight: 400; opacity: 0.8; }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav-link {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0.4rem 0;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .nav-link i { font-size: 1.2rem; }
+    .nav-link:hover, .nav-link.active {
+      color: white;
+      border-bottom-color: var(--accent);
+    }
+
+    .user-badge {
+      background: rgba(255,255,255,0.12);
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .avatar-sm {
+      width: 32px;
+      height: 32px;
+      background: var(--secondary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+    }
+
+    /* Main content */
+    .main-content {
+      padding: 2rem;
+    }
+
+    .page {
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+    .page.active-page { display: block; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* Cards & Grid */
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+    .card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid var(--gray-200);
+    }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
+    .card-header { padding: 1rem 1.2rem 0; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+    .card-body { padding: 1rem 1.2rem 1.2rem; }
+    .tag {
+      background: var(--gray-100);
+      padding: 0.2rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--gray-600);
+      display: inline-block;
+    }
+    .badge-opportunity {
+      background: var(--secondary-light);
+      color: var(--secondary);
+      font-weight: 600;
+    }
+    .btn {
+      padding: 0.5rem 1rem;
+      border-radius: 40px;
+      border: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--gray-100);
+      color: var(--gray-800);
+    }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
+    .btn-secondary { background: var(--secondary); color: white; }
+    .btn-sm { padding: 0.3rem 0.8rem; font-size: 0.8rem; }
+
+    .profile-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      color: white;
+      margin-bottom: 2rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .profile-avatar-lg {
+      width: 100px;
+      height: 100px;
+      background: var(--secondary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+    .search-bar {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      background: white;
+      padding: 0.5rem;
+      border-radius: 60px;
+      border: 1px solid var(--gray-200);
+      max-width: 500px;
+    }
+    .search-bar input {
+      flex: 1;
+      border: none;
+      padding: 0.5rem 1rem;
+      outline: none;
+      background: transparent;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: white;
+      max-width: 500px;
+      width: 90%;
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+    }
+
+    .footer { text-align: center; padding: 2rem; color: var(--gray-600); border-top: 1px solid var(--gray-200); margin-top: 2rem; }
+
+    @media (max-width: 768px) {
+      .navbar { flex-direction: column; align-items: stretch; }
+      .nav-links { justify-content: center; }
+      .main-content { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="app-container">
+  <div class="navbar">
+    <div class="logo">
+      <i class="ti ti-bridge"></i>
+      <span>SkillBridge<span style="font-weight:300"> Africa</span></span>
+    </div>
+    <div class="nav-links">
+      <div class="nav-link active" data-page="opportunities"><i class="ti ti-briefcase"></i> Opportunities</div>
+      <div class="nav-link" data-page="talent"><i class="ti ti-users"></i> Talent</div>
+      <div class="nav-link" data-page="mentors"><i class="ti ti-messages"></i> Mentorship</div>
+      <div class="nav-link" data-page="community"><i class="ti ti-news"></i> Community</div>
+      <div class="nav-link" data-page="companies"><i class="ti ti-building"></i> Companies</div>
+    </div>
+    <div class="user-badge" id="userBadge">
+      <div class="avatar-sm">AM</div>
+      <span>Amina M.</span>
+      <i class="ti ti-chevron-down" style="font-size: 0.8rem;"></i>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <!-- Opportunities Page -->
+    <div id="opportunities-page" class="page active-page">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
+        <h2>🔥 Opportunities across Africa</h2>
+        <button class="btn btn-primary" id="postOppBtn"><i class="ti ti-plus"></i> Post opportunity</button>
+      </div>
+      <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="oppSearch" placeholder="Search jobs, gigs, internships..."></div>
+      <div id="opportunities-list" class="grid-2"></div>
+    </div>
+
+    <!-- Talent Directory -->
+    <div id="talent-page" class="page">
+      <h2 style="margin-bottom: 1rem;">✨ Find African talent</h2>
+      <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="talentSearch" placeholder="Search by skill, location, name..."></div>
+      <div id="talent-list" class="grid-3"></div>
+    </div>
+
+    <!-- Mentorship -->
+    <div id="mentors-page" class="page">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <h2>🤝 Mentorship & Expert advice</h2>
+        <button class="btn btn-outline" id="becomeMentorBtn"><i class="ti ti-star"></i> Become a mentor</button>
+      </div>
+      <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="mentorSearch" placeholder="Find mentor by industry, name..."></div>
+      <div id="mentors-list" class="grid-3"></div>
+    </div>
+
+    <!-- Community Feed -->
+    <div id="community-page" class="page">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h2>💬 Community Hub</h2>
+        <button class="btn btn-primary" id="newPostBtn"><i class="ti ti-edit"></i> New post</button>
+      </div>
+      <div id="feed-list" style="display: flex; flex-direction: column; gap: 1rem;"></div>
+    </div>
+
+    <!-- Companies -->
+    <div id="companies-page" class="page">
+      <h2 style="margin-bottom: 1rem;">🏢 Companies hiring & partnering</h2>
+      <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="companySearch" placeholder="Search companies..."></div>
+      <div id="companies-list" class="grid-2"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>SkillBridge Africa — Connecting talent with real opportunities. No courses, just bridges.</p>
+  </div>
+</div>
+
+<!-- Modal for posting opportunity -->
+<div id="oppModal" class="modal">
+  <div class="modal-content">
+    <h3>Post a new opportunity</h3>
+    <input type="text" id="oppTitle" placeholder="Title (e.g., Frontend Developer)" style="width:100%; margin: 10px 0; padding: 8px;">
+    <select id="oppType" style="width:100%; padding: 8px; margin-bottom: 10px;">
+      <option value="job">Full-time Job</option>
+      <option value="internship">Internship</option>
+      <option value="gig">Freelance/Gig</option>
+    </select>
+    <input type="text" id="oppCompany" placeholder="Company name" style="width:100%; margin-bottom: 10px; padding: 8px;">
+    <input type="text" id="oppLocation" placeholder="Location (e.g., Nairobi / Remote)" style="width:100%; margin-bottom: 10px; padding: 8px;">
+    <textarea id="oppDesc" placeholder="Description, requirements..." rows="3" style="width:100%; margin-bottom: 10px; padding: 8px;"></textarea>
+    <div style="display: flex; gap: 10px; justify-content: flex-end;">
+      <button class="btn" id="closeOppModal">Cancel</button>
+      <button class="btn btn-primary" id="submitOpp">Post</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for new community post -->
+<div id="postModal" class="modal">
+  <div class="modal-content">
+    <h3>Share with the community</h3>
+    <textarea id="postContent" rows="4" placeholder="What's on your mind? Opportunities, insights, questions..." style="width:100%; margin: 10px 0; padding: 8px;"></textarea>
+    <div style="display: flex; gap: 10px; justify-content: flex-end;">
+      <button class="btn" id="closePostModal">Cancel</button>
+      <button class="btn btn-primary" id="submitPost">Publish</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ---------- Demo Data ----------
+  let opportunities = [
+    { id: "opp1", title: "Frontend Developer (React)", type: "job", company: "Fintech Hub", location: "Lagos, Nigeria (Remote)", description: "Join a fast-growing fintech. 3+ years React experience.", postedBy: "TechRecruit", date: "2026-05-01" },
+    { id: "opp2", title: "UI/UX Design Intern", type: "internship", company: "Creative Labs", location: "Nairobi, Kenya", description: "3-month paid internship. Learn from senior designers.", postedBy: "CreativeLabs", date: "2026-05-03" },
+    { id: "opp3", title: "Build Landing Page for NGO", type: "gig", company: "Health Equity", location: "Remote", description: "Budget $200. Need responsive design in 1 week.", postedBy: "HealthEquity", date: "2026-05-02" },
+    { id: "opp4", title: "Data Analyst", type: "job", company: "AfriAnalytics", location: "Kigali, Rwanda", description: "SQL, Python, Power BI. Competitive salary.", postedBy: "AfriAnalytics", date: "2026-04-28" },
+  ];
+
+  let talents = [
+    { id: "tal1", name: "Chiamaka O.", skills: ["React", "Node.js", "MongoDB"], location: "Lagos", avatar: "CO", bio: "Fullstack dev with 4 years experience, open for contract work." },
+    { id: "tal2", name: "Kelvin M.", skills: ["UI/UX", "Figma", "User Research"], location: "Nairobi", avatar: "KM", bio: "Product designer, previously at Andela." },
+    { id: "tal3", name: "Fatima Z.", skills: ["Digital Marketing", "SEO", "Content Strategy"], location: "Casablanca", avatar: "FZ", bio: "Marketing specialist, helped 10+ startups grow." },
+    { id: "tal4", name: "Samuel K.", skills: ["Python", "Data Science", "Tableau"], location: "Accra", avatar: "SK", bio: "Data scientist, Kaggle expert." },
+    { id: "tal5", name: "Amina M.", skills: ["Project Management", "Agile", "Scrum"], location: "Dar es Salaam", avatar: "AM", bio: "Certified PMP, 7 years experience." },
+  ];
+
+  let mentors = [
+    { id: "men1", name: "James Nkosi", title: "Senior Software Engineer", company: "Google", expertise: ["Career Growth", "System Design"], about: "10+ years in tech. Passionate about mentoring African devs.", avatar: "JN", linked: false },
+    { id: "men2", name: "Dr. Grace Achieng", title: "Founder & CEO", company: "Women in STEM", expertise: ["Entrepreneurship", "Leadership"], about: "Helped launch 20+ startups. Let's talk business.", avatar: "GA", linked: false },
+    { id: "men3", name: "Michael Omondi", title: "Lead Product Designer", company: "Canva", expertise: ["UI/UX", "Portfolio Review"], about: "Design mentor. Book a free 30-min chat.", avatar: "MO", linked: false },
+  ];
+
+  let companies = [
+    { id: "comp1", name: "Andela", industry: "Tech Talent", location: "Pan-Africa", hiring: ["Software Engineer", "DevOps"], logo: "AN", description: "Global talent network." },
+    { id: "comp2", name: "Flutterwave", industry: "Fintech", location: "Lagos & Remote", hiring: ["Product Manager", "Backend"], logo: "FW", description: "Leading payments technology." },
+    { id: "comp3", name: "M-KOPA", industry: "Clean Energy", location: "Nairobi", hiring: ["Sales Analyst", "Mobile Dev"], logo: "MK", description: "Pay-as-you-go solar." },
+    { id: "comp4", name: "Jumia", industry: "E-commerce", location: "Multiple Countries", hiring: ["Logistics Coordinator", "Marketing"], logo: "JM", description: "Africa's leading e-commerce." },
+  ];
+
+  let communityPosts = [
+    { id: "post1", author: "Amina M.", avatar: "AM", content: "Just landed a remote gig through SkillBridge! So grateful for this community 🔥", time: "2 hours ago", likes: 24, comments: 3 },
+    { id: "post2", author: "TechBridge", avatar: "TB", content: "We're hiring 5 junior developers. DM for details. #opportunity", time: "Yesterday", likes: 56, comments: 12 },
+    { id: "post3", author: "Grace A.", avatar: "GA", content: "Free mentorship session this Friday: 'How to negotiate your salary in Africa's tech scene'", time: "1 day ago", likes: 89, comments: 7 },
+  ];
+
+  // Helper: render functions
+  function renderOpportunities(filter = "") {
+    const listDiv = document.getElementById("opportunities-list");
+    let filtered = opportunities.filter(opp => opp.title.toLowerCase().includes(filter.toLowerCase()) || opp.company.toLowerCase().includes(filter.toLowerCase()));
+    if (filtered.length === 0) { listDiv.innerHTML = "<div class='card' style='padding:2rem; text-align:center'>No opportunities found. Be the first to post!</div>"; return; }
+    listDiv.innerHTML = filtered.map(opp => `
+      <div class="card">
+        <div class="card-header">
+          <span><strong>${opp.title}</strong></span>
+          <span class="tag badge-opportunity">${opp.type === 'job' ? '💼 Job' : opp.type === 'internship' ? '🎓 Internship' : '⚡ Gig'}</span>
+        </div>
+        <div class="card-body">
+          <p style="display: flex; gap: 1rem; margin-bottom: 0.5rem;"><i class="ti ti-building"></i> ${opp.company} &nbsp;|&nbsp; <i class="ti ti-map-pin"></i> ${opp.location}</p>
+          <p style="margin: 0.5rem 0; color: var(--gray-600);">${opp.description}</p>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+            <span style="font-size: 0.75rem; color: gray;">Posted by ${opp.postedBy}</span>
+            <button class="btn btn-sm btn-primary apply-opp" data-id="${opp.id}">Apply</button>
+          </div>
+        </div>
+      </div>
+    `).join("");
+    document.querySelectorAll(".apply-opp").forEach(btn => btn.addEventListener("click", (e) => { alert("Application sent! The company will contact you via email."); }));
+  }
+
+  function renderTalent(filter = "") {
+    const div = document.getElementById("talent-list");
+    let filtered = talents.filter(t => t.name.toLowerCase().includes(filter.toLowerCase()) || t.skills.some(s => s.toLowerCase().includes(filter.toLowerCase())) || t.location.toLowerCase().includes(filter.toLowerCase()));
+    if (filtered.length === 0) { div.innerHTML = "<div class='card' style='padding:2rem'>No talent found</div>"; return; }
+    div.innerHTML = filtered.map(t => `
+      <div class="card">
+        <div class="card-header" style="gap: 0.5rem;">
+          <div class="avatar-sm" style="background: var(--secondary);">${t.avatar}</div>
+          <span><strong>${t.name}</strong></span>
+        </div>
+        <div class="card-body">
+          <p><i class="ti ti-map-pin"></i> ${t.location}</p>
+          <div style="margin: 8px 0;">${t.skills.map(s => `<span class="tag">${s}</span>`).join(' ')}</div>
+          <p style="font-size: 0.85rem;">${t.bio}</p>
+          <button class="btn btn-sm btn-outline hire-talent" data-name="${t.name}">Contact talent</button>
+        </div>
+      </div>
+    `).join("");
+    document.querySelectorAll(".hire-talent").forEach(btn => btn.addEventListener("click", () => alert("Request sent to talent. They'll see your message.")));
+  }
+
+  function renderMentors(filter = "") {
+    const div = document.getElementById("mentors-list");
+    let filtered = mentors.filter(m => m.name.toLowerCase().includes(filter.toLowerCase()) || m.expertise.some(e => e.toLowerCase().includes(filter.toLowerCase())));
+    if (filtered.length === 0) { div.innerHTML = "<div class='card' style='padding:2rem'>No mentors match</div>"; return; }
+    div.innerHTML = filtered.map(m => `
+      <div class="card">
+        <div class="card-header" style="gap: 0.5rem;">
+          <div class="avatar-sm" style="background: var(--accent);">${m.avatar}</div>
+          <div><strong>${m.name}</strong><br><span style="font-size: 0.7rem;">${m.title} @ ${m.company}</span></div>
+        </div>
+        <div class="card-body">
+          <div>${m.expertise.map(e => `<span class="tag">${e}</span>`).join(' ')}</div>
+          <p style="margin: 10px 0;">${m.about}</p>
+          <button class="btn btn-sm btn-secondary request-mentor" data-id="${m.id}">Request mentorship</button>
+        </div>
+      </div>
+    `).join("");
+    document.querySelectorAll(".request-mentor").forEach(btn => btn.addEventListener("click", (e) => alert("Mentorship request sent! The mentor will respond within 48 hours.")));
+  }
+
+  function renderCompanies(filter = "") {
+    const div = document.getElementById("companies-list");
+    let filtered = companies.filter(c => c.name.toLowerCase().includes(filter.toLowerCase()) || c.industry.toLowerCase().includes(filter.toLowerCase()));
+    if (filtered.length === 0) { div.innerHTML = "<div class='card'>No companies found</div>"; return; }
+    div.innerHTML = filtered.map(c => `
+      <div class="card">
+        <div class="card-header">
+          <div style="display: flex; align-items: center; gap: 10px;"><div class="avatar-sm" style="background: var(--primary);">${c.logo}</div><strong>${c.name}</strong></div>
+          <span class="tag">${c.industry}</span>
+        </div>
+        <div class="card-body">
+          <p><i class="ti ti-map-pin"></i> ${c.location}</p>
+          <p style="margin: 5px 0;">${c.description}</p>
+          <p><strong>Hiring:</strong> ${c.hiring.join(", ")}</p>
+          <button class="btn btn-sm btn-primary view-jobs" data-company="${c.name}">View open roles</button>
+        </div>
+      </div>
+    `).join("");
+    document.querySelectorAll(".view-jobs").forEach(btn => btn.addEventListener("click", () => alert(`Check ${btn.dataset.company}'s careers page for full details.`)));
+  }
+
+  function renderCommunity() {
+    const feedDiv = document.getElementById("feed-list");
+    feedDiv.innerHTML = communityPosts.map(p => `
+      <div class="card">
+        <div class="card-header" style="justify-content: left; gap: 10px;">
+          <div class="avatar-sm" style="background: var(--accent);">${p.avatar}</div>
+          <div><strong>${p.author}</strong> · <span style="font-size:0.7rem; color: gray;">${p.time}</span></div>
+        </div>
+        <div class="card-body">
+          <p>${p.content}</p>
+          <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <button class="like-post" data-id="${p.id}"><i class="ti ti-heart"></i> ${p.likes}</button>
+            <button class="comment-post"><i class="ti ti-message-circle"></i> ${p.comments}</button>
+          </div>
+        </div>
+      </div>
+    `).join("");
+    document.querySelectorAll(".like-post").forEach(btn => btn.addEventListener("click", (e) => { alert("Like added! (demo)"); }));
+  }
+
+  // Add new opportunity
+  function addOpportunity(title, type, company, location, desc) {
+    const newId = "opp" + Date.now();
+    opportunities.unshift({ id: newId, title, type, company, location, description: desc, postedBy: "Amina M.", date: new Date().toISOString().slice(0,10) });
+    renderOpportunities();
+    alert("Opportunity posted!");
+  }
+
+  function addCommunityPost(content) {
+    const newPost = {
+      id: "post"+Date.now(),
+      author: "Amina M.",
+      avatar: "AM",
+      content: content,
+      time: "Just now",
+      likes: 0,
+      comments: 0
+    };
+    communityPosts.unshift(newPost);
+    renderCommunity();
+  }
+
+  // Event listeners and page switching
+  function switchPage(pageId) {
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active-page"));
+    document.getElementById(`${pageId}-page`).classList.add("active-page");
+    document.querySelectorAll(".nav-link").forEach(link => link.classList.remove("active"));
+    document.querySelector(`.nav-link[data-page="${pageId}"]`).classList.add("active");
+    if (pageId === "opportunities") renderOpportunities();
+    else if (pageId === "talent") renderTalent();
+    else if (pageId === "mentors") renderMentors();
+    else if (pageId === "community") renderCommunity();
+    else if (pageId === "companies") renderCompanies();
+  }
+
+  // Search listeners
+  document.getElementById("oppSearch")?.addEventListener("input", (e) => renderOpportunities(e.target.value));
+  document.getElementById("talentSearch")?.addEventListener("input", (e) => renderTalent(e.target.value));
+  document.getElementById("mentorSearch")?.addEventListener("input", (e) => renderMentors(e.target.value));
+  document.getElementById("companySearch")?.addEventListener("input", (e) => renderCompanies(e.target.value));
+
+  // Modal logic
+  const oppModal = document.getElementById("oppModal");
+  const postModal = document.getElementById("postModal");
+  document.getElementById("postOppBtn").onclick = () => oppModal.style.display = "flex";
+  document.getElementById("newPostBtn").onclick = () => postModal.style.display = "flex";
+  document.getElementById("closeOppModal").onclick = () => oppModal.style.display = "none";
+  document.getElementById("closePostModal").onclick = () => postModal.style.display = "none";
+  document.getElementById("submitOpp").onclick = () => {
+    let title = document.getElementById("oppTitle").value.trim();
+    let type = document.getElementById("oppType").value;
+    let company = document.getElementById("oppCompany").value.trim();
+    let location = document.getElementById("oppLocation").value.trim();
+    let desc = document.getElementById("oppDesc").value.trim();
+    if (title && company && location && desc) addOpportunity(title, type, company, location, desc);
+    else alert("Please fill all fields");
+    oppModal.style.display = "none";
+    document.getElementById("oppTitle").value = "";
+    document.getElementById("oppCompany").value = "";
+    document.getElementById("oppLocation").value = "";
+    document.getElementById("oppDesc").value = "";
+  };
+  document.getElementById("submitPost").onclick = () => {
+    let content = document.getElementById("postContent").value.trim();
+    if (content) addCommunityPost(content);
+    else alert("Write something");
+    postModal.style.display = "none";
+    document.getElementById("postContent").value = "";
+  };
+  window.onclick = (e) => { if (e.target === oppModal) oppModal.style.display = "none"; if (e.target === postModal) postModal.style.display = "none"; };
+  document.getElementById("becomeMentorBtn")?.addEventListener("click", () => alert("Mentor application form coming soon!"));
+  document.querySelectorAll(".nav-link").forEach(link => link.addEventListener("click", () => switchPage(link.dataset.page)));
+  // initial renders
+  renderOpportunities();
+  renderTalent();
+  renderMentors();
+  renderCompanies();
+  renderCommunity();
+</script>
+</body>
+</html>
 </body>
 </html>
