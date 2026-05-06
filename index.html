@@ -1,11 +1,4 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -39,7 +32,7 @@
     }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
       background: var(--gray-50);
       color: var(--gray-800);
       line-height: 1.5;
@@ -275,7 +268,7 @@
     <!-- Opportunities Page -->
     <div id="opportunities-page" class="page active-page">
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
-        <h2>🔥 Opportunities across Africa</h2>
+        <h2>Opportunities across Africa</h2>
         <button class="btn btn-primary" id="postOppBtn"><i class="ti ti-plus"></i> Post opportunity</button>
       </div>
       <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="oppSearch" placeholder="Search jobs, gigs, internships..."></div>
@@ -284,7 +277,7 @@
 
     <!-- Talent Directory -->
     <div id="talent-page" class="page">
-      <h2 style="margin-bottom: 1rem;">✨ Find African talent</h2>
+      <h2 style="margin-bottom: 1rem;">Find African talent</h2>
       <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="talentSearch" placeholder="Search by skill, location, name..."></div>
       <div id="talent-list" class="grid-3"></div>
     </div>
@@ -292,7 +285,7 @@
     <!-- Mentorship -->
     <div id="mentors-page" class="page">
       <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-        <h2>🤝 Mentorship & Expert advice</h2>
+        <h2>Mentorship & Expert advice</h2>
         <button class="btn btn-outline" id="becomeMentorBtn"><i class="ti ti-star"></i> Become a mentor</button>
       </div>
       <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="mentorSearch" placeholder="Find mentor by industry, name..."></div>
@@ -302,7 +295,7 @@
     <!-- Community Feed -->
     <div id="community-page" class="page">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-        <h2>💬 Community Hub</h2>
+        <h2>Community Hub</h2>
         <button class="btn btn-primary" id="newPostBtn"><i class="ti ti-edit"></i> New post</button>
       </div>
       <div id="feed-list" style="display: flex; flex-direction: column; gap: 1rem;"></div>
@@ -310,7 +303,7 @@
 
     <!-- Companies -->
     <div id="companies-page" class="page">
-      <h2 style="margin-bottom: 1rem;">🏢 Companies hiring & partnering</h2>
+      <h2 style="margin-bottom: 1rem;">Companies hiring & partnering</h2>
       <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="companySearch" placeholder="Search companies..."></div>
       <div id="companies-list" class="grid-2"></div>
     </div>
@@ -384,7 +377,7 @@
   ];
 
   let communityPosts = [
-    { id: "post1", author: "Amina M.", avatar: "AM", content: "Just landed a remote gig through SkillBridge! So grateful for this community 🔥", time: "2 hours ago", likes: 24, comments: 3 },
+    { id: "post1", author: "Amina M.", avatar: "AM", content: "Just landed a remote gig through SkillBridge! So grateful for this community", time: "2 hours ago", likes: 24, comments: 3 },
     { id: "post2", author: "TechBridge", avatar: "TB", content: "We're hiring 5 junior developers. DM for details. #opportunity", time: "Yesterday", likes: 56, comments: 12 },
     { id: "post3", author: "Grace A.", avatar: "GA", content: "Free mentorship session this Friday: 'How to negotiate your salary in Africa's tech scene'", time: "1 day ago", likes: 89, comments: 7 },
   ];
@@ -398,7 +391,7 @@
       <div class="card">
         <div class="card-header">
           <span><strong>${opp.title}</strong></span>
-          <span class="tag badge-opportunity">${opp.type === 'job' ? '💼 Job' : opp.type === 'internship' ? '🎓 Internship' : '⚡ Gig'}</span>
+          <span class="tag badge-opportunity">${opp.type === 'job' ? 'Job' : opp.type === 'internship' ? 'Internship' : 'Gig'}</span>
         </div>
         <div class="card-body">
           <p style="display: flex; gap: 1rem; margin-bottom: 0.5rem;"><i class="ti ti-building"></i> ${opp.company} &nbsp;|&nbsp; <i class="ti ti-map-pin"></i> ${opp.location}</p>
@@ -492,7 +485,7 @@
         </div>
       </div>
     `).join("");
-    document.querySelectorAll(".like-post").forEach(btn => btn.addEventListener("click", (e) => { alert("Like added! (demo)"); }));
+    document.querySelectorAll(".like-post").forEach(btn => btn.addEventListener("click", (e) => { alert("Like added (demo)"); }));
   }
 
   // Add new opportunity
@@ -574,7 +567,5 @@
   renderCompanies();
   renderCommunity();
 </script>
-</body>
-</html>
 </body>
 </html>
