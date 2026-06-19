@@ -3,108 +3,139 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>SkillBridge Africa Practical Learning Platform</title>
+  <title>SkillBridge Africa – Practical Learning</title>
   <link rel="stylesheet" href="https://unpkg.com/tabler-icons@latest/iconfont/tabler-icons.min.css">
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
     :root{
-      --navy:#1E3050;--navy2:#243660;--teal:#0F6E56;--teal2:#1D9E75;--teal-l:#E1F5EE;--teal-m:#9FE1CB;
-      --amber:#854F0B;--amber-l:#FAEEDA;--amber-m:#FAC775;
-      --slate:#3A4A6B;--slate-l:#E8EBF4;--pink:#993556;--pink-l:#FBEAF0;
-      --green:#3B6D11;--green-l:#EAF3DE;--green-m:#C0DD97;
-      --bg:#F5F6F8;--surf:#fff;--surf2:#F0F2F5;--bdr:rgba(0,0,0,.12);--bdr2:rgba(0,0,0,.22);
-      --t1:#111;--t2:#555;--t3:#888;
-      --r:12px;--rs:8px;
+      --primary: #1E3A5F;
+      --primary-dark: #0F2B45;
+      --secondary: #2A9D8F;
+      --secondary-light: #EAF8F5;
+      --accent: #E9C46A;
+      --gray-50: #F8F9FA;
+      --gray-100: #F1F3F5;
+      --gray-200: #E9ECEF;
+      --gray-600: #6C757D;
+      --gray-800: #343A40;
+      --white: #FFFFFF;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --teal: #0F6E56;
+      --teal2: #1D9E75;
+      --teal-l: #E1F5EE;
+      --teal-m: #9FE1CB;
+      --slate-l: #E8EBF4;
+      --bdr: rgba(0,0,0,.12);
+      --bdr2: rgba(0,0,0,.22);
+      --t1: #111;
+      --t2: #555;
+      --t3: #888;
     }
-    body{font-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;background:var(--bg);color:var(--t1);padding:12px}
-    .wrap{display:flex;gap:0;background:var(--surf);border:0.5px solid var(--bdr);border-radius:var(--r);overflow:hidden;min-height:680px}
-    .sidebar{width:210px;flex-shrink:0;background:var(--navy);display:flex;flex-direction:column}
+    body{font-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;background:var(--gray-50);color:var(--t1);padding:12px}
+    .wrap{display:flex;gap:0;background:var(--white);border:0.5px solid var(--bdr);border-radius:var(--radius-lg);overflow:hidden;min-height:680px}
+    .sidebar{width:210px;flex-shrink:0;background:var(--primary);display:flex;flex-direction:column}
     .logo{padding:20px 18px 16px;color:#fff;font-size:16px;font-weight:500;border-bottom:0.5px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:10px}
-    .logo i{font-size:20px;color:#9FE1CB}
+    .logo i{font-size:20px;color:var(--teal-m)}
     .nav-section{padding:12px 0 0}
     .nav-label{font-size:10px;color:rgba(255,255,255,.35);padding:0 18px 6px;letter-spacing:.08em}
     .nav-item{display:flex;align-items:center;gap:10px;padding:9px 18px;color:rgba(255,255,255,.6);cursor:pointer;font-size:13px}
     .nav-item i{font-size:18px}
     .nav-item:hover{background:rgba(255,255,255,.07);color:#fff}
-    .nav-item.active{background:rgba(159,225,203,.15);color:#9FE1CB}
-    .badge-dot{background:#9FE1CB;color:#085041;font-size:10px;padding:1px 6px;border-radius:10px;margin-left:auto}
+    .nav-item.active{background:rgba(159,225,203,.15);color:var(--teal-m)}
+    .badge-dot{background:var(--teal-m);color:#085041;font-size:10px;padding:1px 6px;border-radius:10px;margin-left:auto}
     .sidebar-footer{margin-top:auto;padding:14px 18px;border-top:0.5px solid rgba(255,255,255,.1)}
+    .sidebar-footer .back-main{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.5);font-size:12px;text-decoration:none;padding:8px 0;border-top:1px solid rgba(255,255,255,.05);margin-top:8px;cursor:pointer}
+    .sidebar-footer .back-main:hover{color:#fff}
     .user-chip{display:flex;align-items:center;gap:9px;cursor:pointer}
-    .user-chip .av{width:34px;height:34px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:#fff}
+    .user-chip .av{width:34px;height:34px;border-radius:50%;background:var(--secondary);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:#fff}
     .user-chip .info{flex:1;min-width:0}
     .user-chip .name{font-size:13px;color:#fff;font-weight:500}
     .user-chip .role{font-size:11px;color:rgba(255,255,255,.4)}
     .main{flex:1;display:flex;flex-direction:column;overflow:hidden}
-    .topbar{padding:14px 22px;border-bottom:0.5px solid var(--bdr);background:var(--surf);display:flex;align-items:center;gap:12px}
+    .topbar{padding:14px 22px;border-bottom:0.5px solid var(--bdr);background:var(--white);display:flex;align-items:center;gap:12px}
     .topbar h1{font-size:17px;font-weight:500;flex:1}
-    .search-box{display:flex;align-items:center;gap:8px;background:var(--surf2);border:0.5px solid var(--bdr);border-radius:var(--rs);padding:6px 12px;width:200px}
+    .search-box{display:flex;align-items:center;gap:8px;background:var(--gray-100);border:0.5px solid var(--bdr);border-radius:var(--radius-sm);padding:6px 12px;width:200px}
     .search-box input{background:transparent;border:none;font-size:13px;outline:none;width:100%}
-    .topbar-btn{background:var(--navy);color:#fff;border:none;border-radius:var(--rs);padding:7px 14px;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:6px}
-    .content{flex:1;overflow-y:auto;padding:22px;background:var(--bg)}
+    .topbar-btn{background:var(--primary);color:#fff;border:none;border-radius:var(--radius-sm);padding:7px 14px;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:6px}
+    .content{flex:1;overflow-y:auto;padding:22px;background:var(--gray-50)}
     .screen{display:none}
     .screen.active{display:block}
     .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
     .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
     .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
-    .card{background:var(--surf);border:0.5px solid var(--bdr);border-radius:var(--r);padding:16px}
-    .card-sm{background:var(--surf);border:0.5px solid var(--bdr);border-radius:var(--r);padding:14px}
-    .stat-card{background:var(--surf2);border-radius:var(--rs);padding:14px;text-align:center}
+    .card{background:var(--white);border:0.5px solid var(--bdr);border-radius:var(--radius-md);padding:16px}
+    .card-sm{background:var(--white);border:0.5px solid var(--bdr);border-radius:var(--radius-md);padding:14px}
+    .stat-card{background:var(--gray-100);border-radius:var(--radius-sm);padding:14px;text-align:center}
     .stat-num{font-size:26px;font-weight:500}
     .stat-lbl{font-size:12px;color:var(--t2);margin-top:3px}
     .sec-title{font-size:13px;font-weight:500;color:var(--t2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
     .badge{font-size:11px;font-weight:500;padding:2px 8px;border-radius:6px}
-    .tag{font-size:11px;padding:2px 8px;border-radius:6px;background:var(--surf2);color:var(--t2)}
+    .tag{font-size:11px;padding:2px 8px;border-radius:6px;background:var(--gray-100);color:var(--t2)}
     .pill-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-    .pill{background:var(--surf2);border:0.5px solid var(--bdr);border-radius:20px;padding:6px 14px;font-size:13px;cursor:pointer;color:var(--t2)}
-    .pill.active{background:var(--navy);color:#fff;border-color:var(--navy)}
-    .row-item{background:var(--surf);border:0.5px solid var(--bdr);border-radius:var(--r);padding:14px 16px;display:flex;align-items:center;gap:14px;margin-bottom:8px;cursor:pointer}
-    .row-item:hover{background:var(--surf2)}
-    .icon-box{width:44px;height:44px;border-radius:var(--rs);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .pill{background:var(--gray-100);border:0.5px solid var(--bdr);border-radius:20px;padding:6px 14px;font-size:13px;cursor:pointer;color:var(--t2)}
+    .pill.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .row-item{background:var(--white);border:0.5px solid var(--bdr);border-radius:var(--radius-md);padding:14px 16px;display:flex;align-items:center;gap:14px;margin-bottom:8px;cursor:pointer}
+    .row-item:hover{background:var(--gray-100)}
+    .icon-box{width:44px;height:44px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0}
     .item-info{flex:1}
     .item-info h4{font-size:14px;font-weight:500}
     .item-info p{font-size:12px;color:var(--t2)}
-    .progress-bar-wrap{background:var(--surf2);border-radius:4px;height:5px;overflow:hidden;margin-top:6px}
-    .progress-bar{height:100%;border-radius:4px;transition:width .4s;background:var(--teal2)}
-    .btn{border-radius:var(--rs);padding:7px 16px;font-size:13px;font-weight:500;cursor:pointer;border:0.5px solid var(--bdr2);background:var(--surf);display:inline-flex;align-items:center;gap:6px}
-    .btn-navy{background:var(--navy);color:#fff;border-color:var(--navy)}
+    .progress-bar-wrap{background:var(--gray-100);border-radius:4px;height:5px;overflow:hidden;margin-top:6px}
+    .progress-bar{height:100%;border-radius:4px;transition:width .4s;background:var(--secondary)}
+    .btn{border-radius:var(--radius-sm);padding:7px 16px;font-size:13px;font-weight:500;cursor:pointer;border:0.5px solid var(--bdr2);background:var(--white);display:inline-flex;align-items:center;gap:6px}
+    .btn-navy{background:var(--primary);color:#fff;border-color:var(--primary)}
     .btn-teal{background:var(--teal-l);color:#085041;border-color:var(--teal-m)}
-    .btn-teal.done{background:var(--teal2);color:#fff}
+    .btn-teal.done{background:var(--secondary);color:#fff}
     .btn-sm{padding:5px 12px;font-size:12px}
     .btn-full{width:100%;justify-content:center}
     .form-row{margin-bottom:14px}
     .form-row label{font-size:12px;font-weight:500;display:block;margin-bottom:5px}
-    .form-row input,.form-row textarea,.form-row select{width:100%;border:0.5px solid var(--bdr2);border-radius:var(--rs);padding:8px 12px;font-size:13px;background:var(--surf)}
-    .toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;padding:10px 16px;border-radius:var(--rs);font-size:13px;display:flex;gap:8px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:1000}
+    .form-row input,.form-row textarea,.form-row select{width:100%;border:0.5px solid var(--bdr2);border-radius:var(--radius-sm);padding:8px 12px;font-size:13px;background:var(--white)}
+    .toast{position:fixed;bottom:24px;right:24px;background:var(--primary);color:#fff;padding:10px 16px;border-radius:var(--radius-sm);font-size:13px;display:flex;gap:8px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:1000}
     .toast.show{opacity:1}
     .lesson-view{display:none}
     .lesson-view.open{display:block}
     .back-btn{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--t2);cursor:pointer;margin-bottom:16px}
-    .code-block{background:var(--navy);border-radius:var(--rs);padding:14px;font-family:monospace;font-size:12px;color:#9FE1CB;margin:12px 0;white-space:pre-wrap}
-    .task-box{background:var(--teal-l);border:0.5px solid var(--teal-m);border-radius:var(--r);padding:14px;margin:12px 0}
-    .quiz-opt{background:var(--surf);border:0.5px solid var(--bdr2);border-radius:var(--rs);padding:11px 14px;margin-bottom:7px;cursor:pointer}
-    .quiz-opt.correct{background:var(--green-l);border-color:var(--green-m);color:#173404}
+    .code-block{background:var(--primary);border-radius:var(--radius-sm);padding:14px;font-family:monospace;font-size:12px;color:var(--teal-m);margin:12px 0;white-space:pre-wrap}
+    .task-box{background:var(--teal-l);border:0.5px solid var(--teal-m);border-radius:var(--radius-md);padding:14px;margin:12px 0}
+    .quiz-opt{background:var(--white);border:0.5px solid var(--bdr2);border-radius:var(--radius-sm);padding:11px 14px;margin-bottom:7px;cursor:pointer}
+    .quiz-opt.correct{background:var(--secondary-light);border-color:var(--secondary);color:#173404}
     .quiz-opt.wrong{background:#FCEBEB;border-color:#F7C1C1;color:#501313}
     .step-dots{display:flex;gap:4px;margin-bottom:16px}
-    .sdot{height:4px;border-radius:2px;flex:1;background:var(--surf2)}
-    .sdot.done{background:var(--teal2)}
+    .sdot{height:4px;border-radius:2px;flex:1;background:var(--gray-100)}
+    .sdot.done{background:var(--secondary)}
     .sdot.cur{background:var(--teal-m)}
     .chat-wrap{max-height:260px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
     .msg{display:flex;gap:8px;align-items:flex-end}
     .msg.me{flex-direction:row-reverse}
-    .msg .bubble{padding:9px 13px;border-radius:var(--r);font-size:13px;max-width:72%}
-    .msg.them .bubble{background:var(--surf2);border-radius:4px var(--r) var(--r) var(--r)}
-    .msg.me .bubble{background:var(--navy);color:#fff;border-radius:var(--r) 4px var(--r) var(--r)}
+    .msg .bubble{padding:9px 13px;border-radius:var(--radius-md);font-size:13px;max-width:72%}
+    .msg.them .bubble{background:var(--gray-100);border-radius:4px var(--radius-md) var(--radius-md) var(--radius-md)}
+    .msg.me .bubble{background:var(--primary);color:#fff;border-radius:var(--radius-md) 4px var(--radius-md) var(--radius-md)}
     .av-sm{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
     .chat-input-row{display:flex;gap:8px;margin-top:8px}
-    .profile-hero{background:var(--navy);border-radius:var(--r);padding:22px;display:flex;align-items:center;gap:18px;margin-bottom:16px}
-    .profile-av{width:64px;height:64px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:500;color:#fff}
+    .profile-hero{background:var(--primary);border-radius:var(--radius-md);padding:22px;display:flex;align-items:center;gap:18px;margin-bottom:16px}
+    .profile-av{width:64px;height:64px;border-radius:50%;background:var(--secondary);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:500;color:#fff}
     .xp-bar-wrap{background:rgba(255,255,255,.15);border-radius:4px;height:6px;margin-top:10px;overflow:hidden}
-    .xp-bar{height:100%;background:#9FE1CB;transition:width .5s}
-    .cert-item{background:var(--amber-l);border:0.5px solid var(--amber-m);border-radius:var(--r);padding:13px 15px;display:flex;align-items:center;gap:13px;margin-bottom:8px}
+    .xp-bar{height:100%;background:var(--teal-m);transition:width .5s}
+    .cert-item{background:var(--secondary-light);border:0.5px solid var(--secondary);border-radius:var(--radius-md);padding:13px 15px;display:flex;align-items:center;gap:13px;margin-bottom:8px;cursor:pointer}
+    .cert-item:hover{background:var(--teal-l)}
     .act-chart{display:flex;align-items:flex-end;gap:5px;height:64px}
     .act-bar{flex:1;border-radius:3px 3px 0 0;transition:height .4s}
-    .opp-detail{background:var(--surf);border:0.5px solid var(--bdr);border-radius:var(--r);padding:18px;margin-top:10px;display:none}
+    .opp-detail{background:var(--white);border:0.5px solid var(--bdr);border-radius:var(--radius-md);padding:18px;margin-top:10px;display:none}
     .opp-detail.open{display:block}
+
+    /* Certificate Modal */
+    .cert-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;z-index:2000}
+    .cert-modal-content{background:var(--white);border-radius:var(--radius-lg);padding:2.5rem;max-width:600px;width:90%;text-align:center;border:8px solid var(--accent);position:relative}
+    .cert-modal-content h2{font-size:2.2rem;color:var(--primary);margin:0.5rem 0}
+    .cert-modal-content .seal{font-size:4rem;color:var(--accent);margin:0.5rem 0}
+    .cert-modal-content .sub{color:var(--gray-600);font-size:0.9rem}
+    .cert-modal-content .line{border-top:2px solid var(--gray-200);margin:1.5rem 0}
+    .cert-modal-content .footer{font-size:0.85rem;color:var(--gray-600)}
+    .cert-modal-content .close-cert{position:absolute;top:10px;right:16px;font-size:1.5rem;cursor:pointer;color:var(--gray-600)}
   </style>
 </head>
 <body>
@@ -124,14 +155,16 @@
     </div>
     <div class="sidebar-footer">
       <div class="user-chip" data-screen="profile"><div class="av">BM</div><div class="info"><div class="name">Byusa Martin</div><div class="role">Level 3 · <span id="sidebar-xp">840</span> XP</div></div><i class="ti ti-chevron-right" style="color:rgba(255,255,255,.3)"></i></div>
+      <!-- ✅ "Back to main portal" link -->
+      <div class="back-main" onclick="window.location.href='index.html'"><i class="ti ti-arrow-left"></i> Back to main portal</div>
     </div>
   </aside>
   <div class="main">
     <div class="topbar"><h1 id="page-title">Dashboard</h1><div class="search-box"><i class="ti ti-search"></i><input type="text" placeholder="Search courses, mentors…" id="global-search"></div><button class="topbar-btn" id="topbar-action"><i class="ti ti-plus"></i> <span>Explore</span></button></div>
     <div class="content">
       <div class="screen active" id="screen-dashboard"><div class="grid4"><div class="stat-card"><div class="stat-num" id="d-courses">0</div><div class="stat-lbl">Courses enrolled</div></div><div class="stat-card"><div class="stat-num" id="d-lessons">0</div><div class="stat-lbl">Lessons done</div></div><div class="stat-card"><div class="stat-num" id="d-streak">0</div><div class="stat-lbl">Day streak</div></div><div class="stat-card"><div class="stat-num" id="d-xp">840</div><div class="stat-lbl">XP earned</div></div></div><div class="grid2"><div><div class="sec-title">Continue learning</div><div id="dash-courses"></div><button class="btn btn-sm" onclick="navTo('courses')">View all courses <i class="ti ti-arrow-right"></i></button></div><div><div class="sec-title">Upcoming activity</div><div class="card" style="margin-bottom:10px"><div id="schedule-list"></div></div><div class="sec-title">Recommended for you</div><div id="recommended"></div></div></div><div class="sec-title">Weekly activity</div><div class="card"><div class="act-chart" id="act-chart"></div><div id="act-labels" style="display:flex;margin-top:6px;gap:5px"></div></div></div>
-      <div class="screen" id="screen-courses"><div id="course-list-view"><div class="pill-row" id="course-filter-pills"></div><div id="course-grid"></div></div><div class="lesson-view" id="lesson-view"><div class="back-btn" onclick="closeLessonView()"><i class="ti ti-arrow-left"></i> Back to courses</div><div style="display:flex;gap:18px"><div style="flex:1"><div class="step-dots" id="step-dots"></div><div class="card" id="lesson-content"></div></div><div style="width:220px"><div class="card" style="margin-bottom:12px"><div class="sec-title">Lessons</div><div id="lesson-nav-list"></div></div><div class="card"><div class="sec-title">Your notes</div><textarea id="lesson-notes" placeholder="Take notes here…" style="width:100%;height:100px;font-size:12px;border:0.5px solid var(--bdr2);border-radius:var(--rs);padding:8px" oninput="saveCurrentNote()"></textarea></div></div></div></div></div></div>
-      <div class="screen" id="screen-mentors"><div id="mentor-list-view"><div class="pill-row" id="mentor-filter-pills"></div><div class="grid2" id="mentor-grid"></div></div><div class="lesson-view" id="mentor-chat-view"><div class="back-btn" onclick="closeMentorChat()"><i class="ti ti-arrow-left"></i> Back to mentors</div><div style="display:flex;gap:16px"><div style="flex:1"><div class="card"><div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div id="chat-av" class="av-sm" style="width:42px;height:42px;font-size:14px"></div><div><div id="chat-name" style="font-size:14px;font-weight:500"></div><div style="font-size:12px;color:var(--teal2)"><i class="ti ti-circle-filled" style="font-size:8px"></i> Online</div></div></div><div class="chat-wrap" id="chat-messages"></div><div class="chat-input-row"><input type="text" id="chat-input" placeholder="Type a message…" onkeydown="if(event.key==='Enter')sendMsg()"><button class="btn btn-navy btn-sm" onclick="sendMsg()"><i class="ti ti-send"></i> Send</button></div></div></div><div style="width:200px"><div class="card" id="mentor-profile-card"></div></div></div></div></div>
+      <div class="screen" id="screen-courses"><div id="course-list-view"><div class="pill-row" id="course-filter-pills"></div><div id="course-grid"></div></div><div class="lesson-view" id="lesson-view"><div class="back-btn" onclick="closeLessonView()"><i class="ti ti-arrow-left"></i> Back to courses</div><div style="display:flex;gap:18px"><div style="flex:1"><div class="step-dots" id="step-dots"></div><div class="card" id="lesson-content"></div></div><div style="width:220px"><div class="card" style="margin-bottom:12px"><div class="sec-title">Lessons</div><div id="lesson-nav-list"></div></div><div class="card"><div class="sec-title">Your notes</div><textarea id="lesson-notes" placeholder="Take notes here…" style="width:100%;height:100px;font-size:12px;border:0.5px solid var(--bdr2);border-radius:var(--radius-sm);padding:8px" oninput="saveCurrentNote()"></textarea></div></div></div></div></div></div>
+      <div class="screen" id="screen-mentors"><div id="mentor-list-view"><div class="pill-row" id="mentor-filter-pills"></div><div class="grid2" id="mentor-grid"></div></div><div class="lesson-view" id="mentor-chat-view"><div class="back-btn" onclick="closeMentorChat()"><i class="ti ti-arrow-left"></i> Back to mentors</div><div style="display:flex;gap:16px"><div style="flex:1"><div class="card"><div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div id="chat-av" class="av-sm" style="width:42px;height:42px;font-size:14px"></div><div><div id="chat-name" style="font-size:14px;font-weight:500"></div><div style="font-size:12px;color:var(--secondary)"><i class="ti ti-circle-filled" style="font-size:8px"></i> Online</div></div></div><div class="chat-wrap" id="chat-messages"></div><div class="chat-input-row"><input type="text" id="chat-input" placeholder="Type a message…" onkeydown="if(event.key==='Enter')sendMsg()"><button class="btn btn-navy btn-sm" onclick="sendMsg()"><i class="ti ti-send"></i> Send</button></div></div></div><div style="width:200px"><div class="card" id="mentor-profile-card"></div></div></div></div></div>
       <div class="screen" id="screen-opportunities"><div class="pill-row" id="opp-filter-pills"></div><div id="opp-grid"></div><div class="opp-detail" id="opp-detail"></div></div>
       <div class="screen" id="screen-community"><div class="grid2"><div><div class="sec-title">Discussion feed</div><div id="feed"></div><div class="card" style="margin-top:12px"><div class="sec-title">Post to community</div><div class="form-row"><textarea id="post-text" placeholder="Share something with the community…"></textarea></div><button class="btn btn-navy btn-sm" onclick="postToFeed()"><i class="ti ti-send"></i> Post</button></div></div><div><div class="sec-title">Active channels</div><div id="channels"></div><div class="sec-title" style="margin-top:16px">Leaderboard</div><div class="card" id="leaderboard"></div></div></div></div>
       <div class="screen" id="screen-profile"><div class="profile-hero"><div class="profile-av" id="p-av">BM</div><div><h2 id="p-name">Byusa M Martin</h2><p id="p-school">African Leadership University · Kigali</p><div class="xp-bar-wrap"><div class="xp-bar" id="xp-bar" style="width:84%"></div></div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:6px"><span id="p-xp">840</span> / 1000 XP</div></div><div style="margin-left:auto"><button class="btn btn-sm" style="background:rgba(255,255,255,.1);color:#fff" onclick="navTo('settings')"><i class="ti ti-edit"></i> Edit</button></div></div><div class="grid4"><div class="stat-card"><div class="stat-num" id="p-courses">0</div><div class="stat-lbl">Courses</div></div><div class="stat-card"><div class="stat-num" id="p-certs">0</div><div class="stat-lbl">Certificates</div></div><div class="stat-card"><div class="stat-num" id="p-projects">3</div><div class="stat-lbl">Projects</div></div><div class="stat-card"><div class="stat-num" id="p-streak2">0</div><div class="stat-lbl">Streak</div></div></div><div class="grid2"><div><div class="sec-title">Certificates earned</div><div id="certs-list"></div></div><div><div class="sec-title">Skills progress</div><div class="card" id="skills-list"></div></div></div><div class="sec-title">Activity history</div><div class="card"><div class="act-chart" id="p-act-chart"></div></div></div>
@@ -140,27 +173,43 @@
   </div>
 </div>
 <div class="toast" id="toast"><i class="ti ti-check"></i> <span id="toast-msg"></span></div>
+
+<!-- Certificate Modal -->
+<div class="cert-modal" id="certModal">
+  <div class="cert-modal-content">
+    <span class="close-cert" onclick="document.getElementById('certModal').style.display='none'">&times;</span>
+    <div class="seal"><i class="ti ti-award"></i></div>
+    <h2 id="certName">Web Development Basics</h2>
+    <p class="sub">This certifies that</p>
+    <h3 style="color:var(--primary);font-size:1.8rem;margin:0.3rem 0" id="certUser">Byusa Martin</h3>
+    <p class="sub">has successfully completed the course with distinction.</p>
+    <div class="line"></div>
+    <div class="footer"><i class="ti ti-calendar"></i> Issued: <span id="certDate">June 2026</span> &nbsp;|&nbsp; <i class="ti ti-bridge"></i> SkillBridge Africa</div>
+    <button class="btn btn-navy btn-sm" style="margin-top:1rem" onclick="document.getElementById('certModal').style.display='none'">Close</button>
+  </div>
+</div>
+
 <script>
   // ----------------------------------- DATA + PERSISTENCE ----------------------------------
   const COURSES = [
-    {id:'wd',cat:'tech',icon:'ti-code',color:'#E8EBF4',ic:'#1E3050',title:'Web Development Basics',diff:'Beginner',dur:'6 lessons',lessons:[{t:'HTML structure',body:'HTML is the skeleton. Every webpage uses tags.',code:'<h1>Hello</h1><p>Paragraph</p>',task:'Write a heading + paragraph.',type:'read'},{t:'CSS styling',body:'CSS adds colors and layout.',code:'h1 { color: teal; }',task:'Style your heading.',type:'read'},{t:'JavaScript intro',body:'JS adds interactivity.',code:'alert("Hello!")',task:'Show an alert.',type:'read'},{t:'Final quiz',type:'quiz',quiz:[{q:'What does HTML stand for?',opts:['HyperText Markup','High Transfer','Home Tool','HyperLink'],ans:0}]}]},
-    {id:'py',cat:'tech',icon:'ti-brand-python',color:'#E1F5EE',ic:'#085041',title:'Python for Beginners',diff:'Beginner',dur:'4 lessons',lessons:[{t:'Variables',body:'Store data using =',code:'name="Byusa"',task:'Create a variable.',type:'read'},{t:'Conditionals',body:'if/else',code:'if x>5: print("ok")',task:'Write if statement.',type:'read'},{t:'Loops',body:'for loops repeat',code:'for i in range(3): print(i)',task:'Print 0..2',type:'read'}]},
+    {id:'wd',cat:'tech',icon:'ti-code',color:'var(--slate-l)',ic:'var(--primary)',title:'Web Development Basics',diff:'Beginner',dur:'6 lessons',lessons:[{t:'HTML structure',body:'HTML is the skeleton. Every webpage uses tags.',code:'<h1>Hello</h1><p>Paragraph</p>',task:'Write a heading + paragraph.',type:'read'},{t:'CSS styling',body:'CSS adds colors and layout.',code:'h1 { color: teal; }',task:'Style your heading.',type:'read'},{t:'JavaScript intro',body:'JS adds interactivity.',code:'alert("Hello!")',task:'Show an alert.',type:'read'},{t:'Final quiz',type:'quiz',quiz:[{q:'What does HTML stand for?',opts:['HyperText Markup','High Transfer','Home Tool','HyperLink'],ans:0}]}]},
+    {id:'py',cat:'tech',icon:'ti-brand-python',color:'var(--teal-l)',ic:'var(--teal)',title:'Python for Beginners',diff:'Beginner',dur:'4 lessons',lessons:[{t:'Variables',body:'Store data using =',code:'name="Byusa"',task:'Create a variable.',type:'read'},{t:'Conditionals',body:'if/else',code:'if x>5: print("ok")',task:'Write if statement.',type:'read'},{t:'Loops',body:'for loops repeat',code:'for i in range(3): print(i)',task:'Print 0..2',type:'read'}]},
     {id:'biz',cat:'business',icon:'ti-chart-bar',color:'#FAEEDA',ic:'#412402',title:'Business Planning',diff:'Beginner',dur:'3 lessons',lessons:[{t:'Value Prop',body:'Solve real problem',task:'Define customer pain.',type:'read'},{t:'Revenue model',body:'How you earn',task:'List 2 revenue streams.',type:'read'}]},
-    {id:'dm',cat:'business',icon:'ti-speakerphone',color:'#EAF3DE',ic:'#173404',title:'Digital Marketing',diff:'Intermediate',dur:'4 lessons',lessons:[{t:'SEO basics',body:'Keywords & backlinks',task:'Optimize a title.',type:'read'},{t:'Social media',body:'Engage audience',task:'Plan 3 posts.',type:'read'}]}
+    {id:'dm',cat:'business',icon:'ti-speakerphone',color:'var(--secondary-light)',ic:'var(--secondary)',title:'Digital Marketing',diff:'Intermediate',dur:'4 lessons',lessons:[{t:'SEO basics',body:'Keywords & backlinks',task:'Optimize a title.',type:'read'},{t:'Social media',body:'Engage audience',task:'Plan 3 posts.',type:'read'}]}
   ];
   const MENTORS = [
-    {id:'jm',init:'JM',bg:'#E8EBF4',ic:'#1E3050',name:'Jane Mwangi',role:'Software Engineer',org:'Andela',tags:['Web Dev','Python'],bio:'5+ years exp. Passionate about mentoring.',avail:'Mon, Wed'},
-    {id:'kb',init:'KB',bg:'#E1F5EE',ic:'#085041',name:'Kofi Boateng',role:'Digital Marketer',org:'Freelance',tags:['SEO','Social Media'],bio:'Built brands from zero.',avail:'Tue, Thu'},
+    {id:'jm',init:'JM',bg:'var(--slate-l)',ic:'var(--primary)',name:'Jane Mwangi',role:'Software Engineer',org:'Andela',tags:['Web Dev','Python'],bio:'5+ years exp. Passionate about mentoring.',avail:'Mon, Wed'},
+    {id:'kb',init:'KB',bg:'var(--teal-l)',ic:'var(--teal)',name:'Kofi Boateng',role:'Digital Marketer',org:'Freelance',tags:['SEO','Social Media'],bio:'Built brands from zero.',avail:'Tue, Thu'},
     {id:'ad',init:'AD',bg:'#FAEEDA',ic:'#412402',name:'Amara Diallo',role:'UX Designer',org:'Interswitch',tags:['Figma','UI/UX'],bio:'Product designer 6 years.',avail:'Daily'}
   ];
   const OPPORTUNITIES = [
-    {id:'o1',type:'intern',icon:'ti-code',bg:'#E8EBF4',ic:'#1E3050',title:'Frontend Intern',org:'Startup Kigali',pay:'Paid · 80k RWF',loc:'Kigali',desc:'Build dashboards, fix bugs.',skills:['React','CSS']},
+    {id:'o1',type:'intern',icon:'ti-code',bg:'var(--slate-l)',ic:'var(--primary)',title:'Frontend Intern',org:'Startup Kigali',pay:'Paid · 80k RWF',loc:'Kigali',desc:'Build dashboards, fix bugs.',skills:['React','CSS']},
     {id:'o2',type:'gig',icon:'ti-palette',bg:'#FBEAF0',ic:'#4B1528',title:'Brand Identity',org:'Freelance',pay:'$60',loc:'Remote',desc:'Logo + brand guide.',skills:['Figma']}
   ];
   // core user state
   let S = {
     enrolled: [], lessons: {}, notes: {}, appliedOpps: {}, mentorReqs: {}, chats: {}, posts: [],
-    xp: 840, streak: 7, name: 'Byusa M Martin', school: 'African Leadership University · Kigali',
+    xp: 0, streak: 7, name: 'Byusa M Martin', school: 'African Leadership University · Kigali',
     activityLog: [] // dates "YYYY-MM-DD"
   };
   function loadState(){ try{
@@ -169,65 +218,117 @@
     if(!S.enrolled) S.enrolled = []; if(!S.lessons) S.lessons = {}; if(!S.notes) S.notes = {};
     if(!S.appliedOpps) S.appliedOpps = {}; if(!S.mentorReqs) S.mentorReqs = {};
     if(!S.chats) S.chats = {}; if(!S.posts) S.posts = [];
-    if(!S.xp) S.xp = 840; if(!S.streak) S.streak = 7;
-    // ensure mentors chats init
+    if(!S.xp) S.xp = 0; if(!S.streak) S.streak = 7;
     MENTORS.forEach(m=>{ if(!S.chats[m.id]) S.chats[m.id]=[{from:'them',text:`Hi! I'm ${m.name}. How can I help?`}]; });
-    if(S.posts.length===0) S.posts = [{id:1,author:'Amara Diallo',init:'AD',bg:'#FAEEDA',ic:'#412402',text:'Design thinking changed my workflow!',time:'2h ago',likes:12,liked:false},{id:2,author:'Byusa Martin',init:'BM',bg:'#E8EBF4',ic:'#1E3050',text:'Just finished Web Dev module!',time:'1d ago',likes:5,liked:false}];
+    if(S.posts.length===0) S.posts = [{id:1,author:'Amara Diallo',init:'AD',bg:'#FAEEDA',ic:'#412402',text:'Design thinking changed my workflow!',time:'2h ago',likes:12,liked:false},{id:2,author:'Byusa Martin',init:'BM',bg:'var(--slate-l)',ic:'var(--primary)',text:'Just finished Web Dev module!',time:'1d ago',likes:5,liked:false}];
+    recomputeXP(); // FIX: force recompute on load
   }catch(e){} }
   function saveState(){ localStorage.setItem('skillbridge_full', JSON.stringify({enrolled:S.enrolled, lessons:S.lessons, notes:S.notes, appliedOpps:S.appliedOpps, mentorReqs:S.mentorReqs, chats:S.chats, posts:S.posts, xp:S.xp, streak:S.streak, name:S.name, school:S.school, activityLog:S.activityLog })); }
   function toast(msg){ const t=document.getElementById('toast'); document.getElementById('toast-msg').innerText=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 2200); }
-  // helper: recompute xp from completed lessons
-  function recomputeXP(){ let total=0; for(let cid of S.enrolled){ let done=S.lessons[cid]||0; total+=done*50; } if(total<100) total=840; S.xp=Math.max(total,100); document.getElementById('d-xp')&&(document.getElementById('d-xp').innerText=S.xp); document.getElementById('sidebar-xp')&&(document.getElementById('sidebar-xp').innerText=S.xp); document.getElementById('p-xp')&&(document.getElementById('p-xp').innerText=S.xp); let percent=Math.min(100,Math.floor(S.xp/1000*100)); document.getElementById('xp-bar')&&(document.getElementById('xp-bar').style.width=percent+'%'); saveState(); }
-  // log activity date
+  
+  // FIX: XP recompute - purely cumulative, no arbitrary reset to 840.
+  function recomputeXP(){ 
+    let total = 0;
+    for(let cid of S.enrolled){
+      let done = S.lessons[cid] || 0;
+      total += done * 50;
+    }
+    S.xp = total; // strictly cumulative
+    document.getElementById('d-xp') && (document.getElementById('d-xp').innerText = S.xp);
+    document.getElementById('sidebar-xp') && (document.getElementById('sidebar-xp').innerText = S.xp);
+    document.getElementById('p-xp') && (document.getElementById('p-xp').innerText = S.xp);
+    let percent = Math.min(100, Math.floor(S.xp / 1000 * 100));
+    document.getElementById('xp-bar') && (document.getElementById('xp-bar').style.width = percent + '%');
+    saveState(); 
+  }
+  
   function logActivity(){ let today=new Date().toISOString().slice(0,10); if(!S.activityLog.includes(today)) S.activityLog.push(today); computeStreak(); saveState(); }
   function computeStreak(){ let dates=S.activityLog.map(d=>new Date(d)).sort((a,b)=>b-a); let streak=0; let cur=new Date(); cur.setHours(0,0,0,0); for(let i=0;i<dates.length;i++){ let d=new Date(dates[i]); d.setHours(0,0,0,0); if((cur.getTime()-d.getTime())/(86400000)===streak) streak++; else if(streak===0 && d.getTime()===cur.getTime()) streak=1; else break; } S.streak=streak; return streak; }
   function getActivityLast7Days(){ let days=[]; for(let i=6;i>=0;i--){ let d=new Date(); d.setDate(d.getDate()-i); days.push(d.toISOString().slice(0,10)); } return days.map(day=>S.activityLog.filter(d=>d===day).length); }
-  function renderActivityChart(containerId){ const counts=getActivityLast7Days(); const max=Math.max(1,...counts); const days=['M','T','W','T','F','S','S']; const container=document.getElementById(containerId); if(!container) return; container.innerHTML=counts.map((v,i)=>`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px"><div class="act-bar" style="width:100%;height:${Math.round(v/max*52)}px;background:${v>0?'var(--teal2)':'var(--slate-l)'}"></div><span style="font-size:10px;color:var(--t3)">${days[i]}</span></div>`).join(''); }
+  function renderActivityChart(containerId){ const counts=getActivityLast7Days(); const max=Math.max(1,...counts); const days=['M','T','W','T','F','S','S']; const container=document.getElementById(containerId); if(!container) return; container.innerHTML=counts.map((v,i)=>`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px"><div class="act-bar" style="width:100%;height:${Math.round(v/max*52)}px;background:${v>0?'var(--secondary)':'var(--gray-200)'}"></div><span style="font-size:10px;color:var(--t3)">${days[i]}</span></div>`).join(''); }
 
-  // Navigation
   function navTo(screen){ document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active')); document.querySelector(`.nav-item[data-screen="${screen}"]`).classList.add('active'); document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(`screen-${screen}`).classList.add('active'); document.getElementById('page-title').innerText=screen.charAt(0).toUpperCase()+screen.slice(1); if(screen==='dashboard')renderDashboard(); if(screen==='courses')renderCourses(); if(screen==='mentors')renderMentors(); if(screen==='opportunities')renderOpps(); if(screen==='community')renderCommunity(); if(screen==='profile')renderProfile(); if(screen==='settings')renderSettings(); }
   window.navTo=navTo; document.querySelectorAll('.nav-item, .user-chip').forEach(el=>el.addEventListener('click',()=>{ const scr=el.dataset.screen; if(scr) navTo(scr); }));
-  // Dashboard
+
   function renderDashboard(){ const totalLessons=S.enrolled.reduce((a,cid)=>a+(S.lessons[cid]||0),0); document.getElementById('d-courses').innerText=S.enrolled.length; document.getElementById('d-lessons').innerText=totalLessons; document.getElementById('d-streak').innerText=computeStreak(); document.getElementById('d-xp').innerText=S.xp; const dashDiv=document.getElementById('dash-courses'); dashDiv.innerHTML=S.enrolled.slice(0,3).map(cid=>{ let c=COURSES.find(c=>c.id===cid); if(!c) return ''; let done=S.lessons[cid]||0; let pct=Math.round(done/c.lessons.length*100); return `<div class="row-item" onclick="openLesson('${cid}',${Math.min(done,c.lessons.length-1)})"><div class="icon-box" style="background:${c.color}"><i class="ti ${c.icon}" style="color:${c.ic}"></i></div><div class="item-info"><h4>${c.title}</h4><p>${done}/${c.lessons.length} lessons</p><div class="progress-bar-wrap"><div class="progress-bar" style="width:${pct}%"></div></div></div><i class="ti ti-chevron-right"></i></div>`; }).join('')||'<div class="card-sm">No enrolled courses. <a href="#" onclick="navTo(\'courses\');return false">Browse courses</a></div>';
     const rec=document.getElementById('recommended'); const notEnrolled=COURSES.filter(c=>!S.enrolled.includes(c.id)); rec.innerHTML=notEnrolled.slice(0,2).map(c=>`<div class="row-item" onclick="enrollCourse('${c.id}')"><div class="icon-box" style="background:${c.color}"><i class="ti ${c.icon}"></i></div><div class="item-info"><h4>${c.title}</h4><p>${c.diff}</p></div><button class="btn btn-teal btn-sm" onclick="event.stopPropagation();enrollCourse('${c.id}')">Enroll</button></div>`).join('')||'<div> Great job! All courses enrolled.</div>';
     document.getElementById('schedule-list').innerHTML=`<div style="display:flex;gap:10px"><i class="ti ti-calendar"></i><span>Next: Complete HTML lesson</span></div><div style="display:flex;gap:10px;margin-top:8px"><i class="ti ti-users"></i><span>Mentor session available</span></div>`; renderActivityChart('act-chart'); }
-  // Courses & lesson logic
+
   function renderCourses(filter='all'){ const pillsDiv=document.getElementById('course-filter-pills'); const cats=['all','tech','business']; pillsDiv.innerHTML=cats.map(c=>`<div class="pill ${filter===c?'active':''}" onclick="renderCourses('${c}')">${c}</div>`).join(''); const filtered=filter==='all'?COURSES:COURSES.filter(c=>c.cat===filter); const grid=document.getElementById('course-grid'); grid.innerHTML=filtered.map(c=>{ let enrolled=S.enrolled.includes(c.id); let done=S.lessons[c.id]||0; let pct=enrolled?Math.round(done/c.lessons.length*100):0; return `<div class="row-item" onclick="${enrolled?`openLesson('${c.id}',${Math.min(done,c.lessons.length-1)})`:`enrollCourse('${c.id}')`}"><div class="icon-box" style="background:${c.color}"><i class="ti ${c.icon}" style="color:${c.ic}"></i></div><div class="item-info"><h4>${c.title}</h4><p>${c.diff} · ${c.dur}</p>${enrolled?`<div class="progress-bar-wrap"><div class="progress-bar" style="width:${pct}%"></div></div>`:''}</div><button class="btn ${enrolled?'btn-teal':'btn-navy'} btn-sm" onclick="event.stopPropagation();${enrolled?`openLesson('${c.id}',${Math.min(done,c.lessons.length-1)})`:`enrollCourse('${c.id}')`}">${enrolled?'Continue':'Enroll'}</button></div>`; }).join(''); }
+
   function enrollCourse(cid){ if(!S.enrolled.includes(cid)){ S.enrolled.push(cid); if(!S.lessons[cid]) S.lessons[cid]=0; saveState(); toast(`Enrolled in ${COURSES.find(c=>c.id===cid).title}!`); renderDashboard(); renderCourses(); } else toast('Already enrolled'); }
+
   let currentLesson = { cid: null, idx: 0 };
   function openLesson(cid, idx){ if(!S.enrolled.includes(cid)) enrollCourse(cid); currentLesson={cid,idx}; document.getElementById('course-list-view').style.display='none'; document.getElementById('lesson-view').classList.add('open'); renderLessonContent(); renderLessonNav(); document.getElementById('lesson-notes').value=S.notes[`${cid}_${idx}`]||''; }
   function closeLessonView(){ document.getElementById('course-list-view').style.display='block'; document.getElementById('lesson-view').classList.remove('open'); renderCourses(); }
   function saveCurrentNote(){ if(currentLesson.cid) S.notes[`${currentLesson.cid}_${currentLesson.idx}`]=document.getElementById('lesson-notes').value; saveState(); }
-  function renderLessonNav(){ let c=COURSES.find(x=>x.id===currentLesson.cid); let doneCount=S.lessons[c.id]||0; document.getElementById('step-dots').innerHTML=c.lessons.map((_,i)=>`<div class="sdot ${i<doneCount?'done':''} ${i===currentLesson.idx?'cur':''}"></div>`).join(''); document.getElementById('lesson-nav-list').innerHTML=c.lessons.map((l,i)=>`<div onclick="openLesson('${c.id}',${i})" style="display:flex;align-items:center;gap:8px;padding:7px 0;cursor:pointer"><i class="ti ${i<(S.lessons[c.id]||0)?'ti-circle-check':'ti-circle'}" style="color:${i<(S.lessons[c.id]||0)?'var(--teal2)':'var(--t3)'}"></i><span>${l.t}</span></div>`).join(''); }
-  function renderLessonContent(){ let c=COURSES.find(x=>x.id===currentLesson.cid); let l=c.lessons[currentLesson.idx]; let completed=(S.lessons[c.id]||0)>currentLesson.idx; let html=`<div style="font-size:12px;color:var(--t3)">Lesson ${currentLesson.idx+1}/${c.lessons.length}</div><h2 style="font-size:18px;margin:8px 0">${l.t}</h2><p>${l.body}</p>${l.code?`<div class="code-block">${l.code}</div>`:''}${l.task?`<div class="task-box"><div class="task-lbl"><i class="ti ti-pencil"></i> Task</div><p>${l.task}</p></div>`:''}${l.type==='quiz'?renderQuiz(l.quiz):''}<div style="display:flex;gap:8px;margin-top:16px"><button class="btn btn-navy" onclick="completeCurrentLesson()" ${completed?'disabled style="background:var(--teal2)"':''}><i class="ti ti-check"></i> ${completed?'Completed':'Mark complete'}</button></div>`; document.getElementById('lesson-content').innerHTML=html; if(l.type==='quiz' && !window._quizState) window._quizState={}; }
+  function renderLessonNav(){ let c=COURSES.find(x=>x.id===currentLesson.cid); let doneCount=S.lessons[c.id]||0; document.getElementById('step-dots').innerHTML=c.lessons.map((_,i)=>`<div class="sdot ${i<doneCount?'done':''} ${i===currentLesson.idx?'cur':''}"></div>`).join(''); document.getElementById('lesson-nav-list').innerHTML=c.lessons.map((l,i)=>`<div onclick="openLesson('${c.id}',${i})" style="display:flex;align-items:center;gap:8px;padding:7px 0;cursor:pointer"><i class="ti ${i<(S.lessons[c.id]||0)?'ti-circle-check':'ti-circle'}" style="color:${i<(S.lessons[c.id]||0)?'var(--secondary)':'var(--t3)'}"></i><span>${l.t}</span></div>`).join(''); }
+  function renderLessonContent(){ let c=COURSES.find(x=>x.id===currentLesson.cid); let l=c.lessons[currentLesson.idx]; let completed=(S.lessons[c.id]||0)>currentLesson.idx; let html=`<div style="font-size:12px;color:var(--t3)">Lesson ${currentLesson.idx+1}/${c.lessons.length}</div><h2 style="font-size:18px;margin:8px 0">${l.t}</h2><p>${l.body}</p>${l.code?`<div class="code-block">${l.code}</div>`:''}${l.task?`<div class="task-box"><div class="task-lbl"><i class="ti ti-pencil"></i> Task</div><p>${l.task}</p></div>`:''}${l.type==='quiz'?renderQuiz(l.quiz):''}<div style="display:flex;gap:8px;margin-top:16px"><button class="btn btn-navy" onclick="completeCurrentLesson()" ${completed?'disabled style="background:var(--secondary)"':''}><i class="ti ti-check"></i> ${completed?'Completed':'Mark complete'}</button></div>`; document.getElementById('lesson-content').innerHTML=html; if(l.type==='quiz' && !window._quizState) window._quizState={}; }
   function renderQuiz(quiz){ return `<div id="quizContainer">${quiz.map((q,qi)=>`<div style="margin-bottom:12px"><div>${q.q}</div>${q.opts.map((o,oi)=>`<div class="quiz-opt" onclick="checkQuizAns(${qi},${oi},${q.ans})">${o}</div>`).join('')}<div id="qfb-${qi}" style="font-size:12px;margin-top:4px"></div></div>`).join('')}</div>`; }
   window.checkQuizAns=(qi,oi,ans)=>{ if(window[`q_${qi}`]) return; let correct=oi===ans; let el=document.querySelector(`#quizContainer .quiz-opt:nth-child(${oi+1})`); if(el) el.classList.add(correct?'correct':'wrong'); if(!correct){ let correctEl=document.querySelector(`#quizContainer .quiz-opt:nth-child(${ans+1})`); if(correctEl) correctEl.classList.add('correct'); } document.getElementById(`qfb-${qi}`).innerHTML=correct?'✓ Correct!':`✗ Wrong. Correct answer: ${ans+1}`; window[`q_${qi}`]=true; };
-  function completeCurrentLesson(){ let c=COURSES.find(x=>x.id===currentLesson.cid); let idx=currentLesson.idx; let currentDone=S.lessons[c.id]||0; if(idx>=currentDone){ S.lessons[c.id]=idx+1; S.xp+=50; logActivity(); recomputeXP(); saveState(); toast('Lesson complete! +50 XP'); renderLessonNav(); renderLessonContent(); renderDashboard(); renderCourses(); if(idx+1===c.lessons.length) toast(` Course completed! Certificate added to profile.`); if(idx+1<c.lessons.length) setTimeout(()=>openLesson(c.id, idx+1), 600); } else toast('Already completed'); }
+  function completeCurrentLesson(){ let c=COURSES.find(x=>x.id===currentLesson.cid); let idx=currentLesson.idx; let currentDone=S.lessons[c.id]||0; if(idx>=currentDone){ S.lessons[c.id]=idx+1; logActivity(); recomputeXP(); saveState(); toast('Lesson complete! +50 XP'); renderLessonNav(); renderLessonContent(); renderDashboard(); renderCourses(); if(idx+1===c.lessons.length){ toast(`🎉 Course completed! Certificate added to profile.`); } if(idx+1<c.lessons.length) setTimeout(()=>openLesson(c.id, idx+1), 600); } else toast('Already completed'); }
 
-  // Mentors
+  // ✅ Certificate rendering – show modal with course name and user
+  function showCertificate(courseId){
+    const c = COURSES.find(x=>x.id === courseId);
+    if(!c) return;
+    const modal = document.getElementById('certModal');
+    document.getElementById('certName').innerText = c.title;
+    document.getElementById('certUser').innerText = S.name;
+    document.getElementById('certDate').innerText = new Date().toLocaleDateString('en-US', { year:'numeric', month:'long' });
+    modal.style.display = 'flex';
+  }
+  // Override profile render to include clickable certificates
+  function renderProfile(){ 
+    document.getElementById('p-name').innerText=S.name; 
+    document.getElementById('p-school').innerText=S.school; 
+    document.getElementById('p-av').innerText=S.name.split(' ').map(n=>n[0]).join('').slice(0,2); 
+    let completedCourses = []; 
+    for(let cid of S.enrolled) {
+      let c = COURSES.find(c=>c.id===cid);
+      if(c && (S.lessons[cid]||0) === c.lessons.length) completedCourses.push(c);
+    }
+    document.getElementById('p-courses').innerText=S.enrolled.length; 
+    document.getElementById('p-certs').innerText=completedCourses.length; 
+    document.getElementById('p-streak2').innerText=computeStreak(); 
+    document.getElementById('certs-list').innerHTML=completedCourses.length>0 ? 
+      completedCourses.map(c => `<div class="cert-item" onclick="showCertificate('${c.id}')"><i class="ti ti-award" style="color:var(--accent)"></i> ${c.title} <span style="margin-left:auto;font-size:12px;color:var(--gray-600)">View certificate →</span></div>`).join('') : 
+      '<div>No certificates yet. Complete a course!</div>'; 
+    document.getElementById('skills-list').innerHTML=S.enrolled.map(cid=>`<div>${COURSES.find(c=>c.id===cid).title}: ${Math.round(((S.lessons[cid]||0)/COURSES.find(c=>c.id===cid).lessons.length)*100)}%</div>`).join('')||'<div>Enroll to see progress</div>'; 
+    renderActivityChart('p-act-chart'); 
+  }
+
+  // Mentors, Opps, Community, Settings (unchanged but keep them)
   function renderMentors(filter='all'){ const pills=document.getElementById('mentor-filter-pills'); pills.innerHTML=['all','Web Dev','Marketing','Design'].map(f=>`<div class="pill ${filter===f?'active':''}" onclick="renderMentors('${f}')">${f}</div>`).join(''); let list=MENTORS; if(filter!=='all') list=list.filter(m=>m.tags.some(t=>t.includes(filter))); document.getElementById('mentor-grid').innerHTML=list.map(m=>`<div class="card-sm" style="cursor:pointer" onclick="openMentorChat('${m.id}')"><div style="display:flex;gap:12px"><div class="av-sm" style="width:46px;height:46px;background:${m.bg};color:${m.ic};font-size:14px">${m.init}</div><div><h4>${m.name}</h4><p>${m.role}</p><div class="tags" style="margin-top:4px">${m.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div><div style="margin-left:auto"><button class="btn ${S.mentorReqs[m.id]?'btn-teal done':'btn-navy'} btn-sm" onclick="event.stopPropagation();requestMentor('${m.id}')">${S.mentorReqs[m.id]?'Requested':'Request'}</button></div></div></div>`).join(''); }
   function requestMentor(id){ if(!S.mentorReqs[id]){ S.mentorReqs[id]=true; saveState(); toast('Session request sent!'); renderMentors(); } }
   function openMentorChat(id){ let m=MENTORS.find(x=>x.id===id); currentMentor=m; document.getElementById('mentor-list-view').style.display='none'; document.getElementById('mentor-chat-view').classList.add('open'); document.getElementById('chat-av').style.background=m.bg; document.getElementById('chat-av').style.color=m.ic; document.getElementById('chat-av').innerText=m.init; document.getElementById('chat-name').innerText=m.name; renderChatMessages(); document.getElementById('mentor-profile-card').innerHTML=`<div class="sec-title">${m.name}</div><p>${m.bio}</p><p><i class="ti ti-calendar"></i> ${m.avail}</p><button class="btn btn-navy btn-sm btn-full" onclick="requestMentor('${m.id}')"> Request session</button>`; }
   function closeMentorChat(){ document.getElementById('mentor-list-view').style.display='block'; document.getElementById('mentor-chat-view').classList.remove('open'); renderMentors(); }
-  function renderChatMessages(){ let msgs=S.chats[currentMentor.id]||[]; let wrap=document.getElementById('chat-messages'); wrap.innerHTML=msgs.map(m=>`<div class="msg ${m.from==='me'?'me':'them'}"><div class="av-sm" style="background:${m.from==='me'?'#E8EBF4':currentMentor.bg};color:${m.from==='me'?'#1E3050':currentMentor.ic}">${m.from==='me'?'BM':currentMentor.init}</div><div class="bubble">${m.text}</div></div>`).join(''); wrap.scrollTop=wrap.scrollHeight; }
+  function renderChatMessages(){ let msgs=S.chats[currentMentor.id]||[]; let wrap=document.getElementById('chat-messages'); wrap.innerHTML=msgs.map(m=>`<div class="msg ${m.from==='me'?'me':'them'}"><div class="av-sm" style="background:${m.from==='me'?'var(--gray-100)':currentMentor.bg};color:${m.from==='me'?'var(--primary)':currentMentor.ic}">${m.from==='me'?'BM':currentMentor.init}</div><div class="bubble">${m.text}</div></div>`).join(''); wrap.scrollTop=wrap.scrollHeight; }
   window.sendMsg=function(){ let inp=document.getElementById('chat-input'); let txt=inp.value.trim(); if(!txt||!currentMentor)return; S.chats[currentMentor.id].push({from:'me',text:txt}); saveState(); renderChatMessages(); inp.value=''; setTimeout(()=>{ let replies=['Great point! Keep learning','Thats awesome','Let me share a resource','Thanks for reaching out!']; let reply=replies[Math.floor(Math.random()*replies.length)]; S.chats[currentMentor.id].push({from:'them',text:reply}); saveState(); renderChatMessages(); },1000); };
-  // Opportunities
-  function renderOpps(filter='all'){ const pills=document.getElementById('opp-filter-pills'); pills.innerHTML=['all','intern','gig'].map(f=>`<div class="pill ${filter===f?'active':''}" onclick="renderOpps('${f}')">${f}</div>`).join(''); let list=filter==='all'?OPPORTUNITIES:OPPORTUNITIES.filter(o=>o.type===filter); document.getElementById('opp-grid').innerHTML=list.map(o=>`<div class="row-item" onclick="showOppDetail('${o.id}')"><div class="icon-box" style="background:${o.bg}"><i class="ti ${o.icon}"></i></div><div class="item-info"><h4>${o.title}</h4><p>${o.org} · ${o.pay}</p></div>${S.appliedOpps[o.id]?'<span class="badge" style="background:var(--green-l);color:#173404">Applied</span>':'<button class="btn btn-navy btn-sm" onclick="event.stopPropagation();applyOpp(\''+o.id+'\')">Apply</button>'}</div>`).join(''); document.getElementById('opp-detail').classList.remove('open'); }
+  function renderOpps(filter='all'){ const pills=document.getElementById('opp-filter-pills'); pills.innerHTML=['all','intern','gig'].map(f=>`<div class="pill ${filter===f?'active':''}" onclick="renderOpps('${f}')">${f}</div>`).join(''); let list=filter==='all'?OPPORTUNITIES:OPPORTUNITIES.filter(o=>o.type===filter); document.getElementById('opp-grid').innerHTML=list.map(o=>`<div class="row-item" onclick="showOppDetail('${o.id}')"><div class="icon-box" style="background:${o.bg}"><i class="ti ${o.icon}"></i></div><div class="item-info"><h4>${o.title}</h4><p>${o.org} · ${o.pay}</p></div>${S.appliedOpps[o.id]?'<span class="badge" style="background:var(--secondary-light);color:#173404">Applied</span>':'<button class="btn btn-navy btn-sm" onclick="event.stopPropagation();applyOpp(\''+o.id+'\')">Apply</button>'}</div>`).join(''); document.getElementById('opp-detail').classList.remove('open'); }
   function showOppDetail(id){ let o=OPPORTUNITIES.find(x=>x.id===id); let detail=document.getElementById('opp-detail'); detail.innerHTML=`<h3>${o.title}</h3><p>${o.desc}</p><p><strong>Compensation:</strong> ${o.pay}</p><p><strong>Location:</strong> ${o.loc}</p><button class="btn btn-navy" onclick="applyOpp('${o.id}')">Apply now</button>`; detail.classList.add('open'); }
   function applyOpp(id){ if(!S.appliedOpps[id]){ S.appliedOpps[id]=true; saveState(); toast('Application submitted! Good luck.'); renderOpps(); } }
-  // Community
   function renderCommunity(){ let feed=document.getElementById('feed'); feed.innerHTML=S.posts.map(p=>`<div class="card-sm" style="margin-bottom:10px"><div style="display:flex;gap:10px"><div class="av-sm" style="background:${p.bg};color:${p.ic}">${p.init}</div><div><b>${p.author}</b><div style="font-size:11px;color:var(--t3)">${p.time}</div></div></div><p style="margin:8px 0">${p.text}</p><div><button class="btn btn-sm" onclick="likePost(${p.id})"><i class="ti ti-heart"></i> ${p.likes}</button></div></div>`).join(''); document.getElementById('channels').innerHTML=['Web Dev','Business','Design','Career'].map(ch=>`<div class="row-item" style="padding:10px"><i class="ti ti-hash"></i> ${ch}</div>`).join(''); document.getElementById('leaderboard').innerHTML=`<div>1️⃣ Amara · 1240 XP</div><div>2️⃣ Pascal · 1105 XP</div><div>3️⃣ You (Byusa) · ${S.xp} XP</div>`; }
   function likePost(id){ let post=S.posts.find(p=>p.id===id); if(post){ post.likes+=post.liked? -1:1; post.liked=!post.liked; renderCommunity(); saveState(); } }
-  function postToFeed(){ let txt=document.getElementById('post-text').value.trim(); if(!txt)return; S.posts.unshift({id:Date.now(),author:S.name,init:'BM',bg:'#E8EBF4',ic:'#1E3050',text:txt,time:'Just now',likes:0,liked:false}); document.getElementById('post-text').value=''; saveState(); renderCommunity(); toast('Posted!'); }
-  // Profile
-  function renderProfile(){ document.getElementById('p-name').innerText=S.name; document.getElementById('p-school').innerText=S.school; document.getElementById('p-av').innerText=S.name.split(' ').map(n=>n[0]).join('').slice(0,2); let completedCourses=0; for(let cid of S.enrolled) if((S.lessons[cid]||0)===COURSES.find(c=>c.id===cid)?.lessons.length) completedCourses++; document.getElementById('p-courses').innerText=S.enrolled.length; document.getElementById('p-certs').innerText=completedCourses; document.getElementById('p-streak2').innerText=computeStreak(); document.getElementById('certs-list').innerHTML=completedCourses>0?`<div class="cert-item"><i class="ti ti-award"></i> Full stack foundations</div>`:'<div>No certificates yet. Complete a course!</div>'; document.getElementById('skills-list').innerHTML=S.enrolled.map(cid=>`<div>${COURSES.find(c=>c.id===cid).title}: ${Math.round(((S.lessons[cid]||0)/COURSES.find(c=>c.id===cid).lessons.length)*100)}%</div>`).join('')||'<div>Enroll to see progress</div>'; renderActivityChart('p-act-chart'); }
-  // Settings
+  function postToFeed(){ let txt=document.getElementById('post-text').value.trim(); if(!txt)return; S.posts.unshift({id:Date.now(),author:S.name,init:'BM',bg:'var(--slate-l)',ic:'var(--primary)',text:txt,time:'Just now',likes:0,liked:false}); document.getElementById('post-text').value=''; saveState(); renderCommunity(); toast('Posted!'); }
   function renderSettings(){ document.getElementById('notif-list').innerHTML=`<div> Email updates: On</div><div> Platform news: On</div>`; }
   function saveSettings(){ S.name=document.getElementById('s-name').value; S.school=document.getElementById('s-school').value+' · '+document.getElementById('s-location').value; saveState(); toast('Settings saved'); renderProfile(); }
-  // search
   document.getElementById('global-search').addEventListener('input',(e)=>{ let q=e.target.value.toLowerCase(); if(q.length<2) return; let found=COURSES.filter(c=>c.title.toLowerCase().includes(q)); if(found.length) navTo('courses'); });
-  window.renderCourses=renderCourses; window.enrollCourse=enrollCourse; window.openLesson=openLesson; window.closeLessonView=closeLessonView; window.saveCurrentNote=saveCurrentNote; window.completeCurrentLesson=completeCurrentLesson; window.renderMentors=renderMentors; window.requestMentor=requestMentor; window.openMentorChat=openMentorChat; window.closeMentorChat=closeMentorChat; window.renderOpps=renderOpps; window.applyOpp=applyOpp; window.showOppDetail=showOppDetail; window.likePost=likePost; window.postToFeed=postToFeed; window.saveSettings=saveSettings; window.renderDashboard=renderDashboard; window.renderProfile=renderProfile;
-  loadState(); recomputeXP(); renderDashboard(); renderCourses(); renderMentors(); renderOpps(); renderCommunity(); renderProfile(); renderSettings(); if(!S.enrolled.length){} // welcome
+  
+  // Expose globals
+  window.renderCourses=renderCourses; window.enrollCourse=enrollCourse; window.openLesson=openLesson; window.closeLessonView=closeLessonView; window.saveCurrentNote=saveCurrentNote; window.completeCurrentLesson=completeCurrentLesson; window.renderMentors=renderMentors; window.requestMentor=requestMentor; window.openMentorChat=openMentorChat; window.closeMentorChat=closeMentorChat; window.renderOpps=renderOpps; window.applyOpp=applyOpp; window.showOppDetail=showOppDetail; window.likePost=likePost; window.postToFeed=postToFeed; window.saveSettings=saveSettings; window.renderDashboard=renderDashboard; window.renderProfile=renderProfile; window.showCertificate=showCertificate;
+
+  // INIT
+  loadState(); 
+  recomputeXP(); 
+  renderDashboard(); 
+  renderCourses(); 
+  renderMentors(); 
+  renderOpps(); 
+  renderCommunity(); 
+  renderProfile(); 
+  renderSettings(); 
+  toast('Welcome to Practical Learning! 🎓');
 </script>
 </body>
 </html>
