@@ -35,6 +35,106 @@
       --t3: #888;
     }
     body{font-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;background:var(--gray-50);color:var(--t1);padding:12px}
+
+    /* ===== AUTH PAGE ===== */
+    .auth-page {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100dvh;
+      padding: 1.5rem;
+      background: var(--gray-50);
+    }
+    .auth-box {
+      max-width: 400px;
+      width: 100%;
+      padding: 2rem 2rem 2.2rem;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--gray-200);
+    }
+    .auth-box .auth-header {
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+    .auth-box .auth-header i {
+      font-size: 2.8rem;
+      color: var(--accent);
+      background: var(--primary);
+      padding: 0.5rem;
+      border-radius: 50%;
+      margin-bottom: 0.5rem;
+    }
+    .auth-box .auth-header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .auth-box .auth-header p {
+      color: var(--gray-600);
+      font-size: 0.9rem;
+      margin-top: 0.2rem;
+    }
+    .auth-box .form-group {
+      margin-bottom: 1rem;
+    }
+    .auth-box .form-group label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .auth-box .form-group input {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      transition: border 0.2s;
+    }
+    .auth-box .form-group input:focus {
+      border-color: var(--secondary);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.15);
+    }
+    .auth-box .btn-auth {
+      width: 100%;
+      padding: 0.7rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+    }
+    .auth-box .btn-auth:hover {
+      background: var(--primary-dark);
+    }
+    .auth-box .toggle-text {
+      text-align: center;
+      margin-top: 1.2rem;
+      font-size: 0.9rem;
+      color: var(--gray-600);
+    }
+    .auth-box .toggle-text a {
+      color: var(--secondary);
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .auth-box .toggle-text a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== APP (hidden until auth) ===== */
+    #app {
+      display: none;
+    }
+
     .wrap{display:flex;gap:0;background:var(--white);border:0.5px solid var(--bdr);border-radius:var(--radius-lg);overflow:hidden;min-height:680px}
     .sidebar{width:210px;flex-shrink:0;background:var(--primary);display:flex;flex-direction:column}
     .logo{padding:20px 18px 16px;color:#fff;font-size:16px;font-weight:500;border-bottom:0.5px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:10px}
@@ -50,7 +150,7 @@
     .sidebar-footer .back-main{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.5);font-size:12px;text-decoration:none;padding:8px 0;border-top:1px solid rgba(255,255,255,.05);margin-top:8px;cursor:pointer}
     .sidebar-footer .back-main:hover{color:#fff}
     .user-chip{display:flex;align-items:center;gap:9px;cursor:pointer}
-    .user-chip .av{width:34px;height:34px;border-radius:50%;background:var(--secondary);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:#fff}
+    .user-chip .av{width:34px;height:34px;border-radius:50%;background:var(--secondary);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:#fff;text-transform:uppercase}
     .user-chip .info{flex:1;min-width:0}
     .user-chip .name{font-size:13px;color:#fff;font-weight:500}
     .user-chip .role{font-size:11px;color:rgba(255,255,255,.4)}
@@ -117,7 +217,7 @@
     .av-sm{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
     .chat-input-row{display:flex;gap:8px;margin-top:8px}
     .profile-hero{background:var(--primary);border-radius:var(--radius-md);padding:22px;display:flex;align-items:center;gap:18px;margin-bottom:16px}
-    .profile-av{width:64px;height:64px;border-radius:50%;background:var(--secondary);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:500;color:#fff}
+    .profile-av{width:64px;height:64px;border-radius:50%;background:var(--secondary);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:500;color:#fff;text-transform:uppercase}
     .xp-bar-wrap{background:rgba(255,255,255,.15);border-radius:4px;height:6px;margin-top:10px;overflow:hidden}
     .xp-bar{height:100%;background:var(--teal-m);transition:width .5s}
     .cert-item{background:var(--secondary-light);border:0.5px solid var(--secondary);border-radius:var(--radius-md);padding:13px 15px;display:flex;align-items:center;gap:13px;margin-bottom:8px;cursor:pointer}
@@ -136,199 +236,311 @@
     .cert-modal-content .line{border-top:2px solid var(--gray-200);margin:1.5rem 0}
     .cert-modal-content .footer{font-size:0.85rem;color:var(--gray-600)}
     .cert-modal-content .close-cert{position:absolute;top:10px;right:16px;font-size:1.5rem;cursor:pointer;color:var(--gray-600)}
+
+    @media (max-width: 768px) {
+      .sidebar { width: 180px; }
+      .wrap { flex-direction: column; }
+      .grid2 { grid-template-columns: 1fr; }
+      .grid3 { grid-template-columns: 1fr; }
+      .grid4 { grid-template-columns: 1fr 1fr; }
+      .topbar { flex-wrap: wrap; }
+      .search-box { width: 100%; }
+      .auth-box { padding: 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .sidebar { width: 100%; }
+      .wrap { border-radius: 0; }
+      .auth-box .auth-header i { font-size: 2.2rem; }
+      .auth-box .auth-header h1 { font-size: 1.2rem; }
+    }
   </style>
 </head>
 <body>
-<div class="wrap">
-  <aside class="sidebar">
-    <div class="logo"><i class="ti ti-rocket"></i><span>SkillBridge<small style="display:block;font-size:11px;opacity:.5">Africa</small></span></div>
-    <div class="nav-section"><div class="nav-label">Main</div>
-      <div class="nav-item active" data-screen="dashboard"><i class="ti ti-layout-dashboard"></i> Dashboard</div>
-      <div class="nav-item" data-screen="courses"><i class="ti ti-book"></i> My courses</div>
-      <div class="nav-item" data-screen="mentors"><i class="ti ti-users"></i> Mentors</div>
-      <div class="nav-item" data-screen="opportunities"><i class="ti ti-briefcase"></i> Opportunities</div>
-      <div class="nav-item" data-screen="community"><i class="ti ti-message-circle"></i> Community <span class="badge-dot" id="msg-badge">3</span></div>
-    </div>
-    <div class="nav-section"><div class="nav-label">Account</div>
-      <div class="nav-item" data-screen="profile"><i class="ti ti-user-circle"></i> Profile</div>
-      <div class="nav-item" data-screen="settings"><i class="ti ti-settings"></i> Settings</div>
-    </div>
-    <div class="sidebar-footer">
-      <div class="user-chip" data-screen="profile"><div class="av">BM</div><div class="info"><div class="name">Byusa Martin</div><div class="role">Level 3 · <span id="sidebar-xp">840</span> XP</div></div><i class="ti ti-chevron-right" style="color:rgba(255,255,255,.3)"></i></div>
-      <!-- ✅ "Back to main portal" link -->
-      <div class="back-main" onclick="window.location.href='index.html'"><i class="ti ti-arrow-left"></i> Back to main portal</div>
-    </div>
-  </aside>
-  <div class="main">
-    <div class="topbar"><h1 id="page-title">Dashboard</h1><div class="search-box"><i class="ti ti-search"></i><input type="text" placeholder="Search courses, mentors…" id="global-search"></div><button class="topbar-btn" id="topbar-action"><i class="ti ti-plus"></i> <span>Explore</span></button></div>
-    <div class="content">
-      <div class="screen active" id="screen-dashboard"><div class="grid4"><div class="stat-card"><div class="stat-num" id="d-courses">0</div><div class="stat-lbl">Courses enrolled</div></div><div class="stat-card"><div class="stat-num" id="d-lessons">0</div><div class="stat-lbl">Lessons done</div></div><div class="stat-card"><div class="stat-num" id="d-streak">0</div><div class="stat-lbl">Day streak</div></div><div class="stat-card"><div class="stat-num" id="d-xp">840</div><div class="stat-lbl">XP earned</div></div></div><div class="grid2"><div><div class="sec-title">Continue learning</div><div id="dash-courses"></div><button class="btn btn-sm" onclick="navTo('courses')">View all courses <i class="ti ti-arrow-right"></i></button></div><div><div class="sec-title">Upcoming activity</div><div class="card" style="margin-bottom:10px"><div id="schedule-list"></div></div><div class="sec-title">Recommended for you</div><div id="recommended"></div></div></div><div class="sec-title">Weekly activity</div><div class="card"><div class="act-chart" id="act-chart"></div><div id="act-labels" style="display:flex;margin-top:6px;gap:5px"></div></div></div>
-      <div class="screen" id="screen-courses"><div id="course-list-view"><div class="pill-row" id="course-filter-pills"></div><div id="course-grid"></div></div><div class="lesson-view" id="lesson-view"><div class="back-btn" onclick="closeLessonView()"><i class="ti ti-arrow-left"></i> Back to courses</div><div style="display:flex;gap:18px"><div style="flex:1"><div class="step-dots" id="step-dots"></div><div class="card" id="lesson-content"></div></div><div style="width:220px"><div class="card" style="margin-bottom:12px"><div class="sec-title">Lessons</div><div id="lesson-nav-list"></div></div><div class="card"><div class="sec-title">Your notes</div><textarea id="lesson-notes" placeholder="Take notes here…" style="width:100%;height:100px;font-size:12px;border:0.5px solid var(--bdr2);border-radius:var(--radius-sm);padding:8px" oninput="saveCurrentNote()"></textarea></div></div></div></div></div></div>
-      <div class="screen" id="screen-mentors"><div id="mentor-list-view"><div class="pill-row" id="mentor-filter-pills"></div><div class="grid2" id="mentor-grid"></div></div><div class="lesson-view" id="mentor-chat-view"><div class="back-btn" onclick="closeMentorChat()"><i class="ti ti-arrow-left"></i> Back to mentors</div><div style="display:flex;gap:16px"><div style="flex:1"><div class="card"><div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div id="chat-av" class="av-sm" style="width:42px;height:42px;font-size:14px"></div><div><div id="chat-name" style="font-size:14px;font-weight:500"></div><div style="font-size:12px;color:var(--secondary)"><i class="ti ti-circle-filled" style="font-size:8px"></i> Online</div></div></div><div class="chat-wrap" id="chat-messages"></div><div class="chat-input-row"><input type="text" id="chat-input" placeholder="Type a message…" onkeydown="if(event.key==='Enter')sendMsg()"><button class="btn btn-navy btn-sm" onclick="sendMsg()"><i class="ti ti-send"></i> Send</button></div></div></div><div style="width:200px"><div class="card" id="mentor-profile-card"></div></div></div></div></div>
-      <div class="screen" id="screen-opportunities"><div class="pill-row" id="opp-filter-pills"></div><div id="opp-grid"></div><div class="opp-detail" id="opp-detail"></div></div>
-      <div class="screen" id="screen-community"><div class="grid2"><div><div class="sec-title">Discussion feed</div><div id="feed"></div><div class="card" style="margin-top:12px"><div class="sec-title">Post to community</div><div class="form-row"><textarea id="post-text" placeholder="Share something with the community…"></textarea></div><button class="btn btn-navy btn-sm" onclick="postToFeed()"><i class="ti ti-send"></i> Post</button></div></div><div><div class="sec-title">Active channels</div><div id="channels"></div><div class="sec-title" style="margin-top:16px">Leaderboard</div><div class="card" id="leaderboard"></div></div></div></div>
-      <div class="screen" id="screen-profile"><div class="profile-hero"><div class="profile-av" id="p-av">BM</div><div><h2 id="p-name">Byusa M Martin</h2><p id="p-school">African Leadership University · Kigali</p><div class="xp-bar-wrap"><div class="xp-bar" id="xp-bar" style="width:84%"></div></div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:6px"><span id="p-xp">840</span> / 1000 XP</div></div><div style="margin-left:auto"><button class="btn btn-sm" style="background:rgba(255,255,255,.1);color:#fff" onclick="navTo('settings')"><i class="ti ti-edit"></i> Edit</button></div></div><div class="grid4"><div class="stat-card"><div class="stat-num" id="p-courses">0</div><div class="stat-lbl">Courses</div></div><div class="stat-card"><div class="stat-num" id="p-certs">0</div><div class="stat-lbl">Certificates</div></div><div class="stat-card"><div class="stat-num" id="p-projects">3</div><div class="stat-lbl">Projects</div></div><div class="stat-card"><div class="stat-num" id="p-streak2">0</div><div class="stat-lbl">Streak</div></div></div><div class="grid2"><div><div class="sec-title">Certificates earned</div><div id="certs-list"></div></div><div><div class="sec-title">Skills progress</div><div class="card" id="skills-list"></div></div></div><div class="sec-title">Activity history</div><div class="card"><div class="act-chart" id="p-act-chart"></div></div></div>
-      <div class="screen" id="screen-settings"><div class="grid2"><div><div class="sec-title">Profile settings</div><div class="card"><div class="form-row"><label>Full name</label><input type="text" id="s-name" value="Byusa M Martin"></div><div class="form-row"><label>Institution</label><input type="text" id="s-school" value="African Leadership University"></div><div class="form-row"><label>Location</label><input type="text" id="s-location" value="Kigali, Rwanda"></div><button class="btn btn-navy btn-sm" onclick="saveSettings()"><i class="ti ti-check"></i> Save changes</button></div></div><div><div class="sec-title">Preferences</div><div class="card"><div class="form-row"><label>Weekly hours target</label><input type="number" id="s-hours" value="5"></div><button class="btn btn-navy btn-sm" onclick="saveSettings()">Save</button></div><div class="sec-title">Notifications</div><div class="card" id="notif-list"></div></div></div></div>
+
+  <!-- ==================== AUTH PAGE ==================== -->
+  <div id="auth-container" class="auth-page">
+    <div class="auth-box">
+      <div class="auth-header">
+        <i class="ti ti-bridge"></i>
+        <h1>SkillBridge Africa</h1>
+        <p>Sign in to access practical learning</p>
+      </div>
+      <!-- Login Form -->
+      <form id="login-form">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="login-email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="login-password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-auth">Log In</button>
+        <p class="toggle-text">Don't have an account? <a href="#" onclick="showSignup()">Sign Up</a></p>
+      </form>
+      <!-- Signup Form -->
+      <form id="signup-form" style="display: none;">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="signup-name" placeholder="Byusa Martin" required>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="signup-email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label>Password (min 6 chars)</label>
+          <input type="password" id="signup-password" placeholder="••••••••" minlength="6" required>
+        </div>
+        <button type="submit" class="btn-auth">Create Account</button>
+        <p class="toggle-text">Already have an account? <a href="#" onclick="showLogin()">Log In</a></p>
+      </form>
     </div>
   </div>
-</div>
-<div class="toast" id="toast"><i class="ti ti-check"></i> <span id="toast-msg"></span></div>
 
-<!-- Certificate Modal -->
-<div class="cert-modal" id="certModal">
-  <div class="cert-modal-content">
-    <span class="close-cert" onclick="document.getElementById('certModal').style.display='none'">&times;</span>
-    <div class="seal"><i class="ti ti-award"></i></div>
-    <h2 id="certName">Web Development Basics</h2>
-    <p class="sub">This certifies that</p>
-    <h3 style="color:var(--primary);font-size:1.8rem;margin:0.3rem 0" id="certUser">Byusa Martin</h3>
-    <p class="sub">has successfully completed the course with distinction.</p>
-    <div class="line"></div>
-    <div class="footer"><i class="ti ti-calendar"></i> Issued: <span id="certDate">June 2026</span> &nbsp;|&nbsp; <i class="ti ti-bridge"></i> SkillBridge Africa</div>
-    <button class="btn btn-navy btn-sm" style="margin-top:1rem" onclick="document.getElementById('certModal').style.display='none'">Close</button>
+  <!-- ==================== MAIN APP ==================== -->
+  <div id="app">
+    <div class="wrap">
+      <aside class="sidebar">
+        <div class="logo"><i class="ti ti-rocket"></i><span>SkillBridge<small style="display:block;font-size:11px;opacity:.5">Africa</small></span></div>
+        <div class="nav-section"><div class="nav-label">Main</div>
+          <div class="nav-item active" data-screen="dashboard"><i class="ti ti-layout-dashboard"></i> Dashboard</div>
+          <div class="nav-item" data-screen="courses"><i class="ti ti-book"></i> My courses</div>
+          <div class="nav-item" data-screen="mentors"><i class="ti ti-users"></i> Mentors</div>
+          <div class="nav-item" data-screen="opportunities"><i class="ti ti-briefcase"></i> Opportunities</div>
+          <div class="nav-item" data-screen="community"><i class="ti ti-message-circle"></i> Community <span class="badge-dot" id="msg-badge">3</span></div>
+        </div>
+        <div class="nav-section"><div class="nav-label">Account</div>
+          <div class="nav-item" data-screen="profile"><i class="ti ti-user-circle"></i> Profile</div>
+          <div class="nav-item" data-screen="settings"><i class="ti ti-settings"></i> Settings</div>
+        </div>
+        <div class="sidebar-footer">
+          <div class="user-chip" data-screen="profile" onclick="logout()">
+            <div class="av" id="sidebarAvatar">BM</div>
+            <div class="info">
+              <div class="name" id="sidebarName">Byusa Martin</div>
+              <div class="role">Level 3 · <span id="sidebar-xp">840</span> XP</div>
+            </div>
+            <i class="ti ti-logout" style="color:rgba(255,255,255,.3);cursor:pointer;" title="Logout"></i>
+          </div>
+          <div class="back-main" onclick="window.location.href='index.html'"><i class="ti ti-arrow-left"></i> Back to main portal</div>
+        </div>
+      </aside>
+      <div class="main">
+        <div class="topbar"><h1 id="page-title">Dashboard</h1><div class="search-box"><i class="ti ti-search"></i><input type="text" placeholder="Search courses, mentors…" id="global-search"></div><button class="topbar-btn" id="topbar-action"><i class="ti ti-plus"></i> <span>Explore</span></button></div>
+        <div class="content">
+          <div class="screen active" id="screen-dashboard"><div class="grid4"><div class="stat-card"><div class="stat-num" id="d-courses">0</div><div class="stat-lbl">Courses enrolled</div></div><div class="stat-card"><div class="stat-num" id="d-lessons">0</div><div class="stat-lbl">Lessons done</div></div><div class="stat-card"><div class="stat-num" id="d-streak">0</div><div class="stat-lbl">Day streak</div></div><div class="stat-card"><div class="stat-num" id="d-xp">840</div><div class="stat-lbl">XP earned</div></div></div><div class="grid2"><div><div class="sec-title">Continue learning</div><div id="dash-courses"></div><button class="btn btn-sm" onclick="navTo('courses')">View all courses <i class="ti ti-arrow-right"></i></button></div><div><div class="sec-title">Upcoming activity</div><div class="card" style="margin-bottom:10px"><div id="schedule-list"></div></div><div class="sec-title">Recommended for you</div><div id="recommended"></div></div></div><div class="sec-title">Weekly activity</div><div class="card"><div class="act-chart" id="act-chart"></div><div id="act-labels" style="display:flex;margin-top:6px;gap:5px"></div></div></div>
+          <div class="screen" id="screen-courses"><div id="course-list-view"><div class="pill-row" id="course-filter-pills"></div><div id="course-grid"></div></div><div class="lesson-view" id="lesson-view"><div class="back-btn" onclick="closeLessonView()"><i class="ti ti-arrow-left"></i> Back to courses</div><div style="display:flex;gap:18px"><div style="flex:1"><div class="step-dots" id="step-dots"></div><div class="card" id="lesson-content"></div></div><div style="width:220px"><div class="card" style="margin-bottom:12px"><div class="sec-title">Lessons</div><div id="lesson-nav-list"></div></div><div class="card"><div class="sec-title">Your notes</div><textarea id="lesson-notes" placeholder="Take notes here…" style="width:100%;height:100px;font-size:12px;border:0.5px solid var(--bdr2);border-radius:var(--radius-sm);padding:8px" oninput="saveCurrentNote()"></textarea></div></div></div></div></div></div>
+          <div class="screen" id="screen-mentors"><div id="mentor-list-view"><div class="pill-row" id="mentor-filter-pills"></div><div class="grid2" id="mentor-grid"></div></div><div class="lesson-view" id="mentor-chat-view"><div class="back-btn" onclick="closeMentorChat()"><i class="ti ti-arrow-left"></i> Back to mentors</div><div style="display:flex;gap:16px"><div style="flex:1"><div class="card"><div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div id="chat-av" class="av-sm" style="width:42px;height:42px;font-size:14px"></div><div><div id="chat-name" style="font-size:14px;font-weight:500"></div><div style="font-size:12px;color:var(--secondary)"><i class="ti ti-circle-filled" style="font-size:8px"></i> Online</div></div></div><div class="chat-wrap" id="chat-messages"></div><div class="chat-input-row"><input type="text" id="chat-input" placeholder="Type a message…" onkeydown="if(event.key==='Enter')sendMsg()"><button class="btn btn-navy btn-sm" onclick="sendMsg()"><i class="ti ti-send"></i> Send</button></div></div></div><div style="width:200px"><div class="card" id="mentor-profile-card"></div></div></div></div></div>
+          <div class="screen" id="screen-opportunities"><div class="pill-row" id="opp-filter-pills"></div><div id="opp-grid"></div><div class="opp-detail" id="opp-detail"></div></div>
+          <div class="screen" id="screen-community"><div class="grid2"><div><div class="sec-title">Discussion feed</div><div id="feed"></div><div class="card" style="margin-top:12px"><div class="sec-title">Post to community</div><div class="form-row"><textarea id="post-text" placeholder="Share something with the community…"></textarea></div><button class="btn btn-navy btn-sm" onclick="postToFeed()"><i class="ti ti-send"></i> Post</button></div></div><div><div class="sec-title">Active channels</div><div id="channels"></div><div class="sec-title" style="margin-top:16px">Leaderboard</div><div class="card" id="leaderboard"></div></div></div></div>
+          <div class="screen" id="screen-profile"><div class="profile-hero"><div class="profile-av" id="p-av">BM</div><div><h2 id="p-name">Byusa M Martin</h2><p id="p-school">African Leadership University · Kigali</p><div class="xp-bar-wrap"><div class="xp-bar" id="xp-bar" style="width:84%"></div></div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:6px"><span id="p-xp">840</span> / 1000 XP</div></div><div style="margin-left:auto"><button class="btn btn-sm" style="background:rgba(255,255,255,.1);color:#fff" onclick="navTo('settings')"><i class="ti ti-edit"></i> Edit</button></div></div><div class="grid4"><div class="stat-card"><div class="stat-num" id="p-courses">0</div><div class="stat-lbl">Courses</div></div><div class="stat-card"><div class="stat-num" id="p-certs">0</div><div class="stat-lbl">Certificates</div></div><div class="stat-card"><div class="stat-num" id="p-projects">3</div><div class="stat-lbl">Projects</div></div><div class="stat-card"><div class="stat-num" id="p-streak2">0</div><div class="stat-lbl">Streak</div></div></div><div class="grid2"><div><div class="sec-title">Certificates earned</div><div id="certs-list"></div></div><div><div class="sec-title">Skills progress</div><div class="card" id="skills-list"></div></div></div><div class="sec-title">Activity history</div><div class="card"><div class="act-chart" id="p-act-chart"></div></div></div>
+          <div class="screen" id="screen-settings"><div class="grid2"><div><div class="sec-title">Profile settings</div><div class="card"><div class="form-row"><label>Full name</label><input type="text" id="s-name" value="Byusa M Martin"></div><div class="form-row"><label>Institution</label><input type="text" id="s-school" value="African Leadership University"></div><div class="form-row"><label>Location</label><input type="text" id="s-location" value="Kigali, Rwanda"></div><button class="btn btn-navy btn-sm" onclick="saveSettings()"><i class="ti ti-check"></i> Save changes</button></div></div><div><div class="sec-title">Preferences</div><div class="card"><div class="form-row"><label>Weekly hours target</label><input type="number" id="s-hours" value="5"></div><button class="btn btn-navy btn-sm" onclick="saveSettings()">Save</button></div><div class="sec-title">Notifications</div><div class="card" id="notif-list"></div></div></div></div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 
-<script>
-  // ----------------------------------- DATA + PERSISTENCE ----------------------------------
-  const COURSES = [
-    {id:'wd',cat:'tech',icon:'ti-code',color:'var(--slate-l)',ic:'var(--primary)',title:'Web Development Basics',diff:'Beginner',dur:'6 lessons',lessons:[{t:'HTML structure',body:'HTML is the skeleton. Every webpage uses tags.',code:'<h1>Hello</h1><p>Paragraph</p>',task:'Write a heading + paragraph.',type:'read'},{t:'CSS styling',body:'CSS adds colors and layout.',code:'h1 { color: teal; }',task:'Style your heading.',type:'read'},{t:'JavaScript intro',body:'JS adds interactivity.',code:'alert("Hello!")',task:'Show an alert.',type:'read'},{t:'Final quiz',type:'quiz',quiz:[{q:'What does HTML stand for?',opts:['HyperText Markup','High Transfer','Home Tool','HyperLink'],ans:0}]}]},
-    {id:'py',cat:'tech',icon:'ti-brand-python',color:'var(--teal-l)',ic:'var(--teal)',title:'Python for Beginners',diff:'Beginner',dur:'4 lessons',lessons:[{t:'Variables',body:'Store data using =',code:'name="Byusa"',task:'Create a variable.',type:'read'},{t:'Conditionals',body:'if/else',code:'if x>5: print("ok")',task:'Write if statement.',type:'read'},{t:'Loops',body:'for loops repeat',code:'for i in range(3): print(i)',task:'Print 0..2',type:'read'}]},
-    {id:'biz',cat:'business',icon:'ti-chart-bar',color:'#FAEEDA',ic:'#412402',title:'Business Planning',diff:'Beginner',dur:'3 lessons',lessons:[{t:'Value Prop',body:'Solve real problem',task:'Define customer pain.',type:'read'},{t:'Revenue model',body:'How you earn',task:'List 2 revenue streams.',type:'read'}]},
-    {id:'dm',cat:'business',icon:'ti-speakerphone',color:'var(--secondary-light)',ic:'var(--secondary)',title:'Digital Marketing',diff:'Intermediate',dur:'4 lessons',lessons:[{t:'SEO basics',body:'Keywords & backlinks',task:'Optimize a title.',type:'read'},{t:'Social media',body:'Engage audience',task:'Plan 3 posts.',type:'read'}]}
-  ];
-  const MENTORS = [
-    {id:'jm',init:'JM',bg:'var(--slate-l)',ic:'var(--primary)',name:'Jane Mwangi',role:'Software Engineer',org:'Andela',tags:['Web Dev','Python'],bio:'5+ years exp. Passionate about mentoring.',avail:'Mon, Wed'},
-    {id:'kb',init:'KB',bg:'var(--teal-l)',ic:'var(--teal)',name:'Kofi Boateng',role:'Digital Marketer',org:'Freelance',tags:['SEO','Social Media'],bio:'Built brands from zero.',avail:'Tue, Thu'},
-    {id:'ad',init:'AD',bg:'#FAEEDA',ic:'#412402',name:'Amara Diallo',role:'UX Designer',org:'Interswitch',tags:['Figma','UI/UX'],bio:'Product designer 6 years.',avail:'Daily'}
-  ];
-  const OPPORTUNITIES = [
-    {id:'o1',type:'intern',icon:'ti-code',bg:'var(--slate-l)',ic:'var(--primary)',title:'Frontend Intern',org:'Startup Kigali',pay:'Paid · 80k RWF',loc:'Kigali',desc:'Build dashboards, fix bugs.',skills:['React','CSS']},
-    {id:'o2',type:'gig',icon:'ti-palette',bg:'#FBEAF0',ic:'#4B1528',title:'Brand Identity',org:'Freelance',pay:'$60',loc:'Remote',desc:'Logo + brand guide.',skills:['Figma']}
-  ];
-  // core user state
-  let S = {
-    enrolled: [], lessons: {}, notes: {}, appliedOpps: {}, mentorReqs: {}, chats: {}, posts: [],
-    xp: 0, streak: 7, name: 'Byusa M Martin', school: 'African Leadership University · Kigali',
-    activityLog: [] // dates "YYYY-MM-DD"
-  };
-  function loadState(){ try{
-    const raw = localStorage.getItem('skillbridge_full');
-    if(raw){ const saved=JSON.parse(raw); Object.assign(S, saved); if(!S.activityLog) S.activityLog=[]; }
-    if(!S.enrolled) S.enrolled = []; if(!S.lessons) S.lessons = {}; if(!S.notes) S.notes = {};
-    if(!S.appliedOpps) S.appliedOpps = {}; if(!S.mentorReqs) S.mentorReqs = {};
-    if(!S.chats) S.chats = {}; if(!S.posts) S.posts = [];
-    if(!S.xp) S.xp = 0; if(!S.streak) S.streak = 7;
-    MENTORS.forEach(m=>{ if(!S.chats[m.id]) S.chats[m.id]=[{from:'them',text:`Hi! I'm ${m.name}. How can I help?`}]; });
-    if(S.posts.length===0) S.posts = [{id:1,author:'Amara Diallo',init:'AD',bg:'#FAEEDA',ic:'#412402',text:'Design thinking changed my workflow!',time:'2h ago',likes:12,liked:false},{id:2,author:'Byusa Martin',init:'BM',bg:'var(--slate-l)',ic:'var(--primary)',text:'Just finished Web Dev module!',time:'1d ago',likes:5,liked:false}];
-    recomputeXP(); // FIX: force recompute on load
-  }catch(e){} }
-  function saveState(){ localStorage.setItem('skillbridge_full', JSON.stringify({enrolled:S.enrolled, lessons:S.lessons, notes:S.notes, appliedOpps:S.appliedOpps, mentorReqs:S.mentorReqs, chats:S.chats, posts:S.posts, xp:S.xp, streak:S.streak, name:S.name, school:S.school, activityLog:S.activityLog })); }
-  function toast(msg){ const t=document.getElementById('toast'); document.getElementById('toast-msg').innerText=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 2200); }
-  
-  // FIX: XP recompute - purely cumulative, no arbitrary reset to 840.
-  function recomputeXP(){ 
-    let total = 0;
-    for(let cid of S.enrolled){
-      let done = S.lessons[cid] || 0;
-      total += done * 50;
+  <!-- Toast -->
+  <div class="toast" id="toast"><i class="ti ti-check"></i> <span id="toast-msg"></span></div>
+
+  <!-- Certificate Modal -->
+  <div class="cert-modal" id="certModal">
+    <div class="cert-modal-content">
+      <span class="close-cert" onclick="document.getElementById('certModal').style.display='none'">&times;</span>
+      <div class="seal"><i class="ti ti-award"></i></div>
+      <h2 id="certName">Web Development Basics</h2>
+      <p class="sub">This certifies that</p>
+      <h3 style="color:var(--primary);font-size:1.8rem;margin:0.3rem 0" id="certUser">Byusa Martin</h3>
+      <p class="sub">has successfully completed the course with distinction.</p>
+      <div class="line"></div>
+      <div class="footer"><i class="ti ti-calendar"></i> Issued: <span id="certDate">June 2026</span> &nbsp;|&nbsp; <i class="ti ti-bridge"></i> SkillBridge Africa</div>
+      <button class="btn btn-navy btn-sm" style="margin-top:1rem" onclick="document.getElementById('certModal').style.display='none'">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // ============================================================
+    //  AUTH SYSTEM (Shared with index.html)
+    // ============================================================
+    function getUsers() {
+      return JSON.parse(localStorage.getItem('sb_users')) || [];
     }
-    S.xp = total; // strictly cumulative
-    document.getElementById('d-xp') && (document.getElementById('d-xp').innerText = S.xp);
-    document.getElementById('sidebar-xp') && (document.getElementById('sidebar-xp').innerText = S.xp);
-    document.getElementById('p-xp') && (document.getElementById('p-xp').innerText = S.xp);
-    let percent = Math.min(100, Math.floor(S.xp / 1000 * 100));
-    document.getElementById('xp-bar') && (document.getElementById('xp-bar').style.width = percent + '%');
-    saveState(); 
-  }
-  
-  function logActivity(){ let today=new Date().toISOString().slice(0,10); if(!S.activityLog.includes(today)) S.activityLog.push(today); computeStreak(); saveState(); }
-  function computeStreak(){ let dates=S.activityLog.map(d=>new Date(d)).sort((a,b)=>b-a); let streak=0; let cur=new Date(); cur.setHours(0,0,0,0); for(let i=0;i<dates.length;i++){ let d=new Date(dates[i]); d.setHours(0,0,0,0); if((cur.getTime()-d.getTime())/(86400000)===streak) streak++; else if(streak===0 && d.getTime()===cur.getTime()) streak=1; else break; } S.streak=streak; return streak; }
-  function getActivityLast7Days(){ let days=[]; for(let i=6;i>=0;i--){ let d=new Date(); d.setDate(d.getDate()-i); days.push(d.toISOString().slice(0,10)); } return days.map(day=>S.activityLog.filter(d=>d===day).length); }
-  function renderActivityChart(containerId){ const counts=getActivityLast7Days(); const max=Math.max(1,...counts); const days=['M','T','W','T','F','S','S']; const container=document.getElementById(containerId); if(!container) return; container.innerHTML=counts.map((v,i)=>`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px"><div class="act-bar" style="width:100%;height:${Math.round(v/max*52)}px;background:${v>0?'var(--secondary)':'var(--gray-200)'}"></div><span style="font-size:10px;color:var(--t3)">${days[i]}</span></div>`).join(''); }
 
-  function navTo(screen){ document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active')); document.querySelector(`.nav-item[data-screen="${screen}"]`).classList.add('active'); document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(`screen-${screen}`).classList.add('active'); document.getElementById('page-title').innerText=screen.charAt(0).toUpperCase()+screen.slice(1); if(screen==='dashboard')renderDashboard(); if(screen==='courses')renderCourses(); if(screen==='mentors')renderMentors(); if(screen==='opportunities')renderOpps(); if(screen==='community')renderCommunity(); if(screen==='profile')renderProfile(); if(screen==='settings')renderSettings(); }
-  window.navTo=navTo; document.querySelectorAll('.nav-item, .user-chip').forEach(el=>el.addEventListener('click',()=>{ const scr=el.dataset.screen; if(scr) navTo(scr); }));
-
-  function renderDashboard(){ const totalLessons=S.enrolled.reduce((a,cid)=>a+(S.lessons[cid]||0),0); document.getElementById('d-courses').innerText=S.enrolled.length; document.getElementById('d-lessons').innerText=totalLessons; document.getElementById('d-streak').innerText=computeStreak(); document.getElementById('d-xp').innerText=S.xp; const dashDiv=document.getElementById('dash-courses'); dashDiv.innerHTML=S.enrolled.slice(0,3).map(cid=>{ let c=COURSES.find(c=>c.id===cid); if(!c) return ''; let done=S.lessons[cid]||0; let pct=Math.round(done/c.lessons.length*100); return `<div class="row-item" onclick="openLesson('${cid}',${Math.min(done,c.lessons.length-1)})"><div class="icon-box" style="background:${c.color}"><i class="ti ${c.icon}" style="color:${c.ic}"></i></div><div class="item-info"><h4>${c.title}</h4><p>${done}/${c.lessons.length} lessons</p><div class="progress-bar-wrap"><div class="progress-bar" style="width:${pct}%"></div></div></div><i class="ti ti-chevron-right"></i></div>`; }).join('')||'<div class="card-sm">No enrolled courses. <a href="#" onclick="navTo(\'courses\');return false">Browse courses</a></div>';
-    const rec=document.getElementById('recommended'); const notEnrolled=COURSES.filter(c=>!S.enrolled.includes(c.id)); rec.innerHTML=notEnrolled.slice(0,2).map(c=>`<div class="row-item" onclick="enrollCourse('${c.id}')"><div class="icon-box" style="background:${c.color}"><i class="ti ${c.icon}"></i></div><div class="item-info"><h4>${c.title}</h4><p>${c.diff}</p></div><button class="btn btn-teal btn-sm" onclick="event.stopPropagation();enrollCourse('${c.id}')">Enroll</button></div>`).join('')||'<div> Great job! All courses enrolled.</div>';
-    document.getElementById('schedule-list').innerHTML=`<div style="display:flex;gap:10px"><i class="ti ti-calendar"></i><span>Next: Complete HTML lesson</span></div><div style="display:flex;gap:10px;margin-top:8px"><i class="ti ti-users"></i><span>Mentor session available</span></div>`; renderActivityChart('act-chart'); }
-
-  function renderCourses(filter='all'){ const pillsDiv=document.getElementById('course-filter-pills'); const cats=['all','tech','business']; pillsDiv.innerHTML=cats.map(c=>`<div class="pill ${filter===c?'active':''}" onclick="renderCourses('${c}')">${c}</div>`).join(''); const filtered=filter==='all'?COURSES:COURSES.filter(c=>c.cat===filter); const grid=document.getElementById('course-grid'); grid.innerHTML=filtered.map(c=>{ let enrolled=S.enrolled.includes(c.id); let done=S.lessons[c.id]||0; let pct=enrolled?Math.round(done/c.lessons.length*100):0; return `<div class="row-item" onclick="${enrolled?`openLesson('${c.id}',${Math.min(done,c.lessons.length-1)})`:`enrollCourse('${c.id}')`}"><div class="icon-box" style="background:${c.color}"><i class="ti ${c.icon}" style="color:${c.ic}"></i></div><div class="item-info"><h4>${c.title}</h4><p>${c.diff} · ${c.dur}</p>${enrolled?`<div class="progress-bar-wrap"><div class="progress-bar" style="width:${pct}%"></div></div>`:''}</div><button class="btn ${enrolled?'btn-teal':'btn-navy'} btn-sm" onclick="event.stopPropagation();${enrolled?`openLesson('${c.id}',${Math.min(done,c.lessons.length-1)})`:`enrollCourse('${c.id}')`}">${enrolled?'Continue':'Enroll'}</button></div>`; }).join(''); }
-
-  function enrollCourse(cid){ if(!S.enrolled.includes(cid)){ S.enrolled.push(cid); if(!S.lessons[cid]) S.lessons[cid]=0; saveState(); toast(`Enrolled in ${COURSES.find(c=>c.id===cid).title}!`); renderDashboard(); renderCourses(); } else toast('Already enrolled'); }
-
-  let currentLesson = { cid: null, idx: 0 };
-  function openLesson(cid, idx){ if(!S.enrolled.includes(cid)) enrollCourse(cid); currentLesson={cid,idx}; document.getElementById('course-list-view').style.display='none'; document.getElementById('lesson-view').classList.add('open'); renderLessonContent(); renderLessonNav(); document.getElementById('lesson-notes').value=S.notes[`${cid}_${idx}`]||''; }
-  function closeLessonView(){ document.getElementById('course-list-view').style.display='block'; document.getElementById('lesson-view').classList.remove('open'); renderCourses(); }
-  function saveCurrentNote(){ if(currentLesson.cid) S.notes[`${currentLesson.cid}_${currentLesson.idx}`]=document.getElementById('lesson-notes').value; saveState(); }
-  function renderLessonNav(){ let c=COURSES.find(x=>x.id===currentLesson.cid); let doneCount=S.lessons[c.id]||0; document.getElementById('step-dots').innerHTML=c.lessons.map((_,i)=>`<div class="sdot ${i<doneCount?'done':''} ${i===currentLesson.idx?'cur':''}"></div>`).join(''); document.getElementById('lesson-nav-list').innerHTML=c.lessons.map((l,i)=>`<div onclick="openLesson('${c.id}',${i})" style="display:flex;align-items:center;gap:8px;padding:7px 0;cursor:pointer"><i class="ti ${i<(S.lessons[c.id]||0)?'ti-circle-check':'ti-circle'}" style="color:${i<(S.lessons[c.id]||0)?'var(--secondary)':'var(--t3)'}"></i><span>${l.t}</span></div>`).join(''); }
-  function renderLessonContent(){ let c=COURSES.find(x=>x.id===currentLesson.cid); let l=c.lessons[currentLesson.idx]; let completed=(S.lessons[c.id]||0)>currentLesson.idx; let html=`<div style="font-size:12px;color:var(--t3)">Lesson ${currentLesson.idx+1}/${c.lessons.length}</div><h2 style="font-size:18px;margin:8px 0">${l.t}</h2><p>${l.body}</p>${l.code?`<div class="code-block">${l.code}</div>`:''}${l.task?`<div class="task-box"><div class="task-lbl"><i class="ti ti-pencil"></i> Task</div><p>${l.task}</p></div>`:''}${l.type==='quiz'?renderQuiz(l.quiz):''}<div style="display:flex;gap:8px;margin-top:16px"><button class="btn btn-navy" onclick="completeCurrentLesson()" ${completed?'disabled style="background:var(--secondary)"':''}><i class="ti ti-check"></i> ${completed?'Completed':'Mark complete'}</button></div>`; document.getElementById('lesson-content').innerHTML=html; if(l.type==='quiz' && !window._quizState) window._quizState={}; }
-  function renderQuiz(quiz){ return `<div id="quizContainer">${quiz.map((q,qi)=>`<div style="margin-bottom:12px"><div>${q.q}</div>${q.opts.map((o,oi)=>`<div class="quiz-opt" onclick="checkQuizAns(${qi},${oi},${q.ans})">${o}</div>`).join('')}<div id="qfb-${qi}" style="font-size:12px;margin-top:4px"></div></div>`).join('')}</div>`; }
-  window.checkQuizAns=(qi,oi,ans)=>{ if(window[`q_${qi}`]) return; let correct=oi===ans; let el=document.querySelector(`#quizContainer .quiz-opt:nth-child(${oi+1})`); if(el) el.classList.add(correct?'correct':'wrong'); if(!correct){ let correctEl=document.querySelector(`#quizContainer .quiz-opt:nth-child(${ans+1})`); if(correctEl) correctEl.classList.add('correct'); } document.getElementById(`qfb-${qi}`).innerHTML=correct?'✓ Correct!':`✗ Wrong. Correct answer: ${ans+1}`; window[`q_${qi}`]=true; };
-  function completeCurrentLesson(){ let c=COURSES.find(x=>x.id===currentLesson.cid); let idx=currentLesson.idx; let currentDone=S.lessons[c.id]||0; if(idx>=currentDone){ S.lessons[c.id]=idx+1; logActivity(); recomputeXP(); saveState(); toast('Lesson complete! +50 XP'); renderLessonNav(); renderLessonContent(); renderDashboard(); renderCourses(); if(idx+1===c.lessons.length){ toast(`🎉 Course completed! Certificate added to profile.`); } if(idx+1<c.lessons.length) setTimeout(()=>openLesson(c.id, idx+1), 600); } else toast('Already completed'); }
-
-  // ✅ Certificate rendering – show modal with course name and user
-  function showCertificate(courseId){
-    const c = COURSES.find(x=>x.id === courseId);
-    if(!c) return;
-    const modal = document.getElementById('certModal');
-    document.getElementById('certName').innerText = c.title;
-    document.getElementById('certUser').innerText = S.name;
-    document.getElementById('certDate').innerText = new Date().toLocaleDateString('en-US', { year:'numeric', month:'long' });
-    modal.style.display = 'flex';
-  }
-  // Override profile render to include clickable certificates
-  function renderProfile(){ 
-    document.getElementById('p-name').innerText=S.name; 
-    document.getElementById('p-school').innerText=S.school; 
-    document.getElementById('p-av').innerText=S.name.split(' ').map(n=>n[0]).join('').slice(0,2); 
-    let completedCourses = []; 
-    for(let cid of S.enrolled) {
-      let c = COURSES.find(c=>c.id===cid);
-      if(c && (S.lessons[cid]||0) === c.lessons.length) completedCourses.push(c);
+    function saveUsers(users) {
+      localStorage.setItem('sb_users', JSON.stringify(users));
     }
-    document.getElementById('p-courses').innerText=S.enrolled.length; 
-    document.getElementById('p-certs').innerText=completedCourses.length; 
-    document.getElementById('p-streak2').innerText=computeStreak(); 
-    document.getElementById('certs-list').innerHTML=completedCourses.length>0 ? 
-      completedCourses.map(c => `<div class="cert-item" onclick="showCertificate('${c.id}')"><i class="ti ti-award" style="color:var(--accent)"></i> ${c.title} <span style="margin-left:auto;font-size:12px;color:var(--gray-600)">View certificate →</span></div>`).join('') : 
-      '<div>No certificates yet. Complete a course!</div>'; 
-    document.getElementById('skills-list').innerHTML=S.enrolled.map(cid=>`<div>${COURSES.find(c=>c.id===cid).title}: ${Math.round(((S.lessons[cid]||0)/COURSES.find(c=>c.id===cid).lessons.length)*100)}%</div>`).join('')||'<div>Enroll to see progress</div>'; 
-    renderActivityChart('p-act-chart'); 
-  }
 
-  // Mentors, Opps, Community, Settings (unchanged but keep them)
-  function renderMentors(filter='all'){ const pills=document.getElementById('mentor-filter-pills'); pills.innerHTML=['all','Web Dev','Marketing','Design'].map(f=>`<div class="pill ${filter===f?'active':''}" onclick="renderMentors('${f}')">${f}</div>`).join(''); let list=MENTORS; if(filter!=='all') list=list.filter(m=>m.tags.some(t=>t.includes(filter))); document.getElementById('mentor-grid').innerHTML=list.map(m=>`<div class="card-sm" style="cursor:pointer" onclick="openMentorChat('${m.id}')"><div style="display:flex;gap:12px"><div class="av-sm" style="width:46px;height:46px;background:${m.bg};color:${m.ic};font-size:14px">${m.init}</div><div><h4>${m.name}</h4><p>${m.role}</p><div class="tags" style="margin-top:4px">${m.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div><div style="margin-left:auto"><button class="btn ${S.mentorReqs[m.id]?'btn-teal done':'btn-navy'} btn-sm" onclick="event.stopPropagation();requestMentor('${m.id}')">${S.mentorReqs[m.id]?'Requested':'Request'}</button></div></div></div>`).join(''); }
-  function requestMentor(id){ if(!S.mentorReqs[id]){ S.mentorReqs[id]=true; saveState(); toast('Session request sent!'); renderMentors(); } }
-  function openMentorChat(id){ let m=MENTORS.find(x=>x.id===id); currentMentor=m; document.getElementById('mentor-list-view').style.display='none'; document.getElementById('mentor-chat-view').classList.add('open'); document.getElementById('chat-av').style.background=m.bg; document.getElementById('chat-av').style.color=m.ic; document.getElementById('chat-av').innerText=m.init; document.getElementById('chat-name').innerText=m.name; renderChatMessages(); document.getElementById('mentor-profile-card').innerHTML=`<div class="sec-title">${m.name}</div><p>${m.bio}</p><p><i class="ti ti-calendar"></i> ${m.avail}</p><button class="btn btn-navy btn-sm btn-full" onclick="requestMentor('${m.id}')"> Request session</button>`; }
-  function closeMentorChat(){ document.getElementById('mentor-list-view').style.display='block'; document.getElementById('mentor-chat-view').classList.remove('open'); renderMentors(); }
-  function renderChatMessages(){ let msgs=S.chats[currentMentor.id]||[]; let wrap=document.getElementById('chat-messages'); wrap.innerHTML=msgs.map(m=>`<div class="msg ${m.from==='me'?'me':'them'}"><div class="av-sm" style="background:${m.from==='me'?'var(--gray-100)':currentMentor.bg};color:${m.from==='me'?'var(--primary)':currentMentor.ic}">${m.from==='me'?'BM':currentMentor.init}</div><div class="bubble">${m.text}</div></div>`).join(''); wrap.scrollTop=wrap.scrollHeight; }
-  window.sendMsg=function(){ let inp=document.getElementById('chat-input'); let txt=inp.value.trim(); if(!txt||!currentMentor)return; S.chats[currentMentor.id].push({from:'me',text:txt}); saveState(); renderChatMessages(); inp.value=''; setTimeout(()=>{ let replies=['Great point! Keep learning','Thats awesome','Let me share a resource','Thanks for reaching out!']; let reply=replies[Math.floor(Math.random()*replies.length)]; S.chats[currentMentor.id].push({from:'them',text:reply}); saveState(); renderChatMessages(); },1000); };
-  function renderOpps(filter='all'){ const pills=document.getElementById('opp-filter-pills'); pills.innerHTML=['all','intern','gig'].map(f=>`<div class="pill ${filter===f?'active':''}" onclick="renderOpps('${f}')">${f}</div>`).join(''); let list=filter==='all'?OPPORTUNITIES:OPPORTUNITIES.filter(o=>o.type===filter); document.getElementById('opp-grid').innerHTML=list.map(o=>`<div class="row-item" onclick="showOppDetail('${o.id}')"><div class="icon-box" style="background:${o.bg}"><i class="ti ${o.icon}"></i></div><div class="item-info"><h4>${o.title}</h4><p>${o.org} · ${o.pay}</p></div>${S.appliedOpps[o.id]?'<span class="badge" style="background:var(--secondary-light);color:#173404">Applied</span>':'<button class="btn btn-navy btn-sm" onclick="event.stopPropagation();applyOpp(\''+o.id+'\')">Apply</button>'}</div>`).join(''); document.getElementById('opp-detail').classList.remove('open'); }
-  function showOppDetail(id){ let o=OPPORTUNITIES.find(x=>x.id===id); let detail=document.getElementById('opp-detail'); detail.innerHTML=`<h3>${o.title}</h3><p>${o.desc}</p><p><strong>Compensation:</strong> ${o.pay}</p><p><strong>Location:</strong> ${o.loc}</p><button class="btn btn-navy" onclick="applyOpp('${o.id}')">Apply now</button>`; detail.classList.add('open'); }
-  function applyOpp(id){ if(!S.appliedOpps[id]){ S.appliedOpps[id]=true; saveState(); toast('Application submitted! Good luck.'); renderOpps(); } }
-  function renderCommunity(){ let feed=document.getElementById('feed'); feed.innerHTML=S.posts.map(p=>`<div class="card-sm" style="margin-bottom:10px"><div style="display:flex;gap:10px"><div class="av-sm" style="background:${p.bg};color:${p.ic}">${p.init}</div><div><b>${p.author}</b><div style="font-size:11px;color:var(--t3)">${p.time}</div></div></div><p style="margin:8px 0">${p.text}</p><div><button class="btn btn-sm" onclick="likePost(${p.id})"><i class="ti ti-heart"></i> ${p.likes}</button></div></div>`).join(''); document.getElementById('channels').innerHTML=['Web Dev','Business','Design','Career'].map(ch=>`<div class="row-item" style="padding:10px"><i class="ti ti-hash"></i> ${ch}</div>`).join(''); document.getElementById('leaderboard').innerHTML=`<div>1️⃣ Amara · 1240 XP</div><div>2️⃣ Pascal · 1105 XP</div><div>3️⃣ You (Byusa) · ${S.xp} XP</div>`; }
-  function likePost(id){ let post=S.posts.find(p=>p.id===id); if(post){ post.likes+=post.liked? -1:1; post.liked=!post.liked; renderCommunity(); saveState(); } }
-  function postToFeed(){ let txt=document.getElementById('post-text').value.trim(); if(!txt)return; S.posts.unshift({id:Date.now(),author:S.name,init:'BM',bg:'var(--slate-l)',ic:'var(--primary)',text:txt,time:'Just now',likes:0,liked:false}); document.getElementById('post-text').value=''; saveState(); renderCommunity(); toast('Posted!'); }
-  function renderSettings(){ document.getElementById('notif-list').innerHTML=`<div> Email updates: On</div><div> Platform news: On</div>`; }
-  function saveSettings(){ S.name=document.getElementById('s-name').value; S.school=document.getElementById('s-school').value+' · '+document.getElementById('s-location').value; saveState(); toast('Settings saved'); renderProfile(); }
-  document.getElementById('global-search').addEventListener('input',(e)=>{ let q=e.target.value.toLowerCase(); if(q.length<2) return; let found=COURSES.filter(c=>c.title.toLowerCase().includes(q)); if(found.length) navTo('courses'); });
-  
-  // Expose globals
-  window.renderCourses=renderCourses; window.enrollCourse=enrollCourse; window.openLesson=openLesson; window.closeLessonView=closeLessonView; window.saveCurrentNote=saveCurrentNote; window.completeCurrentLesson=completeCurrentLesson; window.renderMentors=renderMentors; window.requestMentor=requestMentor; window.openMentorChat=openMentorChat; window.closeMentorChat=closeMentorChat; window.renderOpps=renderOpps; window.applyOpp=applyOpp; window.showOppDetail=showOppDetail; window.likePost=likePost; window.postToFeed=postToFeed; window.saveSettings=saveSettings; window.renderDashboard=renderDashboard; window.renderProfile=renderProfile; window.showCertificate=showCertificate;
+    function getSession() {
+      return JSON.parse(localStorage.getItem('sb_auth_user'));
+    }
 
-  // INIT
-  loadState(); 
-  recomputeXP(); 
-  renderDashboard(); 
-  renderCourses(); 
-  renderMentors(); 
-  renderOpps(); 
-  renderCommunity(); 
-  renderProfile(); 
-  renderSettings(); 
-  toast('Welcome to Practical Learning! 🎓');
-</script>
-</body>
-</html>
+    function setSession(user) {
+      localStorage.setItem('sb_auth_user', JSON.stringify(user));
+    }
+
+    function clearSession() {
+      localStorage.removeItem('sb_auth_user');
+    }
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function showSignup() {
+      document.getElementById('login-form').style.display = 'none';
+      document.getElementById('signup-form').style.display = 'block';
+    }
+
+    function showLogin() {
+      document.getElementById('login-form').style.display = 'block';
+      document.getElementById('signup-form').style.display = 'none';
+    }
+    window.showSignup = showSignup;
+    window.showLogin = showLogin;
+
+    function toast(msg) {
+      const t = document.getElementById('toast');
+      document.getElementById('toast-msg').innerText = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    // Login
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value.trim();
+      if (!isValidEmail(email)) { toast('Please enter a valid email.'); return; }
+      const users = getUsers();
+      const user = users.find(u => u.email === email && u.password === password);
+      if (user) {
+        setSession({ email: user.email, name: user.name });
+        checkAuth();
+        toast('Welcome back, ' + user.name + '!');
+      } else {
+        toast('Invalid email or password.');
+      }
+    });
+
+    // Signup
+    document.getElementById('signup-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('signup-name').value.trim();
+      const email = document.getElementById('signup-email').value.trim();
+      const password = document.getElementById('signup-password').value.trim();
+      if (!name) { toast('Please enter your name.'); return; }
+      if (!isValidEmail(email)) { toast('Please enter a valid email.'); return; }
+      if (password.length < 6) { toast('Password must be at least 6 characters.'); return; }
+      const users = getUsers();
+      if (users.find(u => u.email === email)) { toast('Email already registered.'); return; }
+      users.push({ name, email, password });
+      saveUsers(users);
+      setSession({ email, name });
+      checkAuth();
+      toast('Account created! Welcome, ' + name + ' 🎉');
+    });
+
+    function checkAuth() {
+      const user = getSession();
+      const authContainer = document.getElementById('auth-container');
+      const app = document.getElementById('app');
+      if (user) {
+        authContainer.style.display = 'none';
+        app.style.display = 'block';
+        // Update sidebar user
+        const avatar = document.getElementById('sidebarAvatar');
+        const nameSpan = document.getElementById('sidebarName');
+        if (avatar) avatar.innerText = user.name.charAt(0).toUpperCase();
+        if (nameSpan) nameSpan.innerText = user.name;
+        // Also update profile
+        const pAv = document.getElementById('p-av');
+        const pName = document.getElementById('p-name');
+        if (pAv) pAv.innerText = user.name.charAt(0).toUpperCase();
+        if (pName) pName.innerText = user.name;
+        // Also update settings name
+        const sName = document.getElementById('s-name');
+        if (sName) sName.value = user.name;
+      } else {
+        authContainer.style.display = 'flex';
+        app.style.display = 'none';
+        document.getElementById('login-form').reset();
+        document.getElementById('signup-form').reset();
+        showLogin();
+      }
+    }
+
+    function logout() {
+      if (confirm('Logout?')) {
+        clearSession();
+        checkAuth();
+        toast('Logged out.');
+      }
+    }
+    window.logout = logout;
+
+    // ============================================================
+    //  PLATFORM CORE LOGIC (unchanged)
+    // ============================================================
+    // ... (all your existing COURSES, MENTORS, OPPORTUNITIES, state, render functions)
+    // I'll include them below, but they are unchanged from your original.
+
+    const COURSES = [
+      {id:'wd',cat:'tech',icon:'ti-code',color:'var(--slate-l)',ic:'var(--primary)',title:'Web Development Basics',diff:'Beginner',dur:'6 lessons',lessons:[{t:'HTML structure',body:'HTML is the skeleton. Every webpage uses tags.',code:'<h1>Hello</h1><p>Paragraph</p>',task:'Write a heading + paragraph.',type:'read'},{t:'CSS styling',body:'CSS adds colors and layout.',code:'h1 { color: teal; }',task:'Style your heading.',type:'read'},{t:'JavaScript intro',body:'JS adds interactivity.',code:'alert("Hello!")',task:'Show an alert.',type:'read'},{t:'Final quiz',type:'quiz',quiz:[{q:'What does HTML stand for?',opts:['HyperText Markup','High Transfer','Home Tool','HyperLink'],ans:0}]}]},
+      {id:'py',cat:'tech',icon:'ti-brand-python',color:'var(--teal-l)',ic:'var(--teal)',title:'Python for Beginners',diff:'Beginner',dur:'4 lessons',lessons:[{t:'Variables',body:'Store data using =',code:'name="Byusa"',task:'Create a variable.',type:'read'},{t:'Conditionals',body:'if/else',code:'if x>5: print("ok")',task:'Write if statement.',type:'read'},{t:'Loops',body:'for loops repeat',code:'for i in range(3): print(i)',task:'Print 0..2',type:'read'}]},
+      {id:'biz',cat:'business',icon:'ti-chart-bar',color:'#FAEEDA',ic:'#412402',title:'Business Planning',diff:'Beginner',dur:'3 lessons',lessons:[{t:'Value Prop',body:'Solve real problem',task:'Define customer pain.',type:'read'},{t:'Revenue model',body:'How you earn',task:'List 2 revenue streams.',type:'read'}]},
+      {id:'dm',cat:'business',icon:'ti-speakerphone',color:'var(--secondary-light)',ic:'var(--secondary)',title:'Digital Marketing',diff:'Intermediate',dur:'4 lessons',lessons:[{t:'SEO basics',body:'Keywords & backlinks',task:'Optimize a title.',type:'read'},{t:'Social media',body:'Engage audience',task:'Plan 3 posts.',type:'read'}]}
+    ];
+    const MENTORS = [
+      {id:'jm',init:'JM',bg:'var(--slate-l)',ic:'var(--primary)',name:'Jane Mwangi',role:'Software Engineer',org:'Andela',tags:['Web Dev','Python'],bio:'5+ years exp. Passionate about mentoring.',avail:'Mon, Wed'},
+      {id:'kb',init:'KB',bg:'var(--teal-l)',ic:'var(--teal)',name:'Kofi Boateng',role:'Digital Marketer',org:'Freelance',tags:['SEO','Social Media'],bio:'Built brands from zero.',avail:'Tue, Thu'},
+      {id:'ad',init:'AD',bg:'#FAEEDA',ic:'#412402',name:'Amara Diallo',role:'UX Designer',org:'Interswitch',tags:['Figma','UI/UX'],bio:'Product designer 6 years.',avail:'Daily'}
+    ];
+    const OPPORTUNITIES = [
+      {id:'o1',type:'intern',icon:'ti-code',bg:'var(--slate-l)',ic:'var(--primary)',title:'Frontend Intern',org:'Startup Kigali',pay:'Paid · 80k RWF',loc:'Kigali',desc:'Build dashboards, fix bugs.',skills:['React','CSS']},
+      {id:'o2',type:'gig',icon:'ti-palette',bg:'#FBEAF0',ic:'#4B1528',title:'Brand Identity',org:'Freelance',pay:'$60',loc:'Remote',desc:'Logo + brand guide.',skills:['Figma']}
+    ];
+
+    let S = {
+      enrolled: [], lessons: {}, notes: {}, appliedOpps: {}, mentorReqs: {}, chats: {}, posts: [],
+      xp: 0, streak: 7, name: 'Byusa M Martin', school: 'African Leadership University · Kigali',
+      activityLog: []
+    };
+
+    function loadState(){ try{
+      const raw = localStorage.getItem('skillbridge_full');
+      if(raw){ const saved=JSON.parse(raw); Object.assign(S, saved); if(!S.activityLog) S.activityLog=[]; }
+      if(!S.enrolled) S.enrolled = []; if(!S.lessons) S.lessons = {}; if(!S.notes) S.notes = {};
+      if(!S.appliedOpps) S.appliedOpps = {}; if(!S.mentorReqs) S.mentorReqs = {};
+      if(!S.chats) S.chats = {}; if(!S.posts) S.posts = [];
+      if(!S.xp) S.xp = 0; if(!S.streak) S.streak = 7;
+      MENTORS.forEach(m=>{ if(!S.chats[m.id]) S.chats[m.id]=[{from:'them',text:`Hi! I'm ${m.name}. How can I help?`}]; });
+      if(S.posts.length===0) S.posts = [{id:1,author:'Amara Diallo',init:'AD',bg:'#FAEEDA',ic:'#412402',text:'Design thinking changed my workflow!',time:'2h ago',likes:12,liked:false},{id:2,author:'Byusa Martin',init:'BM',bg:'var(--slate-l)',ic:'var(--primary)',text:'Just finished Web Dev module!',time:'1d ago',likes:5,liked:false}];
+      recomputeXP();
+    }catch(e){} }
+    function saveState(){ localStorage.setItem('skillbridge_full', JSON.stringify({enrolled:S.enrolled, lessons:S.lessons, notes:S.notes, appliedOpps:S.appliedOpps, mentorReqs:S.mentorReqs, chats:S.chats, posts:S.posts, xp:S.xp, streak:S.streak, name:S.name, school:S.school, activityLog:S.activityLog })); }
+    function recomputeXP(){ let total=0; for(let cid of S.enrolled){ let done=S.lessons[cid]||0; total+=done*50; } S.xp=total; document.getElementById('d-xp')&&(document.getElementById('d-xp').innerText=S.xp); document.getElementById('sidebar-xp')&&(document.getElementById('sidebar-xp').innerText=S.xp); document.getElementById('p-xp')&&(document.getElementById('p-xp').innerText=S.xp); let percent=Math.min(100,Math.floor(S.xp/1000*100)); document.getElementById('xp-bar')&&(document.getElementById('xp-bar').style.width=percent+'%'); saveState(); }
+    function logActivity(){ let today=new Date().toISOString().slice(0,10); if(!S.activityLog.includes(today)) S.activityLog.push(today); computeStreak(); saveState(); }
+    function computeStreak(){ let dates=S.activityLog.map(d=>new Date(d)).sort((a,b)=>b-a); let streak=0; let cur=new Date(); cur.setHours(0,0,0,0); for(let i=0;i<dates.length;i++){ let d=new Date(dates[i]); d.setHours(0,0,0,0); if((cur.getTime()-d.getTime())/(86400000)===streak) streak++; else if(streak===0 && d.getTime()===cur.getTime()) streak=1; else break; } S.streak=streak; return streak; }
+    function getActivityLast7Days(){ let days=[]; for(let i=6;i>=0;i--){ let d=new Date(); d.setDate(d.getDate()-i); days.push(d.toISOString().slice(0,10)); } return days.map(day=>S.activityLog.filter(d=>d===day).length); }
+    function renderActivityChart(containerId){ const counts=getActivityLast7Days(); const max=Math.max(1,...counts); const days=['M','T','W','T','F','S','S']; const container=document.getElementById(containerId); if(!container) return; container.innerHTML=counts.map((v,i)=>`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px"><div class="act-bar" style="width:100%;height:${Math.round(v/max*52)}px;background:${v>0?'var(--secondary)':'var(--gray-200)'}"></div><span style="font-size:10px;color:var(--t3)">${days[i]}</span></div>`).join(''); }
+
+    function navTo(screen){ document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active')); document.querySelector(`.nav-item[data-screen="${screen}"]`).classList.add('active'); document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(`screen-${screen}`).classList.add('active'); document.getElementById('page-title').innerText=screen.charAt(0).toUpperCase()+screen.slice(1); if(screen==='dashboard')renderDashboard(); if(screen==='courses')renderCourses(); if(screen==='mentors')renderMentors(); if(screen==='opportunities')renderOpps(); if(screen==='community')renderCommunity(); if(screen==='profile')renderProfile(); if(screen==='settings')renderSettings(); }
+    window.navTo=navTo; document.querySelectorAll('.nav-item, .user-chip').forEach(el=>el.addEventListener('click',()=>{ const scr=el.dataset.screen; if(scr) navTo(scr); }));
+
+    function renderDashboard(){ const totalLessons=S.enrolled.reduce((a,cid)=>a+(S.lessons[cid]||0),0); document.getElementById('d-courses').innerText=S.enrolled.length; document.getElementById('d-lessons').innerText=totalLessons; document.getElementById('d-streak').innerText=computeStreak(); document.getElementById('d-xp').innerText=S.xp; const dashDiv=document.getElementById('dash-courses'); dashDiv.innerHTML=S.enrolled.slice(0,3).map(cid=>{ let c=COURSES.find(c=>c.id===cid); if(!c) return ''; let done=S.lessons[cid]||0; let pct=Math.round(done/c.lessons.length*100); return `<div class="row-item" onclick="openLesson('${cid}',${Math.min(done,c.lessons.length-1)})"><div class="icon-box" style="background:${c.color}"><i class="ti ${c.icon}" style="color:${c.ic}"></i></div><div class="item-info"><h4>${c.title}</h4><p>${done}/${c.lessons.length} lessons</p><div class="progress-bar-wrap"><div class="progress-bar" style="width:${pct}%"></div></div></div><i class="ti ti-chevron-right"></i></div>`; }).join('')||'<div class="card-sm">No enrolled courses. <a href="#" onclick="navTo(\'courses\');return false">Browse courses</a></div>';
+      const rec=document.getElementById('recommended'); const notEnrolled=COURSES.filter(c=>!S.enrolled.includes(c.id)); rec.innerHTML=notEnrolled.slice(0,2).map(c=>`<div class="row-item" onclick="enrollCourse('${c.id}')"><div class="icon-box" style="background:${c.color}"><i class="ti ${c.icon}"></i></div><div class="item-info"><h4>${c.title}</h4><p>${c.diff}</p></div><button class="btn btn-teal btn-sm" onclick="event.stopPropagation();enrollCourse('${c.id}')">Enroll</button></div>`).join('')||'<div> Great job! All courses enrolled.</div>';
+      document.getElementById('schedule-list').innerHTML=`<div style="display:flex;gap:10px"><i class="ti ti-calendar"></i><span>Next: Complete HTML lesson</span></div><div style="display:flex;gap:10px;margin-top:8px"><i class="ti ti-users"></i><span>Mentor session available</span></div>`; renderActivityChart('act-chart'); }
+
+    function renderCourses(filter='all'){ const pillsDiv=document.getElementById('course-filter-pills'); const cats=['all','tech','business']; pillsDiv.innerHTML=cats.map(c=>`<div class="pill ${filter===c?'active':''}" onclick="renderCourses('${c}')">${c}</div>`).join(''); const filtered=filter==='all'?COURSES:COURSES.filter(c=>c.cat===filter); const grid=document.getElementById('course-grid'); grid.innerHTML=filtered.map(c=>{ let enrolled=S.enrolled.includes(c.id); let done=S.lessons[c.id]||0; let pct=enrolled?Math.round(done/c.lessons.length*100):0; return `<div class="row-item" onclick="${enrolled?`openLesson('${c.id}',${Math.min(done,c.lessons.length-1)})`:`enrollCourse('${c.id}')`}"><div class="icon-box" style="background:${c.color}"><i class="ti ${c.icon}" style="color:${c.ic}"></i></div><div class="item-info"><h4>${c.title}</h4><p>${c.diff} · ${c.dur}</p>${enrolled?`<div class="progress-bar-wrap"><div class="progress-bar" style="width:${pct}%"></div></div>`:''}</div><button class="btn ${enrolled?'btn-teal':'btn-navy'} btn-sm" onclick="event.stopPropagation();${enrolled?`openLesson('${c.id}',${Math.min(done,c.lessons.length-1)})`:`enrollCourse('${c.id}')`}">${enrolled?'Continue':'Enroll'}</button></div>`; }).join(''); }
+
+    function enrollCourse(cid){ if(!S.enrolled.includes(cid)){ S.enrolled.push(cid); if(!S.lessons[cid]) S.lessons[cid]=0; saveState(); toast(`Enrolled in ${COURSES.find(c=>c.id===cid).title}!`); renderDashboard(); renderCourses(); } else toast('Already enrolled'); }
+
+    let currentLesson = { cid: null, idx: 0 };
+    function openLesson(cid, idx){ if(!S.enrolled.includes(cid)) enrollCourse(cid); currentLesson={cid,idx}; document.getElementById('course-list-view').style.display='none'; document.getElementById('lesson-view').classList.add('open'); renderLessonContent(); renderLessonNav(); document.getElementById('lesson-notes').value=S.notes[`${cid}_${idx}`]||''; }
+    function closeLessonView(){ document.getElementById('course-list-view').style.display='block'; document.getElementById('lesson-view').classList.remove('open'); renderCourses(); }
+    function saveCurrentNote(){ if(currentLesson.cid) S.notes[`${currentLesson.cid}_${currentLesson.idx}`]=document.getElementById('lesson-notes').value; saveState(); }
+    function renderLessonNav(){ let c=COURSES.find(x=>x.id===currentLesson.cid); let doneCount=S.lessons[c.id]||0; document.getElementById('step-dots').innerHTML=c.lessons.map((_,i)=>`<div class="sdot ${i<doneCount?'done':''} ${i===currentLesson.idx?'cur':''}"></div>`).join(''); document.getElementById('lesson-nav-list').innerHTML=c.lessons.map((l,i)=>`<div onclick="openLesson('${c.id}',${i})" style="display:flex;align-items:center;gap:8px;padding:7px 0;cursor:pointer"><i class="ti ${i<(S.lessons[c.id]||0)?'ti-circle-check':'ti-circle'}" style="color:${i<(S.lessons[c.id]||0)?'var(--secondary)':'var(--t3)'}"></i><span>${l.t}</span></div>`).join(''); }
+    function renderLessonContent(){ let c=COURSES.find(x=>x.id===currentLesson.cid); let l=c.lessons[currentLesson.idx]; let completed=(S.lessons[c.id]||0)>currentLesson.idx; let html=`<div style="font-size:12px;color:var(--t3)">Lesson ${currentLesson.idx+1}/${c.lessons.length}</div><h2 style="font-size:18px;margin:8px 0">${l.t}</h2><p>${l.body}</p>${l.code?`<div class="code-block">${l.code}</div>`:''}${l.task?`<div class="task-box"><div class="task-lbl"><i class="ti ti-pencil"></i> Task</div><p>${l.task}</p></div>`:''}${l.type==='quiz'?renderQuiz(l.quiz):''}<div style="display:flex;gap:8px;margin-top:16px"><button class="btn btn-navy" onclick="completeCurrentLesson()" ${completed?'disabled style="background:var(--secondary)"':''}><i class="ti ti-check"></i> ${completed?'Completed':'Mark complete'}</button></div>`; document.getElementById('lesson-content').innerHTML=html; if(l.type==='quiz' && !window._quizState) window._quizState={}; }
+    function renderQuiz(quiz){ return `<div id="quizContainer">${quiz.map((q,qi)=>`<div style="margin-bottom:12px"><div>${q.q}</div>${q.opts.map((o,oi)=>`<div class="quiz-opt" onclick="checkQuizAns(${qi},${oi},${q.ans})">${o}</div>`).join('')}<div id="qfb-${qi}" style="font-size:12px;margin-top:4px"></div></div>`).join('')}</div>`; }
+    window.checkQuizAns=(qi,oi,ans)=>{ if(window[`q_${qi}`]) return; let correct=oi===ans; let el=document.querySelector(`#quizContainer .quiz-opt:nth-child(${oi+1})`); if(el) el.classList.add(correct?'correct':'wrong'); if
