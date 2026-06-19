@@ -40,105 +40,6 @@
       line-height: 1.5;
     }
 
-    /* ===== AUTH PAGE ===== */
-    .auth-page {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100dvh;
-      padding: 1.5rem;
-      background: var(--gray-50);
-    }
-    .auth-box {
-      max-width: 400px;
-      width: 100%;
-      padding: 2rem 2rem 2.2rem;
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-      border: 1px solid var(--gray-200);
-    }
-    .auth-box .auth-header {
-      text-align: center;
-      margin-bottom: 1.8rem;
-    }
-    .auth-box .auth-header i {
-      font-size: 2.8rem;
-      color: var(--accent);
-      background: var(--primary);
-      padding: 0.5rem;
-      border-radius: 50%;
-      margin-bottom: 0.5rem;
-    }
-    .auth-box .auth-header h1 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-    .auth-box .auth-header p {
-      color: var(--gray-600);
-      font-size: 0.9rem;
-      margin-top: 0.2rem;
-    }
-    .auth-box .form-group {
-      margin-bottom: 1rem;
-    }
-    .auth-box .form-group label {
-      font-size: 0.85rem;
-      font-weight: 500;
-      display: block;
-      margin-bottom: 0.3rem;
-    }
-    .auth-box .form-group input {
-      width: 100%;
-      padding: 0.7rem 1rem;
-      border: 1px solid var(--gray-200);
-      border-radius: var(--radius-sm);
-      font-size: 0.95rem;
-      transition: border 0.2s;
-    }
-    .auth-box .form-group input:focus {
-      border-color: var(--secondary);
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.15);
-    }
-    .auth-box .btn-auth {
-      width: 100%;
-      padding: 0.7rem;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: var(--radius-sm);
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-      margin-top: 0.5rem;
-    }
-    .auth-box .btn-auth:hover {
-      background: var(--primary-dark);
-    }
-    .auth-box .toggle-text {
-      text-align: center;
-      margin-top: 1.2rem;
-      font-size: 0.9rem;
-      color: var(--gray-600);
-    }
-    .auth-box .toggle-text a {
-      color: var(--secondary);
-      font-weight: 500;
-      cursor: pointer;
-      text-decoration: none;
-    }
-    .auth-box .toggle-text a:hover {
-      text-decoration: underline;
-    }
-
-    /* ===== APP (hidden until auth) ===== */
-    #app {
-      display: none;
-    }
-
     .app-container {
       max-width: 1440px;
       margin: 0 auto;
@@ -627,6 +528,64 @@
       opacity: 0.7;
     }
 
+    /* ===== AUTH MODAL (overlay) ===== */
+    #authModal .modal-content {
+      max-width: 400px;
+    }
+    #authModal .auth-header {
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+    #authModal .auth-header i {
+      font-size: 2.8rem;
+      color: var(--accent);
+      background: var(--primary);
+      padding: 0.5rem;
+      border-radius: 50%;
+      margin-bottom: 0.5rem;
+    }
+    #authModal .auth-header h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    #authModal .auth-header p {
+      color: var(--gray-600);
+      font-size: 0.9rem;
+      margin-top: 0.2rem;
+    }
+    #authModal .toggle-text {
+      text-align: center;
+      margin-top: 1.2rem;
+      font-size: 0.9rem;
+      color: var(--gray-600);
+    }
+    #authModal .toggle-text a {
+      color: var(--secondary);
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    #authModal .toggle-text a:hover {
+      text-decoration: underline;
+    }
+    #authModal .btn-auth {
+      width: 100%;
+      padding: 0.7rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+    }
+    #authModal .btn-auth:hover {
+      background: var(--primary-dark);
+    }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       .navbar {
@@ -669,9 +628,6 @@
         bottom: 16px;
         max-width: calc(100% - 32px);
       }
-      .auth-box {
-        padding: 1.5rem;
-      }
     }
 
     @media (max-width: 480px) {
@@ -684,24 +640,150 @@
       .modal-content {
         padding: 1rem;
       }
-      .auth-box .auth-header i {
+      #authModal .auth-header i {
         font-size: 2.2rem;
-      }
-      .auth-box .auth-header h1 {
-        font-size: 1.2rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- ==================== AUTH PAGE ==================== -->
-  <div id="auth-container" class="auth-page">
-    <div class="auth-box">
+  <div class="app-container">
+    <!-- Navigation -->
+    <div class="navbar">
+      <div class="logo"><i class="ti ti-bridge"></i><span>SkillBridge Africa</span></div>
+      <div class="nav-links">
+        <div class="nav-link active" data-page="home"><i class="ti ti-home"></i> Home</div>
+        <div class="nav-link" data-page="opportunities"><i class="ti ti-briefcase"></i> Opportunities</div>
+        <div class="nav-link" data-page="talent"><i class="ti ti-users"></i> Talent</div>
+        <div class="nav-link" data-page="mentors"><i class="ti ti-messages"></i> Mentorship</div>
+        <div class="nav-link" data-page="community"><i class="ti ti-news"></i> Community</div>
+        <div class="nav-link" data-page="companies"><i class="ti ti-building"></i> Companies</div>
+        <div class="nav-link learning-link" data-page="learning"><i class="ti ti-school"></i> Practical Learning</div>
+      </div>
+      <div class="user-badge" id="userBadge" onclick="toggleAuthModal()">
+        <div class="avatar-sm" id="userAvatar">?</div>
+        <span class="user-name" id="userName">Guest</span>
+        <span class="logout-tip" id="logoutTip">Click to login</span>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <!-- HOME / LANDING PAGE -->
+      <div id="home-page" class="page active-page">
+        <div class="hero-section">
+          <div class="hero-text">
+            <h1>Connect, <span>Learn</span>, &amp; <span>Grow</span> Across Africa</h1>
+            <p>SkillBridge Africa is the complete ecosystem for African talent — find opportunities, connect with mentors, access practical learning, and build your career.</p>
+            <div class="hero-actions">
+              <button class="btn btn-accent" onclick="switchPage('opportunities')"><i class="ti ti-briefcase"></i> Explore Opportunities</button>
+              <button class="btn" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.2);" onclick="switchPage('learning')"><i class="ti ti-school"></i> Start Learning</button>
+            </div>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><div class="num" id="hero-opps">0</div><div class="lbl">Opportunities</div></div>
+            <div class="stat"><div class="num" id="hero-talents">0</div><div class="lbl">Talents</div></div>
+            <div class="stat"><div class="num" id="hero-mentors">0</div><div class="lbl">Mentors</div></div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.2rem;margin-bottom:1.5rem;">
+          <div class="card" style="padding:1.5rem;text-align:center;cursor:pointer;" onclick="switchPage('opportunities')">
+            <i class="ti ti-briefcase" style="font-size:2.4rem;color:var(--secondary);"></i>
+            <h4 style="margin:0.5rem 0 0.2rem;">Jobs &amp; Gigs</h4>
+            <p style="font-size:0.85rem;color:var(--gray-600);">Find work across Africa</p>
+          </div>
+          <div class="card" style="padding:1.5rem;text-align:center;cursor:pointer;" onclick="switchPage('talent')">
+            <i class="ti ti-users" style="font-size:2.4rem;color:var(--primary);"></i>
+            <h4 style="margin:0.5rem 0 0.2rem;">Talent Network</h4>
+            <p style="font-size:0.85rem;color:var(--gray-600);">Connect with skilled professionals</p>
+          </div>
+          <div class="card" style="padding:1.5rem;text-align:center;cursor:pointer;" onclick="switchPage('mentors')">
+            <i class="ti ti-messages" style="font-size:2.4rem;color:var(--accent);"></i>
+            <h4 style="margin:0.5rem 0 0.2rem;">Mentorship</h4>
+            <p style="font-size:0.85rem;color:var(--gray-600);">Learn from industry experts</p>
+          </div>
+          <div class="card" style="padding:1.5rem;text-align:center;cursor:pointer;" onclick="switchPage('learning')">
+            <i class="ti ti-school" style="font-size:2.4rem;color:var(--teal2);"></i>
+            <h4 style="margin:0.5rem 0 0.2rem;">Practical Learning</h4>
+            <p style="font-size:0.85rem;color:var(--gray-600);">Hands-on courses &amp; certificates</p>
+          </div>
+        </div>
+        <div class="card" style="padding:1.5rem;background:var(--secondary-light);border-color:var(--secondary);">
+          <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+            <i class="ti ti-rocket" style="font-size:2rem;color:var(--secondary);"></i>
+            <div><strong>Ready to launch your career?</strong> Join thousands of African professionals building their future.</div>
+            <button class="btn btn-secondary" onclick="switchPage('learning')" style="margin-left:auto;">Get Started</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Opportunities Page -->
+      <div id="opportunities-page" class="page">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.8rem;margin-bottom:1.5rem;">
+          <h2>Opportunities across Africa</h2>
+          <button class="btn btn-primary" id="postOppBtn"><i class="ti ti-plus"></i> Post opportunity</button>
+        </div>
+        <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="oppSearch" placeholder="Search jobs, gigs..."></div>
+        <div id="opportunities-list" class="grid-2"></div>
+      </div>
+
+      <!-- Talent Page -->
+      <div id="talent-page" class="page">
+        <h2>Find African talent</h2>
+        <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="talentSearch" placeholder="Search by skill, location, name"></div>
+        <div id="talent-list" class="grid-3"></div>
+      </div>
+
+      <!-- Mentorship Page -->
+      <div id="mentors-page" class="page">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.8rem;margin-bottom:1.5rem;">
+          <h2>Mentorship &amp; Expert advice</h2>
+          <button class="btn btn-outline" id="becomeMentorBtn"><i class="ti ti-star"></i> Become a mentor</button>
+        </div>
+        <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="mentorSearch" placeholder="Find mentor by industry"></div>
+        <div id="mentors-list" class="grid-3"></div>
+      </div>
+
+      <!-- Community Page -->
+      <div id="community-page" class="page">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.8rem;margin-bottom:1.5rem;">
+          <h2>Community Hub</h2>
+          <button class="btn btn-primary" id="newPostBtn"><i class="ti ti-edit"></i> New post</button>
+        </div>
+        <div id="feed-list" style="display:flex;flex-direction:column;gap:1rem;"></div>
+      </div>
+
+      <!-- Companies Page -->
+      <div id="companies-page" class="page">
+        <h2>Companies hiring &amp; partnering</h2>
+        <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="companySearch" placeholder="Search companies"></div>
+        <div id="companies-list" class="grid-2"></div>
+      </div>
+
+      <!-- Practical Learning (redirect to platform.html) -->
+      <div id="learning-page" class="page">
+        <div class="card" style="text-align:center;padding:3rem;">
+          <i class="ti ti-school" style="font-size:4rem;color:var(--secondary);"></i>
+          <h2 style="margin:1rem 0;">Practical Learning Platform</h2>
+          <p style="max-width:480px;margin:0 auto 1.5rem;">Take hands-on courses, earn certificates, and build real projects. Your progress is saved locally.</p>
+          <button class="btn btn-primary" id="goToLearningBtn" style="padding:0.8rem 2.5rem;font-size:1.05rem;"><i class="ti ti-rocket"></i> Launch SkillBridge Learning</button>
+          <div style="margin-top:1rem;font-size:0.85rem;color:var(--gray-600);">Opens in a new tab</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><p>SkillBridge Africa — Connect, apply, grow. Trust &amp; transparency first.</p></div>
+  </div>
+
+  <!-- ====== TOAST CONTAINER ====== -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ====== AUTH MODAL ====== -->
+  <div id="authModal" class="modal">
+    <div class="modal-content">
       <div class="auth-header">
         <i class="ti ti-bridge"></i>
-        <h1>SkillBridge Africa</h1>
-        <p>Sign in to access the complete ecosystem</p>
+        <h2>Welcome to SkillBridge</h2>
+        <p>Sign in to access all features</p>
       </div>
       <!-- Login Form -->
       <form id="login-form">
@@ -736,139 +818,7 @@
     </div>
   </div>
 
-  <!-- ==================== MAIN APP ==================== -->
-  <div id="app">
-    <div class="app-container">
-      <!-- Navigation -->
-      <div class="navbar">
-        <div class="logo"><i class="ti ti-bridge"></i><span>SkillBridge Africa</span></div>
-        <div class="nav-links">
-          <div class="nav-link active" data-page="home"><i class="ti ti-home"></i> Home</div>
-          <div class="nav-link" data-page="opportunities"><i class="ti ti-briefcase"></i> Opportunities</div>
-          <div class="nav-link" data-page="talent"><i class="ti ti-users"></i> Talent</div>
-          <div class="nav-link" data-page="mentors"><i class="ti ti-messages"></i> Mentorship</div>
-          <div class="nav-link" data-page="community"><i class="ti ti-news"></i> Community</div>
-          <div class="nav-link" data-page="companies"><i class="ti ti-building"></i> Companies</div>
-          <div class="nav-link learning-link" data-page="learning"><i class="ti ti-school"></i> Practical Learning</div>
-        </div>
-        <div class="user-badge" id="userBadge" onclick="logout()">
-          <div class="avatar-sm" id="userAvatar">AM</div>
-          <span class="user-name" id="userName">Amina M.</span>
-          <span class="logout-tip">Click to logout</span>
-        </div>
-      </div>
-
-      <div class="main-content">
-        <!-- HOME / LANDING PAGE -->
-        <div id="home-page" class="page active-page">
-          <div class="hero-section">
-            <div class="hero-text">
-              <h1>Connect, <span>Learn</span>, &amp; <span>Grow</span> Across Africa</h1>
-              <p>SkillBridge Africa is the complete ecosystem for African talent — find opportunities, connect with mentors, access practical learning, and build your career.</p>
-              <div class="hero-actions">
-                <button class="btn btn-accent" onclick="switchPage('opportunities')"><i class="ti ti-briefcase"></i> Explore Opportunities</button>
-                <button class="btn" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.2);" onclick="switchPage('learning')"><i class="ti ti-school"></i> Start Learning</button>
-              </div>
-            </div>
-            <div class="hero-stats">
-              <div class="stat"><div class="num" id="hero-opps">0</div><div class="lbl">Opportunities</div></div>
-              <div class="stat"><div class="num" id="hero-talents">0</div><div class="lbl">Talents</div></div>
-              <div class="stat"><div class="num" id="hero-mentors">0</div><div class="lbl">Mentors</div></div>
-            </div>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.2rem;margin-bottom:1.5rem;">
-            <div class="card" style="padding:1.5rem;text-align:center;cursor:pointer;" onclick="switchPage('opportunities')">
-              <i class="ti ti-briefcase" style="font-size:2.4rem;color:var(--secondary);"></i>
-              <h4 style="margin:0.5rem 0 0.2rem;">Jobs &amp; Gigs</h4>
-              <p style="font-size:0.85rem;color:var(--gray-600);">Find work across Africa</p>
-            </div>
-            <div class="card" style="padding:1.5rem;text-align:center;cursor:pointer;" onclick="switchPage('talent')">
-              <i class="ti ti-users" style="font-size:2.4rem;color:var(--primary);"></i>
-              <h4 style="margin:0.5rem 0 0.2rem;">Talent Network</h4>
-              <p style="font-size:0.85rem;color:var(--gray-600);">Connect with skilled professionals</p>
-            </div>
-            <div class="card" style="padding:1.5rem;text-align:center;cursor:pointer;" onclick="switchPage('mentors')">
-              <i class="ti ti-messages" style="font-size:2.4rem;color:var(--accent);"></i>
-              <h4 style="margin:0.5rem 0 0.2rem;">Mentorship</h4>
-              <p style="font-size:0.85rem;color:var(--gray-600);">Learn from industry experts</p>
-            </div>
-            <div class="card" style="padding:1.5rem;text-align:center;cursor:pointer;" onclick="switchPage('learning')">
-              <i class="ti ti-school" style="font-size:2.4rem;color:var(--teal2);"></i>
-              <h4 style="margin:0.5rem 0 0.2rem;">Practical Learning</h4>
-              <p style="font-size:0.85rem;color:var(--gray-600);">Hands-on courses &amp; certificates</p>
-            </div>
-          </div>
-          <div class="card" style="padding:1.5rem;background:var(--secondary-light);border-color:var(--secondary);">
-            <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
-              <i class="ti ti-rocket" style="font-size:2rem;color:var(--secondary);"></i>
-              <div><strong>Ready to launch your career?</strong> Join thousands of African professionals building their future.</div>
-              <button class="btn btn-secondary" onclick="switchPage('learning')" style="margin-left:auto;">Get Started</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Opportunities Page -->
-        <div id="opportunities-page" class="page">
-          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.8rem;margin-bottom:1.5rem;">
-            <h2>Opportunities across Africa</h2>
-            <button class="btn btn-primary" id="postOppBtn"><i class="ti ti-plus"></i> Post opportunity</button>
-          </div>
-          <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="oppSearch" placeholder="Search jobs, gigs..."></div>
-          <div id="opportunities-list" class="grid-2"></div>
-        </div>
-
-        <!-- Talent Page -->
-        <div id="talent-page" class="page">
-          <h2>Find African talent</h2>
-          <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="talentSearch" placeholder="Search by skill, location, name"></div>
-          <div id="talent-list" class="grid-3"></div>
-        </div>
-
-        <!-- Mentorship Page -->
-        <div id="mentors-page" class="page">
-          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.8rem;margin-bottom:1.5rem;">
-            <h2>Mentorship &amp; Expert advice</h2>
-            <button class="btn btn-outline" id="becomeMentorBtn"><i class="ti ti-star"></i> Become a mentor</button>
-          </div>
-          <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="mentorSearch" placeholder="Find mentor by industry"></div>
-          <div id="mentors-list" class="grid-3"></div>
-        </div>
-
-        <!-- Community Page -->
-        <div id="community-page" class="page">
-          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.8rem;margin-bottom:1.5rem;">
-            <h2>Community Hub</h2>
-            <button class="btn btn-primary" id="newPostBtn"><i class="ti ti-edit"></i> New post</button>
-          </div>
-          <div id="feed-list" style="display:flex;flex-direction:column;gap:1rem;"></div>
-        </div>
-
-        <!-- Companies Page -->
-        <div id="companies-page" class="page">
-          <h2>Companies hiring &amp; partnering</h2>
-          <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="companySearch" placeholder="Search companies"></div>
-          <div id="companies-list" class="grid-2"></div>
-        </div>
-
-        <!-- Practical Learning (redirect to platform.html) -->
-        <div id="learning-page" class="page">
-          <div class="card" style="text-align:center;padding:3rem;">
-            <i class="ti ti-school" style="font-size:4rem;color:var(--secondary);"></i>
-            <h2 style="margin:1rem 0;">Practical Learning Platform</h2>
-            <p style="max-width:480px;margin:0 auto 1.5rem;">Take hands-on courses, earn certificates, and build real projects. Your progress is saved locally.</p>
-            <button class="btn btn-primary" id="goToLearningBtn" style="padding:0.8rem 2.5rem;font-size:1.05rem;"><i class="ti ti-rocket"></i> Launch SkillBridge Learning</button>
-            <div style="margin-top:1rem;font-size:0.85rem;color:var(--gray-600);">Opens in a new tab</div>
-          </div>
-        </div>
-      </div>
-      <div class="footer"><p>SkillBridge Africa — Connect, apply, grow. Trust &amp; transparency first.</p></div>
-    </div>
-  </div>
-
-  <!-- ====== TOAST CONTAINER ====== -->
-  <div class="toast-container" id="toastContainer"></div>
-
-  <!-- ====== MODALS ====== -->
+  <!-- ====== OTHER MODALS ====== -->
   <!-- Opportunity Post -->
   <div id="oppPostModal" class="modal">
     <div class="modal-content">
@@ -965,7 +915,7 @@
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
-    // UI Toggle
+    // UI toggle for auth modal
     function showSignup() {
       document.getElementById('login-form').style.display = 'none';
       document.getElementById('signup-form').style.display = 'block';
@@ -978,7 +928,7 @@
     window.showSignup = showSignup;
     window.showLogin = showLogin;
 
-    // Toast (reused from main app)
+    // Toast
     function showToast(msg, type) {
       type = type || 'info';
       const container = document.getElementById('toastContainer');
@@ -990,6 +940,17 @@
         `<i class="ti ${icon}"></i><span class="toast-msg">${msg}</span><button class="toast-close" onclick="this.parentElement.remove()">&times;</button>`;
       container.appendChild(toast);
       setTimeout(() => { if (toast.parentElement) toast.remove(); }, 3500);
+    }
+
+    // Auth modal control
+    function toggleAuthModal() {
+      const modal = document.getElementById('authModal');
+      if (modal.style.display === 'flex') {
+        modal.style.display = 'none';
+      } else {
+        modal.style.display = 'flex';
+        showLogin();
+      }
     }
 
     // Login handler
@@ -1005,7 +966,8 @@
       const user = users.find(u => u.email === email && u.password === password);
       if (user) {
         setSession({ email: user.email, name: user.name });
-        checkAuth();
+        updateUI();
+        document.getElementById('authModal').style.display = 'none';
         showToast('Welcome back, ' + user.name + '!', 'success');
       } else {
         showToast('Invalid email or password.', 'error');
@@ -1041,46 +1003,51 @@
       users.push({ name, email, password });
       saveUsers(users);
       setSession({ email, name });
-      checkAuth();
-      showToast('Account created! Welcome, ' + name + ' 🎉', 'success');
+      updateUI();
+      document.getElementById('authModal').style.display = 'none';
+      showToast('Account created! Welcome, ' + name, 'success');
     });
-
-    // Check auth on load
-    function checkAuth() {
-      const user = getSession();
-      const authContainer = document.getElementById('auth-container');
-      const app = document.getElementById('app');
-      if (user) {
-        authContainer.style.display = 'none';
-        app.style.display = 'block';
-        // Update user badge
-        const avatar = document.getElementById('userAvatar');
-        const nameSpan = document.getElementById('userName');
-        if (avatar) avatar.innerText = user.name.charAt(0).toUpperCase();
-        if (nameSpan) nameSpan.innerText = user.name;
-      } else {
-        authContainer.style.display = 'flex';
-        app.style.display = 'none';
-        document.getElementById('login-form').reset();
-        document.getElementById('signup-form').reset();
-        showLogin();
-      }
-    }
 
     // Logout
     function logout() {
       if (confirm('Are you sure you want to logout?')) {
         clearSession();
-        checkAuth();
+        updateUI();
         showToast('Logged out successfully.', 'info');
       }
     }
     window.logout = logout;
 
+    // Update UI based on session
+    function updateUI() {
+      const user = getSession();
+      const avatar = document.getElementById('userAvatar');
+      const nameSpan = document.getElementById('userName');
+      const logoutTip = document.getElementById('logoutTip');
+      if (user) {
+        avatar.innerText = user.name.charAt(0).toUpperCase();
+        nameSpan.innerText = user.name;
+        logoutTip.innerText = 'Click to logout';
+        document.getElementById('userBadge').onclick = logout;
+      } else {
+        avatar.innerText = '?';
+        nameSpan.innerText = 'Guest';
+        logoutTip.innerText = 'Click to login';
+        document.getElementById('userBadge').onclick = toggleAuthModal;
+      }
+    }
+
+    // Check if user is authenticated, else show auth modal and return false
+    function requireAuth() {
+      if (getSession()) return true;
+      showToast('Please log in to perform this action.', 'error');
+      document.getElementById('authModal').style.display = 'flex';
+      return false;
+    }
+
     // ============================================================
-    //  MAIN APP LOGIC (unchanged from original)
+    //  STORAGE KEYS & DATA (unchanged)
     // ============================================================
-    // STORAGE KEYS
     const STORAGE = {
       opportunities: 'sb_opps',
       talents: 'sb_talents',
@@ -1092,7 +1059,6 @@
       mentorRequests: 'sb_mentor_reqs'
     };
 
-    // DATA
     let opportunities = JSON.parse(localStorage.getItem(STORAGE.opportunities)) || [
       { id: "opp1", title: "Frontend Developer (React)", type: "job", company: "Fintech Hub",
         location: "Lagos, Nigeria (Remote)",
@@ -1162,7 +1128,9 @@
       if (menEl) menEl.textContent = mentors.length;
     }
 
-    // RENDER FUNCTIONS
+    // ============================================================
+    //  RENDER FUNCTIONS (unchanged)
+    // ============================================================
     function renderOpportunities(filter) {
       filter = filter || '';
       let filtered = opportunities.filter(o => o.title.toLowerCase().includes(filter.toLowerCase()) || o.company
@@ -1186,8 +1154,10 @@
               </div>
             </div>
           `).join("");
-      document.querySelectorAll(".apply-opp-btn").forEach(btn => btn.addEventListener("click", (e) => openApplyModal(btn
-        .dataset.id)));
+      document.querySelectorAll(".apply-opp-btn").forEach(btn => btn.addEventListener("click", (e) => {
+        if (!requireAuth()) return;
+        openApplyModal(btn.dataset.id);
+      }));
     }
 
     function renderTalent(filter) {
@@ -1205,8 +1175,10 @@
               <div class="card-body"><p><i class="ti ti-map-pin"></i> ${t.location}</p><div style="margin:6px 0;">${t.skills.map(s => `<span class="tag">${s}</span>`).join(' ')}</div><p style="margin:8px 0;font-size:0.9rem;">${t.bio}</p><button class="btn btn-sm btn-outline contact-talent" data-id="${t.id}">Contact talent</button></div>
             </div>
           `).join("");
-      document.querySelectorAll(".contact-talent").forEach(btn => btn.addEventListener("click", (e) => openContactTalent(
-        btn.dataset.id)));
+      document.querySelectorAll(".contact-talent").forEach(btn => btn.addEventListener("click", (e) => {
+        if (!requireAuth()) return;
+        openContactTalent(btn.dataset.id);
+      }));
     }
 
     function renderMentors(filter) {
@@ -1221,8 +1193,10 @@
       container.innerHTML = filtered.map(m => `
             <div class="card"><div class="card-header"><div class="avatar-sm" style="background:var(--accent);">${m.avatar}</div><strong>${m.name}</strong></div><div class="card-body"><p style="font-size:0.9rem;">${m.title} at ${m.company}</p><div style="margin:6px 0;">${m.expertise.map(e => `<span class="tag">${e}</span>`).join(' ')}</div><p style="font-size:0.9rem;">${m.about}</p><button class="btn btn-sm btn-secondary request-mentor-btn" data-id="${m.id}">Request mentorship</button></div></div>
           `).join("");
-      document.querySelectorAll(".request-mentor-btn").forEach(btn => btn.addEventListener("click", (e) =>
-        openMentorRequest(btn.dataset.id)));
+      document.querySelectorAll(".request-mentor-btn").forEach(btn => btn.addEventListener("click", (e) => {
+        if (!requireAuth()) return;
+        openMentorRequest(btn.dataset.id);
+      }));
     }
 
     function renderCompanies(filter) {
@@ -1261,16 +1235,19 @@
 
       document.querySelectorAll(".like-post-btn").forEach(btn => {
         btn.addEventListener("click", (e) => {
+          if (!requireAuth()) return;
           const postId = btn.dataset.id;
           const post = communityPosts.find(p => p.id === postId);
           if (post) {
             if (!post.likedBy) post.likedBy = [];
-            if (!post.likedBy.includes("AminaM")) {
+            const user = getSession();
+            const userId = user ? user.email : 'guest';
+            if (!post.likedBy.includes(userId)) {
               post.likes++;
-              post.likedBy.push("AminaM");
+              post.likedBy.push(userId);
             } else {
               post.likes--;
-              post.likedBy = post.likedBy.filter(u => u !== "AminaM");
+              post.likedBy = post.likedBy.filter(u => u !== userId);
             }
             saveAll();
             renderCommunity();
@@ -1278,10 +1255,14 @@
         });
       });
       document.querySelectorAll(".comment-post-btn").forEach(btn => {
-        btn.addEventListener("click", (e) => openCommentsModal(btn.dataset.id));
+        btn.addEventListener("click", (e) => {
+          if (!requireAuth()) return;
+          openCommentsModal(btn.dataset.id);
+        });
       });
       document.querySelectorAll(".edit-post").forEach(btn => {
         btn.addEventListener("click", (e) => {
+          if (!requireAuth()) return;
           const postId = btn.dataset.id;
           const post = communityPosts.find(p => p.id === postId);
           if (post) {
@@ -1297,6 +1278,7 @@
       });
       document.querySelectorAll(".delete-post").forEach(btn => {
         btn.addEventListener("click", (e) => {
+          if (!requireAuth()) return;
           if (confirm("Delete this post?")) {
             const index = communityPosts.findIndex(p => p.id === btn.dataset.id);
             if (index !== -1) {
@@ -1310,7 +1292,9 @@
       });
     }
 
-    // MODAL HELPERS
+    // ============================================================
+    //  MODAL HELPERS
+    // ============================================================
     function openApplyModal(oppId) {
       const opp = opportunities.find(o => o.id === oppId);
       if (!opp) return;
@@ -1364,8 +1348,11 @@
       document.getElementById("commentsModal").style.display = "flex";
     }
 
-    // EVENT BINDINGS
+    // ============================================================
+    //  EVENT BINDINGS (with auth checks)
+    // ============================================================
     document.getElementById("submitOpp").onclick = () => {
+      if (!requireAuth()) return;
       const title = document.getElementById("oppTitle").value.trim();
       const type = document.getElementById("oppType").value;
       const company = document.getElementById("oppCompany").value.trim();
@@ -1376,6 +1363,7 @@
         showToast("Please fill all required fields.", "error");
         return;
       }
+      const user = getSession();
       const newOpp = {
         id: "opp" + Date.now(),
         title,
@@ -1383,7 +1371,7 @@
         company,
         location,
         description: desc,
-        postedBy: "Amina M.",
+        postedBy: user.name,
         contactEmail,
         date: new Date().toISOString(),
         verified: true
@@ -1400,7 +1388,13 @@
       showToast("Opportunity posted successfully!", "success");
     };
 
+    document.getElementById("postOppBtn").onclick = () => {
+      if (!requireAuth()) return;
+      document.getElementById("oppPostModal").style.display = "flex";
+    };
+
     document.getElementById("submitApplication").onclick = () => {
+      if (!requireAuth()) return;
       const name = document.getElementById("applicantName").value.trim();
       const email = document.getElementById("applicantEmail").value.trim();
       const resume = document.getElementById("applicantResume").value.trim();
@@ -1429,6 +1423,7 @@
     };
 
     document.getElementById("sendContactMsg").onclick = () => {
+      if (!requireAuth()) return;
       const name = document.getElementById("contactName").value.trim();
       const email = document.getElementById("contactEmail").value.trim();
       const msg = document.getElementById("contactMsg").value.trim();
@@ -1453,6 +1448,7 @@
     };
 
     document.getElementById("submitMentorReq").onclick = () => {
+      if (!requireAuth()) return;
       const name = document.getElementById("menteeName").value.trim();
       const email = document.getElementById("menteeEmail").value.trim();
       const reason = document.getElementById("menteeReason").value.trim();
@@ -1477,6 +1473,7 @@
     };
 
     document.getElementById("addCommentBtn").onclick = () => {
+      if (!requireAuth()) return;
       const text = document.getElementById("newCommentText").value.trim();
       if (!text) {
         showToast("Please write a comment.", "error");
@@ -1485,21 +1482,23 @@
       const post = communityPosts.find(p => p.id === window.currentCommentPostId);
       if (post) {
         if (!post.comments) post.comments = [];
-        post.comments.push({ author: "Amina M.", text, date: new Date() });
+        const user = getSession();
+        post.comments.push({ author: user.name, text, date: new Date() });
         saveAll();
         openCommentsModal(window.currentCommentPostId);
         showToast("Comment added!", "success");
       }
     };
 
-    document.getElementById("postOppBtn").onclick = () => document.getElementById("oppPostModal").style.display = "flex";
     document.getElementById("newPostBtn").onclick = () => {
+      if (!requireAuth()) return;
       const content = prompt("What would you like to share?");
       if (content !== null && content.trim()) {
+        const user = getSession();
         communityPosts.unshift({
           id: "p" + Date.now(),
-          author: "Amina M.",
-          avatar: "AM",
+          author: user.name,
+          avatar: user.name.charAt(0).toUpperCase(),
           content: content.trim(),
           time: "Just now",
           likes: 0,
@@ -1511,9 +1510,12 @@
         showToast("Post shared!", "success");
       }
     };
+
     document.getElementById("becomeMentorBtn").onclick = () => {
+      if (!requireAuth()) return;
       showToast("Email team@skillbridge.africa with your profile to become a mentor.", "info");
     };
+
     document.getElementById("goToLearningBtn").onclick = () => {
       window.open("platform.html", "_blank");
     };
@@ -1529,9 +1531,13 @@
         if (modal) modal.style.display = "none";
       });
     });
-    window.onclick = (e) => { if (e.target.classList.contains("modal")) e.target.style.display = "none"; };
+    window.onclick = (e) => {
+      if (e.target.classList.contains("modal")) e.target.style.display = "none";
+    };
 
-    // NAVIGATION
+    // ============================================================
+    //  NAVIGATION
+    // ============================================================
     function switchPage(pageId) {
       document.querySelectorAll(".page").forEach(p => p.classList.remove("active-page"));
       const target = document.getElementById(pageId + "-page");
@@ -1560,8 +1566,10 @@
     document.getElementById("mentorSearch")?.addEventListener("input", (e) => renderMentors(e.target.value));
     document.getElementById("companySearch")?.addEventListener("input", (e) => renderCompanies(e.target.value));
 
-    // INIT
-    checkAuth(); // First check auth
+    // ============================================================
+    //  INIT
+    // ============================================================
+    updateUI();
     renderOpportunities();
     renderTalent();
     renderMentors();
@@ -1573,9 +1581,14 @@
       document.getElementById("home-page").classList.add("active-page");
     }
 
+    // Show welcome toast if logged in
     if (getSession()) {
       setTimeout(() => {
-        showToast("Welcome back!", "success");
+        showToast("Welcome back! Explore the ecosystem.", "success");
+      }, 400);
+    } else {
+      setTimeout(() => {
+        showToast("Browse freely — log in to interact.", "info");
       }, 400);
     }
   </script>
