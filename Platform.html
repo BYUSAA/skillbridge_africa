@@ -411,6 +411,7 @@
         showLogin();
       }
     }
+    window.toggleAuthModal = toggleAuthModal;
 
     // Login
     document.getElementById('login-form').addEventListener('submit', function(e) {
@@ -467,7 +468,6 @@
         pName.innerText = user.name;
         pSchool.innerText = 'African Leadership University · Kigali';
         if (sName) sName.value = user.name;
-        // change login icon to logout
         document.querySelector('.user-chip i').className = 'ti ti-logout';
         document.querySelector('.user-chip').onclick = function() {
           if (confirm('Logout?')) {
@@ -497,7 +497,7 @@
     }
 
     // ============================================================
-    //  PLATFORM CORE LOGIC (unchanged, but with auth checks where needed)
+    //  PLATFORM CORE LOGIC
     // ============================================================
     const COURSES = [
       {id:'wd',cat:'tech',icon:'ti-code',color:'var(--slate-l)',ic:'var(--primary)',title:'Web Development Basics',diff:'Beginner',dur:'6 lessons',lessons:[{t:'HTML structure',body:'HTML is the skeleton. Every webpage uses tags.',code:'<h1>Hello</h1><p>Paragraph</p>',task:'Write a heading + paragraph.',type:'read'},{t:'CSS styling',body:'CSS adds colors and layout.',code:'h1 { color: teal; }',task:'Style your heading.',type:'read'},{t:'JavaScript intro',body:'JS adds interactivity.',code:'alert("Hello!")',task:'Show an alert.',type:'read'},{t:'Final quiz',type:'quiz',quiz:[{q:'What does HTML stand for?',opts:['HyperText Markup','High Transfer','Home Tool','HyperLink'],ans:0}]}]},
@@ -540,7 +540,11 @@
     function renderActivityChart(containerId){ const counts=getActivityLast7Days(); const max=Math.max(1,...counts); const days=['M','T','W','T','F','S','S']; const container=document.getElementById(containerId); if(!container) return; container.innerHTML=counts.map((v,i)=>`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px"><div class="act-bar" style="width:100%;height:${Math.round(v/max*52)}px;background:${v>0?'var(--secondary)':'var(--gray-200)'}"></div><span style="font-size:10px;color:var(--t3)">${days[i]}</span></div>`).join(''); }
 
     function navTo(screen){ document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active')); document.querySelector(`.nav-item[data-screen="${screen}"]`).classList.add('active'); document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(`screen-${screen}`).classList.add('active'); document.getElementById('page-title').innerText=screen.charAt(0).toUpperCase()+screen.slice(1); if(screen==='dashboard')renderDashboard(); if(screen==='courses')renderCourses(); if(screen==='mentors')renderMentors(); if(screen==='opportunities')renderOpps(); if(screen==='community')renderCommunity(); if(screen==='profile')renderProfile(); if(screen==='settings')renderSettings(); }
-    window.navTo=navTo; document.querySelectorAll('.nav-item, .user-chip').forEach(el=>el.addEventListener('click',()=>{ const scr=el.dataset.screen; if(scr) navTo(scr); }));
+    window.navTo=navTo;
+    // FIX #7: Removed .user-chip from nav listener to prevent conflict with auth modal
+    document.querySelectorAll('.nav-item').forEach(el => el.addEventListener('click', () => {
+      const scr = el.dataset.screen; if(scr) navTo(scr);
+    }));
 
     function renderDashboard(){ const totalLessons=S.enrolled.reduce((a,cid)=>a+(S.lessons[cid]||0),0); document.getElementById('d-courses').innerText=S.enrolled.length; document.getElementById('d-lessons').innerText=totalLessons; document.getElementById('d-streak').innerText=computeStreak(); document.getElementById('d-xp').innerText=S.xp; const dashDiv=document.getElementById('dash-courses'); dashDiv.innerHTML=S.enrolled.slice(0,3).map(cid=>{ let c=COURSES.find(c=>c.id===cid); if(!c) return ''; let done=S.lessons[cid]||0; let pct=Math.round(done/c.lessons.length*100); return `<div class="row-item" onclick="openLesson('${cid}',${Math.min(done,c.lessons.length-1)})"><div class="icon-box" style="background:${c.color}"><i class="ti ${c.icon}" style="color:${c.ic}"></i></div><div class="item-info"><h4>${c.title}</h4><p>${done}/${c.lessons.length} lessons</p><div class="progress-bar-wrap"><div class="progress-bar" style="width:${pct}%"></div></div></div><i class="ti ti-chevron-right"></i></div>`; }).join('')||'<div class="card-sm">No enrolled courses. <a href="#" onclick="navTo(\'courses\');return false">Browse courses</a></div>';
       const rec=document.getElementById('recommended'); const notEnrolled=COURSES.filter(c=>!S.enrolled.includes(c.id)); rec.innerHTML=notEnrolled.slice(0,2).map(c=>`<div class="row-item" onclick="enrollCourse('${c.id}')"><div class="icon-box" style="background:${c.color}"><i class="ti ${c.icon}"></i></div><div class="item-info"><h4>${c.title}</h4><p>${c.diff}</p></div><button class="btn btn-teal btn-sm" onclick="event.stopPropagation();enrollCourse('${c.id}')">Enroll</button></div>`).join('')||'<div> Great job! All courses enrolled.</div>';
@@ -557,8 +561,31 @@
     function renderLessonNav(){ let c=COURSES.find(x=>x.id===currentLesson.cid); let doneCount=S.lessons[c.id]||0; document.getElementById('step-dots').innerHTML=c.lessons.map((_,i)=>`<div class="sdot ${i<doneCount?'done':''} ${i===currentLesson.idx?'cur':''}"></div>`).join(''); document.getElementById('lesson-nav-list').innerHTML=c.lessons.map((l,i)=>`<div onclick="openLesson('${c.id}',${i})" style="display:flex;align-items:center;gap:8px;padding:7px 0;cursor:pointer"><i class="ti ${i<(S.lessons[c.id]||0)?'ti-circle-check':'ti-circle'}" style="color:${i<(S.lessons[c.id]||0)?'var(--secondary)':'var(--t3)'}"></i><span>${l.t}</span></div>`).join(''); }
     function renderLessonContent(){ let c=COURSES.find(x=>x.id===currentLesson.cid); let l=c.lessons[currentLesson.idx]; let completed=(S.lessons[c.id]||0)>currentLesson.idx; let html=`<div style="font-size:12px;color:var(--t3)">Lesson ${currentLesson.idx+1}/${c.lessons.length}</div><h2 style="font-size:18px;margin:8px 0">${l.t}</h2><p>${l.body}</p>${l.code?`<div class="code-block">${l.code}</div>`:''}${l.task?`<div class="task-box"><div class="task-lbl"><i class="ti ti-pencil"></i> Task</div><p>${l.task}</p></div>`:''}${l.type==='quiz'?renderQuiz(l.quiz):''}<div style="display:flex;gap:8px;margin-top:16px"><button class="btn btn-navy" onclick="completeCurrentLesson()" ${completed?'disabled style="background:var(--secondary)"':''}><i class="ti ti-check"></i> ${completed?'Completed':'Mark complete'}</button></div>`; document.getElementById('lesson-content').innerHTML=html; if(l.type==='quiz' && !window._quizState) window._quizState={}; }
     function renderQuiz(quiz){ return `<div id="quizContainer">${quiz.map((q,qi)=>`<div style="margin-bottom:12px"><div>${q.q}</div>${q.opts.map((o,oi)=>`<div class="quiz-opt" onclick="checkQuizAns(${qi},${oi},${q.ans})">${o}</div>`).join('')}<div id="qfb-${qi}" style="font-size:12px;margin-top:4px"></div></div>`).join('')}</div>`; }
-    window.checkQuizAns=(qi,oi,ans)=>{ if(window[`q_${qi}`]) return; let correct=oi===ans; let el=document.querySelector(`#quizContainer .quiz-opt:nth-child(${oi+1})`); if(el) el.classList.add(correct?'correct':'wrong'); if(!correct){ let correctEl=document.querySelector(`#quizContainer .quiz-opt:nth-child(${ans+1})`); if(correctEl) correctEl.classList.add('correct'); } document.getElementById(`qfb-${qi}`).innerHTML=correct?'✓ Correct!':`✗ Wrong. Correct answer: ${ans+1}`; window[`q_${qi}`]=true; };
-    function completeCurrentLesson(){ if (!requireAuth()) return; let c=COURSES.find(x=>x.id===currentLesson.cid); let idx=currentLesson.idx; let currentDone=S.lessons[c.id]||0; if(idx>=currentDone){ S.lessons[c.id]=idx+1; logActivity(); recomputeXP(); saveState(); toast('Lesson complete! +50 XP'); renderLessonNav(); renderLessonContent(); renderDashboard(); renderCourses(); if(idx+1===c.lessons.length){ toast(`Course completed! Certificate added to profile.`); } if(idx+1<c.lessons.length) setTimeout(()=>openLesson(c.id, idx+1), 600); } else toast('Already completed'); }
+    // FIX #2: Quiz feedback - no emojis, using icons
+    window.checkQuizAns=(qi,oi,ans)=>{ if(window[`q_${qi}`]) return; let correct=oi===ans; let el=document.querySelector(`#quizContainer .quiz-opt:nth-child(${oi+1})`); if(el) el.classList.add(correct?'correct':'wrong'); if(!correct){ let correctEl=document.querySelector(`#quizContainer .quiz-opt:nth-child(${ans+1})`); if(correctEl) correctEl.classList.add('correct'); } document.getElementById(`qfb-${qi}`).innerHTML = correct ? 
+      '<span style="color:var(--secondary)"><i class="ti ti-check"></i> Correct!</span>' : 
+      '<span style="color:#dc3545"><i class="ti ti-x"></i> Wrong. Correct answer shown above.</span>';
+      window[`q_${qi}`]=true; };
+    // FIX #4: completeCurrentLesson guard - prevent completing already completed lessons
+    function completeCurrentLesson(){ 
+      if (!requireAuth()) return;
+      let c = COURSES.find(x=>x.id===currentLesson.cid);
+      if (!c) return;
+      let idx = currentLesson.idx;
+      let currentDone = S.lessons[c.id]||0;
+      if (idx < currentDone) { toast('Already completed'); return; }
+      S.lessons[c.id]=idx+1; 
+      logActivity(); 
+      recomputeXP(); 
+      saveState(); 
+      toast('Lesson complete! +50 XP'); 
+      renderLessonNav(); 
+      renderLessonContent(); 
+      renderDashboard(); 
+      renderCourses(); 
+      if(idx+1===c.lessons.length){ toast(`Course completed! Certificate added to profile.`); } 
+      if(idx+1<c.lessons.length) setTimeout(()=>openLesson(c.id, idx+1), 600); 
+    }
 
     function showCertificate(courseId){
       if (!requireAuth()) return;
@@ -571,6 +598,7 @@
       modal.style.display = 'flex';
     }
 
+    // FIX #5: p-projects dynamic count - total completed lessons across all enrolled courses
     function renderProfile(){ 
       const user = getSession();
       document.getElementById('p-name').innerText = user ? user.name : 'Guest'; 
@@ -583,6 +611,9 @@
       }
       document.getElementById('p-courses').innerText=S.enrolled.length; 
       document.getElementById('p-certs').innerText=completedCourses.length; 
+      // p-projects = total completed lessons across all courses
+      const totalCompletedLessons = S.enrolled.reduce((a, cid) => a + (S.lessons[cid]||0), 0);
+      document.getElementById('p-projects').innerText = totalCompletedLessons;
       document.getElementById('p-streak2').innerText=computeStreak(); 
       document.getElementById('certs-list').innerHTML=completedCourses.length>0 ? 
         completedCourses.map(c => `<div class="cert-item" onclick="showCertificate('${c.id}')"><i class="ti ti-award" style="color:var(--accent)"></i> ${c.title} <span style="margin-left:auto;font-size:12px;color:var(--gray-600)">View certificate →</span></div>`).join('') : 
@@ -600,10 +631,28 @@
     function renderOpps(filter='all'){ const pills=document.getElementById('opp-filter-pills'); pills.innerHTML=['all','intern','gig'].map(f=>`<div class="pill ${filter===f?'active':''}" onclick="renderOpps('${f}')">${f}</div>`).join(''); let list=filter==='all'?OPPORTUNITIES:OPPORTUNITIES.filter(o=>o.type===filter); document.getElementById('opp-grid').innerHTML=list.map(o=>`<div class="row-item" onclick="showOppDetail('${o.id}')"><div class="icon-box" style="background:${o.bg}"><i class="ti ${o.icon}"></i></div><div class="item-info"><h4>${o.title}</h4><p>${o.org} · ${o.pay}</p></div>${S.appliedOpps[o.id]?'<span class="badge" style="background:var(--secondary-light);color:#173404">Applied</span>':'<button class="btn btn-navy btn-sm" onclick="event.stopPropagation();applyOpp(\''+o.id+'\')">Apply</button>'}</div>`).join(''); document.getElementById('opp-detail').classList.remove('open'); }
     function showOppDetail(id){ if (!requireAuth()) return; let o=OPPORTUNITIES.find(x=>x.id===id); let detail=document.getElementById('opp-detail'); detail.innerHTML=`<h3>${o.title}</h3><p>${o.desc}</p><p><strong>Compensation:</strong> ${o.pay}</p><p><strong>Location:</strong> ${o.loc}</p><button class="btn btn-navy" onclick="applyOpp('${o.id}')">Apply now</button>`; detail.classList.add('open'); }
     function applyOpp(id){ if (!requireAuth()) return; if(!S.appliedOpps[id]){ S.appliedOpps[id]=true; saveState(); toast('Application submitted! Good luck.'); renderOpps(); } }
-    function renderCommunity(){ let feed=document.getElementById('feed'); feed.innerHTML=S.posts.map(p=>`<div class="card-sm" style="margin-bottom:10px"><div style="display:flex;gap:10px"><div class="av-sm" style="background:${p.bg};color:${p.ic}">${p.init}</div><div><b>${p.author}</b><div style="font-size:11px;color:var(--t3)">${p.time}</div></div></div><p style="margin:8px 0">${p.text}</p><div><button class="btn btn-sm" onclick="likePost(${p.id})"><i class="ti ti-heart"></i> ${p.likes}</button></div></div>`).join(''); document.getElementById('channels').innerHTML=['Web Dev','Business','Design','Career'].map(ch=>`<div class="row-item" style="padding:10px"><i class="ti ti-hash"></i> ${ch}</div>`).join(''); document.getElementById('leaderboard').innerHTML=`<div>1️⃣ Amara · 1240 XP</div><div>2️⃣ Pascal · 1105 XP</div><div>3️⃣ You (Byusa) · ${S.xp} XP</div>`; }
+    // FIX #1: Leaderboard - no emoji numbers, using icons
+    function renderCommunity(){ let feed=document.getElementById('feed'); feed.innerHTML=S.posts.map(p=>`<div class="card-sm" style="margin-bottom:10px"><div style="display:flex;gap:10px"><div class="av-sm" style="background:${p.bg};color:${p.ic}">${p.init}</div><div><b>${p.author}</b><div style="font-size:11px;color:var(--t3)">${p.time}</div></div></div><p style="margin:8px 0">${p.text}</p><div><button class="btn btn-sm" onclick="likePost(${p.id})"><i class="ti ti-heart"></i> ${p.likes}</button></div></div>`).join(''); document.getElementById('channels').innerHTML=['Web Dev','Business','Design','Career'].map(ch=>`<div class="row-item" style="padding:10px"><i class="ti ti-hash"></i> ${ch}</div>`).join(''); 
+      document.getElementById('leaderboard').innerHTML = `
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:0.5px solid var(--bdr)">
+          <i class="ti ti-medal" style="color:var(--accent)"></i> <span>Amara · 1240 XP</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:0.5px solid var(--bdr)">
+          <i class="ti ti-medal-2" style="color:var(--gray-600)"></i> <span>Pascal · 1105 XP</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 0">
+          <i class="ti ti-user" style="color:var(--secondary)"></i> <span>You · ${S.xp} XP</span>
+        </div>`;
+    }
     function likePost(id){ if (!requireAuth()) return; let post=S.posts.find(p=>p.id===id); if(post){ post.likes+=post.liked? -1:1; post.liked=!post.liked; renderCommunity(); saveState(); } }
     function postToFeed(){ if (!requireAuth()) return; let txt=document.getElementById('post-text').value.trim(); if(!txt)return; S.posts.unshift({id:Date.now(),author:S.name,init:'BM',bg:'var(--slate-l)',ic:'var(--primary)',text:txt,time:'Just now',likes:0,liked:false}); document.getElementById('post-text').value=''; saveState(); renderCommunity(); toast('Posted!'); }
-    function renderSettings(){ document.getElementById('notif-list').innerHTML=`<div> Email updates: On</div><div> Platform news: On</div>`; }
+    // FIX #6: Settings pre-fill from logged-in user
+    function renderSettings(){ 
+      const user = getSession();
+      if (user) document.getElementById('s-name').value = user.name;
+      document.getElementById('notif-list').innerHTML = 
+        `<div>Email updates: On</div><div>Platform news: On</div>`;
+    }
     function saveSettings(){ if (!requireAuth()) return; S.name=document.getElementById('s-name').value; S.school=document.getElementById('s-school').value+' · '+document.getElementById('s-location').value; saveState(); toast('Settings saved'); renderProfile(); }
     document.getElementById('global-search').addEventListener('input',(e)=>{ let q=e.target.value.toLowerCase(); if(q.length<2) return; let found=COURSES.filter(c=>c.title.toLowerCase().includes(q)); if(found.length) navTo('courses'); });
     
