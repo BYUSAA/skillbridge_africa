@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>SkillBridge Africa – Connect | Opportunities | Talent</title>
+  <title>SkillBridge Africa – Complete Ecosystem</title>
   <link rel="stylesheet" href="https://unpkg.com/tabler-icons@latest/iconfont/tabler-icons.min.css">
   <style>
     * {
@@ -18,7 +18,6 @@
       --secondary: #2A9D8F;
       --secondary-light: #EAF8F5;
       --accent: #E9C46A;
-      --accent-dark: #D4A52E;
       --gray-50: #F8F9FA;
       --gray-100: #F1F3F5;
       --gray-200: #E9ECEF;
@@ -46,7 +45,7 @@
       box-shadow: var(--shadow);
     }
 
-    /* Header & Navigation */
+    /* Navigation */
     .navbar {
       background: var(--primary);
       padding: 1rem 2rem;
@@ -69,8 +68,6 @@
       font-weight: 700;
     }
     .logo i { font-size: 1.8rem; color: var(--accent); }
-    .logo span { font-size: 0.9rem; font-weight: 400; opacity: 0.8; }
-
     .nav-links {
       display: flex;
       gap: 1.5rem;
@@ -79,7 +76,6 @@
     }
     .nav-link {
       color: rgba(255,255,255,0.85);
-      text-decoration: none;
       font-weight: 500;
       display: flex;
       align-items: center;
@@ -94,6 +90,14 @@
       color: white;
       border-bottom-color: var(--accent);
     }
+    .learning-link {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-weight: 600;
+    }
+    .learning-link:hover { background: #D4A52E; color: var(--primary-dark); border-bottom: none; }
 
     .user-badge {
       background: rgba(255,255,255,0.12);
@@ -116,7 +120,6 @@
       font-weight: bold;
     }
 
-    /* Main content */
     .main-content {
       padding: 2rem;
     }
@@ -129,7 +132,6 @@
 
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    /* Cards & Grid */
     .grid-2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
     .grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
     .card {
@@ -137,10 +139,10 @@
       border-radius: var(--radius-md);
       box-shadow: var(--shadow);
       overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s;
       border: 1px solid var(--gray-200);
+      transition: transform 0.2s;
     }
-    .card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
+    .card:hover { transform: translateY(-3px); }
     .card-header { padding: 1rem 1.2rem 0; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
     .card-body { padding: 1rem 1.2rem 1.2rem; }
     .tag {
@@ -148,14 +150,6 @@
       padding: 0.2rem 0.7rem;
       border-radius: 20px;
       font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--gray-600);
-      display: inline-block;
-    }
-    .badge-opportunity {
-      background: var(--secondary-light);
-      color: var(--secondary);
-      font-weight: 600;
     }
     .btn {
       padding: 0.5rem 1rem;
@@ -175,29 +169,8 @@
     .btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
     .btn-secondary { background: var(--secondary); color: white; }
     .btn-sm { padding: 0.3rem 0.8rem; font-size: 0.8rem; }
+    .btn-danger { background: #dc3545; color: white; }
 
-    .profile-header {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      color: white;
-      margin-bottom: 2rem;
-      display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    .profile-avatar-lg {
-      width: 100px;
-      height: 100px;
-      background: var(--secondary);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      font-weight: bold;
-    }
     .search-bar {
       display: flex;
       gap: 0.5rem;
@@ -208,13 +181,7 @@
       border: 1px solid var(--gray-200);
       max-width: 500px;
     }
-    .search-bar input {
-      flex: 1;
-      border: none;
-      padding: 0.5rem 1rem;
-      outline: none;
-      background: transparent;
-    }
+    .search-bar input { flex: 1; border: none; padding: 0.5rem 1rem; outline: none; background: transparent; }
 
     .modal {
       display: none;
@@ -228,17 +195,28 @@
     }
     .modal-content {
       background: white;
-      max-width: 500px;
+      max-width: 550px;
       width: 90%;
       border-radius: var(--radius-lg);
       padding: 1.5rem;
+      max-height: 90vh;
+      overflow-y: auto;
     }
-
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 0.3rem; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+    }
+    .comment-section { margin-top: 1rem; border-top: 1px solid var(--gray-200); padding-top: 0.8rem; }
+    .comment { margin-left: 1.5rem; padding: 0.5rem 0; border-bottom: 0.5px solid var(--gray-200); font-size: 0.85rem; }
     .footer { text-align: center; padding: 2rem; color: var(--gray-600); border-top: 1px solid var(--gray-200); margin-top: 2rem; }
 
     @media (max-width: 768px) {
-      .navbar { flex-direction: column; align-items: stretch; }
-      .nav-links { justify-content: center; }
+      .navbar { flex-direction: column; }
       .main-content { padding: 1rem; }
     }
   </style>
@@ -246,276 +224,419 @@
 <body>
 <div class="app-container">
   <div class="navbar">
-    <div class="logo">
-      <i class="ti ti-bridge"></i>
-      <span>SkillBridge<span style="font-weight:300"> Africa</span></span>
-    </div>
+    <div class="logo"><i class="ti ti-bridge"></i><span>SkillBridge Africa</span></div>
     <div class="nav-links">
       <div class="nav-link active" data-page="opportunities"><i class="ti ti-briefcase"></i> Opportunities</div>
       <div class="nav-link" data-page="talent"><i class="ti ti-users"></i> Talent</div>
       <div class="nav-link" data-page="mentors"><i class="ti ti-messages"></i> Mentorship</div>
       <div class="nav-link" data-page="community"><i class="ti ti-news"></i> Community</div>
       <div class="nav-link" data-page="companies"><i class="ti ti-building"></i> Companies</div>
+      <div class="nav-link learning-link" data-page="learning"><i class="ti ti-school"></i> Practical Learning</div>
     </div>
-    <div class="user-badge" id="userBadge">
-      <div class="avatar-sm">AM</div>
-      <span>Amina M.</span>
-      <i class="ti ti-chevron-down" style="font-size: 0.8rem;"></i>
-    </div>
+    <div class="user-badge" id="userBadge"><div class="avatar-sm">AM</div><span>Amina M.</span></div>
   </div>
 
   <div class="main-content">
     <!-- Opportunities Page -->
     <div id="opportunities-page" class="page active-page">
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem;">
         <h2>Opportunities across Africa</h2>
         <button class="btn btn-primary" id="postOppBtn"><i class="ti ti-plus"></i> Post opportunity</button>
       </div>
-      <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="oppSearch" placeholder="Search jobs, gigs, internships..."></div>
+      <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="oppSearch" placeholder="Search jobs, gigs..."></div>
       <div id="opportunities-list" class="grid-2"></div>
     </div>
 
-    <!-- Talent Directory -->
+    <!-- Talent Page -->
     <div id="talent-page" class="page">
-      <h2 style="margin-bottom: 1rem;">Find African talent</h2>
-      <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="talentSearch" placeholder="Search by skill, location, name..."></div>
+      <h2>Find African talent</h2>
+      <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="talentSearch" placeholder="Search by skill, location, name"></div>
       <div id="talent-list" class="grid-3"></div>
     </div>
 
-    <!-- Mentorship -->
+    <!-- Mentorship Page -->
     <div id="mentors-page" class="page">
-      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+      <div style="display: flex; justify-content: space-between;">
         <h2>Mentorship & Expert advice</h2>
         <button class="btn btn-outline" id="becomeMentorBtn"><i class="ti ti-star"></i> Become a mentor</button>
       </div>
-      <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="mentorSearch" placeholder="Find mentor by industry, name..."></div>
+      <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="mentorSearch" placeholder="Find mentor by industry"></div>
       <div id="mentors-list" class="grid-3"></div>
     </div>
 
-    <!-- Community Feed -->
+    <!-- Community Page -->
     <div id="community-page" class="page">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+      <div style="display: flex; justify-content: space-between;">
         <h2>Community Hub</h2>
         <button class="btn btn-primary" id="newPostBtn"><i class="ti ti-edit"></i> New post</button>
       </div>
       <div id="feed-list" style="display: flex; flex-direction: column; gap: 1rem;"></div>
     </div>
 
-    <!-- Companies -->
+    <!-- Companies Page -->
     <div id="companies-page" class="page">
-      <h2 style="margin-bottom: 1rem;">Companies hiring & partnering</h2>
-      <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="companySearch" placeholder="Search companies..."></div>
+      <h2>Companies hiring & partnering</h2>
+      <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="companySearch" placeholder="Search companies"></div>
       <div id="companies-list" class="grid-2"></div>
     </div>
-  </div>
 
-  <div class="footer">
-    <p>SkillBridge Africa — Connecting talent with real opportunities. No courses, just bridges.</p>
-  </div>
-</div>
-
-<!-- Modal for posting opportunity -->
-<div id="oppModal" class="modal">
-  <div class="modal-content">
-    <h3>Post a new opportunity</h3>
-    <input type="text" id="oppTitle" placeholder="Title (e.g., Frontend Developer)" style="width:100%; margin: 10px 0; padding: 8px;">
-    <select id="oppType" style="width:100%; padding: 8px; margin-bottom: 10px;">
-      <option value="job">Full-time Job</option>
-      <option value="internship">Internship</option>
-      <option value="gig">Freelance/Gig</option>
-    </select>
-    <input type="text" id="oppCompany" placeholder="Company name" style="width:100%; margin-bottom: 10px; padding: 8px;">
-    <input type="text" id="oppLocation" placeholder="Location (e.g., Nairobi / Remote)" style="width:100%; margin-bottom: 10px; padding: 8px;">
-    <textarea id="oppDesc" placeholder="Description, requirements..." rows="3" style="width:100%; margin-bottom: 10px; padding: 8px;"></textarea>
-    <div style="display: flex; gap: 10px; justify-content: flex-end;">
-      <button class="btn" id="closeOppModal">Cancel</button>
-      <button class="btn btn-primary" id="submitOpp">Post</button>
+    <!-- Practical Learning (external redirect) -->
+    <div id="learning-page" class="page">
+      <div class="card" style="text-align: center; padding: 3rem;">
+        <i class="ti ti-school" style="font-size: 4rem; color: var(--secondary);"></i>
+        <h2 style="margin: 1rem 0;">Practical Learning Platform</h2>
+        <p>Take hands-on courses, earn certificates, and build real projects.</p>
+        <button class="btn btn-primary" id="goToLearningBtn" style="margin-top: 1.5rem;">Launch SkillBridge Learning</button>
+      </div>
     </div>
   </div>
+  <div class="footer"><p>SkillBridge Africa — Connect, apply, grow. Trust & transparency first.</p></div>
 </div>
 
-<!-- Modal for new community post -->
-<div id="postModal" class="modal">
-  <div class="modal-content">
-    <h3>Share with the community</h3>
-    <textarea id="postContent" rows="4" placeholder="What's on your mind? Opportunities, insights, questions..." style="width:100%; margin: 10px 0; padding: 8px;"></textarea>
-    <div style="display: flex; gap: 10px; justify-content: flex-end;">
-      <button class="btn" id="closePostModal">Cancel</button>
-      <button class="btn btn-primary" id="submitPost">Publish</button>
-    </div>
-  </div>
-</div>
+<!-- Modals: Opportunity Post, Application, Contact Talent, Mentorship Request, Company Details, Post Edit/Delete, Comments -->
+<div id="oppPostModal" class="modal"><div class="modal-content"><h3>Post a new opportunity</h3><div class="form-group"><label>Title*</label><input id="oppTitle" placeholder="e.g., Frontend Developer"></div><div class="form-group"><label>Type*</label><select id="oppType"><option value="job">Full-time Job</option><option value="internship">Internship</option><option value="gig">Freelance/Gig</option></select></div><div class="form-group"><label>Company/Organization*</label><input id="oppCompany" placeholder="Company name"></div><div class="form-group"><label>Location*</label><input id="oppLocation" placeholder="City / Remote"></div><div class="form-group"><label>Description*</label><textarea id="oppDesc" rows="3" placeholder="Role, requirements, benefits..."></textarea></div><div class="form-group"><label>Contact email* (for applications)</label><input id="oppContactEmail" placeholder="hr@company.com"></div><div class="form-group"><label>Verification phone (optional)</label><input id="oppPhone" placeholder="+250..."></div><div style="display:flex; gap:10px; justify-content:flex-end"><button class="btn" id="closeOppModal">Cancel</button><button class="btn btn-primary" id="submitOpp">Post (trusted)</button></div></div></div>
+
+<div id="applyModal" class="modal"><div class="modal-content"><h3>Apply for opportunity</h3><div id="applyOppTitle"></div><div class="form-group"><label>Full Name*</label><input id="applicantName"></div><div class="form-group"><label>Email*</label><input id="applicantEmail" type="email"></div><div class="form-group"><label>Resume/CV link (Google Drive, LinkedIn)*</label><input id="applicantResume" placeholder="URL"></div><div class="form-group"><label>Cover letter / message</label><textarea id="applicantMessage" rows="3"></textarea></div><div style="display:flex; gap:10px; justify-content:flex-end"><button class="btn" id="closeApplyModal">Cancel</button><button class="btn btn-primary" id="submitApplication">Submit application</button></div></div></div>
+
+<div id="contactTalentModal" class="modal"><div class="modal-content"><h3>Contact talent</h3><div id="talentNameDisplay"></div><div class="form-group"><label>Your name*</label><input id="contactName"></div><div class="form-group"><label>Your email*</label><input id="contactEmail" type="email"></div><div class="form-group"><label>Message*</label><textarea id="contactMsg" rows="3" placeholder="I'm interested in your skills..."></textarea></div><div style="display:flex; gap:10px; justify-content:flex-end"><button class="btn" id="closeContactModal">Cancel</button><button class="btn btn-primary" id="sendContactMsg">Send message</button></div></div></div>
+
+<div id="mentorshipRequestModal" class="modal"><div class="modal-content"><h3>Request mentorship</h3><div id="mentorNameDisplay"></div><div class="form-group"><label>Your name*</label><input id="menteeName"></div><div class="form-group"><label>Your email*</label><input id="menteeEmail"></div><div class="form-group"><label>Why you want this mentor?</label><textarea id="menteeReason" rows="3"></textarea></div><div style="display:flex; gap:10px; justify-content:flex-end"><button class="btn" id="closeMentorReqModal">Cancel</button><button class="btn btn-primary" id="submitMentorReq">Send request</button></div></div></div>
+
+<div id="companyDetailModal" class="modal"><div class="modal-content" id="companyDetailContent"></div></div>
+
+<div id="commentsModal" class="modal"><div class="modal-content"><h3>Comments</h3><div id="commentsList"></div><div class="form-group"><textarea id="newCommentText" rows="2" placeholder="Write a comment..."></textarea></div><button class="btn btn-primary btn-sm" id="addCommentBtn">Add comment</button><div style="margin-top:10px"><button class="btn" id="closeCommentsModal">Close</button></div></div></div>
 
 <script>
-  // ---------- Demo Data ----------
-  let opportunities = [
-    { id: "opp1", title: "Frontend Developer (React)", type: "job", company: "Fintech Hub", location: "Lagos, Nigeria (Remote)", description: "Join a fast-growing fintech. 3+ years React experience.", postedBy: "TechRecruit", date: "2026-05-01" },
-    { id: "opp2", title: "UI/UX Design Intern", type: "internship", company: "Creative Labs", location: "Nairobi, Kenya", description: "3-month paid internship. Learn from senior designers.", postedBy: "CreativeLabs", date: "2026-05-03" },
-    { id: "opp3", title: "Build Landing Page for NGO", type: "gig", company: "Health Equity", location: "Remote", description: "Budget $200. Need responsive design in 1 week.", postedBy: "HealthEquity", date: "2026-05-02" },
-    { id: "opp4", title: "Data Analyst", type: "job", company: "AfriAnalytics", location: "Kigali, Rwanda", description: "SQL, Python, Power BI. Competitive salary.", postedBy: "AfriAnalytics", date: "2026-04-28" },
-  ];
+  // ---------- STORAGE KEYS ----------
+  const STORAGE = {
+    opportunities: 'sb_opps',
+    talents: 'sb_talents',
+    mentors: 'sb_mentors',
+    companies: 'sb_companies',
+    posts: 'sb_posts',
+    applications: 'sb_applications',
+    messages: 'sb_messages',
+    mentorRequests: 'sb_mentor_reqs'
+  };
 
-  let talents = [
-    { id: "tal1", name: "Chiamaka O.", skills: ["React", "Node.js", "MongoDB"], location: "Lagos", avatar: "CO", bio: "Fullstack dev with 4 years experience, open for contract work." },
-    { id: "tal2", name: "Kelvin M.", skills: ["UI/UX", "Figma", "User Research"], location: "Nairobi", avatar: "KM", bio: "Product designer, previously at Andela." },
-    { id: "tal3", name: "Fatima Z.", skills: ["Digital Marketing", "SEO", "Content Strategy"], location: "Casablanca", avatar: "FZ", bio: "Marketing specialist, helped 10+ startups grow." },
-    { id: "tal4", name: "Samuel K.", skills: ["Python", "Data Science", "Tableau"], location: "Accra", avatar: "SK", bio: "Data scientist, Kaggle expert." },
-    { id: "tal5", name: "Amina M.", skills: ["Project Management", "Agile", "Scrum"], location: "Dar es Salaam", avatar: "AM", bio: "Certified PMP, 7 years experience." },
+  // Load or init data
+  let opportunities = JSON.parse(localStorage.getItem(STORAGE.opportunities)) || [
+    { id: "opp1", title: "Frontend Developer (React)", type: "job", company: "Fintech Hub", location: "Lagos, Nigeria (Remote)", description: "Join a fast-growing fintech. 3+ years React experience.", postedBy: "TechRecruit", contactEmail: "recruit@fintech.ng", date: "2026-05-01", verified: true },
+    { id: "opp2", title: "UI/UX Design Intern", type: "internship", company: "Creative Labs", location: "Nairobi, Kenya", description: "3-month paid internship.", postedBy: "CreativeLabs", contactEmail: "hr@creativelabs.ke", date: "2026-05-03", verified: true },
+    { id: "opp3", title: "Build Landing Page for NGO", type: "gig", company: "Health Equity", location: "Remote", description: "Budget $200. Responsive design.", postedBy: "HealthEquity", contactEmail: "hello@healthequity.org", date: "2026-05-02", verified: true }
   ];
-
-  let mentors = [
-    { id: "men1", name: "James Nkosi", title: "Senior Software Engineer", company: "Google", expertise: ["Career Growth", "System Design"], about: "10+ years in tech. Passionate about mentoring African devs.", avatar: "JN", linked: false },
-    { id: "men2", name: "Dr. Grace Achieng", title: "Founder & CEO", company: "Women in STEM", expertise: ["Entrepreneurship", "Leadership"], about: "Helped launch 20+ startups. Let's talk business.", avatar: "GA", linked: false },
-    { id: "men3", name: "Michael Omondi", title: "Lead Product Designer", company: "Canva", expertise: ["UI/UX", "Portfolio Review"], about: "Design mentor. Book a free 30-min chat.", avatar: "MO", linked: false },
+  let talents = JSON.parse(localStorage.getItem(STORAGE.talents)) || [
+    { id: "tal1", name: "Chiamaka O.", skills: ["React", "Node.js"], location: "Lagos", avatar: "CO", bio: "Fullstack dev, 4 years exp.", email: "chiamaka@example.com" },
+    { id: "tal2", name: "Kelvin M.", skills: ["UI/UX", "Figma"], location: "Nairobi", avatar: "KM", bio: "Product designer.", email: "kelvin@example.com" },
+    { id: "tal3", name: "Fatima Z.", skills: ["Digital Marketing", "SEO"], location: "Casablanca", avatar: "FZ", bio: "Marketing specialist.", email: "fatima@example.com" }
   ];
-
-  let companies = [
-    { id: "comp1", name: "Andela", industry: "Tech Talent", location: "Pan-Africa", hiring: ["Software Engineer", "DevOps"], logo: "AN", description: "Global talent network." },
-    { id: "comp2", name: "Flutterwave", industry: "Fintech", location: "Lagos & Remote", hiring: ["Product Manager", "Backend"], logo: "FW", description: "Leading payments technology." },
-    { id: "comp3", name: "M-KOPA", industry: "Clean Energy", location: "Nairobi", hiring: ["Sales Analyst", "Mobile Dev"], logo: "MK", description: "Pay-as-you-go solar." },
-    { id: "comp4", name: "Jumia", industry: "E-commerce", location: "Multiple Countries", hiring: ["Logistics Coordinator", "Marketing"], logo: "JM", description: "Africa's leading e-commerce." },
+  let mentors = JSON.parse(localStorage.getItem(STORAGE.mentors)) || [
+    { id: "men1", name: "James Nkosi", title: "Senior Software Engineer", company: "Google", expertise: ["Career Growth", "System Design"], about: "10+ years exp.", avatar: "JN", email: "james@mentor.com" },
+    { id: "men2", name: "Dr. Grace Achieng", title: "Founder & CEO", company: "Women in STEM", expertise: ["Entrepreneurship"], about: "Startup mentor.", avatar: "GA", email: "grace@mentor.com" }
   ];
-
-  let communityPosts = [
-    { id: "post1", author: "Amina M.", avatar: "AM", content: "Just landed a remote gig through SkillBridge! So grateful for this community", time: "2 hours ago", likes: 24, comments: 3 },
-    { id: "post2", author: "TechBridge", avatar: "TB", content: "We're hiring 5 junior developers. DM for details. #opportunity", time: "Yesterday", likes: 56, comments: 12 },
-    { id: "post3", author: "Grace A.", avatar: "GA", content: "Free mentorship session this Friday: 'How to negotiate your salary in Africa's tech scene'", time: "1 day ago", likes: 89, comments: 7 },
+  let companies = JSON.parse(localStorage.getItem(STORAGE.companies)) || [
+    { id: "comp1", name: "Andela", industry: "Tech Talent", location: "Pan-Africa", hiring: ["Software Engineer", "DevOps"], logo: "AN", description: "Global talent network.", website: "https://andela.com", fullDetails: "Andela connects top African developers with global companies. We offer remote roles." },
+    { id: "comp2", name: "Flutterwave", industry: "Fintech", location: "Lagos & Remote", hiring: ["Product Manager", "Backend"], logo: "FW", description: "Leading payments technology.", fullDetails: "Flutterwave simplifies payments for businesses. Join our engineering or product teams." }
   ];
+  let communityPosts = JSON.parse(localStorage.getItem(STORAGE.posts)) || [
+    { id: "post1", author: "Amina M.", avatar: "AM", content: "Just landed a remote gig through SkillBridge! So grateful.", time: "2 hours ago", likes: 12, likedBy: [], comments: [] },
+    { id: "post2", author: "TechBridge", avatar: "TB", content: "We're hiring 5 junior developers. DM for details.", time: "Yesterday", likes: 32, likedBy: [], comments: [] }
+  ];
+  let applications = JSON.parse(localStorage.getItem(STORAGE.applications)) || [];
+  let contactMessages = JSON.parse(localStorage.getItem(STORAGE.messages)) || [];
+  let mentorRequests = JSON.parse(localStorage.getItem(STORAGE.mentorRequests)) || [];
 
-  // Helper: render functions
+  function saveAll() {
+    localStorage.setItem(STORAGE.opportunities, JSON.stringify(opportunities));
+    localStorage.setItem(STORAGE.talents, JSON.stringify(talents));
+    localStorage.setItem(STORAGE.mentors, JSON.stringify(mentors));
+    localStorage.setItem(STORAGE.companies, JSON.stringify(companies));
+    localStorage.setItem(STORAGE.posts, JSON.stringify(communityPosts));
+    localStorage.setItem(STORAGE.applications, JSON.stringify(applications));
+    localStorage.setItem(STORAGE.messages, JSON.stringify(contactMessages));
+    localStorage.setItem(STORAGE.mentorRequests, JSON.stringify(mentorRequests));
+  }
+
+  // Helper: show toast
+  function showToast(msg) { alert(msg); } // simple; can be improved
+
+  // Render functions
   function renderOpportunities(filter = "") {
-    const listDiv = document.getElementById("opportunities-list");
-    let filtered = opportunities.filter(opp => opp.title.toLowerCase().includes(filter.toLowerCase()) || opp.company.toLowerCase().includes(filter.toLowerCase()));
-    if (filtered.length === 0) { listDiv.innerHTML = "<div class='card' style='padding:2rem; text-align:center'>No opportunities found. Be the first to post!</div>"; return; }
-    listDiv.innerHTML = filtered.map(opp => `
+    let filtered = opportunities.filter(o => o.title.toLowerCase().includes(filter.toLowerCase()) || o.company.toLowerCase().includes(filter.toLowerCase()));
+    const container = document.getElementById("opportunities-list");
+    if (!filtered.length) { container.innerHTML = "<div class='card' style='padding:2rem'>No opportunities. Post one!</div>"; return; }
+    container.innerHTML = filtered.map(opp => `
       <div class="card">
-        <div class="card-header">
-          <span><strong>${opp.title}</strong></span>
-          <span class="tag badge-opportunity">${opp.type === 'job' ? 'Job' : opp.type === 'internship' ? 'Internship' : 'Gig'}</span>
-        </div>
+        <div class="card-header"><span><strong>${opp.title}</strong></span><span class="tag">${opp.type === 'job' ? 'Job' : opp.type === 'internship' ? 'Internship' : 'Gig'}</span></div>
         <div class="card-body">
-          <p style="display: flex; gap: 1rem; margin-bottom: 0.5rem;"><i class="ti ti-building"></i> ${opp.company} &nbsp;|&nbsp; <i class="ti ti-map-pin"></i> ${opp.location}</p>
-          <p style="margin: 0.5rem 0; color: var(--gray-600);">${opp.description}</p>
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
-            <span style="font-size: 0.75rem; color: gray;">Posted by ${opp.postedBy}</span>
-            <button class="btn btn-sm btn-primary apply-opp" data-id="${opp.id}">Apply</button>
+          <p><i class="ti ti-building"></i> ${opp.company} | <i class="ti ti-map-pin"></i> ${opp.location}</p>
+          <p style="margin:10px 0">${opp.description.substring(0, 100)}...</p>
+          <div style="display:flex; justify-content:space-between; align-items:center">
+            <span style="font-size:0.75rem;">Posted by ${opp.postedBy} ${opp.verified ? '(verified)' : ''}</span>
+            <button class="btn btn-sm btn-primary apply-opp-btn" data-id="${opp.id}">Apply</button>
           </div>
         </div>
       </div>
     `).join("");
-    document.querySelectorAll(".apply-opp").forEach(btn => btn.addEventListener("click", (e) => { alert("Application sent! The company will contact you via email."); }));
+    document.querySelectorAll(".apply-opp-btn").forEach(btn => btn.addEventListener("click", (e) => openApplyModal(btn.dataset.id)));
   }
+
+  function openApplyModal(oppId) {
+    const opp = opportunities.find(o => o.id === oppId);
+    if (!opp) return;
+    document.getElementById("applyOppTitle").innerHTML = `<strong>${opp.title}</strong> at ${opp.company}`;
+    const modal = document.getElementById("applyModal");
+    modal.style.display = "flex";
+    window.currentApplyOppId = oppId;
+  }
+
+  document.getElementById("submitApplication").onclick = () => {
+    const name = document.getElementById("applicantName").value.trim();
+    const email = document.getElementById("applicantEmail").value.trim();
+    const resume = document.getElementById("applicantResume").value.trim();
+    const message = document.getElementById("applicantMessage").value.trim();
+    if (!name || !email || !resume) { alert("Please fill required fields (name, email, resume link)."); return; }
+    const application = { id: Date.now(), oppId: window.currentApplyOppId, name, email, resume, message, date: new Date().toISOString() };
+    applications.push(application);
+    saveAll();
+    alert("Application submitted! The employer will contact you.");
+    document.getElementById("applyModal").style.display = "none";
+    document.getElementById("applicantName").value = "";
+    document.getElementById("applicantEmail").value = "";
+    document.getElementById("applicantResume").value = "";
+    document.getElementById("applicantMessage").value = "";
+  };
 
   function renderTalent(filter = "") {
-    const div = document.getElementById("talent-list");
     let filtered = talents.filter(t => t.name.toLowerCase().includes(filter.toLowerCase()) || t.skills.some(s => s.toLowerCase().includes(filter.toLowerCase())) || t.location.toLowerCase().includes(filter.toLowerCase()));
-    if (filtered.length === 0) { div.innerHTML = "<div class='card' style='padding:2rem'>No talent found</div>"; return; }
-    div.innerHTML = filtered.map(t => `
+    const container = document.getElementById("talent-list");
+    if (!filtered.length) { container.innerHTML = "<div class='card'>No talent found</div>"; return; }
+    container.innerHTML = filtered.map(t => `
       <div class="card">
-        <div class="card-header" style="gap: 0.5rem;">
-          <div class="avatar-sm" style="background: var(--secondary);">${t.avatar}</div>
-          <span><strong>${t.name}</strong></span>
-        </div>
-        <div class="card-body">
-          <p><i class="ti ti-map-pin"></i> ${t.location}</p>
-          <div style="margin: 8px 0;">${t.skills.map(s => `<span class="tag">${s}</span>`).join(' ')}</div>
-          <p style="font-size: 0.85rem;">${t.bio}</p>
-          <button class="btn btn-sm btn-outline hire-talent" data-name="${t.name}">Contact talent</button>
-        </div>
+        <div class="card-header"><div class="avatar-sm">${t.avatar}</div><strong>${t.name}</strong></div>
+        <div class="card-body"><p><i class="ti ti-map-pin"></i> ${t.location}</p><div>${t.skills.map(s => `<span class="tag">${s}</span>`).join(' ')}</div><p style="margin:8px 0">${t.bio}</p><button class="btn btn-sm btn-outline contact-talent" data-id="${t.id}">Contact talent</button></div>
       </div>
     `).join("");
-    document.querySelectorAll(".hire-talent").forEach(btn => btn.addEventListener("click", () => alert("Request sent to talent. They'll see your message.")));
+    document.querySelectorAll(".contact-talent").forEach(btn => btn.addEventListener("click", (e) => openContactTalent(btn.dataset.id)));
   }
+
+  function openContactTalent(talentId) {
+    const talent = talents.find(t => t.id === talentId);
+    if (!talent) return;
+    document.getElementById("talentNameDisplay").innerHTML = `<strong>${talent.name}</strong> (${talent.location})`;
+    const modal = document.getElementById("contactTalentModal");
+    modal.style.display = "flex";
+    window.currentTalentId = talentId;
+  }
+  document.getElementById("sendContactMsg").onclick = () => {
+    const name = document.getElementById("contactName").value.trim();
+    const email = document.getElementById("contactEmail").value.trim();
+    const msg = document.getElementById("contactMsg").value.trim();
+    if (!name || !email || !msg) { alert("Please fill all fields"); return; }
+    contactMessages.push({ id: Date.now(), talentId: window.currentTalentId, fromName: name, fromEmail: email, message: msg, date: new Date() });
+    saveAll();
+    alert("Message sent to talent! They will reply via email.");
+    document.getElementById("contactTalentModal").style.display = "none";
+    document.getElementById("contactName").value = "";
+    document.getElementById("contactEmail").value = "";
+    document.getElementById("contactMsg").value = "";
+  };
 
   function renderMentors(filter = "") {
-    const div = document.getElementById("mentors-list");
     let filtered = mentors.filter(m => m.name.toLowerCase().includes(filter.toLowerCase()) || m.expertise.some(e => e.toLowerCase().includes(filter.toLowerCase())));
-    if (filtered.length === 0) { div.innerHTML = "<div class='card' style='padding:2rem'>No mentors match</div>"; return; }
-    div.innerHTML = filtered.map(m => `
-      <div class="card">
-        <div class="card-header" style="gap: 0.5rem;">
-          <div class="avatar-sm" style="background: var(--accent);">${m.avatar}</div>
-          <div><strong>${m.name}</strong><br><span style="font-size: 0.7rem;">${m.title} @ ${m.company}</span></div>
-        </div>
-        <div class="card-body">
-          <div>${m.expertise.map(e => `<span class="tag">${e}</span>`).join(' ')}</div>
-          <p style="margin: 10px 0;">${m.about}</p>
-          <button class="btn btn-sm btn-secondary request-mentor" data-id="${m.id}">Request mentorship</button>
-        </div>
-      </div>
+    const container = document.getElementById("mentors-list");
+    if (!filtered.length) { container.innerHTML = "<div class='card'>No mentors found</div>"; return; }
+    container.innerHTML = filtered.map(m => `
+      <div class="card"><div class="card-header"><div class="avatar-sm" style="background:var(--accent)">${m.avatar}</div><strong>${m.name}</strong></div><div class="card-body"><p>${m.title} at ${m.company}</p><div>${m.expertise.map(e => `<span class="tag">${e}</span>`).join(' ')}</div><p>${m.about}</p><button class="btn btn-sm btn-secondary request-mentor-btn" data-id="${m.id}">Request mentorship</button></div></div>
     `).join("");
-    document.querySelectorAll(".request-mentor").forEach(btn => btn.addEventListener("click", (e) => alert("Mentorship request sent! The mentor will respond within 48 hours.")));
+    document.querySelectorAll(".request-mentor-btn").forEach(btn => btn.addEventListener("click", (e) => openMentorRequest(btn.dataset.id)));
   }
+
+  function openMentorRequest(mentorId) {
+    const mentor = mentors.find(m => m.id === mentorId);
+    if (!mentor) return;
+    document.getElementById("mentorNameDisplay").innerHTML = `<strong>${mentor.name}</strong> - ${mentor.title}`;
+    const modal = document.getElementById("mentorshipRequestModal");
+    modal.style.display = "flex";
+    window.currentMentorId = mentorId;
+  }
+  document.getElementById("submitMentorReq").onclick = () => {
+    const name = document.getElementById("menteeName").value.trim();
+    const email = document.getElementById("menteeEmail").value.trim();
+    const reason = document.getElementById("menteeReason").value.trim();
+    if (!name || !email || !reason) { alert("Please fill all fields"); return; }
+    mentorRequests.push({ id: Date.now(), mentorId: window.currentMentorId, name, email, reason, date: new Date() });
+    saveAll();
+    alert("Mentorship request sent! The mentor will reach out.");
+    document.getElementById("mentorshipRequestModal").style.display = "none";
+    document.getElementById("menteeName").value = "";
+    document.getElementById("menteeEmail").value = "";
+    document.getElementById("menteeReason").value = "";
+  };
 
   function renderCompanies(filter = "") {
-    const div = document.getElementById("companies-list");
     let filtered = companies.filter(c => c.name.toLowerCase().includes(filter.toLowerCase()) || c.industry.toLowerCase().includes(filter.toLowerCase()));
-    if (filtered.length === 0) { div.innerHTML = "<div class='card'>No companies found</div>"; return; }
-    div.innerHTML = filtered.map(c => `
-      <div class="card">
-        <div class="card-header">
-          <div style="display: flex; align-items: center; gap: 10px;"><div class="avatar-sm" style="background: var(--primary);">${c.logo}</div><strong>${c.name}</strong></div>
-          <span class="tag">${c.industry}</span>
-        </div>
-        <div class="card-body">
-          <p><i class="ti ti-map-pin"></i> ${c.location}</p>
-          <p style="margin: 5px 0;">${c.description}</p>
-          <p><strong>Hiring:</strong> ${c.hiring.join(", ")}</p>
-          <button class="btn btn-sm btn-primary view-jobs" data-company="${c.name}">View open roles</button>
-        </div>
-      </div>
+    const container = document.getElementById("companies-list");
+    if (!filtered.length) { container.innerHTML = "<div class='card'>No companies found</div>"; return; }
+    container.innerHTML = filtered.map(c => `
+      <div class="card"><div class="card-header"><div class="avatar-sm" style="background:var(--primary)">${c.logo}</div><strong>${c.name}</strong><span class="tag">${c.industry}</span></div><div class="card-body"><p>${c.location}</p><p>${c.description}</p><p><strong>Hiring:</strong> ${c.hiring.join(", ")}</p><button class="btn btn-sm btn-primary view-company-details" data-id="${c.id}">View details & roles</button></div></div>
     `).join("");
-    document.querySelectorAll(".view-jobs").forEach(btn => btn.addEventListener("click", () => alert(`Check ${btn.dataset.company}'s careers page for full details.`)));
+    document.querySelectorAll(".view-company-details").forEach(btn => btn.addEventListener("click", (e) => showCompanyDetails(btn.dataset.id)));
   }
 
+  function showCompanyDetails(companyId) {
+    const company = companies.find(c => c.id === companyId);
+    if (!company) return;
+    const modal = document.getElementById("companyDetailModal");
+    document.getElementById("companyDetailContent").innerHTML = `
+      <h3>${company.name}</h3>
+      <p><strong>Industry:</strong> ${company.industry}</p>
+      <p><strong>Location:</strong> ${company.location}</p>
+      <p><strong>Description:</strong> ${company.fullDetails || company.description}</p>
+      <p><strong>Open roles:</strong> ${company.hiring.join(", ")}</p>
+      <p><strong>Website:</strong> <a href="${company.website || '#'}" target="_blank">${company.website || 'Not provided'}</a></p>
+      <hr><button class="btn btn-primary" id="closeCompanyModalBtn">Close</button>
+    `;
+    modal.style.display = "flex";
+    document.getElementById("closeCompanyModalBtn").onclick = () => modal.style.display = "none";
+  }
+
+  // Community: render posts with like, comment, edit, delete
   function renderCommunity() {
     const feedDiv = document.getElementById("feed-list");
-    feedDiv.innerHTML = communityPosts.map(p => `
-      <div class="card">
-        <div class="card-header" style="justify-content: left; gap: 10px;">
-          <div class="avatar-sm" style="background: var(--accent);">${p.avatar}</div>
-          <div><strong>${p.author}</strong> · <span style="font-size:0.7rem; color: gray;">${p.time}</span></div>
+    feedDiv.innerHTML = communityPosts.map(post => `
+      <div class="card" data-post-id="${post.id}">
+        <div class="card-header" style="justify-content: space-between;">
+          <div style="display:flex; gap:10px"><div class="avatar-sm" style="background:var(--accent)">${post.avatar}</div><strong>${post.author}</strong> · <span style="font-size:0.7rem;">${post.time}</span></div>
+          <div>
+            ${post.author === "Amina M." ? `<button class="btn btn-sm edit-post" data-id="${post.id}"><i class="ti ti-edit"></i></button><button class="btn btn-sm btn-danger delete-post" data-id="${post.id}"><i class="ti ti-trash"></i></button>` : ''}
+          </div>
         </div>
         <div class="card-body">
-          <p>${p.content}</p>
-          <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-            <button class="like-post" data-id="${p.id}"><i class="ti ti-heart"></i> ${p.likes}</button>
-            <button class="comment-post"><i class="ti ti-message-circle"></i> ${p.comments}</button>
+          <p>${post.content}</p>
+          <div style="display:flex; gap:1rem; margin-top:0.8rem;">
+            <button class="like-post-btn" data-id="${post.id}"><i class="ti ti-heart"></i> ${post.likes}</button>
+            <button class="comment-post-btn" data-id="${post.id}"><i class="ti ti-message-circle"></i> ${post.comments.length} comments</button>
           </div>
         </div>
       </div>
     `).join("");
-    document.querySelectorAll(".like-post").forEach(btn => btn.addEventListener("click", (e) => { alert("Like added (demo)"); }));
+    // Like logic
+    document.querySelectorAll(".like-post-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const postId = btn.dataset.id;
+        const post = communityPosts.find(p => p.id === postId);
+        if (post) {
+          if (!post.likedBy.includes("AminaM")) {
+            post.likes++;
+            post.likedBy.push("AminaM");
+          } else {
+            post.likes--;
+            post.likedBy = post.likedBy.filter(u => u !== "AminaM");
+          }
+          saveAll();
+          renderCommunity();
+        }
+      });
+    });
+    // Comment button
+    document.querySelectorAll(".comment-post-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => openCommentsModal(btn.dataset.id));
+    });
+    // Edit/Delete
+    document.querySelectorAll(".edit-post").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const postId = btn.dataset.id;
+        const post = communityPosts.find(p => p.id === postId);
+        if (post) {
+          const newContent = prompt("Edit your post:", post.content);
+          if (newContent) { post.content = newContent; saveAll(); renderCommunity(); }
+        }
+      });
+    });
+    document.querySelectorAll(".delete-post").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        if (confirm("Delete this post?")) {
+          const index = communityPosts.findIndex(p => p.id === btn.dataset.id);
+          if (index !== -1) { communityPosts.splice(index, 1); saveAll(); renderCommunity(); }
+        }
+      });
+    });
   }
 
-  // Add new opportunity
-  function addOpportunity(title, type, company, location, desc) {
-    const newId = "opp" + Date.now();
-    opportunities.unshift({ id: newId, title, type, company, location, description: desc, postedBy: "Amina M.", date: new Date().toISOString().slice(0,10) });
+  function openCommentsModal(postId) {
+    const post = communityPosts.find(p => p.id === postId);
+    if (!post) return;
+    const modal = document.getElementById("commentsModal");
+    const commentsDiv = document.getElementById("commentsList");
+    commentsDiv.innerHTML = (post.comments || []).map(c => `<div class="comment"><strong>${c.author}</strong>: ${c.text}</div>`).join("");
+    document.getElementById("newCommentText").value = "";
+    window.currentCommentPostId = postId;
+    modal.style.display = "flex";
+  }
+  document.getElementById("addCommentBtn").onclick = () => {
+    const text = document.getElementById("newCommentText").value.trim();
+    if (!text) return;
+    const post = communityPosts.find(p => p.id === window.currentCommentPostId);
+    if (post) {
+      if (!post.comments) post.comments = [];
+      post.comments.push({ author: "Amina M.", text, date: new Date() });
+      saveAll();
+      openCommentsModal(window.currentCommentPostId); // refresh
+    }
+  };
+  document.getElementById("closeCommentsModal").onclick = () => document.getElementById("commentsModal").style.display = "none";
+
+  // Post new opportunity (trusted)
+  document.getElementById("submitOpp").onclick = () => {
+    const title = document.getElementById("oppTitle").value.trim();
+    const type = document.getElementById("oppType").value;
+    const company = document.getElementById("oppCompany").value.trim();
+    const location = document.getElementById("oppLocation").value.trim();
+    const desc = document.getElementById("oppDesc").value.trim();
+    const contactEmail = document.getElementById("oppContactEmail").value.trim();
+    if (!title || !company || !location || !desc || !contactEmail) { alert("Please fill all required fields (title, company, location, description, contact email)."); return; }
+    const newOpp = { id: "opp"+Date.now(), title, type, company, location, description: desc, postedBy: "Amina M.", contactEmail, date: new Date().toISOString(), verified: true };
+    opportunities.unshift(newOpp);
+    saveAll();
     renderOpportunities();
-    alert("Opportunity posted!");
-  }
+    document.getElementById("oppPostModal").style.display = "none";
+    document.getElementById("oppTitle").value = "";
+    document.getElementById("oppCompany").value = "";
+    document.getElementById("oppLocation").value = "";
+    document.getElementById("oppDesc").value = "";
+    document.getElementById("oppContactEmail").value = "";
+    alert("Opportunity posted! It is now visible to applicants.");
+  };
 
-  function addCommunityPost(content) {
-    const newPost = {
-      id: "post"+Date.now(),
-      author: "Amina M.",
-      avatar: "AM",
-      content: content,
-      time: "Just now",
-      likes: 0,
-      comments: 0
-    };
-    communityPosts.unshift(newPost);
-    renderCommunity();
-  }
+  document.getElementById("postOppBtn").onclick = () => document.getElementById("oppPostModal").style.display = "flex";
+  document.getElementById("newPostBtn").onclick = () => {
+    const content = prompt("What would you like to share?");
+    if (content) {
+      communityPosts.unshift({ id: "p"+Date.now(), author: "Amina M.", avatar: "AM", content, time: "Just now", likes: 0, likedBy: [], comments: [] });
+      saveAll();
+      renderCommunity();
+    }
+  };
+  document.getElementById("becomeMentorBtn").onclick = () => alert("To become a mentor, please email team@skillbridge.africa with your profile.");
+  document.getElementById("goToLearningBtn").onclick = () => window.open("https://www.skillbridge.africa/learning", "_blank");
 
-  // Event listeners and page switching
+  // Close modals
+  const modals = ["oppPostModal", "applyModal", "contactTalentModal", "mentorshipRequestModal", "companyDetailModal", "commentsModal"];
+  modals.forEach(m => { document.getElementById(`close${m.charAt(0).toUpperCase() + m.slice(1)}`)?.addEventListener("click", () => document.getElementById(m).style.display = "none"); });
+  document.getElementById("closeOppModal")?.addEventListener("click", () => document.getElementById("oppPostModal").style.display = "none");
+  document.getElementById("closeApplyModal")?.addEventListener("click", () => document.getElementById("applyModal").style.display = "none");
+  document.getElementById("closeContactModal")?.addEventListener("click", () => document.getElementById("contactTalentModal").style.display = "none");
+  document.getElementById("closeMentorReqModal")?.addEventListener("click", () => document.getElementById("mentorshipRequestModal").style.display = "none");
+  window.onclick = (e) => { if (e.target.classList.contains("modal")) e.target.style.display = "none"; };
+
+  // Navigation
   function switchPage(pageId) {
     document.querySelectorAll(".page").forEach(p => p.classList.remove("active-page"));
     document.getElementById(`${pageId}-page`).classList.add("active-page");
     document.querySelectorAll(".nav-link").forEach(link => link.classList.remove("active"));
-    document.querySelector(`.nav-link[data-page="${pageId}"]`).classList.add("active");
+    const activeLink = Array.from(document.querySelectorAll(".nav-link")).find(l => l.dataset.page === pageId);
+    if (activeLink) activeLink.classList.add("active");
     if (pageId === "opportunities") renderOpportunities();
     else if (pageId === "talent") renderTalent();
     else if (pageId === "mentors") renderMentors();
@@ -523,44 +644,13 @@
     else if (pageId === "companies") renderCompanies();
   }
 
-  // Search listeners
+  document.querySelectorAll(".nav-link").forEach(link => link.addEventListener("click", () => switchPage(link.dataset.page)));
   document.getElementById("oppSearch")?.addEventListener("input", (e) => renderOpportunities(e.target.value));
   document.getElementById("talentSearch")?.addEventListener("input", (e) => renderTalent(e.target.value));
   document.getElementById("mentorSearch")?.addEventListener("input", (e) => renderMentors(e.target.value));
   document.getElementById("companySearch")?.addEventListener("input", (e) => renderCompanies(e.target.value));
 
-  // Modal logic
-  const oppModal = document.getElementById("oppModal");
-  const postModal = document.getElementById("postModal");
-  document.getElementById("postOppBtn").onclick = () => oppModal.style.display = "flex";
-  document.getElementById("newPostBtn").onclick = () => postModal.style.display = "flex";
-  document.getElementById("closeOppModal").onclick = () => oppModal.style.display = "none";
-  document.getElementById("closePostModal").onclick = () => postModal.style.display = "none";
-  document.getElementById("submitOpp").onclick = () => {
-    let title = document.getElementById("oppTitle").value.trim();
-    let type = document.getElementById("oppType").value;
-    let company = document.getElementById("oppCompany").value.trim();
-    let location = document.getElementById("oppLocation").value.trim();
-    let desc = document.getElementById("oppDesc").value.trim();
-    if (title && company && location && desc) addOpportunity(title, type, company, location, desc);
-    else alert("Please fill all fields");
-    oppModal.style.display = "none";
-    document.getElementById("oppTitle").value = "";
-    document.getElementById("oppCompany").value = "";
-    document.getElementById("oppLocation").value = "";
-    document.getElementById("oppDesc").value = "";
-  };
-  document.getElementById("submitPost").onclick = () => {
-    let content = document.getElementById("postContent").value.trim();
-    if (content) addCommunityPost(content);
-    else alert("Write something");
-    postModal.style.display = "none";
-    document.getElementById("postContent").value = "";
-  };
-  window.onclick = (e) => { if (e.target === oppModal) oppModal.style.display = "none"; if (e.target === postModal) postModal.style.display = "none"; };
-  document.getElementById("becomeMentorBtn")?.addEventListener("click", () => alert("Mentor application form coming soon!"));
-  document.querySelectorAll(".nav-link").forEach(link => link.addEventListener("click", () => switchPage(link.dataset.page)));
-  // initial renders
+  // Initial renders
   renderOpportunities();
   renderTalent();
   renderMentors();
