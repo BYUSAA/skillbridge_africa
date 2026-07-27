@@ -7,163 +7,877 @@
   <link rel="stylesheet" href="https://unpkg.com/tabler-icons@latest/iconfont/tabler-icons.min.css" />
   <style>
     /* ===== RESET & VARIABLES ===== */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --primary: #1E3A5F; --primary-dark: #0F2B45; --secondary: #2A9D8F; --secondary-light: #EAF8F5;
-      --accent: #E9C46A; --gray-50: #F8F9FA; --gray-100: #F1F3F5; --gray-200: #E9ECEF;
-      --gray-600: #6C757D; --gray-800: #343A40; --white: #FFFFFF;
-      --shadow: 0 4px 12px rgba(0,0,0,0.05); --radius-lg: 16px; --radius-md: 12px; --radius-sm: 8px;
-      --teal: #0F6E56; --teal2: #1D9E75; --teal-l: #E1F5EE; --bdr: rgba(0,0,0,0.12);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--gray-50); color: var(--gray-800); line-height: 1.5; }
-    .app-container { max-width: 1440px; margin: 0 auto; background: var(--white); min-height: 100vh; box-shadow: var(--shadow); position: relative; }
+    :root {
+      --primary: #1E3A5F;
+      --primary-dark: #0F2B45;
+      --secondary: #2A9D8F;
+      --secondary-light: #EAF8F5;
+      --accent: #E9C46A;
+      --gray-50: #F8F9FA;
+      --gray-100: #F1F3F5;
+      --gray-200: #E9ECEF;
+      --gray-600: #6C757D;
+      --gray-800: #343A40;
+      --white: #FFFFFF;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --teal: #0F6E56;
+      --teal2: #1D9E75;
+      --teal-l: #E1F5EE;
+      --bdr: rgba(0, 0, 0, 0.12);
+    }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-800);
+      line-height: 1.5;
+    }
+    .app-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      background: var(--white);
+      min-height: 100vh;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
     /* NAV */
-    .navbar { background: var(--primary); padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; position: sticky; top: 0; z-index: 100; }
-    .logo { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 1.5rem; font-weight: 700; cursor: default; }
-    .logo i { font-size: 1.8rem; color: var(--accent); }
-    .nav-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
-    .nav-link { color: rgba(255,255,255,0.85); font-weight: 500; display: flex; align-items: center; gap: 6px; padding: 0.4rem 0; border-bottom: 2px solid transparent; transition: all 0.2s; cursor: pointer; font-size: 0.9rem; text-decoration: none; background: none; border-top: none; border-left: none; border-right: none; }
-    .nav-link i { font-size: 1.2rem; }
-    .nav-link:hover, .nav-link.active { color: #fff; border-bottom-color: var(--accent); }
-    .learning-link { background: var(--accent); color: var(--primary); padding: 0.3rem 1rem; border-radius: 40px; font-weight: 600; border-bottom: none !important; }
-    .learning-link:hover { background: #d4a52e; color: var(--primary-dark); }
-    .user-badge { background: rgba(255,255,255,0.12); padding: 0.4rem 1rem; border-radius: 40px; display: flex; align-items: center; gap: 8px; cursor: pointer; transition: background 0.2s; position: relative; border: none; font: inherit; color: inherit; }
-    .user-badge:hover { background: rgba(255,255,255,0.2); }
-    .user-badge .avatar-sm { width: 32px; height: 32px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 0.8rem; text-transform: uppercase; }
-    .user-badge .user-name { color: #fff; font-weight: 500; font-size: 0.9rem; }
-    .logout-tip { display: none; position: absolute; top: 110%; right: 0; background: #fff; color: var(--gray-800); padding: 0.5rem 1rem; border-radius: var(--radius-sm); box-shadow: var(--shadow); font-size: 0.8rem; white-space: nowrap; border: 1px solid var(--gray-200); }
-    .user-badge:hover .logout-tip { display: block; }
+    .navbar {
+      background: var(--primary);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 700;
+      cursor: default;
+    }
+    .logo i {
+      font-size: 1.8rem;
+      color: var(--accent);
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav-link {
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0.4rem 0;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      cursor: pointer;
+      font-size: 0.9rem;
+      text-decoration: none;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+    }
+    .nav-link i {
+      font-size: 1.2rem;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+      color: #fff;
+      border-bottom-color: var(--accent);
+    }
+    .learning-link {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-weight: 600;
+      border-bottom: none !important;
+    }
+    .learning-link:hover {
+      background: #d4a52e;
+      color: var(--primary-dark);
+    }
+    .user-badge {
+      background: rgba(255, 255, 255, 0.12);
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+      position: relative;
+      border: none;
+      font: inherit;
+      color: inherit;
+    }
+    .user-badge:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .user-badge .avatar-sm {
+      width: 32px;
+      height: 32px;
+      background: var(--secondary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: bold;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+    .user-badge .user-name {
+      color: #fff;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+    .logout-tip {
+      display: none;
+      position: absolute;
+      top: 110%;
+      right: 0;
+      background: #fff;
+      color: var(--gray-800);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      font-size: 0.8rem;
+      white-space: nowrap;
+      border: 1px solid var(--gray-200);
+    }
+    .user-badge:hover .logout-tip {
+      display: block;
+    }
     /* MAIN */
-    .main-content { padding: 2rem; }
-    .page { display: none; animation: fadeIn 0.25s ease; }
-    .page.active-page { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .main-content {
+      padding: 2rem;
+    }
+    .page {
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+    .page.active-page {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
     /* CARDS & GRIDS */
-    .grid-2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px,1fr)); gap: 1.5rem; }
-    .grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 1.5rem; }
-    .grid-4 { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 1rem; }
-    .card { background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow); overflow: hidden; border: 1px solid var(--gray-200); transition: transform 0.2s; }
-    .card:hover { transform: translateY(-3px); }
-    .card-header { padding: 1rem 1.2rem 0; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
-    .card-body { padding: 1rem 1.2rem 1.2rem; }
-    .tag { background: var(--gray-100); padding: 0.2rem 0.7rem; border-radius: 20px; font-size: 0.75rem; }
-    .badge { font-size: 0.7rem; padding: 0.15rem 0.6rem; border-radius: 12px; font-weight: 500; }
-    .badge-success { background: var(--secondary-light); color: var(--teal); }
-    .badge-warning { background: #FFF3CD; color: #856404; }
-    .badge-danger { background: #FCEBEB; color: #501313; }
-    .btn { padding: 0.5rem 1rem; border-radius: 40px; border: none; font-weight: 500; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; background: var(--gray-100); color: var(--gray-800); font-size: 0.9rem; font-family: inherit; text-decoration: none; }
-    .btn-primary { background: var(--primary); color: #fff; } .btn-primary:hover { background: var(--primary-dark); }
-    .btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); } .btn-outline:hover { background: var(--primary); color: #fff; }
-    .btn-secondary { background: var(--secondary); color: #fff; } .btn-secondary:hover { background: #21867a; }
-    .btn-sm { padding: 0.3rem 0.8rem; font-size: 0.8rem; }
-    .btn-danger { background: #dc3545; color: #fff; } .btn-danger:hover { background: #c82333; }
-    .btn-accent { background: var(--accent); color: var(--primary); } .btn-accent:hover { background: #d4a52e; }
-    .btn-success { background: var(--secondary); color: #fff; } .btn-success:hover { background: #1a7a6e; }
-    .btn-full { width: 100%; justify-content: center; }
-    .search-bar { display: flex; gap: 0.5rem; margin-bottom: 2rem; background: #fff; padding: 0.5rem 1rem; border-radius: 60px; border: 1px solid var(--gray-200); max-width: 500px; align-items: center; }
-    .search-bar input { flex: 1; border: none; padding: 0.5rem 0; outline: none; background: transparent; font-size: 0.95rem; font-family: inherit; }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+    }
+    .card-header {
+      padding: 1rem 1.2rem 0;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card-body {
+      padding: 1rem 1.2rem 1.2rem;
+    }
+    .tag {
+      background: var(--gray-100);
+      padding: 0.2rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+    }
+    .badge {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.6rem;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+    .badge-success {
+      background: var(--secondary-light);
+      color: var(--teal);
+    }
+    .badge-warning {
+      background: #FFF3CD;
+      color: #856404;
+    }
+    .badge-danger {
+      background: #FCEBEB;
+      color: #501313;
+    }
+    .btn {
+      padding: 0.5rem 1rem;
+      border-radius: 40px;
+      border: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--gray-100);
+      color: var(--gray-800);
+      font-size: 0.9rem;
+      font-family: inherit;
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+    .btn-outline:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-secondary {
+      background: var(--secondary);
+      color: #fff;
+    }
+    .btn-secondary:hover {
+      background: #21867a;
+    }
+    .btn-sm {
+      padding: 0.3rem 0.8rem;
+      font-size: 0.8rem;
+    }
+    .btn-danger {
+      background: #dc3545;
+      color: #fff;
+    }
+    .btn-danger:hover {
+      background: #c82333;
+    }
+    .btn-accent {
+      background: var(--accent);
+      color: var(--primary);
+    }
+    .btn-accent:hover {
+      background: #d4a52e;
+    }
+    .btn-success {
+      background: var(--secondary);
+      color: #fff;
+    }
+    .btn-success:hover {
+      background: #1a7a6e;
+    }
+    .btn-full {
+      width: 100%;
+      justify-content: center;
+    }
+    .search-bar {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      background: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 60px;
+      border: 1px solid var(--gray-200);
+      max-width: 500px;
+      align-items: center;
+    }
+    .search-bar input {
+      flex: 1;
+      border: none;
+      padding: 0.5rem 0;
+      outline: none;
+      background: transparent;
+      font-size: 0.95rem;
+      font-family: inherit;
+    }
     /* MODALS */
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 1000; }
-    .modal-content { background: #fff; max-width: 550px; width: 90%; border-radius: var(--radius-lg); padding: 1.5rem; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
-    .form-group { margin-bottom: 1rem; } .form-group label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 0.3rem; }
-    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.6rem 0.8rem; border: 1px solid var(--gray-200); border-radius: var(--radius-sm); font-family: inherit; font-size: 0.95rem; }
-    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--secondary); box-shadow: 0 0 0 3px rgba(42,157,143,0.15); }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: #fff;
+      max-width: 550px;
+      width: 90%;
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.15);
+    }
     /* AUTH MODAL */
-    #authModal .modal-content { max-width: 400px; }
-    #authModal .auth-header { text-align: center; margin-bottom: 1.8rem; }
-    #authModal .auth-header i { font-size: 2.8rem; color: var(--accent); background: var(--primary); padding: 0.5rem; border-radius: 50%; margin-bottom: 0.5rem; }
-    #authModal .auth-header h2 { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
-    #authModal .auth-header p { color: var(--gray-600); font-size: 0.9rem; margin-top: 0.2rem; }
-    #authModal .toggle-text { text-align: center; margin-top: 1.2rem; font-size: 0.9rem; color: var(--gray-600); }
-    #authModal .toggle-text a { color: var(--secondary); font-weight: 500; cursor: pointer; text-decoration: none; }
-    #authModal .toggle-text a:hover { text-decoration: underline; }
-    #authModal .btn-auth { width: 100%; padding: 0.7rem; background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-top: 0.5rem; font-family: inherit; }
-    #authModal .btn-auth:hover { background: var(--primary-dark); }
+    #authModal .modal-content {
+      max-width: 400px;
+    }
+    #authModal .auth-header {
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+    #authModal .auth-header i {
+      font-size: 2.8rem;
+      color: var(--accent);
+      background: var(--primary);
+      padding: 0.5rem;
+      border-radius: 50%;
+      margin-bottom: 0.5rem;
+    }
+    #authModal .auth-header h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    #authModal .auth-header p {
+      color: var(--gray-600);
+      font-size: 0.9rem;
+      margin-top: 0.2rem;
+    }
+    #authModal .toggle-text {
+      text-align: center;
+      margin-top: 1.2rem;
+      font-size: 0.9rem;
+      color: var(--gray-600);
+    }
+    #authModal .toggle-text a {
+      color: var(--secondary);
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    #authModal .toggle-text a:hover {
+      text-decoration: underline;
+    }
+    #authModal .btn-auth {
+      width: 100%;
+      padding: 0.7rem;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+      font-family: inherit;
+    }
+    #authModal .btn-auth:hover {
+      background: var(--primary-dark);
+    }
     /* TOAST */
-    .toast-container { position: fixed; bottom: 30px; right: 30px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; max-width: 380px; width: 100%; }
-    .toast { background: var(--primary); color: #fff; padding: 14px 20px; border-radius: var(--radius-sm); font-size: 0.9rem; box-shadow: 0 8px 30px rgba(0,0,0,0.18); display: flex; align-items: center; gap: 12px; animation: slideUp 0.3s ease; border-left: 4px solid var(--accent); }
-    .toast i { font-size: 1.2rem; flex-shrink: 0; color: var(--accent); }
-    .toast .toast-msg { flex: 1; }
-    .toast .toast-close { cursor: pointer; opacity: 0.6; font-size: 1rem; transition: opacity 0.2s; background: none; border: none; color: #fff; }
-    .toast .toast-close:hover { opacity: 1; }
-    .toast-success { border-left-color: var(--secondary); } .toast-success i { color: var(--secondary); }
-    .toast-error { border-left-color: #dc3545; } .toast-error i { color: #dc3545; }
-    @keyframes slideUp { from { opacity: 0; transform: translateY(20px) scale(0.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    .toast-container {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 380px;
+      width: 100%;
+    }
+    .toast {
+      background: var(--primary);
+      color: #fff;
+      padding: 14px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: slideUp 0.3s ease;
+      border-left: 4px solid var(--accent);
+    }
+    .toast i {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      color: var(--accent);
+    }
+    .toast .toast-msg {
+      flex: 1;
+    }
+    .toast .toast-close {
+      cursor: pointer;
+      opacity: 0.6;
+      font-size: 1rem;
+      transition: opacity 0.2s;
+      background: none;
+      border: none;
+      color: #fff;
+    }
+    .toast .toast-close:hover {
+      opacity: 1;
+    }
+    .toast-success {
+      border-left-color: var(--secondary);
+    }
+    .toast-success i {
+      color: var(--secondary);
+    }
+    .toast-error {
+      border-left-color: #dc3545;
+    }
+    .toast-error i {
+      color: #dc3545;
+    }
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
     /* HERO */
-    .hero-section { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); border-radius: var(--radius-lg); padding: 3rem 2.5rem; margin-bottom: 2.5rem; color: #fff; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem; position: relative; overflow: hidden; }
-    .hero-section::after { content: ''; position: absolute; top: -50%; right: -20%; width: 400px; height: 400px; background: rgba(233,196,106,0.08); border-radius: 50%; }
-    .hero-section::before { content: ''; position: absolute; bottom: -40%; left: -10%; width: 300px; height: 300px; background: rgba(42,157,143,0.10); border-radius: 50%; }
-    .hero-text { flex: 1; min-width: 260px; position: relative; z-index: 1; }
-    .hero-text h1 { font-size: 2.4rem; font-weight: 700; line-height: 1.2; margin-bottom: 0.5rem; }
-    .hero-text h1 span { color: var(--accent); }
-    .hero-text p { font-size: 1.1rem; opacity: 0.85; max-width: 520px; margin-bottom: 1.5rem; line-height: 1.6; }
-    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .hero-actions .btn { padding: 0.7rem 1.8rem; font-size: 1rem; }
-    .hero-stats { display: flex; gap: 2.5rem; position: relative; z-index: 1; }
-    .hero-stats .stat { text-align: center; }
-    .hero-stats .stat .num { font-size: 2rem; font-weight: 700; color: var(--accent); }
-    .hero-stats .stat .lbl { font-size: 0.8rem; opacity: 0.7; }
+    .hero-section {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2.5rem;
+      margin-bottom: 2.5rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-section::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: rgba(233, 196, 106, 0.08);
+      border-radius: 50%;
+    }
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      bottom: -40%;
+      left: -10%;
+      width: 300px;
+      height: 300px;
+      background: rgba(42, 157, 143, 0.10);
+      border-radius: 50%;
+    }
+    .hero-text {
+      flex: 1;
+      min-width: 260px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-text h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .hero-text h1 span {
+      color: var(--accent);
+    }
+    .hero-text p {
+      font-size: 1.1rem;
+      opacity: 0.85;
+      max-width: 520px;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .hero-actions .btn {
+      padding: 0.7rem 1.8rem;
+      font-size: 1rem;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-stats .stat {
+      text-align: center;
+    }
+    .hero-stats .stat .num {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .hero-stats .stat .lbl {
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
     /* QUICK CARDS */
-    .quick-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 1.2rem; margin-bottom: 1.5rem; }
-    .quick-card { padding: 1.5rem; text-align: center; cursor: pointer; background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow); border: 1px solid var(--gray-200); transition: transform 0.2s; }
-    .quick-card:hover { transform: translateY(-3px); }
-    .quick-card i { font-size: 2.4rem; color: var(--secondary); }
-    .quick-card h4 { margin: 0.5rem 0 0.2rem; }
-    .quick-card p { font-size: 0.85rem; color: var(--gray-600); }
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+    .quick-card {
+      padding: 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--gray-200);
+      transition: transform 0.2s;
+    }
+    .quick-card:hover {
+      transform: translateY(-3px);
+    }
+    .quick-card i {
+      font-size: 2.4rem;
+      color: var(--secondary);
+    }
+    .quick-card h4 {
+      margin: 0.5rem 0 0.2rem;
+    }
+    .quick-card p {
+      font-size: 0.85rem;
+      color: var(--gray-600);
+    }
     /* FOOTER */
-    .footer { text-align: center; padding: 2rem; color: var(--gray-600); border-top: 1px solid var(--gray-200); margin-top: 2rem; font-size: 0.9rem; }
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--gray-600);
+      border-top: 1px solid var(--gray-200);
+      margin-top: 2rem;
+      font-size: 0.9rem;
+    }
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      .navbar { flex-direction: column; padding: 1rem; }
-      .main-content { padding: 1rem; }
-      .hero-section { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
-      .hero-text h1 { font-size: 1.8rem; }
-      .hero-stats { gap: 1.5rem; justify-content: center; }
-      .hero-actions { justify-content: center; }
-      .grid-2, .grid-3 { grid-template-columns: 1fr; }
-      .grid-4 { grid-template-columns: 1fr 1fr; }
-      .nav-links { justify-content: center; gap: 0.8rem; }
-      .nav-link { font-size: 0.8rem; }
-      .toast-container { right: 16px; bottom: 16px; max-width: calc(100% - 32px); }
-      .quick-grid { grid-template-columns: 1fr 1fr; }
+      .navbar {
+        flex-direction: column;
+        padding: 1rem;
+      }
+      .main-content {
+        padding: 1rem;
+      }
+      .hero-section {
+        padding: 2rem 1.5rem;
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero-text h1 {
+        font-size: 1.8rem;
+      }
+      .hero-stats {
+        gap: 1.5rem;
+        justify-content: center;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+      .grid-2,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+      .grid-4 {
+        grid-template-columns: 1fr 1fr;
+      }
+      .nav-links {
+        justify-content: center;
+        gap: 0.8rem;
+      }
+      .nav-link {
+        font-size: 0.8rem;
+      }
+      .toast-container {
+        right: 16px;
+        bottom: 16px;
+        max-width: calc(100% - 32px);
+      }
+      .quick-grid {
+        grid-template-columns: 1fr 1fr;
+      }
     }
     @media (max-width: 480px) {
-      .hero-text h1 { font-size: 1.5rem; }
-      .hero-stats .stat .num { font-size: 1.5rem; }
-      .modal-content { padding: 1rem; }
-      #authModal .auth-header i { font-size: 2.2rem; }
-      .quick-grid { grid-template-columns: 1fr; }
+      .hero-text h1 {
+        font-size: 1.5rem;
+      }
+      .hero-stats .stat .num {
+        font-size: 1.5rem;
+      }
+      .modal-content {
+        padding: 1rem;
+      }
+      #authModal .auth-header i {
+        font-size: 2.2rem;
+      }
+      .quick-grid {
+        grid-template-columns: 1fr;
+      }
     }
     /* OPP CARD */
-    .opp-card .opp-type { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600; padding: 0.1rem 0.6rem; border-radius: 10px; }
-    .opp-card .opp-type.intern { background: #E1F5EE; color: #0F6E56; }
-    .opp-card .opp-type.job { background: #E8EBF4; color: #1E3A5F; }
-    .opp-card .opp-type.gig { background: #FFF3CD; color: #856404; }
+    .opp-card .opp-type {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+      padding: 0.1rem 0.6rem;
+      border-radius: 10px;
+    }
+    .opp-card .opp-type.intern {
+      background: #E1F5EE;
+      color: #0F6E56;
+    }
+    .opp-card .opp-type.job {
+      background: #E8EBF4;
+      color: #1E3A5F;
+    }
+    .opp-card .opp-type.gig {
+      background: #FFF3CD;
+      color: #856404;
+    }
     /* TALENT */
-    .talent-rank { display: flex; align-items: center; gap: 0.8rem; padding: 0.6rem 0; border-bottom: 0.5px solid var(--gray-200); }
-    .talent-rank .rank-num { font-weight: 700; color: var(--primary); width: 28px; text-align: center; }
-    .talent-rank .rank-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; color: #fff; font-size: 0.75rem; }
+    .talent-rank {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.6rem 0;
+      border-bottom: 0.5px solid var(--gray-200);
+    }
+    .talent-rank .rank-num {
+      font-weight: 700;
+      color: var(--primary);
+      width: 28px;
+      text-align: center;
+    }
+    .talent-rank .rank-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #fff;
+      font-size: 0.75rem;
+    }
     /* POST CARD */
-    .post-card { background: var(--white); border-radius: var(--radius-md); border: 1px solid var(--gray-200); padding: 1rem 1.2rem; margin-bottom: 0.8rem; }
-    .post-card .post-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem; }
-    .post-card .post-header .av { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; color: #fff; font-size: 0.8rem; flex-shrink: 0; }
-    .post-card .post-header .post-author { font-weight: 600; font-size: 0.9rem; }
-    .post-card .post-header .post-time { font-size: 0.75rem; color: var(--gray-600); }
-    .post-card .post-body { font-size: 0.95rem; margin-bottom: 0.8rem; }
-    .post-card .post-actions { display: flex; gap: 1rem; font-size: 0.8rem; color: var(--gray-600); }
-    .post-card .post-actions span { cursor: pointer; display: flex; align-items: center; gap: 4px; }
-    .post-card .post-actions span:hover { color: var(--primary); }
+    .post-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-200);
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.8rem;
+    }
+    .post-card .post-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .post-card .post-header .av {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #fff;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+    .post-card .post-header .post-author {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .post-card .post-header .post-time {
+      font-size: 0.75rem;
+      color: var(--gray-600);
+    }
+    .post-card .post-body {
+      font-size: 0.95rem;
+      margin-bottom: 0.8rem;
+    }
+    .post-card .post-actions {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.8rem;
+      color: var(--gray-600);
+    }
+    .post-card .post-actions span {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .post-card .post-actions span:hover {
+      color: var(--primary);
+    }
     /* MENTOR CARD */
-    .mentor-card .avatar-lg { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 600; color: #fff; flex-shrink: 0; }
-    .mentor-card .expertise-tag { display: inline-block; background: var(--gray-100); padding: 0.1rem 0.6rem; border-radius: 12px; font-size: 0.7rem; margin: 0.15rem 0.1rem; }
-    .auth-prompt { display: inline; color: var(--secondary); font-weight: 500; cursor: pointer; border-bottom: 1px dashed var(--secondary); transition: all 0.2s; background: none; border-top: none; border-left: none; border-right: none; padding: 0; font: inherit; }
-    .auth-prompt:hover { color: var(--primary-dark); border-bottom-color: var(--primary-dark); }
-    .section-title { font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; color: var(--primary); }
-    .section-sub { color: var(--gray-600); margin-bottom: 1.5rem; }
+    .mentor-card .avatar-lg {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .mentor-card .expertise-tag {
+      display: inline-block;
+      background: var(--gray-100);
+      padding: 0.1rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      margin: 0.15rem 0.1rem;
+    }
+    .auth-prompt {
+      display: inline;
+      color: var(--secondary);
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 1px dashed var(--secondary);
+      transition: all 0.2s;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      padding: 0;
+      font: inherit;
+    }
+    .auth-prompt:hover {
+      color: var(--primary-dark);
+      border-bottom-color: var(--primary-dark);
+    }
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    .section-sub {
+      color: var(--gray-600);
+      margin-bottom: 1.5rem;
+    }
+    /* ===== MENTOR APPLICATION STATUS ===== */
+    .mentor-status-badge {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-weight: 500;
+      display: inline-block;
+    }
+    .mentor-status-badge.pending {
+      background: #FFF3CD;
+      color: #856404;
+    }
+    .mentor-status-badge.approved {
+      background: var(--secondary-light);
+      color: var(--teal);
+    }
+    .mentor-status-badge.rejected {
+      background: #FCEBEB;
+      color: #501313;
+    }
+    .mentor-status-badge.none {
+      background: var(--gray-100);
+      color: var(--gray-600);
+    }
   </style>
 </head>
 <body>
+
   <div class="app-container">
+    <!-- NAVBAR -->
     <nav class="navbar">
       <div class="logo"><i class="ti ti-bridge"></i><span>SkillBridge Africa</span></div>
       <div class="nav-links">
@@ -236,7 +950,10 @@
       <div id="mentors-page" class="page">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.8rem;margin-bottom:1.5rem;">
           <h2>Mentorship &amp; Expert advice</h2>
-          <button class="btn btn-outline" id="becomeMentorBtn"><i class="ti ti-star"></i> Become a mentor</button>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="btn btn-outline" id="becomeMentorBtn"><i class="ti ti-star"></i> Become a mentor</button>
+            <span id="mentorStatusBadge" class="mentor-status-badge none" style="align-self:center;">Not applied</span>
+          </div>
         </div>
         <div class="search-bar"><i class="ti ti-search"></i><input type="text" id="mentorSearch" placeholder="Find mentor by industry"></div>
         <div id="mentors-list" class="grid-3"></div>
@@ -258,7 +975,7 @@
         <div id="companies-list" class="grid-2"></div>
       </div>
 
-      <!-- YOUTH PLATFORM -->
+      <!-- YOUTH PLATFORM LAUNCHER -->
       <div id="youth-page" class="page">
         <div style="text-align:center;padding:2rem 0;">
           <i class="ti ti-school" style="font-size:4rem;color:var(--secondary);"></i>
@@ -276,7 +993,7 @@
   <!-- TOAST -->
   <div class="toast-container" id="toastContainer"></div>
 
-  <!-- AUTH MODAL -->
+  <!-- ===== AUTH MODAL (Unified Login / Signup) ===== -->
   <div id="authModal" class="modal">
     <div class="modal-content">
       <div class="auth-header">
@@ -284,16 +1001,36 @@
         <h2>Welcome to SkillBridge</h2>
         <p>Sign in to access all features</p>
       </div>
+      <!-- Login Form -->
       <form id="login-form">
-        <div class="form-group"><label>Email</label><input type="email" id="login-email" placeholder="you@example.com" required></div>
-        <div class="form-group"><label>Password</label><input type="password" id="login-password" placeholder="••••••••" required></div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="login-email" placeholder="you@example.com" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password">
+        </div>
         <button type="submit" class="btn-auth">Log In</button>
         <p class="toggle-text">Don't have an account? <a href="#" onclick="showSignup()">Sign Up</a></p>
+        <p class="toggle-text" style="margin-top:0.5rem;font-size:0.8rem;color:var(--gray-600);">
+          <i class="ti ti-info-circle"></i> Admin: m.byusa@alustudent.com
+        </p>
       </form>
+      <!-- Signup Form -->
       <form id="signup-form" style="display:none;">
-        <div class="form-group"><label>Full Name</label><input type="text" id="signup-name" placeholder="Amina M." required></div>
-        <div class="form-group"><label>Email</label><input type="email" id="signup-email" placeholder="you@example.com" required></div>
-        <div class="form-group"><label>Password (min 6 chars)</label><input type="password" id="signup-password" placeholder="••••••••" minlength="6" required></div>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="signup-name" placeholder="Amina M." required autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="signup-email" placeholder="you@example.com" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label>Password (min 6 chars)</label>
+          <input type="password" id="signup-password" placeholder="••••••••" minlength="6" required autocomplete="new-password">
+        </div>
         <button type="submit" class="btn-auth">Create Account</button>
         <p class="toggle-text">Already have an account? <a href="#" onclick="showLogin()">Log In</a></p>
       </form>
@@ -376,94 +1113,223 @@
 
   <script>
     // ============================================================
-    //  AUTH SYSTEM
+    //  UNIFIED AUTH SYSTEM – works for all user types
+    //  Users: youths, mentors (approved/pending), admin
     // ============================================================
-    function getUsers() { return JSON.parse(localStorage.getItem('sb_users')) || []; }
-    function saveUsers(users) { localStorage.setItem('sb_users', JSON.stringify(users)); }
-    function getSession() { return JSON.parse(localStorage.getItem('sb_auth_user')); }
-    function setSession(user) { localStorage.setItem('sb_auth_user', JSON.stringify(user)); }
-    function clearSession() { localStorage.removeItem('sb_auth_user'); }
-    function isValidEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
-    function showSignup() { document.getElementById('login-form').style.display = 'none'; document.getElementById('signup-form').style.display = 'block'; }
-    function showLogin() { document.getElementById('login-form').style.display = 'block'; document.getElementById('signup-form').style.display = 'none'; }
+
+    // ----- Core Auth Functions -----
+    function getUsers() {
+      return JSON.parse(localStorage.getItem('sb_users')) || [];
+    }
+
+    function saveUsers(users) {
+      localStorage.setItem('sb_users', JSON.stringify(users));
+    }
+
+    function getSession() {
+      return JSON.parse(localStorage.getItem('sb_auth_user'));
+    }
+
+    function setSession(user) {
+      localStorage.setItem('sb_auth_user', JSON.stringify(user));
+    }
+
+    function clearSession() {
+      localStorage.removeItem('sb_auth_user');
+    }
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    // ----- UI Toggle for Auth Modal -----
+    function showSignup() {
+      document.getElementById('login-form').style.display = 'none';
+      document.getElementById('signup-form').style.display = 'block';
+    }
+
+    function showLogin() {
+      document.getElementById('login-form').style.display = 'block';
+      document.getElementById('signup-form').style.display = 'none';
+    }
     window.showSignup = showSignup;
     window.showLogin = showLogin;
 
+    // ----- Toast Notifications -----
     function showToast(msg, type) {
       type = type || 'info';
       const container = document.getElementById('toastContainer');
       const toast = document.createElement('div');
       toast.className = 'toast toast-' + type;
       const icon = type === 'success' ? 'ti-check-circle' : type === 'error' ? 'ti-alert-circle' : 'ti-info-circle';
-      toast.innerHTML = `<i class="ti ${icon}"></i><span class="toast-msg">${msg}</span><button class="toast-close" onclick="this.parentElement.remove()">&times;</button>`;
+      toast.innerHTML =
+        `<i class="ti ${icon}"></i><span class="toast-msg">${msg}</span><button class="toast-close" onclick="this.parentElement.remove()">&times;</button>`;
       container.appendChild(toast);
       setTimeout(() => { if (toast.parentElement) toast.remove(); }, 3500);
     }
 
+    // ----- Toggle Auth Modal -----
     function toggleAuthModal() {
       const modal = document.getElementById('authModal');
-      modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
-      if (modal.style.display === 'flex') showLogin();
+      if (modal.style.display === 'flex') {
+        modal.style.display = 'none';
+      } else {
+        modal.style.display = 'flex';
+        showLogin();
+      }
     }
     window.toggleAuthModal = toggleAuthModal;
 
+    // ----- Get Mentor Application Status for current user -----
+    function getMentorStatus(email) {
+      const mentors = JSON.parse(localStorage.getItem('sb_mentors')) || [];
+      const found = mentors.find(m => m.email === email);
+      if (!found) return 'none';
+      return found.approved === true ? 'approved' : found.approved === false ? 'rejected' : 'pending';
+    }
+
+    // ----- Update Mentor Status Badge -----
+    function updateMentorStatusBadge() {
+      const user = getSession();
+      const badge = document.getElementById('mentorStatusBadge');
+      if (!badge) return;
+      if (!user) {
+        badge.textContent = 'Not applied';
+        badge.className = 'mentor-status-badge none';
+        return;
+      }
+      const status = getMentorStatus(user.email);
+      const labels = {
+        'none': 'Not applied',
+        'pending': '⏳ Pending Approval',
+        'approved': '✅ Approved Mentor',
+        'rejected': '❌ Rejected'
+      };
+      badge.textContent = labels[status] || 'Not applied';
+      badge.className = 'mentor-status-badge ' + status;
+    }
+
+    // ============================================================
+    //  LOGIN HANDLER
+    // ============================================================
     document.getElementById('login-form').addEventListener('submit', function(e) {
       e.preventDefault();
       const email = document.getElementById('login-email').value.trim();
       const password = document.getElementById('login-password').value.trim();
-      if (!isValidEmail(email)) { showToast('Please enter a valid email.', 'error'); return; }
+
+      if (!isValidEmail(email)) {
+        showToast('Please enter a valid email address.', 'error');
+        return;
+      }
+
       const users = getUsers();
       const user = users.find(u => u.email === email && u.password === password);
-      if (user) {
-        setSession({ email: user.email, name: user.name, role: user.role || 'youth' });
-        if (user.role === 'admin') {
-          document.getElementById('authModal').style.display = 'none';
-          showToast('Welcome Admin! Redirecting to dashboard...', 'success');
-          setTimeout(() => { window.location.href = 'admin.html'; }, 600);
-          return;
-        }
-        updateUI();
-        document.getElementById('authModal').style.display = 'none';
-        showToast('Welcome back, ' + user.name + '!', 'success');
-      } else {
+
+      if (!user) {
         showToast('Invalid email or password.', 'error');
+        return;
       }
+
+      // Set session
+      setSession({ email: user.email, name: user.name, role: user.role || 'youth' });
+
+      // Close modal
+      document.getElementById('authModal').style.display = 'none';
+
+      // --- Role-based redirect ---
+      if (user.role === 'admin') {
+        showToast('Welcome Admin! Redirecting to dashboard...', 'success');
+        setTimeout(() => { window.location.href = 'admin.html'; }, 600);
+        return;
+      }
+
+      // Check if user is an approved mentor
+      const mentorStatus = getMentorStatus(user.email);
+      if (mentorStatus === 'approved') {
+        showToast('Welcome Mentor! Redirecting to mentor platform...', 'success');
+        setTimeout(() => { window.location.href = 'mentor.html'; }, 600);
+        return;
+      }
+
+      // Youth or pending mentor — stay on homepage with full access
+      updateUI();
+      updateMentorStatusBadge();
+      showToast('Welcome back, ' + user.name + '!', 'success');
     });
 
+    // ============================================================
+    //  SIGNUP HANDLER
+    // ============================================================
     document.getElementById('signup-form').addEventListener('submit', function(e) {
       e.preventDefault();
+
       const name = document.getElementById('signup-name').value.trim();
       const email = document.getElementById('signup-email').value.trim();
       const password = document.getElementById('signup-password').value.trim();
-      if (!name) { showToast('Please enter your name.', 'error'); return; }
-      if (!isValidEmail(email)) { showToast('Please enter a valid email.', 'error'); return; }
-      if (password.length < 6) { showToast('Password must be at least 6 characters.', 'error'); return; }
+
+      if (!name) {
+        showToast('Please enter your full name.', 'error');
+        return;
+      }
+      if (!isValidEmail(email)) {
+        showToast('Please enter a valid email address.', 'error');
+        return;
+      }
+      if (password.length < 6) {
+        showToast('Password must be at least 6 characters.', 'error');
+        return;
+      }
+
       const users = getUsers();
-      if (users.find(u => u.email === email)) { showToast('Email already registered.', 'error'); return; }
-      if (email === 'm.byusa@alustudent.com') { showToast('This email is reserved for system administration.', 'error'); return; }
+
+      // Check if email already registered
+      if (users.find(u => u.email === email)) {
+        showToast('Email already registered. Please log in.', 'error');
+        return;
+      }
+
+      // Block admin signup from public form
+      if (email === 'm.byusa@alustudent.com') {
+        showToast('This email is reserved for system administration.', 'error');
+        return;
+      }
+
+      // Create youth account
       users.push({ name, email, password, role: 'youth' });
       saveUsers(users);
+
+      // Auto-login
       setSession({ email, name, role: 'youth' });
-      updateUI();
       document.getElementById('authModal').style.display = 'none';
+
+      updateUI();
+      updateMentorStatusBadge();
       showToast('Account created! Welcome, ' + name, 'success');
     });
 
+    // ============================================================
+    //  LOGOUT
+    // ============================================================
     function logout() {
       if (confirm('Are you sure you want to logout?')) {
         clearSession();
         updateUI();
+        updateMentorStatusBadge();
         switchPage('home');
         showToast('Logged out successfully.', 'info');
       }
     }
     window.logout = logout;
 
+    // ============================================================
+    //  UI UPDATE (Navbar user badge)
+    // ============================================================
     function updateUI() {
       const user = getSession();
       const avatar = document.getElementById('userAvatar');
       const nameSpan = document.getElementById('userName');
       const logoutTip = document.getElementById('logoutTip');
+
       if (user) {
         avatar.innerText = user.name.charAt(0).toUpperCase();
         nameSpan.innerText = user.name;
@@ -477,6 +1343,9 @@
       }
     }
 
+    // ============================================================
+    //  REQUIRE AUTH (guard for actions)
+    // ============================================================
     function requireAuth() {
       if (getSession()) return true;
       showToast('Please log in to perform this action.', 'error');
@@ -484,35 +1353,128 @@
       return false;
     }
 
-    // DATA STORAGE
+    // ============================================================
+    //  BECOME A MENTOR – Submit application to sb_mentors
+    // ============================================================
+    document.getElementById('becomeMentorBtn').addEventListener('click', function() {
+      if (!requireAuth()) return;
+
+      const user = getSession();
+      if (!user) return;
+
+      // Check if already applied
+      const existing = JSON.parse(localStorage.getItem('sb_mentors') || []).find(m => m.email === user.email);
+      if (existing) {
+        const status = existing.approved === true ? 'approved' : existing.approved === false ? 'rejected' :
+        'pending';
+        const msgs = {
+          'pending': 'You already have a pending mentor application. Please wait for admin approval.',
+          'approved': 'You are already an approved mentor! 🎉',
+          'rejected': 'Your mentor application was rejected. Please contact admin for details.'
+        };
+        showToast(msgs[status] || 'You have already applied.', 'info');
+        updateMentorStatusBadge();
+        return;
+      }
+
+      // Collect mentor details
+      const fullName = prompt('Enter your full name:', user.name || '');
+      if (!fullName || !fullName.trim()) return;
+      const title = prompt('Enter your professional title (e.g., Senior Software Engineer):', '');
+      if (!title || !title.trim()) return;
+      const company = prompt('Enter your company / organisation:', '');
+      if (!company || !company.trim()) return;
+      const expertise = prompt('Enter your areas of expertise (comma separated):', 'Web Dev, Python');
+      if (!expertise || !expertise.trim()) return;
+      const about = prompt('Write a short bio about yourself:', 'Passionate about mentoring the next generation.');
+      if (!about || !about.trim()) return;
+
+      const newMentor = {
+        id: 'men_' + Date.now(),
+        name: fullName.trim(),
+        email: user.email,
+        title: title.trim(),
+        company: company.trim(),
+        expertise: expertise.split(',').map(s => s.trim()).filter(Boolean),
+        about: about.trim(),
+        avatar: fullName.trim().charAt(0).toUpperCase(),
+        approved: false, // pending admin approval
+        availability: {},
+        mentees: [],
+        createdAt: new Date().toISOString()
+      };
+
+      const mentors = JSON.parse(localStorage.getItem('sb_mentors') || '[]');
+      mentors.push(newMentor);
+      localStorage.setItem('sb_mentors', JSON.stringify(mentors));
+
+      // Update UI
+      updateMentorStatusBadge();
+      showToast('✅ Mentor application submitted! Await admin approval.', 'success');
+    });
+
+    // ============================================================
+    //  DATA STORAGE (shared across platforms)
+    // ============================================================
     const STORAGE = {
-      opportunities: 'sb_opps', talents: 'sb_talents', mentors: 'sb_mentors', companies: 'sb_companies',
-      posts: 'sb_posts', applications: 'sb_applications', messages: 'sb_messages',
-      mentorRequests: 'sb_mentor_reqs', mentorAvailability: 'sb_mentor_avail',
-      calendarEvents: 'sb_calendar_events', youthProfiles: 'sb_youth_profiles'
+      opportunities: 'sb_opps',
+      talents: 'sb_talents',
+      mentors: 'sb_mentors',
+      companies: 'sb_companies',
+      posts: 'sb_posts',
+      applications: 'sb_applications',
+      messages: 'sb_messages',
+      mentorRequests: 'sb_mentor_reqs',
+      mentorAvailability: 'sb_mentor_avail',
+      calendarEvents: 'sb_calendar_events',
+      youthProfiles: 'sb_youth_profiles'
     };
 
+    // Seed initial data if empty
     let opportunities = JSON.parse(localStorage.getItem(STORAGE.opportunities)) || [
-      { id:"opp1", title:"Frontend Developer (React)", type:"job", company:"Fintech Hub", location:"Lagos, Nigeria (Remote)", description:"Join a fast-growing fintech. 3+ years React experience.", postedBy:"TechRecruit", contactEmail:"recruit@fintech.ng", date:"2026-05-01", verified:true },
-      { id:"opp2", title:"UI/UX Design Intern", type:"internship", company:"Creative Labs", location:"Nairobi, Kenya", description:"3-month paid internship.", postedBy:"CreativeLabs", contactEmail:"hr@creativelabs.ke", date:"2026-05-03", verified:true },
-      { id:"opp3", title:"Build Landing Page for NGO", type:"gig", company:"Health Equity", location:"Remote", description:"Budget $200. Responsive design.", postedBy:"HealthEquity", contactEmail:"hello@healthequity.org", date:"2026-05-02", verified:true }
+      { id: "opp1", title: "Frontend Developer (React)", type: "job", company: "Fintech Hub",
+        location: "Lagos, Nigeria (Remote)", description: "Join a fast-growing fintech. 3+ years React experience.",
+        postedBy: "TechRecruit", contactEmail: "recruit@fintech.ng", date: "2026-05-01", verified: true },
+      { id: "opp2", title: "UI/UX Design Intern", type: "internship", company: "Creative Labs",
+        location: "Nairobi, Kenya", description: "3-month paid internship.", postedBy: "CreativeLabs",
+        contactEmail: "hr@creativelabs.ke", date: "2026-05-03", verified: true },
+      { id: "opp3", title: "Build Landing Page for NGO", type: "gig", company: "Health Equity", location: "Remote",
+        description: "Budget $200. Responsive design.", postedBy: "HealthEquity",
+        contactEmail: "hello@healthequity.org", date: "2026-05-02", verified: true }
     ];
     let talents = JSON.parse(localStorage.getItem(STORAGE.talents)) || [
-      { id:"tal1", name:"Chiamaka O.", skills:["React","Node.js"], location:"Lagos", avatar:"CO", bio:"Fullstack dev, 4 years exp.", email:"chiamaka@example.com", xp:320, completedCourses:3 },
-      { id:"tal2", name:"Kelvin M.", skills:["UI/UX","Figma"], location:"Nairobi", avatar:"KM", bio:"Product designer.", email:"kelvin@example.com", xp:280, completedCourses:2 },
-      { id:"tal3", name:"Fatima Z.", skills:["Digital Marketing","SEO"], location:"Casablanca", avatar:"FZ", bio:"Marketing specialist.", email:"fatima@example.com", xp:150, completedCourses:1 }
+      { id: "tal1", name: "Chiamaka O.", skills: ["React", "Node.js"], location: "Lagos", avatar: "CO",
+        bio: "Fullstack dev, 4 years exp.", email: "chiamaka@example.com", xp: 320, completedCourses: 3 },
+      { id: "tal2", name: "Kelvin M.", skills: ["UI/UX", "Figma"], location: "Nairobi", avatar: "KM",
+        bio: "Product designer.", email: "kelvin@example.com", xp: 280, completedCourses: 2 },
+      { id: "tal3", name: "Fatima Z.", skills: ["Digital Marketing", "SEO"], location: "Casablanca", avatar: "FZ",
+        bio: "Marketing specialist.", email: "fatima@example.com", xp: 150, completedCourses: 1 }
     ];
     let mentors = JSON.parse(localStorage.getItem(STORAGE.mentors)) || [
-      { id:"men1", name:"James Nkosi", title:"Senior Software Engineer", company:"Google", expertise:["Career Growth","System Design"], about:"10+ years exp.", avatar:"JN", email:"james@mentor.com", approved:true, availability:{Mon:['09:00-12:00','14:00-17:00'],Wed:['10:00-13:00']}, mentees:[] },
-      { id:"men2", name:"Dr. Grace Achieng", title:"Founder & CEO", company:"Women in STEM", expertise:["Entrepreneurship"], about:"Startup mentor.", avatar:"GA", email:"grace@mentor.com", approved:true, availability:{Tue:['10:00-14:00'],Thu:['09:00-12:00']}, mentees:[] }
+      { id: "men1", name: "James Nkosi", title: "Senior Software Engineer", company: "Google",
+        expertise: ["Career Growth", "System Design"], about: "10+ years exp.", avatar: "JN",
+        email: "james@mentor.com", approved: true, availability: { Mon: ['09:00-12:00', '14:00-17:00'], Wed: [
+            '10:00-13:00'
+          ] }, mentees: [] },
+      { id: "men2", name: "Dr. Grace Achieng", title: "Founder & CEO", company: "Women in STEM",
+        expertise: ["Entrepreneurship"], about: "Startup mentor.", avatar: "GA", email: "grace@mentor.com",
+        approved: true, availability: { Tue: ['10:00-14:00'], Thu: ['09:00-12:00'] }, mentees: [] }
     ];
     let companies = JSON.parse(localStorage.getItem(STORAGE.companies)) || [
-      { id:"comp1", name:"Andela", industry:"Tech Talent", location:"Pan-Africa", hiring:["Software Engineer","DevOps"], logo:"AN", description:"Global talent network.", website:"https://andela.com", fullDetails:"Andela connects top African developers with global companies." },
-      { id:"comp2", name:"Flutterwave", industry:"Fintech", location:"Lagos & Remote", hiring:["Product Manager","Backend"], logo:"FW", description:"Leading payments technology.", fullDetails:"Flutterwave simplifies payments for businesses." }
+      { id: "comp1", name: "Andela", industry: "Tech Talent", location: "Pan-Africa",
+        hiring: ["Software Engineer", "DevOps"], logo: "AN", description: "Global talent network.",
+        website: "https://andela.com", fullDetails: "Andela connects top African developers with global companies." },
+      { id: "comp2", name: "Flutterwave", industry: "Fintech", location: "Lagos & Remote",
+        hiring: ["Product Manager", "Backend"], logo: "FW", description: "Leading payments technology.",
+        fullDetails: "Flutterwave simplifies payments for businesses." }
     ];
     let communityPosts = JSON.parse(localStorage.getItem(STORAGE.posts)) || [
-      { id:"post1", author:"Amina M.", avatar:"AM", content:"Just landed a remote gig through SkillBridge! So grateful.", time:"2 hours ago", likes:12, likedBy:[], comments:[] },
-      { id:"post2", author:"TechBridge", avatar:"TB", content:"We're hiring 5 junior developers. DM for details.", time:"Yesterday", likes:32, likedBy:[], comments:[] }
+      { id: "post1", author: "Amina M.", avatar: "AM",
+        content: "Just landed a remote gig through SkillBridge! So grateful.",
+        time: "2 hours ago", likes: 12, likedBy: [], comments: [] },
+      { id: "post2", author: "TechBridge", avatar: "TB",
+        content: "We're hiring 5 junior developers. DM for details.",
+        time: "Yesterday", likes: 32, likedBy: [], comments: [] }
     ];
     let applications = JSON.parse(localStorage.getItem(STORAGE.applications)) || [];
     let contactMessages = JSON.parse(localStorage.getItem(STORAGE.messages)) || [];
@@ -545,110 +1507,124 @@
       if (menEl) menEl.textContent = mentors.filter(m => m.approved).length;
     }
 
-    // RENDER FUNCTIONS
+    // ============================================================
+    //  RENDER FUNCTIONS
+    // ============================================================
     function renderOpportunities(filter) {
       filter = filter || '';
-      let filtered = opportunities.filter(o => o.title.toLowerCase().includes(filter.toLowerCase()) || o.company.toLowerCase().includes(filter.toLowerCase()));
+      let filtered = opportunities.filter(o => o.title.toLowerCase().includes(filter.toLowerCase()) || o.company
+        .toLowerCase().includes(filter.toLowerCase()));
       const container = document.getElementById("opportunities-list");
       if (!filtered.length) {
-        container.innerHTML = "<div class='card' style='padding:2rem;text-align:center;'>No opportunities yet. <button class='btn btn-primary btn-sm' onclick='document.getElementById(\"postOppBtn\").click()'>Post one!</button></div>";
+        container.innerHTML =
+          "<div class='card' style='padding:2rem;text-align:center;'>No opportunities yet. <button class='btn btn-primary btn-sm' onclick='document.getElementById(\"postOppBtn\").click()'>Post one!</button></div>";
         return;
       }
       container.innerHTML = filtered.map(opp => `
-        <div class="card opp-card">
-          <div class="card-header">
-            <span><strong>${opp.title}</strong></span>
-            <span class="opp-type ${opp.type}">${opp.type==='job'?'Job':opp.type==='internship'?'Internship':'Gig'}</span>
-          </div>
-          <div class="card-body">
-            <p><i class="ti ti-building"></i> ${opp.company} | <i class="ti ti-map-pin"></i> ${opp.location}</p>
-            <p style="margin:10px 0;font-size:0.9rem;">${opp.description.substring(0,120)}${opp.description.length>120?'…':''}</p>
-            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">
-              <span style="font-size:0.75rem;color:var(--gray-600);">Posted by ${opp.postedBy} ${opp.verified?'<i class="ti ti-circle-check" style="color:var(--secondary)"></i>':''}</span>
-              <button class="btn btn-sm btn-primary apply-opp-btn" data-id="${opp.id}">Apply</button>
+            <div class="card opp-card">
+              <div class="card-header">
+                <span><strong>${opp.title}</strong></span>
+                <span class="opp-type ${opp.type}">${opp.type==='job'?'Job':opp.type==='internship'?'Internship':'Gig'}</span>
+              </div>
+              <div class="card-body">
+                <p><i class="ti ti-building"></i> ${opp.company} | <i class="ti ti-map-pin"></i> ${opp.location}</p>
+                <p style="margin:10px 0;font-size:0.9rem;">${opp.description.substring(0,120)}${opp.description.length>120?'…':''}</p>
+                <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">
+                  <span style="font-size:0.75rem;color:var(--gray-600);">Posted by ${opp.postedBy} ${opp.verified?'<i class="ti ti-circle-check" style="color:var(--secondary)"></i>':''}</span>
+                  <button class="btn btn-sm btn-primary apply-opp-btn" data-id="${opp.id}">Apply</button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      `).join("");
-      document.querySelectorAll(".apply-opp-btn").forEach(btn => btn.addEventListener("click", (e) => { if(!requireAuth()) return; openApplyModal(btn.dataset.id); }));
+          `).join("");
+      document.querySelectorAll(".apply-opp-btn").forEach(btn => btn.addEventListener("click", (e) => { if (!requireAuth())
+          return; openApplyModal(btn.dataset.id); }));
     }
 
     function renderTalent(filter) {
       filter = filter || '';
-      let filtered = talents.filter(t => t.name.toLowerCase().includes(filter.toLowerCase()) || t.skills.some(s => s.toLowerCase().includes(filter.toLowerCase())) || t.location.toLowerCase().includes(filter.toLowerCase()));
-      filtered.sort((a,b) => (b.xp||0) - (a.xp||0));
+      let filtered = talents.filter(t => t.name.toLowerCase().includes(filter.toLowerCase()) || t.skills.some(s => s
+        .toLowerCase().includes(filter.toLowerCase())) || t.location.toLowerCase().includes(filter.toLowerCase()));
+      filtered.sort((a, b) => (b.xp || 0) - (a.xp || 0));
       const container = document.getElementById("talent-list");
-      if (!filtered.length) { container.innerHTML = "<div class='card' style='padding:2rem;text-align:center;'>No talent found</div>"; return; }
+      if (!filtered.length) { container.innerHTML =
+        "<div class='card' style='padding:2rem;text-align:center;'>No talent found</div>"; return; }
       container.innerHTML = filtered.map((t, idx) => `
-        <div class="card">
-          <div class="card-header">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <span style="font-weight:700;color:var(--primary);font-size:0.8rem;">#${idx+1}</span>
-              <div class="avatar-sm" style="background:var(--secondary);">${t.avatar}</div>
-              <strong>${t.name}</strong>
+            <div class="card">
+              <div class="card-header">
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <span style="font-weight:700;color:var(--primary);font-size:0.8rem;">#${idx+1}</span>
+                  <div class="avatar-sm" style="background:var(--secondary);">${t.avatar}</div>
+                  <strong>${t.name}</strong>
+                </div>
+                <span class="badge badge-success">${t.xp||0} XP</span>
+              </div>
+              <div class="card-body">
+                <p><i class="ti ti-map-pin"></i> ${t.location}</p>
+                <div style="margin:6px 0;">${t.skills.map(s => `<span class="tag">${s}</span>`).join(' ')}</div>
+                <p style="margin:8px 0;font-size:0.9rem;">${t.bio}</p>
+                <p style="font-size:0.8rem;color:var(--gray-600);">${t.completedCourses||0} courses completed</p>
+                <button class="btn btn-sm btn-outline contact-talent" data-id="${t.id}">Contact talent</button>
+              </div>
             </div>
-            <span class="badge badge-success">${t.xp||0} XP</span>
-          </div>
-          <div class="card-body">
-            <p><i class="ti ti-map-pin"></i> ${t.location}</p>
-            <div style="margin:6px 0;">${t.skills.map(s => `<span class="tag">${s}</span>`).join(' ')}</div>
-            <p style="margin:8px 0;font-size:0.9rem;">${t.bio}</p>
-            <p style="font-size:0.8rem;color:var(--gray-600);">${t.completedCourses||0} courses completed</p>
-            <button class="btn btn-sm btn-outline contact-talent" data-id="${t.id}">Contact talent</button>
-          </div>
-        </div>
-      `).join("");
-      document.querySelectorAll(".contact-talent").forEach(btn => btn.addEventListener("click", (e) => { if(!requireAuth()) return; openContactTalent(btn.dataset.id); }));
+          `).join("");
+      document.querySelectorAll(".contact-talent").forEach(btn => btn.addEventListener("click", (e) => { if (!requireAuth())
+          return; openContactTalent(btn.dataset.id); }));
     }
 
     function renderMentors(filter) {
       filter = filter || '';
-      let filtered = mentors.filter(m => m.approved && (m.name.toLowerCase().includes(filter.toLowerCase()) || m.expertise.some(e => e.toLowerCase().includes(filter.toLowerCase()))));
+      let filtered = mentors.filter(m => m.approved && (m.name.toLowerCase().includes(filter.toLowerCase()) || m.expertise
+        .some(e => e.toLowerCase().includes(filter.toLowerCase()))));
       const container = document.getElementById("mentors-list");
-      if (!filtered.length) { container.innerHTML = "<div class='card' style='padding:2rem;text-align:center;'>No approved mentors found. Check back soon!</div>"; return; }
+      if (!filtered.length) { container.innerHTML =
+        "<div class='card' style='padding:2rem;text-align:center;'>No approved mentors found. Check back soon!</div>"; return; }
       container.innerHTML = filtered.map(m => `
-        <div class="card mentor-card">
-          <div class="card-header">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <div class="avatar-lg" style="background:var(--accent);">${m.avatar}</div>
-              <div>
-                <strong>${m.name}</strong>
-                <p style="font-size:0.8rem;color:var(--gray-600);">${m.title} at ${m.company}</p>
+            <div class="card mentor-card">
+              <div class="card-header">
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <div class="avatar-lg" style="background:var(--accent);">${m.avatar}</div>
+                  <div>
+                    <strong>${m.name}</strong>
+                    <p style="font-size:0.8rem;color:var(--gray-600);">${m.title} at ${m.company}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div style="margin:6px 0;">${m.expertise.map(e => `<span class="expertise-tag">${e}</span>`).join(' ')}</div>
+                <p style="font-size:0.9rem;margin:6px 0;">${m.about}</p>
+                <p style="font-size:0.8rem;color:var(--gray-600);"><i class="ti ti-calendar"></i> Available: ${Object.keys(m.availability||{}).join(', ')}</p>
+                <button class="btn btn-sm btn-secondary request-mentor-btn" data-id="${m.id}">Request mentorship</button>
               </div>
             </div>
-          </div>
-          <div class="card-body">
-            <div style="margin:6px 0;">${m.expertise.map(e => `<span class="expertise-tag">${e}</span>`).join(' ')}</div>
-            <p style="font-size:0.9rem;margin:6px 0;">${m.about}</p>
-            <p style="font-size:0.8rem;color:var(--gray-600);"><i class="ti ti-calendar"></i> Available: ${Object.keys(m.availability||{}).join(', ')}</p>
-            <button class="btn btn-sm btn-secondary request-mentor-btn" data-id="${m.id}">Request mentorship</button>
-          </div>
-        </div>
-      `).join("");
-      document.querySelectorAll(".request-mentor-btn").forEach(btn => btn.addEventListener("click", (e) => { if(!requireAuth()) return; openMentorRequest(btn.dataset.id); }));
+          `).join("");
+      document.querySelectorAll(".request-mentor-btn").forEach(btn => btn.addEventListener("click", (e) => { if (!requireAuth())
+          return; openMentorRequest(btn.dataset.id); }));
     }
 
     function renderCompanies(filter) {
       filter = filter || '';
-      let filtered = companies.filter(c => c.name.toLowerCase().includes(filter.toLowerCase()) || c.industry.toLowerCase().includes(filter.toLowerCase()));
+      let filtered = companies.filter(c => c.name.toLowerCase().includes(filter.toLowerCase()) || c.industry
+        .toLowerCase().includes(filter.toLowerCase()));
       const container = document.getElementById("companies-list");
-      if (!filtered.length) { container.innerHTML = "<div class='card' style='padding:2rem;text-align:center;'>No companies found</div>"; return; }
+      if (!filtered.length) { container.innerHTML =
+        "<div class='card' style='padding:2rem;text-align:center;'>No companies found</div>"; return; }
       container.innerHTML = filtered.map(c => `
-        <div class="card">
-          <div class="card-header">
-            <div class="avatar-sm" style="background:var(--primary);">${c.logo}</div>
-            <strong>${c.name}</strong>
-            <span class="tag">${c.industry}</span>
-          </div>
-          <div class="card-body">
-            <p><i class="ti ti-map-pin"></i> ${c.location}</p>
-            <p style="font-size:0.9rem;">${c.description}</p>
-            <p><strong>Hiring:</strong> ${c.hiring.join(", ")}</p>
-            <button class="btn btn-sm btn-primary view-company-details" data-id="${c.id}">View details</button>
-          </div>
-        </div>
-      `).join("");
-      document.querySelectorAll(".view-company-details").forEach(btn => btn.addEventListener("click", (e) => showCompanyDetails(btn.dataset.id)));
+            <div class="card">
+              <div class="card-header">
+                <div class="avatar-sm" style="background:var(--primary);">${c.logo}</div>
+                <strong>${c.name}</strong>
+                <span class="tag">${c.industry}</span>
+              </div>
+              <div class="card-body">
+                <p><i class="ti ti-map-pin"></i> ${c.location}</p>
+                <p style="font-size:0.9rem;">${c.description}</p>
+                <p><strong>Hiring:</strong> ${c.hiring.join(", ")}</p>
+                <button class="btn btn-sm btn-primary view-company-details" data-id="${c.id}">View details</button>
+              </div>
+            </div>
+          `).join("");
+      document.querySelectorAll(".view-company-details").forEach(btn => btn.addEventListener("click", (e) =>
+        showCompanyDetails(btn.dataset.id)));
     }
 
     function renderCommunity() {
@@ -658,23 +1634,23 @@
       feedDiv.innerHTML = communityPosts.map(post => {
         const isAuthor = post.author === (user ? user.name : '');
         return `
-          <div class="post-card" data-post-id="${post.id}">
-            <div class="post-header">
-              <div class="av" style="background:var(--accent);">${post.avatar}</div>
-              <span class="post-author">${post.author}</span>
-              <span class="post-time">${post.time}</span>
-              ${isAuthor ? `<span style="margin-left:auto;">
-                <button class="btn btn-sm btn-outline edit-post" data-id="${post.id}"><i class="ti ti-edit"></i></button>
-                <button class="btn btn-sm btn-danger delete-post" data-id="${post.id}"><i class="ti ti-trash"></i></button>
-              </span>` : ''}
-            </div>
-            <div class="post-body">${post.content}</div>
-            <div class="post-actions">
-              <span class="like-post-btn" data-id="${post.id}"><i class="ti ti-heart" style="color:${post.likedBy && post.likedBy.includes(userEmail) ? 'var(--secondary)' : ''};"></i> ${post.likes}</span>
-              <span class="comment-post-btn" data-id="${post.id}"><i class="ti ti-message-circle"></i> ${post.comments?.length||0}</span>
-            </div>
-          </div>
-        `;
+              <div class="post-card" data-post-id="${post.id}">
+                <div class="post-header">
+                  <div class="av" style="background:var(--accent);">${post.avatar}</div>
+                  <span class="post-author">${post.author}</span>
+                  <span class="post-time">${post.time}</span>
+                  ${isAuthor ? `<span style="margin-left:auto;">
+                    <button class="btn btn-sm btn-outline edit-post" data-id="${post.id}"><i class="ti ti-edit"></i></button>
+                    <button class="btn btn-sm btn-danger delete-post" data-id="${post.id}"><i class="ti ti-trash"></i></button>
+                  </span>` : ''}
+                </div>
+                <div class="post-body">${post.content}</div>
+                <div class="post-actions">
+                  <span class="like-post-btn" data-id="${post.id}"><i class="ti ti-heart" style="color:${post.likedBy && post.likedBy.includes(userEmail) ? 'var(--secondary)' : ''};"></i> ${post.likes}</span>
+                  <span class="comment-post-btn" data-id="${post.id}"><i class="ti ti-message-circle"></i> ${post.comments?.length||0}</span>
+                </div>
+              </div>
+            `;
       }).join("");
 
       document.querySelectorAll(".like-post-btn").forEach(btn => {
@@ -733,6 +1709,9 @@
       });
     }
 
+    // ============================================================
+    //  MODAL HELPERS
+    // ============================================================
     function openApplyModal(oppId) {
       const opp = opportunities.find(o => o.id === oppId);
       if (!opp) return;
@@ -740,6 +1719,7 @@
       document.getElementById("applyModal").style.display = "flex";
       window.currentApplyOppId = oppId;
     }
+
     function openContactTalent(talentId) {
       const talent = talents.find(t => t.id === talentId);
       if (!talent) return;
@@ -747,6 +1727,7 @@
       document.getElementById("contactTalentModal").style.display = "flex";
       window.currentTalentId = talentId;
     }
+
     function openMentorRequest(mentorId) {
       const mentor = mentors.find(m => m.id === mentorId);
       if (!mentor) return;
@@ -754,6 +1735,7 @@
       document.getElementById("mentorshipRequestModal").style.display = "flex";
       window.currentMentorId = mentorId;
     }
+
     function showCompanyDetails(companyId) {
       const company = companies.find(c => c.id === companyId);
       if (!company) return;
@@ -761,29 +1743,34 @@
       modal.className = 'modal';
       modal.style.display = 'flex';
       modal.innerHTML = `
-        <div class="modal-content">
-          <h3>${company.name}</h3>
-          <p><strong>Industry:</strong> ${company.industry}</p>
-          <p><strong>Location:</strong> ${company.location}</p>
-          <p><strong>Description:</strong> ${company.fullDetails || company.description}</p>
-          <p><strong>Open roles:</strong> ${company.hiring.join(", ")}</p>
-          <p><strong>Website:</strong> <a href="${company.website || '#'}" target="_blank" style="color:var(--secondary);">${company.website || 'Not provided'}</a></p>
-          <hr><button class="btn btn-primary" onclick="this.closest('.modal').style.display='none'">Close</button>
-        </div>
-      `;
+            <div class="modal-content">
+              <h3>${company.name}</h3>
+              <p><strong>Industry:</strong> ${company.industry}</p>
+              <p><strong>Location:</strong> ${company.location}</p>
+              <p><strong>Description:</strong> ${company.fullDetails || company.description}</p>
+              <p><strong>Open roles:</strong> ${company.hiring.join(", ")}</p>
+              <p><strong>Website:</strong> <a href="${company.website || '#'}" target="_blank" style="color:var(--secondary);">${company.website || 'Not provided'}</a></p>
+              <hr><button class="btn btn-primary" onclick="this.closest('.modal').style.display='none'">Close</button>
+            </div>
+          `;
       document.body.appendChild(modal);
       modal.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
     }
+
     function openCommentsModal(postId) {
       const post = communityPosts.find(p => p.id === postId);
       if (!post) return;
-      document.getElementById("commentsList").innerHTML = (post.comments||[]).map(c => `<div class="comment"><strong>${c.author}</strong>: ${c.text}</div>`).join("") || "<div style='color:var(--gray-600);padding:0.5rem 0;'>No comments yet.</div>";
+      document.getElementById("commentsList").innerHTML = (post.comments || []).map(c =>
+          `<div class="comment"><strong>${c.author}</strong>: ${c.text}</div>`).join(
+        "") || "<div style='color:var(--gray-600);padding:0.5rem 0;'>No comments yet.</div>";
       document.getElementById("newCommentText").value = "";
       window.currentCommentPostId = postId;
       document.getElementById("commentsModal").style.display = "flex";
     }
 
-    // EVENT BINDINGS
+    // ============================================================
+    //  EVENT BINDINGS
+    // ============================================================
     document.getElementById("submitOpp").onclick = () => {
       if (!requireAuth()) return;
       const title = document.getElementById("oppTitle").value.trim();
@@ -792,134 +1779,155 @@
       const location = document.getElementById("oppLocation").value.trim();
       const desc = document.getElementById("oppDesc").value.trim();
       const contactEmail = document.getElementById("oppContactEmail").value.trim();
-      if (!title || !company || !location || !desc || !contactEmail) { showToast("Please fill all required fields.", "error"); return; }
+      if (!title || !company || !location || !desc || !contactEmail) {
+        showToast("Please fill all required fields.", "error");
+        return;
+      }
       const user = getSession();
-      opportunities.unshift({ id:"opp"+Date.now(), title, type, company, location, description:desc, postedBy:user.name, contactEmail, date:new Date().toISOString(), verified:true });
+      opportunities.unshift({
+        id: "opp" + Date.now(),
+        title,
+        type,
+        company,
+        location,
+        description: desc,
+        postedBy: user.name,
+        contactEmail,
+        date: new Date().toISOString(),
+        verified: true
+      });
       saveAll();
       renderOpportunities();
       document.getElementById("oppPostModal").style.display = "none";
-      document.getElementById("oppTitle").value = ""; document.getElementById("oppCompany").value = ""; document.getElementById("oppLocation").value = ""; document.getElementById("oppDesc").value = ""; document.getElementById("oppContactEmail").value = "";
+      document.getElementById("oppTitle").value = "";
+      document.getElementById("oppCompany").value = "";
+      document.getElementById("oppLocation").value = "";
+      document.getElementById("oppDesc").value = "";
+      document.getElementById("oppContactEmail").value = "";
       showToast("Opportunity posted successfully!", "success");
     };
-    document.getElementById("postOppBtn").onclick = () => { if (!requireAuth()) return; document.getElementById("oppPostModal").style.display = "flex"; };
+
+    document.getElementById("postOppBtn").onclick = () => { if (!requireAuth()) return; document.getElementById(
+        "oppPostModal").style.display = "flex"; };
+
     document.getElementById("submitApplication").onclick = () => {
       if (!requireAuth()) return;
       const name = document.getElementById("applicantName").value.trim();
       const email = document.getElementById("applicantEmail").value.trim();
       const resume = document.getElementById("applicantResume").value.trim();
       const message = document.getElementById("applicantMessage").value.trim();
-      if (!name || !email || !resume) { showToast("Please fill name, email, and resume link.", "error"); return; }
-      applications.push({ id:Date.now(), oppId:window.currentApplyOppId, name, email, resume, message, date:new Date().toISOString() });
+      if (!name || !email || !resume) {
+        showToast("Please fill name, email, and resume link.", "error");
+        return;
+      }
+      applications.push({ id: Date.now(), oppId: window.currentApplyOppId, name, email, resume, message, date: new Date()
+          .toISOString() });
       saveAll();
       showToast("Application submitted! The employer will contact you.", "success");
       document.getElementById("applyModal").style.display = "none";
-      document.getElementById("applicantName").value = ""; document.getElementById("applicantEmail").value = ""; document.getElementById("applicantResume").value = ""; document.getElementById("applicantMessage").value = "";
+      document.getElementById("applicantName").value = "";
+      document.getElementById("applicantEmail").value = "";
+      document.getElementById("applicantResume").value = "";
+      document.getElementById("applicantMessage").value = "";
     };
+
     document.getElementById("sendContactMsg").onclick = () => {
       if (!requireAuth()) return;
       const name = document.getElementById("contactName").value.trim();
       const email = document.getElementById("contactEmail").value.trim();
       const msg = document.getElementById("contactMsg").value.trim();
-      if (!name || !email || !msg) { showToast("Please fill all fields.", "error"); return; }
-      contactMessages.push({ id:Date.now(), talentId:window.currentTalentId, fromName:name, fromEmail:email, message:msg, date:new Date() });
+      if (!name || !email || !msg) {
+        showToast("Please fill all fields.", "error");
+        return;
+      }
+      contactMessages.push({ id: Date.now(), talentId: window.currentTalentId, fromName: name, fromEmail: email,
+        message: msg, date: new Date() });
       saveAll();
       showToast("Message sent to talent! They will reply via email.", "success");
       document.getElementById("contactTalentModal").style.display = "none";
-      document.getElementById("contactName").value = ""; document.getElementById("contactEmail").value = ""; document.getElementById("contactMsg").value = "";
+      document.getElementById("contactName").value = "";
+      document.getElementById("contactEmail").value = "";
+      document.getElementById("contactMsg").value = "";
     };
+
     document.getElementById("submitMentorReq").onclick = () => {
       if (!requireAuth()) return;
       const name = document.getElementById("menteeName").value.trim();
       const email = document.getElementById("menteeEmail").value.trim();
       const reason = document.getElementById("menteeReason").value.trim();
-      if (!name || !email || !reason) { showToast("Please fill all fields.", "error"); return; }
+      if (!name || !email || !reason) {
+        showToast("Please fill all fields.", "error");
+        return;
+      }
       const mentor = mentors.find(m => m.id === window.currentMentorId);
       if (mentor) {
         if (!mentor.mentees) mentor.mentees = [];
-        mentor.mentees.push({ name, email, reason, date:new Date().toISOString() });
+        mentor.mentees.push({ name, email, reason, date: new Date().toISOString() });
+        // Also store in mentorRequests for admin visibility
+        mentorRequests.push({ id: Date.now(), mentorId: window.currentMentorId, name, email, reason, date: new Date()
+            .toISOString() });
         saveAll();
         showToast("Mentorship request sent! The mentor will reach out.", "success");
       } else {
         showToast("Mentor not found.", "error");
       }
       document.getElementById("mentorshipRequestModal").style.display = "none";
-      document.getElementById("menteeName").value = ""; document.getElementById("menteeEmail").value = ""; document.getElementById("menteeReason").value = "";
+      document.getElementById("menteeName").value = "";
+      document.getElementById("menteeEmail").value = "";
+      document.getElementById("menteeReason").value = "";
     };
+
     document.getElementById("addCommentBtn").onclick = () => {
       if (!requireAuth()) return;
       const text = document.getElementById("newCommentText").value.trim();
-      if (!text) { showToast("Please write a comment.", "error"); return; }
+      if (!text) {
+        showToast("Please write a comment.", "error");
+        return;
+      }
       const post = communityPosts.find(p => p.id === window.currentCommentPostId);
       if (post) {
         if (!post.comments) post.comments = [];
         const user = getSession();
-        post.comments.push({ author:user.name, text, date:new Date() });
+        post.comments.push({ author: user.name, text, date: new Date() });
         saveAll();
         openCommentsModal(window.currentCommentPostId);
         showToast("Comment added!", "success");
       }
     };
+
     document.getElementById("newPostBtn").onclick = () => {
       if (!requireAuth()) return;
       const content = prompt("What would you like to share?");
       if (content !== null && content.trim()) {
         const user = getSession();
-        communityPosts.unshift({ id:"p"+Date.now(), author:user.name, avatar:user.name.charAt(0).toUpperCase(), content:content.trim(), time:"Just now", likes:0, likedBy:[], comments:[] });
+        communityPosts.unshift({
+          id: "p" + Date.now(),
+          author: user.name,
+          avatar: user.name.charAt(0).toUpperCase(),
+          content: content.trim(),
+          time: "Just now",
+          likes: 0,
+          likedBy: [],
+          comments: []
+        });
         saveAll();
         renderCommunity();
         showToast("Post shared!", "success");
       }
     };
+
     document.getElementById("goToYouthBtn").onclick = () => { window.open("youth.html", "_blank"); };
 
-    // ===== BECOME A MENTOR – submit application to sb_mentors =====
-    document.getElementById("becomeMentorBtn").onclick = () => {
-      if (!requireAuth()) return;
-      const fullName = prompt("Enter your full name:", getSession()?.name || "");
-      if (!fullName || !fullName.trim()) return;
-      const title = prompt("Enter your professional title (e.g., Software Engineer):", "");
-      if (!title || !title.trim()) return;
-      const company = prompt("Enter your company / organisation:", "");
-      if (!company || !company.trim()) return;
-      const expertise = prompt("Enter your areas of expertise (comma separated):", "");
-      if (!expertise || !expertise.trim()) return;
-      const about = prompt("Write a short bio about yourself:", "");
-      if (!about || !about.trim()) return;
-      const user = getSession();
-      if (!user) { showToast("Session expired. Please log in again.", "error"); return; }
-
-      const newMentor = {
-        id: "men" + Date.now(),
-        name: fullName.trim(),
-        email: user.email,
-        title: title.trim(),
-        company: company.trim(),
-        expertise: expertise.split(",").map(s => s.trim()).filter(Boolean),
-        about: about.trim(),
-        avatar: fullName.trim().charAt(0).toUpperCase(),
-        approved: false,
-        availability: {},
-        mentees: [],
-        createdAt: new Date().toISOString()
-      };
-
-      const mentorsArr = JSON.parse(localStorage.getItem('sb_mentors')) || [];
-      if (mentorsArr.find(m => m.email === user.email)) {
-        showToast("You have already applied to become a mentor.", "error");
-        return;
-      }
-      mentorsArr.push(newMentor);
-      localStorage.setItem('sb_mentors', JSON.stringify(mentorsArr));
-      showToast("Your mentor application has been submitted. Await admin approval.", "success");
-    };
-
-    ["closeOppModal","closeApplyModal","closeContactModal","closeMentorReqModal","closeCommentsModal"].forEach(id => {
+    // Close modals
+    ["closeOppModal", "closeApplyModal", "closeContactModal", "closeMentorReqModal", "closeCommentsModal"].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.addEventListener("click", () => { el.closest(".modal").style.display = "none"; });
     });
     window.onclick = (e) => { if (e.target.classList.contains("modal")) e.target.style.display = "none"; };
 
-    // NAVIGATION
+    // ============================================================
+    //  NAVIGATION
+    // ============================================================
     function switchPage(pageId) {
       document.querySelectorAll(".page").forEach(p => p.classList.remove("active-page"));
       const target = document.getElementById(pageId + "-page");
@@ -935,23 +1943,33 @@
       else if (pageId === "home") updateHeroStats();
     }
     window.switchPage = switchPage;
-    document.querySelectorAll(".nav-link").forEach(link => link.addEventListener("click", () => switchPage(link.dataset.page)));
 
+    document.querySelectorAll(".nav-link").forEach(link => link.addEventListener("click", () => switchPage(link.dataset
+      .page)));
+
+    // Search
     document.getElementById("oppSearch")?.addEventListener("input", (e) => renderOpportunities(e.target.value));
     document.getElementById("talentSearch")?.addEventListener("input", (e) => renderTalent(e.target.value));
     document.getElementById("mentorSearch")?.addEventListener("input", (e) => renderMentors(e.target.value));
     document.getElementById("companySearch")?.addEventListener("input", (e) => renderCompanies(e.target.value));
 
+    // ============================================================
+    //  ENSURE ADMIN ACCOUNT EXISTS
+    // ============================================================
     function ensureAdminAccount() {
       const users = getUsers();
       if (!users.some(u => u.email === 'm.byusa@alustudent.com')) {
-        users.push({ name:'Admin', email:'m.byusa@alustudent.com', password:'SkillBridgeAfrica@1', role:'admin' });
+        users.push({ name: 'Admin', email: 'm.byusa@alustudent.com', password: 'SkillBridgeAfrica@1', role: 'admin' });
         saveUsers(users);
       }
     }
     ensureAdminAccount();
 
+    // ============================================================
+    //  INIT
+    // ============================================================
     updateUI();
+    updateMentorStatusBadge();
     renderOpportunities();
     renderTalent();
     renderMentors();
