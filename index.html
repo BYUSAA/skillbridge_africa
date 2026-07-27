@@ -453,7 +453,7 @@
       if (confirm('Are you sure you want to logout?')) {
         clearSession();
         updateUI();
-        switchPage('home');   // ✅ redirect to home after logout
+        switchPage('home');
         showToast('Logged out successfully.', 'info');
       }
     }
@@ -870,8 +870,48 @@
         showToast("Post shared!", "success");
       }
     };
-    document.getElementById("becomeMentorBtn").onclick = () => { if (!requireAuth()) return; showToast("To become a mentor, please contact admin@skillbridge.africa with your credentials and expertise.", "info"); };
     document.getElementById("goToYouthBtn").onclick = () => { window.open("youth.html", "_blank"); };
+
+    // ===== BECOME A MENTOR – submit application to sb_mentors =====
+    document.getElementById("becomeMentorBtn").onclick = () => {
+      if (!requireAuth()) return;
+      const fullName = prompt("Enter your full name:", getSession()?.name || "");
+      if (!fullName || !fullName.trim()) return;
+      const title = prompt("Enter your professional title (e.g., Software Engineer):", "");
+      if (!title || !title.trim()) return;
+      const company = prompt("Enter your company / organisation:", "");
+      if (!company || !company.trim()) return;
+      const expertise = prompt("Enter your areas of expertise (comma separated):", "");
+      if (!expertise || !expertise.trim()) return;
+      const about = prompt("Write a short bio about yourself:", "");
+      if (!about || !about.trim()) return;
+      const user = getSession();
+      if (!user) { showToast("Session expired. Please log in again.", "error"); return; }
+
+      const newMentor = {
+        id: "men" + Date.now(),
+        name: fullName.trim(),
+        email: user.email,
+        title: title.trim(),
+        company: company.trim(),
+        expertise: expertise.split(",").map(s => s.trim()).filter(Boolean),
+        about: about.trim(),
+        avatar: fullName.trim().charAt(0).toUpperCase(),
+        approved: false,
+        availability: {},
+        mentees: [],
+        createdAt: new Date().toISOString()
+      };
+
+      const mentorsArr = JSON.parse(localStorage.getItem('sb_mentors')) || [];
+      if (mentorsArr.find(m => m.email === user.email)) {
+        showToast("You have already applied to become a mentor.", "error");
+        return;
+      }
+      mentorsArr.push(newMentor);
+      localStorage.setItem('sb_mentors', JSON.stringify(mentorsArr));
+      showToast("Your mentor application has been submitted. Await admin approval.", "success");
+    };
 
     ["closeOppModal","closeApplyModal","closeContactModal","closeMentorReqModal","closeCommentsModal"].forEach(id => {
       const el = document.getElementById(id);
