@@ -1,0 +1,2354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>SkillBridge Africa – Mentor Platform</title>
+  <link rel="stylesheet" href="https://unpkg.com/tabler-icons@latest/iconfont/tabler-icons.min.css" />
+  <style>
+    /* ===== RESET & VARIABLES ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    :root {
+      --primary: #1E3A5F;
+      --primary-dark: #0F2B45;
+      --secondary: #2A9D8F;
+      --secondary-light: #EAF8F5;
+      --accent: #E9C46A;
+      --gray-50: #F8F9FA;
+      --gray-100: #F1F3F5;
+      --gray-200: #E9ECEF;
+      --gray-600: #6C757D;
+      --gray-800: #343A40;
+      --white: #FFFFFF;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --teal: #0F6E56;
+      --teal2: #1D9E75;
+      --teal-l: #E1F5EE;
+      --bdr: rgba(0, 0, 0, 0.12);
+      --bdr2: rgba(0, 0, 0, 0.22);
+      --t1: #111;
+      --t2: #555;
+      --t3: #888;
+    }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: var(--gray-50);
+      color: var(--t1);
+      padding: 12px;
+    }
+    .wrap {
+      display: flex;
+      gap: 0;
+      background: var(--white);
+      border: 0.5px solid var(--bdr);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      min-height: 680px;
+    }
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      width: 210px;
+      flex-shrink: 0;
+      background: var(--primary);
+      display: flex;
+      flex-direction: column;
+    }
+    .logo {
+      padding: 20px 18px 16px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 500;
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo i {
+      font-size: 20px;
+      color: #9FE1CB;
+    }
+    .nav-section {
+      padding: 12px 0 0;
+    }
+    .nav-label {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.35);
+      padding: 0 18px 6px;
+      letter-spacing: 0.08em;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 18px;
+      color: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      font-size: 13px;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+    }
+    .nav-item i {
+      font-size: 18px;
+    }
+    .nav-item:hover {
+      background: rgba(255, 255, 255, 0.07);
+      color: #fff;
+    }
+    .nav-item.active {
+      background: rgba(159, 225, 203, 0.15);
+      color: #9FE1CB;
+    }
+    .badge-dot {
+      background: #9FE1CB;
+      color: #085041;
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 10px;
+      margin-left: auto;
+    }
+    .badge-dot.danger {
+      background: #dc3545;
+      color: #fff;
+    }
+    .sidebar-footer {
+      margin-top: auto;
+      padding: 14px 18px;
+      border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+    }
+    .sidebar-footer .back-main {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 12px;
+      text-decoration: none;
+      padding: 8px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      margin-top: 8px;
+      cursor: pointer;
+      background: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: none;
+      width: 100%;
+      font-family: inherit;
+    }
+    .sidebar-footer .back-main:hover {
+      color: #fff;
+    }
+    .user-chip {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      padding: 0;
+      font-family: inherit;
+      text-align: left;
+    }
+    .user-chip .av {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 500;
+      color: #fff;
+      text-transform: uppercase;
+    }
+    .user-chip .info {
+      flex: 1;
+      min-width: 0;
+    }
+    .user-chip .name {
+      font-size: 13px;
+      color: #fff;
+      font-weight: 500;
+    }
+    .user-chip .role {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.4);
+    }
+    .user-chip i {
+      color: rgba(255, 255, 255, 0.3);
+    }
+    /* ===== MAIN ===== */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .topbar {
+      padding: 14px 22px;
+      border-bottom: 0.5px solid var(--bdr);
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .topbar h1 {
+      font-size: 17px;
+      font-weight: 500;
+      flex: 1;
+    }
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gray-100);
+      border: 0.5px solid var(--bdr);
+      border-radius: var(--radius-sm);
+      padding: 6px 12px;
+      width: 200px;
+    }
+    .search-box input {
+      background: transparent;
+      border: none;
+      font-size: 13px;
+      outline: none;
+      width: 100%;
+      font-family: inherit;
+    }
+    .topbar-btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+    }
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 22px;
+      background: var(--gray-50);
+    }
+    .screen {
+      display: none;
+    }
+    .screen.active {
+      display: block;
+    }
+    /* ===== GRIDS ===== */
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .grid3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .grid4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    /* ===== CARDS ===== */
+    .card {
+      background: var(--white);
+      border: 0.5px solid var(--bdr);
+      border-radius: var(--radius-md);
+      padding: 16px;
+    }
+    .card-sm {
+      background: var(--white);
+      border: 0.5px solid var(--bdr);
+      border-radius: var(--radius-md);
+      padding: 14px;
+    }
+    .stat-card {
+      background: var(--gray-100);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 26px;
+      font-weight: 500;
+    }
+    .stat-lbl {
+      font-size: 12px;
+      color: var(--t2);
+      margin-top: 3px;
+    }
+    .sec-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--t2);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+    .badge {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+    .badge-success {
+      background: var(--secondary-light);
+      color: var(--teal);
+    }
+    .badge-warning {
+      background: #FFF3CD;
+      color: #856404;
+    }
+    .badge-danger {
+      background: #FCEBEB;
+      color: #501313;
+    }
+    .badge-info {
+      background: #E8EBF4;
+      color: var(--primary);
+    }
+    .tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: var(--gray-100);
+      color: var(--t2);
+    }
+    .pill-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .pill {
+      background: var(--gray-100);
+      border: 0.5px solid var(--bdr);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      color: var(--t2);
+      font-family: inherit;
+    }
+    .pill.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .row-item {
+      background: var(--white);
+      border: 0.5px solid var(--bdr);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .row-item:hover {
+      background: var(--gray-100);
+    }
+    .icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .item-info {
+      flex: 1;
+    }
+    .item-info h4 {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .item-info p {
+      font-size: 12px;
+      color: var(--t2);
+    }
+    .btn {
+      border-radius: var(--radius-sm);
+      padding: 7px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 0.5px solid var(--bdr2);
+      background: var(--white);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+    }
+    .btn-navy {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .btn-navy:hover {
+      background: var(--primary-dark);
+    }
+    .btn-teal {
+      background: var(--teal-l);
+      color: #085041;
+      border-color: #9FE1CB;
+    }
+    .btn-teal.done {
+      background: var(--secondary);
+      color: #fff;
+    }
+    .btn-sm {
+      padding: 5px 12px;
+      font-size: 12px;
+    }
+    .btn-full {
+      width: 100%;
+      justify-content: center;
+    }
+    .btn-danger {
+      background: #dc3545;
+      color: #fff;
+      border-color: #dc3545;
+    }
+    .btn-danger:hover {
+      background: #c82333;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+    .btn-outline:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-success {
+      background: var(--secondary);
+      color: #fff;
+      border-color: var(--secondary);
+    }
+    .btn-success:hover {
+      background: #1a7a6e;
+    }
+    /* ===== FORMS ===== */
+    .form-row {
+      margin-bottom: 14px;
+    }
+    .form-row label {
+      font-size: 12px;
+      font-weight: 500;
+      display: block;
+      margin-bottom: 5px;
+    }
+    .form-row input,
+    .form-row textarea,
+    .form-row select {
+      width: 100%;
+      border: 0.5px solid var(--bdr2);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      font-size: 13px;
+      background: var(--white);
+      font-family: inherit;
+    }
+    .form-row input:focus,
+    .form-row textarea:focus,
+    .form-row select:focus {
+      outline: none;
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.15);
+    }
+    /* ===== TOAST ===== */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--primary);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      display: flex;
+      gap: 8px;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+      z-index: 1000;
+      align-items: center;
+    }
+    .toast.show {
+      opacity: 1;
+    }
+    /* ===== AUTH MODAL ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: #fff;
+      max-width: 550px;
+      width: 90%;
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    }
+    #authModal .modal-content {
+      max-width: 400px;
+    }
+    #authModal .auth-header {
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+    #authModal .auth-header i {
+      font-size: 2.8rem;
+      color: var(--accent);
+      background: var(--primary);
+      padding: 0.5rem;
+      border-radius: 50%;
+      margin-bottom: 0.5rem;
+    }
+    #authModal .auth-header h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    #authModal .auth-header p {
+      color: var(--gray-600);
+      font-size: 0.9rem;
+      margin-top: 0.2rem;
+    }
+    #authModal .toggle-text {
+      text-align: center;
+      margin-top: 1.2rem;
+      font-size: 0.9rem;
+      color: var(--gray-600);
+    }
+    #authModal .toggle-text a {
+      color: var(--secondary);
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    #authModal .toggle-text a:hover {
+      text-decoration: underline;
+    }
+    #authModal .btn-auth {
+      width: 100%;
+      padding: 0.7rem;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+      font-family: inherit;
+    }
+    #authModal .btn-auth:hover {
+      background: var(--primary-dark);
+    }
+    /* ===== CALENDAR ===== */
+    .calendar-wrap {
+      background: var(--white);
+      border: 0.5px solid var(--bdr);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .calendar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: var(--primary);
+      color: #fff;
+    }
+    .calendar-header h3 {
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .calendar-header .cal-nav {
+      display: flex;
+      gap: 8px;
+    }
+    .calendar-header .cal-nav button {
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: background 0.2s;
+      font-family: inherit;
+    }
+    .calendar-header .cal-nav button:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: 60px repeat(7, 1fr);
+      font-size: 12px;
+    }
+    .calendar-grid .cell {
+      padding: 6px 4px;
+      border-bottom: 0.5px solid var(--bdr);
+      border-right: 0.5px solid var(--bdr);
+      min-height: 60px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .calendar-grid .cell:hover {
+      background: var(--gray-50);
+    }
+    .calendar-grid .cell.time-label {
+      background: var(--gray-50);
+      font-weight: 500;
+      color: var(--t3);
+      text-align: center;
+      font-size: 10px;
+      border-right: 0.5px solid var(--bdr);
+      padding: 6px 2px;
+      cursor: default;
+    }
+    .calendar-grid .cell.time-label:hover {
+      background: var(--gray-50);
+    }
+    .calendar-grid .cell.day-header {
+      background: var(--gray-50);
+      font-weight: 600;
+      color: var(--t2);
+      text-align: center;
+      padding: 8px 4px;
+      border-bottom: 1px solid var(--bdr);
+      cursor: default;
+    }
+    .calendar-grid .cell.day-header:hover {
+      background: var(--gray-50);
+    }
+    .calendar-grid .cell.today {
+      background: var(--secondary-light);
+    }
+    .calendar-grid .cell .event-dot {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin: 1px auto;
+    }
+    .calendar-grid .cell .event-label {
+      font-size: 7px;
+      line-height: 1.2;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding: 0 2px;
+      cursor: default;
+    }
+    .calendar-grid .cell .avail-indicator {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--secondary);
+      border: 1px solid #fff;
+    }
+    .calendar-grid .cell .busy-indicator {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #dc3545;
+      border: 1px solid #fff;
+    }
+    /* ===== SCHEDULE ITEM ===== */
+    .schedule-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      background: var(--white);
+      border: 0.5px solid var(--bdr);
+      border-radius: var(--radius-sm);
+      margin-bottom: 6px;
+      transition: background 0.2s;
+    }
+    .schedule-item:hover {
+      background: var(--gray-50);
+    }
+    .schedule-item .time {
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--primary);
+      min-width: 56px;
+    }
+    .schedule-item .info {
+      flex: 1;
+    }
+    .schedule-item .info .title {
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .schedule-item .info .desc {
+      font-size: 11px;
+      color: var(--t3);
+    }
+    .schedule-item .type-badge {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+    .schedule-item .type-badge.mentor {
+      background: var(--secondary-light);
+      color: var(--teal);
+    }
+    .schedule-item .type-badge.course {
+      background: #E8EBF4;
+      color: var(--primary);
+    }
+    .schedule-item .type-badge.opp {
+      background: #FFF3CD;
+      color: #856404;
+    }
+    .schedule-item .type-badge.other {
+      background: var(--gray-100);
+      color: var(--t2);
+    }
+    .schedule-item .type-badge.available {
+      background: var(--secondary-light);
+      color: var(--teal);
+    }
+    .schedule-item .type-badge.busy {
+      background: #FCEBEB;
+      color: #501313;
+    }
+    /* ===== MENTEE CARD ===== */
+    .mentee-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: var(--white);
+      border: 0.5px solid var(--bdr);
+      border-radius: var(--radius-md);
+      margin-bottom: 8px;
+      transition: background 0.2s;
+    }
+    .mentee-card:hover {
+      background: var(--gray-50);
+    }
+    .mentee-card .mentee-av {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #fff;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .mentee-card .mentee-info {
+      flex: 1;
+    }
+    .mentee-card .mentee-info .name {
+      font-weight: 500;
+      font-size: 14px;
+    }
+    .mentee-card .mentee-info .detail {
+      font-size: 12px;
+      color: var(--t3);
+    }
+    .mentee-card .mentee-info .tags {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    /* ===== REQUEST CARD ===== */
+    .request-card {
+      background: var(--white);
+      border: 0.5px solid var(--bdr);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      margin-bottom: 8px;
+      border-left: 3px solid var(--accent);
+    }
+    .request-card .request-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    .request-card .request-header .name {
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .request-card .request-header .date {
+      font-size: 11px;
+      color: var(--t3);
+    }
+    .request-card .request-body {
+      font-size: 13px;
+      color: var(--t2);
+      margin-bottom: 8px;
+    }
+    .request-card .request-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    /* ===== PROFILE ===== */
+    .profile-hero {
+      background: var(--primary);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .profile-av {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 500;
+      color: #fff;
+      text-transform: uppercase;
+    }
+    .profile-hero .profile-info h2 {
+      color: #fff;
+      font-size: 20px;
+    }
+    .profile-hero .profile-info p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 13px;
+    }
+    .profile-hero .profile-info .tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+    .profile-hero .profile-info .tags .tag {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+    /* ===== AVAILABILITY TOGGLE ===== */
+    .avail-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      background: var(--gray-50);
+      border-radius: var(--radius-sm);
+      border: 0.5px solid var(--bdr);
+    }
+    .avail-toggle .toggle-track {
+      width: 40px;
+      height: 22px;
+      background: var(--gray-200);
+      border-radius: 12px;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+    .avail-toggle .toggle-track.active {
+      background: var(--secondary);
+    }
+    .avail-toggle .toggle-track .toggle-thumb {
+      width: 18px;
+      height: 18px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.2s;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    .avail-toggle .toggle-track.active .toggle-thumb {
+      transform: translateX(18px);
+    }
+    .avail-toggle .avail-label {
+      font-size: 13px;
+      font-weight: 500;
+    }
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 180px;
+      }
+      .wrap {
+        flex-direction: column;
+      }
+      .grid2 {
+        grid-template-columns: 1fr;
+      }
+      .grid3 {
+        grid-template-columns: 1fr;
+      }
+      .grid4 {
+        grid-template-columns: 1fr 1fr;
+      }
+      .topbar {
+        flex-wrap: wrap;
+      }
+      .search-box {
+        width: 100%;
+      }
+      .calendar-grid {
+        font-size: 10px;
+        grid-template-columns: 40px repeat(7, 1fr);
+      }
+      .calendar-grid .cell {
+        min-height: 40px;
+        padding: 4px 2px;
+      }
+      .calendar-grid .cell .event-label {
+        font-size: 6px;
+      }
+      .calendar-header h3 {
+        font-size: 13px;
+      }
+    }
+    @media (max-width: 480px) {
+      .sidebar {
+        width: 100%;
+      }
+      .wrap {
+        border-radius: 0;
+      }
+      .calendar-grid {
+        grid-template-columns: 30px repeat(7, 1fr);
+        font-size: 8px;
+      }
+      .calendar-grid .cell {
+        min-height: 30px;
+        padding: 2px 1px;
+      }
+      .calendar-grid .cell.time-label {
+        font-size: 7px;
+        padding: 4px 1px;
+      }
+      .calendar-grid .cell .event-dot {
+        width: 4px;
+        height: 4px;
+      }
+      .calendar-grid .cell .event-label {
+        display: none;
+      }
+      .profile-hero {
+        flex-direction: column;
+        text-align: center;
+      }
+      #authModal .auth-header i {
+        font-size: 2.2rem;
+      }
+    }
+    /* ===== COLOR OPTIONS ===== */
+    .color-option {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      margin: 2px 4px 2px 0;
+    }
+    .color-option.selected {
+      border-color: var(--primary);
+    }
+    /* ===== SUGGEST OPPORTUNITY ===== */
+    .suggest-opp-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      background: var(--gray-50);
+      border-radius: var(--radius-sm);
+      margin-bottom: 6px;
+      border: 0.5px solid var(--bdr);
+    }
+    .suggest-opp-item .opp-info {
+      flex: 1;
+    }
+    .suggest-opp-item .opp-info .title {
+      font-weight: 500;
+      font-size: 13px;
+    }
+    .suggest-opp-item .opp-info .desc {
+      font-size: 11px;
+      color: var(--t3);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== APP ===== -->
+  <div class="wrap">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="logo"><i class="ti ti-star"></i><span>SkillBridge<small style="display:block;font-size:11px;opacity:.5">Mentor</small></span></div>
+      <div class="nav-section">
+        <div class="nav-label">Main</div>
+        <button class="nav-item active" data-screen="dashboard"><i class="ti ti-layout-dashboard"></i> Dashboard</button>
+        <button class="nav-item" data-screen="requests"><i class="ti ti-inbox"></i> Requests <span class="badge-dot danger" id="request-badge">0</span></button>
+        <button class="nav-item" data-screen="mentees"><i class="ti ti-users"></i> My Mentees</button>
+        <button class="nav-item" data-screen="calendar"><i class="ti ti-calendar"></i> Calendar</button>
+        <button class="nav-item" data-screen="availability"><i class="ti ti-clock"></i> Availability</button>
+      </div>
+      <div class="nav-section">
+        <div class="nav-label">Account</div>
+        <button class="nav-item" data-screen="profile"><i class="ti ti-user-circle"></i> Profile</button>
+        <button class="nav-item" data-screen="settings"><i class="ti ti-settings"></i> Settings</button>
+      </div>
+      <div class="sidebar-footer">
+        <button class="user-chip" id="sidebarUserBtn">
+          <div class="av" id="sidebarAvatar">?</div>
+          <div class="info">
+            <div class="name" id="sidebarName">Guest</div>
+            <div class="role" id="sidebarRole">Login to manage</div>
+          </div>
+          <i class="ti ti-login" id="sidebarAuthIcon"></i>
+        </button>
+        <button class="back-main" onclick="window.location.href='index.html'"><i class="ti ti-arrow-left"></i> Back to main portal</button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+      <div class="topbar">
+        <h1 id="page-title">Dashboard</h1>
+        <div class="search-box"><i class="ti ti-search"></i><input type="text" placeholder="Search mentees, requests…" id="global-search"></div>
+        <button class="topbar-btn" id="topbar-action"><i class="ti ti-calendar"></i> <span>Manage Schedule</span></button>
+      </div>
+      <div class="content">
+
+        <!-- ===== DASHBOARD ===== -->
+        <div class="screen active" id="screen-dashboard">
+          <div class="grid4">
+            <div class="stat-card"><div class="stat-num" id="d-mentees">0</div><div class="stat-lbl">Active Mentees</div></div>
+            <div class="stat-card"><div class="stat-num" id="d-requests">0</div><div class="stat-lbl">Pending Requests</div></div>
+            <div class="stat-card"><div class="stat-num" id="d-appointments">0</div><div class="stat-lbl">Appointments Today</div></div>
+            <div class="stat-card"><div class="stat-num" id="d-availability">0</div><div class="stat-lbl">Available Slots</div></div>
+          </div>
+          <div class="grid2">
+            <div>
+              <div class="sec-title">Recent Requests</div>
+              <div id="dash-requests"></div>
+            </div>
+            <div>
+              <div class="sec-title">Today's Schedule</div>
+              <div id="dash-schedule"></div>
+              <div class="sec-title" style="margin-top:14px;">Quick Actions</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <button class="btn btn-navy btn-sm" onclick="navTo('availability')"><i class="ti ti-clock"></i> Set Availability</button>
+                <button class="btn btn-outline btn-sm" onclick="navTo('requests')"><i class="ti ti-inbox"></i> View Requests</button>
+              </div>
+            </div>
+          </div>
+          <div class="sec-title">Weekly Overview</div>
+          <div class="card"><div class="act-chart" id="act-chart"></div><div id="act-labels" style="display:flex;margin-top:6px;gap:5px"></div></div>
+        </div>
+
+        <!-- ===== REQUESTS ===== -->
+        <div class="screen" id="screen-requests">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.8rem;margin-bottom:1rem;">
+            <h2>Mentorship Requests</h2>
+            <span id="request-count" style="font-size:14px;color:var(--t3);">0 pending</span>
+          </div>
+          <div id="requests-list"></div>
+        </div>
+
+        <!-- ===== MENTEES ===== -->
+        <div class="screen" id="screen-mentees">
+          <h2>My Mentees</h2>
+          <div class="search-bar" style="max-width:400px;margin:12px 0 16px;"><i class="ti ti-search"></i><input type="text" id="menteeSearch" placeholder="Search mentees…"></div>
+          <div id="mentees-list"></div>
+        </div>
+
+        <!-- ===== CALENDAR ===== -->
+        <div class="screen" id="screen-calendar">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.8rem;margin-bottom:1rem;">
+            <h2>Your Schedule</h2>
+            <button class="btn btn-primary" id="addAppointmentBtn"><i class="ti ti-plus"></i> Add Appointment</button>
+          </div>
+          <div class="calendar-wrap">
+            <div class="calendar-header">
+              <h3 id="cal-month-year"></h3>
+              <div class="cal-nav">
+                <button id="cal-prev"><i class="ti ti-chevron-left"></i></button>
+                <button id="cal-today">Today</button>
+                <button id="cal-next"><i class="ti ti-chevron-right"></i></button>
+              </div>
+            </div>
+            <div class="calendar-grid" id="calendar-grid"></div>
+          </div>
+          <div style="margin-top:1.5rem;">
+            <div class="sec-title">Legend</div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;">
+              <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--secondary);vertical-align:middle;margin-right:4px;"></span> Available</span>
+              <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#dc3545;vertical-align:middle;margin-right:4px;"></span> Busy / Appointment</span>
+              <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--accent);vertical-align:middle;margin-right:4px;"></span> Pending / Request</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== AVAILABILITY ===== -->
+        <div class="screen" id="screen-availability">
+          <h2>Manage Your Availability</h2>
+          <p style="color:var(--t3);margin-bottom:1rem;">Set your available time slots for each day. Youth will see these when requesting mentorship.</p>
+          <div class="grid2" id="availability-grid"></div>
+          <div style="margin-top:1.5rem;">
+            <button class="btn btn-navy" id="saveAvailabilityBtn"><i class="ti ti-check"></i> Save Availability</button>
+            <button class="btn btn-outline" id="resetAvailabilityBtn" style="margin-left:8px;">Reset All</button>
+          </div>
+        </div>
+
+        <!-- ===== PROFILE ===== -->
+        <div class="screen" id="screen-profile">
+          <div class="profile-hero">
+            <div class="profile-av" id="p-av">?</div>
+            <div class="profile-info">
+              <h2 id="p-name">Guest</h2>
+              <p id="p-title">Mentor · Not logged in</p>
+              <div class="tags" id="p-tags"></div>
+            </div>
+            <div style="margin-left:auto;"><button class="btn btn-sm" style="background:rgba(255,255,255,0.1);color:#fff;" id="profileAuthBtn"><i class="ti ti-login"></i> Login</button></div>
+          </div>
+          <div class="grid2">
+            <div>
+              <div class="sec-title">About</div>
+              <div class="card" id="profile-about">
+                <p style="color:var(--t3);">Sign in to manage your mentor profile.</p>
+              </div>
+              <div class="sec-title" style="margin-top:14px;">Expertise</div>
+              <div class="card" id="profile-expertise">
+                <p style="color:var(--t3);">No expertise set.</p>
+              </div>
+            </div>
+            <div>
+              <div class="sec-title">Statistics</div>
+              <div class="card">
+                <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--bdr);"><span>Total Mentees</span><strong id="stat-mentees">0</strong></div>
+                <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--bdr);"><span>Mentorship Sessions</span><strong id="stat-sessions">0</strong></div>
+                <div style="display:flex;justify-content:space-between;padding:6px 0;"><span>Average Rating</span><strong id="stat-rating">⭐ 4.8</strong></div>
+              </div>
+              <div class="sec-title" style="margin-top:14px;">Suggested Opportunities</div>
+              <div class="card" id="suggested-opps">
+                <p style="color:var(--t3);">Suggest opportunities to your mentees.</p>
+                <button class="btn btn-navy btn-sm" style="margin-top:8px;" onclick="suggestOpportunity()"><i class="ti ti-plus"></i> Suggest Opportunity</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== SETTINGS ===== -->
+        <div class="screen" id="screen-settings">
+          <div class="grid2">
+            <div>
+              <div class="sec-title">Profile Settings</div>
+              <div class="card">
+                <div class="form-row"><label>Full Name</label><input type="text" id="s-name" value="Guest"></div>
+                <div class="form-row"><label>Title / Role</label><input type="text" id="s-title" placeholder="e.g., Senior Software Engineer"></div>
+                <div class="form-row"><label>Company / Organization</label><input type="text" id="s-company" placeholder="e.g., Google"></div>
+                <div class="form-row"><label>Bio / About</label><textarea id="s-bio" rows="3" placeholder="Tell mentees about yourself..."></textarea></div>
+                <div class="form-row"><label>Expertise (comma separated)</label><input type="text" id="s-expertise" placeholder="e.g., Web Dev, Python, Career Growth"></div>
+                <button class="btn btn-navy btn-sm" onclick="saveMentorSettings()"><i class="ti ti-check"></i> Save Profile</button>
+              </div>
+            </div>
+            <div>
+              <div class="sec-title">Preferences</div>
+              <div class="card">
+                <div class="form-row"><label>Session Duration (minutes)</label><input type="number" id="s-session-duration" value="60" min="15" step="15"></div>
+                <div class="form-row"><label>Max Mentees</label><input type="number" id="s-max-mentees" value="10" min="1"></div>
+                <div class="avail-toggle" style="margin-top:8px;">
+                  <div class="toggle-track active" id="autoAcceptToggle" onclick="toggleAutoAccept()">
+                    <div class="toggle-thumb"></div>
+                  </div>
+                  <span class="avail-label">Auto-accept requests</span>
+                </div>
+                <button class="btn btn-navy btn-sm" style="margin-top:12px;" onclick="saveMentorSettings()">Save Preferences</button>
+              </div>
+              <div class="sec-title" style="margin-top:14px;">Notifications</div>
+              <div class="card" id="notif-list">
+                <div>Email notifications: On</div>
+                <div>Request alerts: On</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TOAST ===== -->
+  <div class="toast" id="toast"><i class="ti ti-check"></i> <span id="toast-msg"></span></div>
+
+  <!-- ===== AUTH MODAL ===== -->
+  <div id="authModal" class="modal">
+    <div class="modal-content">
+      <div class="auth-header">
+        <i class="ti ti-bridge"></i>
+        <h2>Welcome to SkillBridge</h2>
+        <p>Sign in to manage your mentorship</p>
+      </div>
+      <form id="login-form">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="login-email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="login-password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-auth">Log In</button>
+        <p class="toggle-text">Don't have an account? <a href="#" onclick="showSignup()">Sign Up</a></p>
+      </form>
+      <form id="signup-form" style="display:none;">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="signup-name" placeholder="James Nkosi" required>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="signup-email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label>Password (min 6 chars)</label>
+          <input type="password" id="signup-password" placeholder="••••••••" minlength="6" required>
+        </div>
+        <button type="submit" class="btn-auth">Create Account</button>
+        <p class="toggle-text">Already have an account? <a href="#" onclick="showLogin()">Log In</a></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== APPOINTMENT MODAL ===== -->
+  <div id="appointmentModal" class="modal">
+    <div class="modal-content">
+      <h3>Schedule Appointment</h3>
+      <div class="form-row">
+        <label>Title *</label>
+        <input type="text" id="app-title" placeholder="e.g., Career Guidance Session">
+      </div>
+      <div class="form-row">
+        <label>Mentee</label>
+        <select id="app-mentee">
+          <option value="">Select a mentee…</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Day</label>
+        <select id="app-day">
+          <option value="0">Sunday</option>
+          <option value="1" selected>Monday</option>
+          <option value="2">Tuesday</option>
+          <option value="3">Wednesday</option>
+          <option value="4">Thursday</option>
+          <option value="5">Friday</option>
+          <option value="6">Saturday</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Time</label>
+        <input type="time" id="app-time" value="10:00">
+      </div>
+      <div class="form-row">
+        <label>Duration (minutes)</label>
+        <input type="number" id="app-duration" value="60" min="15" step="15">
+      </div>
+      <div class="form-row">
+        <label>Description</label>
+        <textarea id="app-desc" rows="2" placeholder="What will this session cover?"></textarea>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px;">
+        <button class="btn" id="closeAppModal">Cancel</button>
+        <button class="btn btn-primary" id="submitAppointment">Schedule</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SUGGEST OPPORTUNITY MODAL ===== -->
+  <div id="suggestOppModal" class="modal">
+    <div class="modal-content">
+      <h3>Suggest Opportunity to Mentees</h3>
+      <div class="form-row">
+        <label>Opportunity Title *</label>
+        <input type="text" id="suggest-title" placeholder="e.g., Frontend Developer at Fintech">
+      </div>
+      <div class="form-row">
+        <label>Company / Organization</label>
+        <input type="text" id="suggest-company" placeholder="Company name">
+      </div>
+      <div class="form-row">
+        <label>Description</label>
+        <textarea id="suggest-desc" rows="3" placeholder="Describe the opportunity..."></textarea>
+      </div>
+      <div class="form-row">
+        <label>Link / Apply URL</label>
+        <input type="text" id="suggest-link" placeholder="https://example.com/apply">
+      </div>
+      <div class="form-row">
+        <label>Send to specific mentee (optional)</label>
+        <select id="suggest-mentee">
+          <option value="">All mentees</option>
+        </select>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px;">
+        <button class="btn" id="closeSuggestModal">Cancel</button>
+        <button class="btn btn-primary" id="submitSuggestion">Suggest</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ============================================================
+    //  AUTH SYSTEM (Shared)
+    // ============================================================
+    function getUsers() {
+      return JSON.parse(localStorage.getItem('sb_users')) || [];
+    }
+
+    function saveUsers(users) {
+      localStorage.setItem('sb_users', JSON.stringify(users));
+    }
+
+    function getSession() {
+      return JSON.parse(localStorage.getItem('sb_auth_user'));
+    }
+
+    function setSession(user) {
+      localStorage.setItem('sb_auth_user', JSON.stringify(user));
+    }
+
+    function clearSession() {
+      localStorage.removeItem('sb_auth_user');
+    }
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function showSignup() {
+      document.getElementById('login-form').style.display = 'none';
+      document.getElementById('signup-form').style.display = 'block';
+    }
+
+    function showLogin() {
+      document.getElementById('login-form').style.display = 'block';
+      document.getElementById('signup-form').style.display = 'none';
+    }
+    window.showSignup = showSignup;
+    window.showLogin = showLogin;
+
+    function toast(msg) {
+      const t = document.getElementById('toast');
+      document.getElementById('toast-msg').innerText = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    function toggleAuthModal() {
+      const modal = document.getElementById('authModal');
+      if (modal.style.display === 'flex') {
+        modal.style.display = 'none';
+      } else {
+        modal.style.display = 'flex';
+        showLogin();
+      }
+    }
+    window.toggleAuthModal = toggleAuthModal;
+
+    // Login
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value.trim();
+      if (!isValidEmail(email)) { toast('Please enter a valid email.'); return; }
+      const users = getUsers();
+      const user = users.find(u => u.email === email && u.password === password);
+      if (user) {
+        setSession({ email: user.email, name: user.name, role: user.role || 'youth' });
+        // If admin, redirect
+        if (user.role === 'admin') {
+          document.getElementById('authModal').style.display = 'none';
+          toast('Welcome Admin! Redirecting...');
+          setTimeout(() => { window.location.href = 'admin.html'; }, 500);
+          return;
+        }
+        // Check if this user is a mentor (has mentor profile)
+        const mentorData = getMentorData(email);
+        if (!mentorData) {
+          // Auto-create mentor profile for anyone logging in here
+          createMentorProfile(email, user.name);
+          toast('Mentor profile created!');
+        }
+        updateUI();
+        document.getElementById('authModal').style.display = 'none';
+        toast('Welcome back, ' + user.name + '!');
+      } else {
+        toast('Invalid email or password.');
+      }
+    });
+
+    // Signup
+    document.getElementById('signup-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('signup-name').value.trim();
+      const email = document.getElementById('signup-email').value.trim();
+      const password = document.getElementById('signup-password').value.trim();
+      if (!name) { toast('Please enter your name.'); return; }
+      if (!isValidEmail(email)) { toast('Please enter a valid email.'); return; }
+      if (password.length < 6) { toast('Password must be at least 6 characters.'); return; }
+      const users = getUsers();
+      if (users.find(u => u.email === email)) { toast('Email already registered.'); return; }
+      if (email === 'm.byusa@alustudent.com') { toast('This email is reserved.'); return; }
+      users.push({ name, email, password, role: 'youth' });
+      saveUsers(users);
+      setSession({ email, name, role: 'youth' });
+      // Create mentor profile
+      createMentorProfile(email, name);
+      updateUI();
+      document.getElementById('authModal').style.display = 'none';
+      toast('Account created! Welcome, ' + name);
+    });
+
+    // ============================================================
+    //  MENTOR DATA STORAGE
+    // ============================================================
+    const MENTOR_STORAGE = 'sb_mentor_profiles';
+
+    function getMentorData(email) {
+      const all = JSON.parse(localStorage.getItem(MENTOR_STORAGE)) || {};
+      return all[email] || null;
+    }
+
+    function saveMentorData(email, data) {
+      const all = JSON.parse(localStorage.getItem(MENTOR_STORAGE)) || {};
+      all[email] = data;
+      localStorage.setItem(MENTOR_STORAGE, JSON.stringify(all));
+    }
+
+    function getAllMentorData() {
+      return JSON.parse(localStorage.getItem(MENTOR_STORAGE)) || {};
+    }
+
+    function createMentorProfile(email, name) {
+      const existing = getMentorData(email);
+      if (existing) return existing;
+      const profile = {
+        name: name || 'Mentor',
+        email: email,
+        title: 'Mentor',
+        company: '',
+        bio: 'Passionate about helping others grow.',
+        expertise: ['Mentorship'],
+        autoAccept: false,
+        sessionDuration: 60,
+        maxMentees: 10,
+        mentees: [],
+        requests: [],
+        appointments: [],
+        availability: {
+          1: [], // Monday
+          2: [],
+          3: [],
+          4: [],
+          5: [],
+          0: [], // Sunday
+          6: [] // Saturday
+        },
+        suggestedOpps: [],
+        createdAt: new Date().toISOString()
+      };
+      saveMentorData(email, profile);
+      return profile;
+    }
+
+    // ============================================================
+    //  STATE
+    // ============================================================
+    let currentMentorEmail = null;
+    let currentMentorData = null;
+    let calDate = new Date();
+    let selectedColor = 'secondary';
+
+    function loadMentorState() {
+      const session = getSession();
+      if (session && session.email) {
+        currentMentorEmail = session.email;
+        const data = getMentorData(session.email);
+        if (data) {
+          currentMentorData = data;
+        } else {
+          // Create profile if missing
+          currentMentorData = createMentorProfile(session.email, session.name);
+        }
+      } else {
+        currentMentorEmail = null;
+        currentMentorData = null;
+      }
+    }
+
+    function saveMentorState() {
+      if (currentMentorEmail && currentMentorData) {
+        saveMentorData(currentMentorEmail, currentMentorData);
+      }
+    }
+
+    // ============================================================
+    //  UI UPDATE
+    // ============================================================
+    function updateUI() {
+      const session = getSession();
+      const av = document.getElementById('sidebarAvatar');
+      const nameEl = document.getElementById('sidebarName');
+      const roleEl = document.getElementById('sidebarRole');
+      const authIcon = document.getElementById('sidebarAuthIcon');
+      const pAv = document.getElementById('p-av');
+      const pName = document.getElementById('p-name');
+      const pTitle = document.getElementById('p-title');
+      const sName = document.getElementById('s-name');
+      const profileBtn = document.getElementById('profileAuthBtn');
+
+      if (session) {
+        const initial = session.name.charAt(0).toUpperCase();
+        av.innerText = initial;
+        nameEl.innerText = session.name;
+        roleEl.innerText = 'Mentor · ' + (currentMentorData ? currentMentorData.mentees.length : 0) + ' mentees';
+        authIcon.className = 'ti ti-logout';
+        pAv.innerText = initial;
+        pName.innerText = session.name;
+        pTitle.innerText = currentMentorData ? (currentMentorData.title || 'Mentor') : 'Mentor';
+        if (sName) sName.value = session.name;
+        if (profileBtn) {
+          profileBtn.innerHTML = '<i class="ti ti-logout"></i> Logout';
+          profileBtn.onclick = function() { if (confirm('Logout?')) { clearSession();
+              loadMentorState();
+              updateUI();
+              toast('Logged out.'); } };
+        }
+        document.getElementById('sidebarUserBtn').onclick = function() {
+          if (confirm('Logout?')) { clearSession();
+            loadMentorState();
+            updateUI();
+            toast('Logged out.'); }
+        };
+        // Load mentor data into settings
+        if (currentMentorData) {
+          document.getElementById('s-title').value = currentMentorData.title || '';
+          document.getElementById('s-company').value = currentMentorData.company || '';
+          document.getElementById('s-bio').value = currentMentorData.bio || '';
+          document.getElementById('s-expertise').value = (currentMentorData.expertise || []).join(', ');
+          document.getElementById('s-session-duration').value = currentMentorData.sessionDuration || 60;
+          document.getElementById('s-max-mentees').value = currentMentorData.maxMentees || 10;
+          const autoToggle = document.getElementById('autoAcceptToggle');
+          if (currentMentorData.autoAccept) {
+            autoToggle.classList.add('active');
+          } else {
+            autoToggle.classList.remove('active');
+          }
+        }
+      } else {
+        av.innerText = '?';
+        nameEl.innerText = 'Guest';
+        roleEl.innerText = 'Login to manage';
+        authIcon.className = 'ti ti-login';
+        pAv.innerText = '?';
+        pName.innerText = 'Guest';
+        pTitle.innerText = 'Mentor · Not logged in';
+        if (sName) sName.value = 'Guest';
+        if (profileBtn) {
+          profileBtn.innerHTML = '<i class="ti ti-login"></i> Login';
+          profileBtn.onclick = toggleAuthModal;
+        }
+        document.getElementById('sidebarUserBtn').onclick = toggleAuthModal;
+      }
+      updateRequestBadge();
+    }
+
+    function updateRequestBadge() {
+      const badge = document.getElementById('request-badge');
+      if (currentMentorData) {
+        const pending = (currentMentorData.requests || []).filter(r => r.status === 'pending').length;
+        badge.innerText = pending;
+        badge.style.display = pending > 0 ? 'inline' : 'none';
+      } else {
+        badge.style.display = 'none';
+      }
+    }
+
+    function requireAuth() {
+      if (getSession() && currentMentorData) return true;
+      toast('Please log in as a mentor to continue.');
+      document.getElementById('authModal').style.display = 'flex';
+      return false;
+    }
+
+    // ============================================================
+    //  NAVIGATION
+    // ============================================================
+    function navTo(screen) {
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      const navBtn = document.querySelector(`.nav-item[data-screen="${screen}"]`);
+      if (navBtn) navBtn.classList.add('active');
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      const target = document.getElementById(`screen-${screen}`);
+      if (target) target.classList.add('active');
+      const titles = {
+        dashboard: 'Dashboard',
+        requests: 'Mentorship Requests',
+        mentees: 'My Mentees',
+        calendar: 'Calendar',
+        availability: 'Availability',
+        profile: 'Profile',
+        settings: 'Settings'
+      };
+      document.getElementById('page-title').innerText = titles[screen] || screen;
+      if (screen === 'dashboard') renderDashboard();
+      if (screen === 'requests') renderRequests();
+      if (screen === 'mentees') renderMentees();
+      if (screen === 'calendar') renderCalendar();
+      if (screen === 'availability') renderAvailability();
+      if (screen === 'profile') renderProfile();
+      if (screen === 'settings') renderSettings();
+    }
+    window.navTo = navTo;
+
+    document.querySelectorAll('.nav-item').forEach(el => {
+      el.addEventListener('click', () => {
+        const scr = el.dataset.screen;
+        if (scr) navTo(scr);
+      });
+    });
+
+    document.getElementById('topbar-action').onclick = () => {
+      navTo('calendar');
+    };
+
+    // ============================================================
+    //  DASHBOARD
+    // ============================================================
+    function renderDashboard() {
+      if (!currentMentorData) {
+        document.getElementById('d-mentees').innerText = '0';
+        document.getElementById('d-requests').innerText = '0';
+        document.getElementById('d-appointments').innerText = '0';
+        document.getElementById('d-availability').innerText = '0';
+        document.getElementById('dash-requests').innerHTML = '<div class="card-sm" style="text-align:center;color:var(--t3);">Login to see activity.</div>';
+        document.getElementById('dash-schedule').innerHTML = '<div class="card-sm" style="text-align:center;color:var(--t3);">No schedule.</div>';
+        return;
+      }
+
+      const mentees = currentMentorData.mentees || [];
+      const requests = (currentMentorData.requests || []).filter(r => r.status === 'pending');
+      const today = new Date().getDay();
+      const todayAppointments = (currentMentorData.appointments || []).filter(a => a.day === today);
+      const availSlots = Object.values(currentMentorData.availability || {}).reduce((sum, slots) => sum + slots.length, 0);
+
+      document.getElementById('d-mentees').innerText = mentees.length;
+      document.getElementById('d-requests').innerText = requests.length;
+      document.getElementById('d-appointments').innerText = todayAppointments.length;
+      document.getElementById('d-availability').innerText = availSlots;
+
+      // Recent requests
+      const dashReqs = document.getElementById('dash-requests');
+      const recentReqs = (currentMentorData.requests || []).filter(r => r.status === 'pending').slice(0, 3);
+      if (recentReqs.length === 0) {
+        dashReqs.innerHTML = '<div class="card-sm" style="text-align:center;color:var(--t3);">No pending requests.</div>';
+      } else {
+        dashReqs.innerHTML = recentReqs.map(r =>
+          `<div class="row-item" onclick="navTo('requests')"><div class="icon-box" style="background:var(--accent);color:#fff;font-weight:600;">${r.name.charAt(0)}</div><div class="item-info"><h4>${r.name}</h4><p>${r.reason || 'Requested mentorship'}</p></div><span class="badge badge-warning">Pending</span></div>`
+        ).join('');
+      }
+
+      // Today's schedule
+      const dashSchedule = document.getElementById('dash-schedule');
+      if (todayAppointments.length === 0) {
+        dashSchedule.innerHTML = '<div class="card-sm" style="text-align:center;color:var(--t3);">No appointments today.</div>';
+      } else {
+        dashSchedule.innerHTML = todayAppointments.map(a =>
+          `<div class="schedule-item"><span class="time">${a.time}</span><div class="info"><div class="title">${a.title}</div><div class="desc">${a.menteeName || ''}${a.desc ? ' · ' + a.desc : ''}</div></div><span class="type-badge mentor">Mentor</span></div>`
+        ).join('');
+      }
+
+      // Activity chart
+      renderActivityChart('act-chart');
+    }
+
+    function renderActivityChart(containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      // Generate dummy activity data for last 7 days
+      const days = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+      const counts = [];
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        const dayStr = d.toISOString().slice(0, 10);
+        // Count appointments on this day
+        const count = (currentMentorData?.appointments || []).filter(a => {
+          const appDate = new Date();
+          appDate.setDate(appDate.getDate() - (appDate.getDay() - a.day));
+          return appDate.toISOString().slice(0, 10) === dayStr;
+        }).length || 0;
+        counts.push(count);
+      }
+      const max = Math.max(1, ...counts);
+      container.innerHTML = counts.map((v, i) =>
+        `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px"><div class="act-bar" style="width:100%;height:${Math.round(v/max*52)}px;background:${v>0?'var(--secondary)':'var(--gray-200)'}"></div><span style="font-size:10px;color:var(--t3)">${days[i]}</span></div>`
+      ).join('');
+    }
+
+    // ============================================================
+    //  REQUESTS
+    // ============================================================
+    function renderRequests() {
+      if (!currentMentorData) {
+        document.getElementById('requests-list').innerHTML =
+          '<div class="card" style="text-align:center;padding:2rem;color:var(--t3);">Login to view requests.</div>';
+        document.getElementById('request-count').innerText = '0 pending';
+        return;
+      }
+      const requests = currentMentorData.requests || [];
+      const pending = requests.filter(r => r.status === 'pending');
+      const others = requests.filter(r => r.status !== 'pending');
+
+      document.getElementById('request-count').innerText = pending.length + ' pending';
+
+      let html = '';
+      if (pending.length === 0 && others.length === 0) {
+        html = '<div class="card" style="text-align:center;padding:2rem;color:var(--t3);">No mentorship requests yet.</div>';
+      } else {
+        if (pending.length > 0) {
+          html += `<div class="sec-title" style="margin-top:8px;">Pending (${pending.length})</div>`;
+          html += pending.map(r =>
+            `<div class="request-card" style="border-left-color:var(--accent);">
+              <div class="request-header"><span class="name">${r.name}</span><span class="date">${new Date(r.date).toLocaleDateString()}</span></div>
+              <div class="request-body">${r.reason || 'Would like to have you as a mentor.'}</div>
+              <div class="request-actions">
+                <button class="btn btn-success btn-sm" onclick="acceptRequest('${r.id}')"><i class="ti ti-check"></i> Accept</button>
+                <button class="btn btn-danger btn-sm" onclick="declineRequest('${r.id}')"><i class="ti ti-x"></i> Decline</button>
+                <button class="btn btn-outline btn-sm" onclick="viewMenteeProfile('${r.email}')"><i class="ti ti-user"></i> View Profile</button>
+              </div>
+            </div>`
+          ).join('');
+        }
+        if (others.length > 0) {
+          html += `<div class="sec-title" style="margin-top:16px;">History (${others.length})</div>`;
+          html += others.map(r =>
+            `<div class="request-card" style="border-left-color:${r.status === 'accepted' ? 'var(--secondary)' : 'var(--gray-600)'};">
+              <div class="request-header"><span class="name">${r.name}</span><span class="date">${new Date(r.date).toLocaleDateString()}</span></div>
+              <div class="request-body">${r.reason || ''}</div>
+              <span class="badge ${r.status === 'accepted' ? 'badge-success' : 'badge-danger'}">${r.status}</span>
+            </div>`
+          ).join('');
+        }
+      }
+      document.getElementById('requests-list').innerHTML = html;
+      updateRequestBadge();
+    }
+
+    function acceptRequest(requestId) {
+      if (!requireAuth()) return;
+      const requests = currentMentorData.requests || [];
+      const idx = requests.findIndex(r => r.id === requestId);
+      if (idx === -1) return;
+      requests[idx].status = 'accepted';
+      // Add to mentees
+      if (!currentMentorData.mentees) currentMentorData.mentees = [];
+      const mentee = {
+        email: requests[idx].email,
+        name: requests[idx].name,
+        joined: new Date().toISOString(),
+        progress: 0,
+        notes: ''
+      };
+      if (!currentMentorData.mentees.find(m => m.email === mentee.email)) {
+        currentMentorData.mentees.push(mentee);
+      }
+      // Auto-create an appointment
+      const now = new Date();
+      const day = (now.getDay() + 1) % 7;
+      if (!currentMentorData.appointments) currentMentorData.appointments = [];
+      currentMentorData.appointments.push({
+        id: 'app_' + Date.now(),
+        day: day,
+        time: '10:00',
+        duration: currentMentorData.sessionDuration || 60,
+        title: `Mentorship Session: ${requests[idx].name}`,
+        desc: `First session with ${requests[idx].name}`,
+        menteeName: requests[idx].name,
+        menteeEmail: requests[idx].email
+      });
+      saveMentorState();
+      toast('Request accepted! Mentee added and session scheduled.');
+      renderRequests();
+      renderDashboard();
+      updateRequestBadge();
+    }
+
+    function declineRequest(requestId) {
+      if (!requireAuth()) return;
+      const requests = currentMentorData.requests || [];
+      const idx = requests.findIndex(r => r.id === requestId);
+      if (idx === -1) return;
+      requests[idx].status = 'declined';
+      saveMentorState();
+      toast('Request declined.');
+      renderRequests();
+      updateRequestBadge();
+    }
+
+    function viewMenteeProfile(email) {
+      toast('Viewing profile: ' + email);
+      // In a full implementation, this would open a profile modal
+    }
+
+    // ============================================================
+    //  MENTEES
+    // ============================================================
+    function renderMentees(filter = '') {
+      if (!currentMentorData) {
+        document.getElementById('mentees-list').innerHTML =
+          '<div class="card" style="text-align:center;padding:2rem;color:var(--t3);">Login to see your mentees.</div>';
+        return;
+      }
+      const mentees = (currentMentorData.mentees || []).filter(m =>
+        m.name.toLowerCase().includes(filter.toLowerCase()) ||
+        (m.email || '').toLowerCase().includes(filter.toLowerCase())
+      );
+      if (mentees.length === 0) {
+        document.getElementById('mentees-list').innerHTML =
+          '<div class="card" style="text-align:center;padding:2rem;color:var(--t3);">No mentees yet. Accept requests to start mentoring!</div>';
+        return;
+      }
+      document.getElementById('mentees-list').innerHTML = mentees.map(m =>
+        `<div class="mentee-card">
+          <div class="mentee-av" style="background:var(--secondary);">${m.name.charAt(0).toUpperCase()}</div>
+          <div class="mentee-info">
+            <div class="name">${m.name}</div>
+            <div class="detail">${m.email || ''} · Joined ${new Date(m.joined).toLocaleDateString()}</div>
+            <div class="tags"><span class="tag">Progress: ${m.progress || 0}%</span></div>
+          </div>
+          <div style="display:flex;gap:6px;">
+            <button class="btn btn-outline btn-sm" onclick="scheduleWithMentee('${m.email}')"><i class="ti ti-calendar"></i></button>
+            <button class="btn btn-danger btn-sm" onclick="removeMentee('${m.email}')"><i class="ti ti-trash"></i></button>
+          </div>
+        </div>`
+      ).join('');
+    }
+
+    document.getElementById('menteeSearch')?.addEventListener('input', (e) => {
+      renderMentees(e.target.value);
+    });
+
+    function scheduleWithMentee(email) {
+      if (!requireAuth()) return;
+      const mentee = (currentMentorData.mentees || []).find(m => m.email === email);
+      if (!mentee) { toast('Mentee not found.'); return; }
+      document.getElementById('app-mentee').value = email;
+      document.getElementById('app-title').value = `Mentorship Session: ${mentee.name}`;
+      document.getElementById('appointmentModal').style.display = 'flex';
+    }
+
+    function removeMentee(email) {
+      if (!requireAuth()) return;
+      if (!confirm(`Remove ${email} from your mentees?`)) return;
+      currentMentorData.mentees = (currentMentorData.mentees || []).filter(m => m.email !== email);
+      saveMentorState();
+      toast('Mentee removed.');
+      renderMentees();
+    }
+
+    // ============================================================
+    //  CALENDAR
+    // ============================================================
+    function renderCalendar() {
+      const year = calDate.getFullYear();
+      const month = calDate.getMonth();
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const today = new Date();
+      const todayDay = today.getDate();
+      const todayMonth = today.getMonth();
+      const todayYear = today.getFullYear();
+
+      document.getElementById('cal-month-year').innerText =
+        new Date(year, month).toLocaleString('default', { month: 'long', year: 'numeric' });
+
+      const hours = ['6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00',
+        '18:00', '19:00'
+      ];
+
+      let grid = document.getElementById('calendar-grid');
+      let html = '';
+
+      html += `<div class="cell time-label"></div>`;
+      for (let d = 0; d < 7; d++) {
+        const dayName = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d];
+        const isToday = d === today.getDay() && month === todayMonth && year === todayYear;
+        html += `<div class="cell day-header${isToday?' today':''}">${dayName}</div>`;
+      }
+
+      const appointments = currentMentorData?.appointments || [];
+      const availability = currentMentorData?.availability || {};
+
+      for (let h = 0; h < hours.length; h++) {
+        html += `<div class="cell time-label">${hours[h]}</div>`;
+        for (let d = 0; d < 7; d++) {
+          const dayOfMonth = (d - firstDay + 1) + h * 7;
+          const isToday = d === today.getDay() && month === todayMonth && year === todayYear;
+          const isValid = dayOfMonth >= 1 && dayOfMonth <= daysInMonth;
+          const dateStr = isValid ? `${year}-${String(month+1).padStart(2,'0')}-${String(dayOfMonth).padStart(2,'0')}` :
+            '';
+
+          const timeStr = hours[h];
+          const hourNum = parseInt(timeStr);
+
+          // Find appointments at this day/hour
+          const appEvents = appointments.filter(e => e.day === d);
+          const matchingApps = appEvents.filter(e => {
+            const [eh, em] = e.time.split(':').map(Number);
+            return eh === hourNum;
+          });
+
+          // Check availability
+          const availSlots = availability[d] || [];
+          const isAvailable = availSlots.some(slot => {
+            const [startH] = slot.split('-').map(s => parseInt(s.split(':')[0]));
+            return startH === hourNum;
+          });
+
+          html += `<div class="cell${isToday?' today':''}" data-day="${d}" data-hour="${h}" onclick="onCellClick(${d}, '${hours[h]}')">`;
+          if (isValid) {
+            if (matchingApps.length > 0) {
+              matchingApps.forEach(a => {
+                html += `<div class="event-dot" style="background:#dc3545;"></div>`;
+                html += `<div class="event-label">${a.title.substring(0,12)}</div>`;
+              });
+            } else if (isAvailable) {
+              html += `<div class="avail-indicator"></div>`;
+            }
+          }
+          html += `</div>`;
+        }
+      }
+
+      grid.innerHTML = html;
+      renderUpcomingEvents();
+    }
+
+    function onCellClick(day, time) {
+      if (!requireAuth()) return;
+      document.getElementById('app-day').value = day;
+      document.getElementById('app-time').value = time;
+      document.getElementById('appointmentModal').style.display = 'flex';
+    }
+
+    function renderUpcomingEvents() {
+      const container = document.getElementById('upcoming-events-list') || document.createElement('div');
+      if (!container.id) return;
+      const today = new Date().getDay();
+      const appointments = currentMentorData?.appointments || [];
+      const upcoming = appointments.filter(e => e.day >= today || e.day < today).sort((a, b) => {
+        if (a.day !== b.day) return a.day - b.day;
+        return a.time.localeCompare(b.time);
+      }).slice(0, 6);
+
+      if (upcoming.length === 0) {
+        container.innerHTML = '<div class="card-sm" style="text-align:center;color:var(--t3);">No upcoming appointments.</div>';
+        return;
+      }
+      const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      container.innerHTML = upcoming.map(e =>
+        `<div class="schedule-item"><span class="time">${e.time}</span><div class="info"><div class="title">${e.title}</div><div class="desc">${dayNames[e.day]}${e.menteeName ? ' · ' + e.menteeName : ''}</div></div><span class="type-badge mentor">Mentor</span></div>`
+      ).join('');
+    }
+
+    // Calendar navigation
+    document.getElementById('cal-prev').onclick = () => {
+      calDate.setMonth(calDate.getMonth() - 1);
+      renderCalendar();
+    };
+    document.getElementById('cal-next').onclick = () => {
+      calDate.setMonth(calDate.getMonth() + 1);
+      renderCalendar();
+    };
+    document.getElementById('cal-today').onclick = () => {
+      calDate = new Date();
+      renderCalendar();
+    };
+
+    // ============================================================
+    //  AVAILABILITY
+    // ============================================================
+    function renderAvailability() {
+      if (!currentMentorData) {
+        document.getElementById('availability-grid').innerHTML =
+          '<div class="card" style="text-align:center;padding:2rem;color:var(--t3);">Login to manage availability.</div>';
+        return;
+      }
+      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const avail = currentMentorData.availability || {};
+
+      let html = '';
+      for (let d = 0; d < 7; d++) {
+        const slots = avail[d] || [];
+        html += `<div class="card">
+          <div class="sec-title">${days[d]}</div>
+          <div id="avail-slots-${d}">
+            ${slots.length === 0 ? '<p style="color:var(--t3);font-size:12px;">No slots set</p>' : ''}
+            ${slots.map((slot, idx) => `<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;font-size:13px;">
+              <span>${slot}</span>
+              <button class="btn btn-sm btn-danger" onclick="removeAvailabilitySlot(${d}, ${idx})"><i class="ti ti-x"></i></button>
+            </div>`).join('')}
+          </div>
+          <div style="display:flex;gap:6px;margin-top:8px;">
+            <input type="time" id="avail-start-${d}" value="09:00" style="width:80px;padding:4px 6px;border:0.5px solid var(--bdr);border-radius:var(--radius-sm);font-size:12px;">
+            <span style="font-size:12px;align-self:center;">to</span>
+            <input type="time" id="avail-end-${d}" value="17:00" style="width:80px;padding:4px 6px;border:0.5px solid var(--bdr);border-radius:var(--radius-sm);font-size:12px;">
+            <button class="btn btn-sm btn-navy" onclick="addAvailabilitySlot(${d})"><i class="ti ti-plus"></i> Add</button>
+          </div>
+        </div>`;
+      }
+      document.getElementById('availability-grid').innerHTML = html;
+    }
+
+    function addAvailabilitySlot(day) {
+      if (!requireAuth()) return;
+      const start = document.getElementById(`avail-start-${day}`).value;
+      const end = document.getElementById(`avail-end-${day}`).value;
+      if (!start || !end) { toast('Please set start and end time.'); return; }
+      if (start >= end) { toast('Start time must be before end time.'); return; }
+      if (!currentMentorData.availability) currentMentorData.availability = {};
+      if (!currentMentorData.availability[day]) currentMentorData.availability[day] = [];
+      const slot = `${start}-${end}`;
+      if (currentMentorData.availability[day].includes(slot)) {
+        toast('Slot already exists.');
+        return;
+      }
+      currentMentorData.availability[day].push(slot);
+      currentMentorData.availability[day].sort();
+      saveMentorState();
+      renderAvailability();
+      toast('Availability slot added!');
+    }
+
+    function removeAvailabilitySlot(day, index) {
+      if (!requireAuth()) return;
+      if (!currentMentorData.availability[day]) return;
+      currentMentorData.availability[day].splice(index, 1);
+      if (currentMentorData.availability[day].length === 0) {
+        delete currentMentorData.availability[day];
+      }
+      saveMentorState();
+      renderAvailability();
+      toast('Slot removed.');
+    }
+
+    document.getElementById('saveAvailabilityBtn').onclick = () => {
+      if (!requireAuth()) return;
+      saveMentorState();
+      toast('Availability saved!');
+    };
+
+    document.getElementById('resetAvailabilityBtn').onclick = () => {
+      if (!requireAuth()) return;
+      if (!confirm('Reset all availability slots?')) return;
+      currentMentorData.availability = {};
+      saveMentorState();
+      renderAvailability();
+      toast('Availability reset.');
+    };
+
+    // ============================================================
+    //  APPOINTMENT MODAL
+    // ============================================================
+    document.getElementById('addAppointmentBtn').onclick = () => {
+      if (!requireAuth()) return;
+      // Populate mentee dropdown
+      const select = document.getElementById('app-mentee');
+      const mentees = currentMentorData.mentees || [];
+      select.innerHTML = '<option value="">Select a mentee…</option>' +
+        mentees.map(m => `<option value="${m.email}">${m.name}</option>`).join('');
+      document.getElementById('app-title').value = '';
+      document.getElementById('app-desc').value = '';
+      document.getElementById('appointmentModal').style.display = 'flex';
+    };
+
+    document.getElementById('closeAppModal').onclick = () => {
+      document.getElementById('appointmentModal').style.display = 'none';
+    };
+
+    document.getElementById('submitAppointment').onclick = () => {
+      if (!requireAuth()) return;
+      const title = document.getElementById('app-title').value.trim();
+      if (!title) { toast('Please enter a title.'); return; }
+      const day = parseInt(document.getElementById('app-day').value);
+      const time = document.getElementById('app-time').value;
+      const duration = parseInt(document.getElementById('app-duration').value) || 60;
+      const desc = document.getElementById('app-desc').value.trim();
+      const menteeEmail = document.getElementById('app-mentee').value;
+
+      if (!currentMentorData.appointments) currentMentorData.appointments = [];
+      const mentee = (currentMentorData.mentees || []).find(m => m.email === menteeEmail);
+
+      currentMentorData.appointments.push({
+        id: 'app_' + Date.now(),
+        day,
+        time,
+        duration,
+        title,
+        desc,
+        menteeName: mentee ? mentee.name : '',
+        menteeEmail: menteeEmail || ''
+      });
+      saveMentorState();
+      document.getElementById('appointmentModal').style.display = 'none';
+      renderCalendar();
+      renderDashboard();
+      toast('Appointment scheduled!');
+    };
+
+    // ============================================================
+    //  PROFILE
+    // ============================================================
+    function renderProfile() {
+      if (!currentMentorData) {
+        document.getElementById('profile-about').innerHTML = '<p style="color:var(--t3);">Sign in to manage your mentor profile.</p>';
+        document.getElementById('profile-expertise').innerHTML = '<p style="color:var(--t3);">No expertise set.</p>';
+        document.getElementById('stat-mentees').innerText = '0';
+        document.getElementById('stat-sessions').innerText = '0';
+        document.getElementById('p-tags').innerHTML = '';
+        return;
+      }
+
+      document.getElementById('profile-about').innerHTML =
+        `<p>${currentMentorData.bio || 'No bio set.'}</p><p style="font-size:12px;color:var(--t3);margin-top:4px;">${currentMentorData.company || ''}</p>`;
+
+      document.getElementById('profile-expertise').innerHTML =
+        (currentMentorData.expertise || []).map(e => `<span class="tag">${e}</span>`).join(' ') ||
+        '<p style="color:var(--t3);">No expertise set.</p>';
+
+      document.getElementById('p-tags').innerHTML =
+        (currentMentorData.expertise || []).map(e => `<span class="tag">${e}</span>`).join('');
+
+      document.getElementById('stat-mentees').innerText = (currentMentorData.mentees || []).length;
+      document.getElementById('stat-sessions').innerText = (currentMentorData.appointments || []).length;
+
+      // Suggested opportunities
+      const opps = currentMentorData.suggestedOpps || [];
+      const oppContainer = document.getElementById('suggested-opps');
+      if (opps.length > 0) {
+        oppContainer.innerHTML = opps.map(o =>
+          `<div class="suggest-opp-item"><div class="opp-info"><div class="title">${o.title}</div><div class="desc">${o.company || ''} ${o.desc || ''}</div></div><span class="badge badge-info">${o.sentTo || 'All mentees'}</span></div>`
+        ).join('') +
+        `<button class="btn btn-navy btn-sm" style="margin-top:8px;" onclick="suggestOpportunity()"><i class="ti ti-plus"></i> Suggest Opportunity</button>`;
+      } else {
+        oppContainer.innerHTML =
+          '<p style="color:var(--t3);">Suggest opportunities to your mentees.</p><button class="btn btn-navy btn-sm" style="margin-top:8px;" onclick="suggestOpportunity()"><i class="ti ti-plus"></i> Suggest Opportunity</button>';
+      }
+    }
+
+    // ============================================================
+    //  SUGGEST OPPORTUNITY
+    // ============================================================
+    function suggestOpportunity() {
+      if (!requireAuth()) return;
+      const select = document.getElementById('suggest-mentee');
+      const mentees = currentMentorData.mentees || [];
+      select.innerHTML = '<option value="">All mentees</option>' +
+        mentees.map(m => `<option value="${m.email}">${m.name}</option>`).join('');
+      document.getElementById('suggest-title').value = '';
+      document.getElementById('suggest-company').value = '';
+      document.getElementById('suggest-desc').value = '';
+      document.getElementById('suggest-link').value = '';
+      document.getElementById('suggestOppModal').style.display = 'flex';
+    }
+
+    document.getElementById('closeSuggestModal').onclick = () => {
+      document.getElementById('suggestOppModal').style.display = 'none';
+    };
+
+    document.getElementById('submitSuggestion').onclick = () => {
+      if (!requireAuth()) return;
+      const title = document.getElementById('suggest-title').value.trim();
+      if (!title) { toast('Please enter a title.'); return; }
+      const company = document.getElementById('suggest-company').value.trim();
+      const desc = document.getElementById('suggest-desc').value.trim();
+      const link = document.getElementById('suggest-link').value.trim();
+      const menteeEmail = document.getElementById('suggest-mentee').value;
+
+      if (!currentMentorData.suggestedOpps) currentMentorData.suggestedOpps = [];
+      currentMentorData.suggestedOpps.push({
+        id: 'sug_' + Date.now(),
+        title,
+        company,
+        desc,
+        link,
+        sentTo: menteeEmail || 'All mentees',
+        date: new Date().toISOString()
+      });
+      saveMentorState();
+      document.getElementById('suggestOppModal').style.display = 'none';
+      toast('Opportunity suggested!');
+      renderProfile();
+    };
+
+    // ============================================================
+    //  SETTINGS
+    // ============================================================
+    function renderSettings() {
+      // Already populated in updateUI
+    }
+
+    function saveMentorSettings() {
+      if (!requireAuth()) return;
+      currentMentorData.title = document.getElementById('s-title').value.trim() || 'Mentor';
+      currentMentorData.company = document.getElementById('s-company').value.trim();
+      currentMentorData.bio = document.getElementById('s-bio').value.trim() || 'Passionate about helping others grow.';
+      const expertise = document.getElementById('s-expertise').value.split(',').map(s => s.trim()).filter(Boolean);
+      currentMentorData.expertise = expertise.length > 0 ? expertise : ['Mentorship'];
+      currentMentorData.sessionDuration = parseInt(document.getElementById('s-session-duration').value) || 60;
+      currentMentorData.maxMentees = parseInt(document.getElementById('s-max-mentees').value) || 10;
+
+      // Update name in session
+      const session = getSession();
+      if (session) {
+        const name = document.getElementById('s-name').value.trim();
+        if (name && name !== session.name) {
+          session.name = name;
+          setSession(session);
+          // Update in users
+          const users = getUsers();
+          const userIdx = users.findIndex(u => u.email === session.email);
+          if (userIdx !== -1) {
+            users[userIdx].name = name;
+            saveUsers(users);
+          }
+        }
+      }
+
+      saveMentorState();
+      updateUI();
+      toast('Profile saved!');
+    }
+
+    function toggleAutoAccept() {
+      if (!requireAuth()) return;
+      const toggle = document.getElementById('autoAcceptToggle');
+      toggle.classList.toggle('active');
+      currentMentorData.autoAccept = toggle.classList.contains('active');
+      saveMentorState();
+      toast(currentMentorData.autoAccept ? 'Auto-accept enabled' : 'Auto-accept disabled');
+    }
+
+    // ============================================================
+    //  GLOBAL SEARCH
+    // ============================================================
+    document.getElementById('global-search').addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase();
+      if (q.length < 2) return;
+      const mentees = (currentMentorData?.mentees || []).filter(m =>
+        m.name.toLowerCase().includes(q) || (m.email || '').toLowerCase().includes(q)
+      );
+      if (mentees.length > 0) navTo('mentees');
+    });
+
+    // ============================================================
+    //  INIT
+    // ============================================================
+    loadMentorState();
+    updateUI();
+
+    // Render all screens
+    renderDashboard();
+    renderRequests();
+    renderMentees();
+    renderCalendar();
+    renderAvailability();
+    renderProfile();
+    renderSettings();
+
+    // Close modals on outside click
+    window.onclick = (e) => {
+      if (e.target.classList.contains('modal')) e.target.style.display = 'none';
+    };
+
+    // Auto-refresh every 30 seconds
+    setInterval(() => {
+      loadMentorState();
+      updateUI();
+    }, 30000);
+
+    if (getSession()) {
+      setTimeout(() => toast('Welcome to your Mentor Platform!'), 400);
+    } else {
+      setTimeout(() => toast('Log in to manage your mentorship.'), 400);
+    }
+
+    console.log('SkillBridge Mentor Platform loaded.');
+  </script>
+</body>
+</html>
