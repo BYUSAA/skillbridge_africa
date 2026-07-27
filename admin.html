@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillBridge Africa – Admin Dashboard</title>
+  <link rel="stylesheet" href="https://unpkg.com/tabler-icons@latest/iconfont/tabler-icons.min.css" />
+  <style>
+    /* ===== RESET & VARIABLES ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1E3A5F; --primary-dark: #0F2B45; --secondary: #2A9D8F; --secondary-light: #EAF8F5;
+      --accent: #E9C46A; --gray-50: #F8F9FA; --gray-100: #F1F3F5; --gray-200: #E9ECEF;
+      --gray-600: #6C757D; --gray-800: #343A40; --white: #FFFFFF;
+      --shadow: 0 4px 12px rgba(0,0,0,0.05); --radius-lg: 16px; --radius-md: 12px; --radius-sm: 8px;
+      --teal: #0F6E56; --teal2: #1D9E75; --teal-l: #E1F5EE; --bdr: rgba(0,0,0,0.12);
+      --bdr2: rgba(0,0,0,0.22); --t1: #111; --t2: #555; --t3: #888;
+    }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: var(--gray-50); color: var(--t1); padding: 12px;
+    }
+    .wrap { display: flex; gap: 0; background: var(--white); border: 0.5px solid var(--bdr); border-radius: var(--radius-lg); overflow: hidden; min-height: 680px; }
+    /* ===== SIDEBAR ===== */
+    .sidebar { width: 210px; flex-shrink: 0; background: var(--primary); display: flex; flex-direction: column; }
+    .logo { padding: 20px 18px 16px; color: #fff; font-size: 16px; font-weight: 500; border-bottom: 0.5px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 10px; }
+    .logo i { font-size: 20px; color: #9FE1CB; }
+    .nav-section { padding: 12px 0 0; }
+    .nav-label { font-size: 10px; color: rgba(255,255,255,0.35); padding: 0 18px 6px; letter-spacing: 0.08em; }
+    .nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 18px; color: rgba(255,255,255,0.6); cursor: pointer; font-size: 13px; border: none; background: none; width: 100%; text-align: left; font-family: inherit; }
+    .nav-item i { font-size: 18px; }
+    .nav-item:hover { background: rgba(255,255,255,0.07); color: #fff; }
+    .nav-item.active { background: rgba(159,225,203,0.15); color: #9FE1CB; }
+    .badge-dot { background: #9FE1CB; color: #085041; font-size: 10px; padding: 1px 6px; border-radius: 10px; margin-left: auto; }
+    .badge-dot.danger { background: #dc3545; color: #fff; }
+    .sidebar-footer { margin-top: auto; padding: 14px 18px; border-top: 0.5px solid rgba(255,255,255,0.1); }
+    .sidebar-footer .back-main { display: flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.5); font-size: 12px; text-decoration: none; padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 8px; cursor: pointer; background: none; border-left: none; border-right: none; border-bottom: none; width: 100%; font-family: inherit; }
+    .sidebar-footer .back-main:hover { color: #fff; }
+    .user-chip { display: flex; align-items: center; gap: 9px; cursor: pointer; background: none; border: none; width: 100%; padding: 0; font-family: inherit; text-align: left; }
+    .user-chip .av { width: 34px; height: 34px; border-radius: 50%; background: var(--secondary); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; color: #fff; text-transform: uppercase; }
+    .user-chip .info { flex: 1; min-width: 0; }
+    .user-chip .name { font-size: 13px; color: #fff; font-weight: 500; }
+    .user-chip .role { font-size: 11px; color: rgba(255,255,255,0.4); }
+    .user-chip i { color: rgba(255,255,255,0.3); }
+    /* ===== MAIN ===== */
+    .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    .topbar { padding: 14px 22px; border-bottom: 0.5px solid var(--bdr); background: var(--white); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .topbar h1 { font-size: 17px; font-weight: 500; flex: 1; }
+    .topbar-btn { background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm); padding: 7px 14px; font-size: 13px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px; font-family: inherit; }
+    .topbar-btn:hover { background: var(--primary-dark); }
+    .topbar-btn-danger { background: #dc3545; }
+    .topbar-btn-danger:hover { background: #c82333; }
+    .content { flex: 1; overflow-y: auto; padding: 22px; background: var(--gray-50); }
+    .screen { display: none; }
+    .screen.active { display: block; }
+    /* ===== GRIDS ===== */
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+    .grid3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 16px; }
+    .grid4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 16px; }
+    /* ===== CARDS ===== */
+    .card { background: var(--white); border: 0.5px solid var(--bdr); border-radius: var(--radius-md); padding: 16px; }
+    .stat-card { background: var(--gray-100); border-radius: var(--radius-sm); padding: 14px; text-align: center; }
+    .stat-num { font-size: 26px; font-weight: 500; }
+    .stat-lbl { font-size: 12px; color: var(--t2); margin-top: 3px; }
+    .sec-title { font-size: 13px; font-weight: 500; color: var(--t2); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
+    .badge { font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 6px; }
+    .badge-success { background: var(--secondary-light); color: var(--teal); }
+    .badge-warning { background: #FFF3CD; color: #856404; }
+    .badge-danger { background: #FCEBEB; color: #501313; }
+    .badge-info { background: #E8EBF4; color: var(--primary); }
+    .tag { font-size: 11px; padding: 2px 8px; border-radius: 6px; background: var(--gray-100); color: var(--t2); }
+    .btn { border-radius: var(--radius-sm); padding: 7px 16px; font-size: 13px; font-weight: 500; cursor: pointer; border: 0.5px solid var(--bdr2); background: var(--white); display: inline-flex; align-items: center; gap: 6px; font-family: inherit; }
+    .btn-navy { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .btn-navy:hover { background: var(--primary-dark); }
+    .btn-success { background: var(--secondary); color: #fff; border-color: var(--secondary); }
+    .btn-success:hover { background: #1a7a6e; }
+    .btn-danger { background: #dc3545; color: #fff; border-color: #dc3545; }
+    .btn-danger:hover { background: #c82333; }
+    .btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
+    .btn-outline:hover { background: var(--primary); color: #fff; }
+    .btn-sm { padding: 5px 12px; font-size: 12px; }
+    /* ===== TABLES ===== */
+    .table-wrap { overflow-x: auto; margin-top: 8px; }
+    .table-wrap table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .table-wrap th { background: var(--gray-100); padding: 10px 12px; text-align: left; font-weight: 600; color: var(--t2); border-bottom: 1px solid var(--bdr); }
+    .table-wrap td { padding: 10px 12px; border-bottom: 0.5px solid var(--bdr); vertical-align: middle; }
+    .table-wrap tr:hover td { background: var(--gray-50); }
+    .table-wrap .actions { display: flex; gap: 4px; flex-wrap: wrap; }
+    /* ===== TOAST ===== */
+    .toast { position: fixed; bottom: 24px; right: 24px; background: var(--primary); color: #fff; padding: 10px 16px; border-radius: var(--radius-sm); font-size: 13px; display: flex; gap: 8px; opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 1000; align-items: center; }
+    .toast.show { opacity: 1; }
+    /* ===== AUTH MODAL ===== */
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 1000; }
+    .modal-content { background: #fff; max-width: 400px; width: 90%; border-radius: var(--radius-lg); padding: 1.5rem; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+    .modal-content .auth-header { text-align: center; margin-bottom: 1.8rem; }
+    .modal-content .auth-header i { font-size: 2.8rem; color: var(--accent); background: var(--primary); padding: 0.5rem; border-radius: 50%; margin-bottom: 0.5rem; }
+    .modal-content .auth-header h2 { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+    .modal-content .auth-header p { color: var(--gray-600); font-size: 0.9rem; margin-top: 0.2rem; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 0.3rem; }
+    .form-group input { width: 100%; padding: 0.6rem 0.8rem; border: 1px solid var(--gray-200); border-radius: var(--radius-sm); font-family: inherit; font-size: 0.95rem; }
+    .form-group input:focus { outline: none; border-color: var(--secondary); box-shadow: 0 0 0 3px rgba(42,157,143,0.15); }
+    .btn-auth { width: 100%; padding: 0.7rem; background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-top: 0.5rem; font-family: inherit; }
+    .btn-auth:hover { background: var(--primary-dark); }
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .sidebar { width: 180px; }
+      .wrap { flex-direction: column; }
+      .grid2,.grid3,.grid4 { grid-template-columns: 1fr; }
+      .topbar { flex-wrap: wrap; }
+      .table-wrap table { font-size: 12px; }
+      .table-wrap th,.table-wrap td { padding: 6px 8px; }
+    }
+    @media (max-width: 480px) {
+      .sidebar { width: 100%; }
+      .wrap { border-radius: 0; }
+      .modal-content { padding: 1rem; }
+    }
+    .badge-pending { background: #FFF3CD; color: #856404; }
+    .badge-approved { background: var(--secondary-light); color: var(--teal); }
+    .badge-rejected { background: #FCEBEB; color: #501313; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== APP ===== -->
+  <div class="wrap">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="logo"><i class="ti ti-shield"></i><span>SkillBridge<small style="display:block;font-size:11px;opacity:.5">Admin</small></span></div>
+      <div class="nav-section">
+        <div class="nav-label">Management</div>
+        <button class="nav-item active" data-screen="dashboard"><i class="ti ti-layout-dashboard"></i> Dashboard</button>
+        <button class="nav-item" data-screen="users"><i class="ti ti-users"></i> Users</button>
+        <button class="nav-item" data-screen="mentors"><i class="ti ti-star"></i> Mentors <span class="badge-dot danger" id="mentor-badge">0</span></button>
+        <button class="nav-item" data-screen="opportunities"><i class="ti ti-briefcase"></i> Opportunities</button>
+        <button class="nav-item" data-screen="community"><i class="ti ti-news"></i> Community</button>
+        <button class="nav-item" data-screen="reports"><i class="ti ti-chart-bar"></i> Reports</button>
+      </div>
+      <div class="sidebar-footer">
+        <button class="user-chip" id="sidebarUserBtn">
+          <div class="av" id="sidebarAvatar">A</div>
+          <div class="info">
+            <div class="name" id="sidebarName">Admin</div>
+            <div class="role" id="sidebarRole">Logged in</div>
+          </div>
+          <i class="ti ti-logout" id="sidebarAuthIcon"></i>
+        </button>
+        <button class="back-main" onclick="window.location.href='index.html'"><i class="ti ti-arrow-left"></i> Back to main portal</button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+      <div class="topbar">
+        <h1 id="page-title">Dashboard</h1>
+        <button class="topbar-btn" id="topbar-action"><i class="ti ti-refresh"></i> Refresh</button>
+        <button class="topbar-btn topbar-btn-danger" id="logoutBtn"><i class="ti ti-logout"></i> Logout</button>
+      </div>
+      <div class="content" id="contentArea">
+
+        <!-- ===== AUTH SCREEN ===== -->
+        <div id="auth-screen" style="display:flex;align-items:center;justify-content:center;min-height:400px;">
+          <div class="card" style="max-width:400px;width:100%;padding:2rem;">
+            <div style="text-align:center;margin-bottom:1.5rem;">
+              <i class="ti ti-shield" style="font-size:3rem;color:var(--accent);"></i>
+              <h2 style="margin-top:0.5rem;">Admin Login</h2>
+              <p style="color:var(--t3);font-size:0.9rem;">Enter your credentials to access the dashboard</p>
+            </div>
+            <form id="adminLoginForm">
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="admin-email" value="m.byusa@alustudent.com" required>
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="admin-password" value="SkillBridgeAfrica@1" required>
+              </div>
+              <button type="submit" class="btn-auth">Log In</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- ===== DASHBOARD ===== -->
+        <div class="screen" id="screen-dashboard" style="display:none;">
+          <div class="grid4" id="stats-grid">
+            <div class="stat-card"><div class="stat-num" id="stat-users">0</div><div class="stat-lbl">Total Users</div></div>
+            <div class="stat-card"><div class="stat-num" id="stat-mentors">0</div><div class="stat-lbl">Mentors (Approved)</div></div>
+            <div class="stat-card"><div class="stat-num" id="stat-pending">0</div><div class="stat-lbl">Pending Mentors</div></div>
+            <div class="stat-card"><div class="stat-num" id="stat-opps">0</div><div class="stat-lbl">Opportunities</div></div>
+          </div>
+          <div class="grid2">
+            <div>
+              <div class="sec-title">Recent Mentor Applications</div>
+              <div id="dash-pending-mentors"></div>
+            </div>
+            <div>
+              <div class="sec-title">Recent Activity</div>
+              <div id="dash-activity"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== USERS ===== -->
+        <div class="screen" id="screen-users" style="display:none;">
+          <h2>All Users</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Actions</th></tr></thead>
+              <tbody id="users-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ===== MENTORS ===== -->
+        <div class="screen" id="screen-mentors" style="display:none;">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.8rem;margin-bottom:1rem;">
+            <h2>Mentor Applications &amp; Management</h2>
+            <span id="pending-mentor-count" style="font-size:14px;color:var(--t3);">0 pending</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Name</th><th>Email</th><th>Expertise</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="mentors-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ===== OPPORTUNITIES ===== -->
+        <div class="screen" id="screen-opportunities" style="display:none;">
+          <h2>All Opportunities</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Title</th><th>Company</th><th>Type</th><th>Posted By</th><th>Actions</th></tr></thead>
+              <tbody id="opps-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ===== COMMUNITY ===== -->
+        <div class="screen" id="screen-community" style="display:none;">
+          <h2>Community Posts</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Author</th><th>Content</th><th>Likes</th><th>Comments</th><th>Actions</th></tr></thead>
+              <tbody id="posts-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ===== REPORTS ===== -->
+        <div class="screen" id="screen-reports" style="display:none;">
+          <h2>Reports &amp; Insights</h2>
+          <div class="grid2">
+            <div class="card">
+              <div class="sec-title">User Growth</div>
+              <div id="user-growth-chart" style="height:200px;display:flex;align-items:flex-end;gap:6px;padding-top:10px;"></div>
+            </div>
+            <div class="card">
+              <div class="sec-title">Mentor Status</div>
+              <div id="mentor-status-chart" style="height:200px;display:flex;align-items:flex-end;gap:6px;padding-top:10px;"></div>
+            </div>
+          </div>
+          <div class="card" style="margin-top:12px;">
+            <div class="sec-title">Platform Summary</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;">
+              <div><strong>Total Users:</strong> <span id="r-users">0</span></div>
+              <div><strong>Total Mentors:</strong> <span id="r-mentors">0</span></div>
+              <div><strong>Pending Approvals:</strong> <span id="r-pending">0</span></div>
+              <div><strong>Opportunities:</strong> <span id="r-opps">0</span></div>
+              <div><strong>Community Posts:</strong> <span id="r-posts">0</span></div>
+              <div><strong>Mentorship Requests:</strong> <span id="r-requests">0</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TOAST ===== -->
+  <div class="toast" id="toast"><i class="ti ti-check"></i> <span id="toast-msg"></span></div>
+
+  <script>
+    // ============================================================
+    //  AUTH SYSTEM (Shared)
+    // ============================================================
+    const ADMIN_EMAIL = 'm.byusa@alustudent.com';
+    const ADMIN_PASSWORD = 'SkillBridgeAfrica@1';
+
+    function getUsers() { return JSON.parse(localStorage.getItem('sb_users')) || []; }
+    function saveUsers(users) { localStorage.setItem('sb_users', JSON.stringify(users)); }
+    function getSession() { return JSON.parse(localStorage.getItem('sb_auth_user')); }
+    function setSession(user) { localStorage.setItem('sb_auth_user', JSON.stringify(user)); }
+    function clearSession() { localStorage.removeItem('sb_auth_user'); }
+
+    // ============================================================
+    //  MENTORS – UNIFIED STORAGE (sb_mentors)
+    // ============================================================
+    const MENTORS_KEY = 'sb_mentors';
+    function getMentorsArray() { return JSON.parse(localStorage.getItem(MENTORS_KEY)) || []; }
+    function saveMentorsArray(arr) { localStorage.setItem(MENTORS_KEY, JSON.stringify(arr)); }
+
+    // ============================================================
+    //  OTHER DATA STORAGE
+    // ============================================================
+    const OPP_KEY = 'sb_opps';
+    const POST_KEY = 'sb_posts';
+
+    function getOpportunities() { return JSON.parse(localStorage.getItem(OPP_KEY)) || []; }
+    function saveOpportunities(data) { localStorage.setItem(OPP_KEY, JSON.stringify(data)); }
+    function getCommunityPosts() { return JSON.parse(localStorage.getItem(POST_KEY)) || []; }
+    function saveCommunityPosts(data) { localStorage.setItem(POST_KEY, JSON.stringify(data)); }
+
+    function toast(msg) {
+      const t = document.getElementById('toast');
+      document.getElementById('toast-msg').innerText = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    // ============================================================
+    //  ADMIN LOGIN
+    // ============================================================
+    document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('admin-email').value.trim();
+      const password = document.getElementById('admin-password').value.trim();
+      if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+        setSession({ email: ADMIN_EMAIL, name: 'Admin', role: 'admin' });
+        const users = getUsers();
+        if (!users.find(u => u.email === ADMIN_EMAIL)) {
+          users.push({ name: 'Admin', email: ADMIN_EMAIL, password: ADMIN_PASSWORD, role: 'admin' });
+          saveUsers(users);
+        }
+        showDashboard();
+        toast('Welcome Admin!');
+      } else {
+        toast('Invalid admin credentials.');
+      }
+    });
+
+    // ============================================================
+    //  CHECK AUTH ON LOAD
+    // ============================================================
+    function checkAuth() {
+      const session = getSession();
+      if (session && session.role === 'admin' && session.email === ADMIN_EMAIL) {
+        showDashboard();
+      } else {
+        document.getElementById('auth-screen').style.display = 'flex';
+        document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
+      }
+    }
+
+    function showDashboard() {
+      document.getElementById('auth-screen').style.display = 'none';
+      document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
+      document.getElementById('screen-dashboard').style.display = 'block';
+      document.getElementById('screen-dashboard').classList.add('active');
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      document.querySelector('.nav-item[data-screen="dashboard"]').classList.add('active');
+      document.getElementById('page-title').innerText = 'Dashboard';
+      document.getElementById('sidebarAvatar').innerText = 'A';
+      document.getElementById('sidebarName').innerText = 'Admin';
+      document.getElementById('sidebarRole').innerText = 'Administrator';
+      document.getElementById('sidebarAuthIcon').className = 'ti ti-logout';
+      document.getElementById('sidebarUserBtn').onclick = function() {
+        if (confirm('Logout?')) { clearSession(); location.reload(); }
+      };
+      refreshAll();
+    }
+
+    // ============================================================
+    //  NAVIGATION
+    // ============================================================
+    function navTo(screen) {
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      const navBtn = document.querySelector(`.nav-item[data-screen="${screen}"]`);
+      if (navBtn) navBtn.classList.add('active');
+      document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
+      const target = document.getElementById(`screen-${screen}`);
+      if (target) { target.style.display = 'block'; target.classList.add('active'); }
+      const titles = { dashboard:'Dashboard', users:'Users', mentors:'Mentors', opportunities:'Opportunities', community:'Community', reports:'Reports' };
+      document.getElementById('page-title').innerText = titles[screen] || screen;
+      if (screen === 'dashboard') refreshDashboard();
+      if (screen === 'users') renderUsers();
+      if (screen === 'mentors') renderMentors();
+      if (screen === 'opportunities') renderOpportunities();
+      if (screen === 'community') renderCommunity();
+      if (screen === 'reports') renderReports();
+    }
+
+    document.querySelectorAll('.nav-item').forEach(el => {
+      el.addEventListener('click', () => { const scr = el.dataset.screen; if (scr) navTo(scr); });
+    });
+
+    document.getElementById('topbar-action').onclick = () => { refreshAll(); toast('Refreshed!'); };
+    document.getElementById('logoutBtn').onclick = () => { if (confirm('Logout?')) { clearSession(); location.reload(); } };
+
+    // ============================================================
+    //  REFRESH ALL
+    // ============================================================
+    function refreshAll() {
+      refreshDashboard();
+      renderUsers();
+      renderMentors();
+      renderOpportunities();
+      renderCommunity();
+      renderReports();
+      updateMentorBadge();
+    }
+
+    // ============================================================
+    //  DASHBOARD
+    // ============================================================
+    function refreshDashboard() {
+      const users = getUsers();
+      const mentors = getMentorsArray();
+      const approved = mentors.filter(m => m.approved === true);
+      const pending = mentors.filter(m => m.approved !== true);
+      const opps = getOpportunities();
+      const posts = getCommunityPosts();
+
+      document.getElementById('stat-users').innerText = users.length;
+      document.getElementById('stat-mentors').innerText = approved.length;
+      document.getElementById('stat-pending').innerText = pending.length;
+      document.getElementById('stat-opps').innerText = opps.length;
+
+      const dashPending = document.getElementById('dash-pending-mentors');
+      if (pending.length === 0) {
+        dashPending.innerHTML = '<div class="card-sm" style="text-align:center;color:var(--t3);">No pending mentor applications.</div>';
+      } else {
+        dashPending.innerHTML = pending.slice(0,5).map(m =>
+          `<div class="row-item" style="padding:10px 12px;cursor:default;"><div style="flex:1;"><strong>${m.name}</strong> <span style="font-size:12px;color:var(--t3);">${m.email}</span></div><button class="btn btn-success btn-sm" onclick="approveMentor('${m.email}')"><i class="ti ti-check"></i> Approve</button><button class="btn btn-danger btn-sm" onclick="rejectMentor('${m.email}')"><i class="ti ti-x"></i></button></div>`
+        ).join('');
+      }
+      document.getElementById('dash-activity').innerHTML =
+        `<div class="card-sm" style="color:var(--t3);">Total posts: ${posts.length} · Total opportunities: ${opps.length}</div>`;
+    }
+
+    // ============================================================
+    //  USERS
+    // ============================================================
+    function renderUsers() {
+      const users = getUsers();
+      const tbody = document.getElementById('users-table-body');
+      if (users.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--t3);">No users registered.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = users.map(u =>
+        `<tr><td>${u.name||'N/A'}</td><td>${u.email}</td><td><span class="badge ${u.role==='admin'?'badge-danger':'badge-info'}">${u.role||'youth'}</span></td><td>${u.role!=='admin'?`<button class="btn btn-danger btn-sm" onclick="deleteUser('${u.email}')"><i class="ti ti-trash"></i></button>`:'<span style="color:var(--t3);font-size:12px;">Protected</span>'}</td></tr>`
+      ).join('');
+    }
+
+    function deleteUser(email) {
+      if (!confirm(`Delete user ${email}?`)) return;
+      let users = getUsers();
+      users = users.filter(u => u.email !== email);
+      saveUsers(users);
+      renderUsers();
+      refreshDashboard();
+      toast('User deleted.');
+    }
+
+    // ============================================================
+    //  MENTORS (unified sb_mentors)
+    // ============================================================
+    function renderMentors() {
+      const mentors = getMentorsArray();
+      const pending = mentors.filter(m => m.approved !== true);
+      document.getElementById('pending-mentor-count').innerText = pending.length + ' pending';
+      updateMentorBadge();
+
+      const tbody = document.getElementById('mentors-table-body');
+      if (mentors.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--t3);">No mentor profiles yet.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = mentors.map(m => {
+        const status = m.approved === true ? 'approved' : m.approved === false ? 'rejected' : 'pending';
+        const badgeClass = status === 'approved' ? 'badge-approved' : status === 'rejected' ? 'badge-rejected' : 'badge-pending';
+        return `<tr>
+          <td>${m.name||'N/A'}</td>
+          <td>${m.email}</td>
+          <td>${(m.expertise||[]).join(', ')}</td>
+          <td><span class="badge ${badgeClass}">${status.charAt(0).toUpperCase()+status.slice(1)}</span></td>
+          <td>
+            ${status==='pending'?`<button class="btn btn-success btn-sm" onclick="approveMentor('${m.email}')"><i class="ti ti-check"></i></button><button class="btn btn-danger btn-sm" onclick="rejectMentor('${m.email}')"><i class="ti ti-x"></i></button>`:''}
+            ${status==='approved'?`<button class="btn btn-danger btn-sm" onclick="rejectMentor('${m.email}')"><i class="ti ti-x"></i> Revoke</button>`:''}
+            ${status==='rejected'?`<button class="btn btn-success btn-sm" onclick="approveMentor('${m.email}')"><i class="ti ti-check"></i> Re-approve</button>`:''}
+          </td>
+        </tr>`;
+      }).join('');
+    }
+
+    function approveMentor(email) {
+      const mentors = getMentorsArray();
+      const idx = mentors.findIndex(m => m.email === email);
+      if (idx !== -1) {
+        mentors[idx].approved = true;
+        saveMentorsArray(mentors);
+        renderMentors();
+        refreshDashboard();
+        toast('Mentor approved!');
+      }
+    }
+
+    function rejectMentor(email) {
+      const mentors = getMentorsArray();
+      const idx = mentors.findIndex(m => m.email === email);
+      if (idx !== -1) {
+        mentors[idx].approved = false; // explicitly false for rejected
+        saveMentorsArray(mentors);
+        renderMentors();
+        refreshDashboard();
+        toast('Mentor rejected.');
+      }
+    }
+
+    function updateMentorBadge() {
+      const mentors = getMentorsArray();
+      const pending = mentors.filter(m => m.approved !== true).length;
+      const badge = document.getElementById('mentor-badge');
+      if (pending > 0) {
+        badge.innerText = pending;
+        badge.style.display = 'inline';
+      } else {
+        badge.style.display = 'none';
+      }
+    }
+
+    // ============================================================
+    //  OPPORTUNITIES
+    // ============================================================
+    function renderOpportunities() {
+      const opps = getOpportunities();
+      const tbody = document.getElementById('opps-table-body');
+      if (opps.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--t3);">No opportunities posted.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = opps.map(o =>
+        `<tr><td>${o.title}</td><td>${o.company}</td><td><span class="badge badge-info">${o.type}</span></td><td>${o.postedBy||'N/A'}</td><td><button class="btn btn-danger btn-sm" onclick="deleteOpportunity('${o.id}')"><i class="ti ti-trash"></i></button></td></tr>`
+      ).join('');
+    }
+
+    function deleteOpportunity(id) {
+      if (!confirm('Delete this opportunity?')) return;
+      let opps = getOpportunities();
+      opps = opps.filter(o => o.id !== id);
+      saveOpportunities(opps);
+      renderOpportunities();
+      refreshDashboard();
+      toast('Opportunity deleted.');
+    }
+
+    // ============================================================
+    //  COMMUNITY
+    // ============================================================
+    function renderCommunity() {
+      const posts = getCommunityPosts();
+      const tbody = document.getElementById('posts-table-body');
+      if (posts.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--t3);">No community posts.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = posts.map(p =>
+        `<tr>
+          <td>${p.author||'Unknown'}</td>
+          <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${p.content||''}</td>
+          <td>${p.likes||0}</td>
+          <td>${(p.comments||[]).length}</td>
+          <td><button class="btn btn-danger btn-sm" onclick="deletePost('${p.id}')"><i class="ti ti-trash"></i></button></td>
+        </tr>`
+      ).join('');
+    }
+
+    function deletePost(id) {
+      if (!confirm('Delete this post?')) return;
+      let posts = getCommunityPosts();
+      posts = posts.filter(p => p.id !== id);
+      saveCommunityPosts(posts);
+      renderCommunity();
+      refreshDashboard();
+      toast('Post deleted.');
+    }
+
+    // ============================================================
+    //  REPORTS
+    // ============================================================
+    function renderReports() {
+      const users = getUsers();
+      const mentors = getMentorsArray();
+      const approved = mentors.filter(m => m.approved === true);
+      const pending = mentors.filter(m => m.approved !== true);
+      const opps = getOpportunities();
+      const posts = getCommunityPosts();
+
+      document.getElementById('r-users').innerText = users.length;
+      document.getElementById('r-mentors').innerText = approved.length;
+      document.getElementById('r-pending').innerText = pending.length;
+      document.getElementById('r-opps').innerText = opps.length;
+      document.getElementById('r-posts').innerText = posts.length;
+
+      let requests = 0;
+      mentors.forEach(m => { if (m.mentees) requests += m.mentees.length; });
+      document.getElementById('r-requests').innerText = requests;
+
+      const growth = document.getElementById('user-growth-chart');
+      growth.innerHTML = '';
+      const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+      const values = [12,19,15,22,28,24,30];
+      const max = Math.max(...values,1);
+      days.forEach((d,i) => {
+        const bar = document.createElement('div');
+        bar.style.cssText = 'flex:1;display:flex;flex-direction:column;align-items:center;gap:4px';
+        bar.innerHTML = `<div style="width:100%;height:${Math.round(values[i]/max*150)}px;background:var(--primary);border-radius:4px 4px 0 0;"></div><span style="font-size:10px;color:var(--t3);">${d}</span>`;
+        growth.appendChild(bar);
+      });
+
+      const statusChart = document.getElementById('mentor-status-chart');
+      statusChart.innerHTML = '';
+      const statusData = [
+        { label:'Approved', value:approved.length, color:'var(--secondary)' },
+        { label:'Pending', value:pending.length, color:'var(--accent)' },
+        { label:'Rejected', value:mentors.filter(m=>m.approved===false).length, color:'#dc3545' }
+      ];
+      const maxVal = Math.max(...statusData.map(d=>d.value),1);
+      statusData.forEach(s => {
+        const div = document.createElement('div');
+        div.style.cssText = 'flex:1;display:flex;flex-direction:column;align-items:center;gap:4px';
+        div.innerHTML = `<div style="width:100%;height:${Math.round(s.value/maxVal*150)}px;background:${s.color};border-radius:4px 4px 0 0;"></div><span style="font-size:10px;color:var(--t3);">${s.label}</span>`;
+        statusChart.appendChild(div);
+      });
+    }
+
+    // ============================================================
+    //  INIT
+    // ============================================================
+    checkAuth();
+
+    // Auto-refresh every 60 seconds
+    setInterval(() => {
+      if (getSession() && getSession().role === 'admin') refreshAll();
+    }, 60000);
+
+    console.log('SkillBridge Admin Dashboard loaded.');
+  </script>
+</body>
+</html>
