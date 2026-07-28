@@ -1993,6 +1993,7 @@
       ).join('');
     }
 
+    // ===== IMPROVED: requestMentor now jumps to the event date =====
     function requestMentor(id) {
       if (!S.mentorReqs[id]) {
         S.mentorReqs[id] = true;
@@ -2015,6 +2016,8 @@
             color: 'secondary'
           });
           saveState();
+          // Jump calendar to the event date so it's immediately visible
+          calDate = new Date(dateStr);
           renderCalendar();
         }
         renderMentors();
