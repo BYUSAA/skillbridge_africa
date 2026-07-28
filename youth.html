@@ -1323,6 +1323,11 @@
       margin-bottom: 8px;
       color: var(--gray-200);
     }
+
+    /* ===== utilities ===== */
+    .opacity-50 {
+      opacity: 0.5;
+    }
   </style>
 </head>
 <body>
@@ -1481,7 +1486,7 @@
         <div class="screen" id="screen-calendar">
           <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.8rem;margin-bottom:1rem;">
             <h2>Your Weekly Schedule</h2>
-            <button class="btn btn-navy" id="addEventBtn"><i class="ti ti-plus"></i> Add Event</button>
+            <button class="btn btn-navy" id="addEventBtn"><i class="ti ti-edit"></i> Edit/Reschedule</button>
           </div>
           <div class="calendar-wrap">
             <div class="calendar-header">
@@ -1581,21 +1586,19 @@
     </div>
   </div>
 
-  <!-- ===== ADD EVENT MODAL (for youth to reschedule/delete, but not add new) ===== -->
+  <!-- ===== ADD/EDIT EVENT MODAL ===== -->
   <div id="addEventModal" class="modal schedule-modal">
     <div class="modal-content">
-      <h3 id="eventModalTitle">Add Schedule Event</h3>
-      <p style="font-size:12px;color:var(--t3);margin-bottom:12px;">Events are synced from your mentors and courses. You can only reschedule or delete existing events.</p>
-      <div class="form-row"><label>Title *</label><input type="text" id="event-title" placeholder="e.g., Mentor Meeting with James" /></div>
-      <div class="form-row"><label>Day</label><select id="event-day">
-          <option value="0">Sunday</option><option value="1" selected>Monday</option><option value="2">Tuesday</option><option value="3">Wednesday</option><option value="4">Thursday</option><option value="5">Friday</option><option value="6">Saturday</option>
-        </select></div>
+      <h3 id="eventModalTitle">Edit Event</h3>
+      <p style="font-size:12px;color:var(--t3);margin-bottom:12px;">Update the event details. You cannot create new events; only edit or delete existing ones.</p>
+      <div class="form-row"><label>Title *</label><input type="text" id="event-title" placeholder="e.g., Mentor Meeting" /></div>
+      <div class="form-row"><label>Date</label><input type="date" id="event-date" /></div>
       <div class="form-row"><label>Time</label><input type="time" id="event-time" value="10:00" /></div>
       <div class="form-row"><label>Duration (minutes)</label><input type="number" id="event-duration" value="60" min="15" step="15" /></div>
       <div class="form-row"><label>Type</label><select id="event-type">
           <option value="mentor">Mentorship</option><option value="course">Course</option><option value="opp">Opportunity</option><option value="other">Other</option>
         </select></div>
-      <div class="form-row"><label>Description</label><textarea id="event-desc" rows="2" placeholder="Details about this event..."></textarea></div>
+      <div class="form-row"><label>Description</label><textarea id="event-desc" rows="2" placeholder="Details..."></textarea></div>
       <div class="form-row"><label>Color</label>
         <div style="display:flex;gap:4px;flex-wrap:wrap;">
           <span class="color-option selected" style="background:#2A9D8F;" data-color="secondary" onclick="selectColor(this)"></span>
@@ -1608,6 +1611,7 @@
       <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px;">
         <button class="btn btn-ghost" id="closeEventModal">Cancel</button>
         <button class="btn btn-navy" id="submitEvent">Save Changes</button>
+        <button class="btn btn-danger" id="deleteEventBtn" style="display:none;">Delete</button>
       </div>
     </div>
   </div>
@@ -1632,22 +1636,17 @@
     //  AUTH SYSTEM (Shared with main portal)
     // ============================================================
     function getUsers() { return JSON.parse(localStorage.getItem('sb_users')) || []; }
-
     function saveUsers(users) { localStorage.setItem('sb_users', JSON.stringify(users)); }
-
     function getSession() { return JSON.parse(localStorage.getItem('sb_auth_user')); }
-
     function setSession(user) { localStorage.setItem('sb_auth_user', JSON.stringify(user)); }
-
     function clearSession() { localStorage.removeItem('sb_auth_user'); }
-
     function isValidEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
 
-    function showSignup() { document.getElementById('login-form').style.display = 'none';
-      document.getElementById('signup-form').style.display = 'block'; }
+    function showSignup() { document.getElementById('login-form').style.display = 'none'; document.getElementById('signup-form')
+        .style.display = 'block'; }
 
-    function showLogin() { document.getElementById('login-form').style.display = 'block';
-      document.getElementById('signup-form').style.display = 'none'; }
+    function showLogin() { document.getElementById('login-form').style.display = 'block'; document.getElementById('signup-form')
+        .style.display = 'none'; }
     window.showSignup = showSignup;
     window.showLogin = showLogin;
 
@@ -1703,7 +1702,6 @@
         updateUI();
         document.getElementById('authModal').style.display = 'none';
         toast('Welcome back, ' + user.name + '!');
-        // Reload state
         loadState();
         renderDashboard();
         renderCourses();
@@ -1826,7 +1824,7 @@
       name: 'Byusa Martin',
       school: 'African Leadership University · Kigali',
       activityLog: [],
-      schedule: []
+      schedule: [] // each event: { id, date (YYYY-MM-DD), time, duration, title, desc, type, color }
     };
 
     function loadState() {
@@ -1850,46 +1848,44 @@
           { id: 2, author: 'Byusa Martin', init: 'BM', bg: 'var(--gray-100)', ic: 'var(--primary)',
             text: 'Just finished Web Dev module!', time: '1d ago', likes: 5, liked: false }
         ];
-        // Seed schedule from mentors and courses if empty
+        // Seed schedule with realistic events for the next few days
         if (S.schedule.length === 0) {
-          const now = new Date();
-          const day = now.getDay();
-          const mentors = getApprovedMentors();
-          if (mentors.length > 0) {
-            const m = mentors[0];
-            S.schedule.push({
-              id: 'seed_' + Date.now(),
-              day: (day + 1) % 7,
-              time: '10:00',
-              duration: 60,
-              title: 'Mentor Session: ' + m.name,
-              desc: 'Career guidance and skill development',
-              type: 'mentor',
-              color: 'secondary',
-              fromMentor: true
-            });
-          }
+          const today = new Date();
+          const tomorrow = new Date(today);
+          tomorrow.setDate(tomorrow.getDate() + 1);
+          const dayAfter = new Date(today);
+          dayAfter.setDate(dayAfter.getDate() + 2);
+          const formatDate = d => d.toISOString().slice(0, 10);
+
           S.schedule.push({
-            id: 'seed2_' + Date.now() + 1,
-            day: (day + 3) % 7,
+            id: 'seed1',
+            date: formatDate(tomorrow),
+            time: '10:00',
+            duration: 60,
+            title: 'Mentor Session: James Nkosi',
+            desc: 'Career guidance and skill development',
+            type: 'mentor',
+            color: 'secondary'
+          });
+          S.schedule.push({
+            id: 'seed2',
+            date: formatDate(dayAfter),
             time: '14:00',
             duration: 90,
             title: 'Web Dev Course: Module 2',
             desc: 'CSS styling deep dive',
             type: 'course',
-            color: 'primary',
-            fromCourse: true
+            color: 'primary'
           });
           S.schedule.push({
-            id: 'seed3_' + Date.now() + 2,
-            day: (day + 5) % 7,
+            id: 'seed3',
+            date: formatDate(new Date(today.getTime() + 3 * 86400000)),
             time: '09:00',
             duration: 45,
             title: 'Apply for Frontend Intern',
             desc: 'Prepare application materials',
             type: 'opp',
-            color: 'accent',
-            fromOpp: true
+            color: 'accent'
           });
         }
         recomputeXP();
@@ -1990,7 +1986,6 @@
         settings: 'Settings'
       };
       document.getElementById('page-title').innerText = titles[screen] || screen;
-      // Update search placeholder based on page
       const searchInput = document.getElementById('global-search');
       const placeholders = {
         dashboard: 'Search courses, mentors, opportunities...',
@@ -2003,7 +1998,6 @@
         settings: 'Search...'
       };
       searchInput.placeholder = placeholders[screen] || 'Search...';
-      // Clear search
       searchInput.value = '';
       if (screen === 'dashboard') renderDashboard();
       if (screen === 'courses') renderCourses();
@@ -2031,7 +2025,6 @@
 
     function performSearch(screen, query) {
       if (!query) {
-        // Re-render the current screen
         if (screen === 'dashboard') renderDashboard();
         else if (screen === 'courses') renderCourses();
         else if (screen === 'mentors') renderMentors();
@@ -2044,13 +2037,11 @@
       }
 
       if (screen === 'dashboard') {
-        // Search across courses, mentors, opportunities
         const courseResults = COURSES.filter(c => c.title.toLowerCase().includes(query) || c.cat.includes(query));
         const mentorResults = getApprovedMentors().filter(m => m.name.toLowerCase().includes(query) || (m.expertise || [])
           .some(e => e.toLowerCase().includes(query)));
         const oppResults = OPPORTUNITIES.filter(o => o.title.toLowerCase().includes(query) || o.org.toLowerCase().includes(
           query) || o.desc.toLowerCase().includes(query));
-        // Show results in dashboard
         const dashCourses = document.getElementById('dash-courses');
         if (courseResults.length + mentorResults.length + oppResults.length === 0) {
           dashCourses.innerHTML = '<div class="no-results"><i class="ti ti-search"></i>No results found</div>';
@@ -2070,7 +2061,6 @@
           });
           dashCourses.innerHTML = html;
         }
-        // Also update recommended
         document.getElementById('recommended').innerHTML = '';
       } else if (screen === 'courses') {
         renderCourses(query);
@@ -2144,17 +2134,18 @@
         const mentor = getApprovedMentors().find(m => m.id === id);
         if (mentor) {
           const now = new Date();
-          const day = (now.getDay() + 1) % 7;
+          const tomorrow = new Date(now);
+          tomorrow.setDate(tomorrow.getDate() + 1);
+          const dateStr = tomorrow.toISOString().slice(0, 10);
           S.schedule.push({
             id: 'req_' + Date.now(),
-            day,
+            date: dateStr,
             time: '15:00',
             duration: 60,
             title: 'Mentor Session: ' + mentor.name,
             desc: 'Requested mentorship with ' + mentor.name,
             type: 'mentor',
-            color: 'secondary',
-            fromMentor: true
+            color: 'secondary'
           });
           saveState();
           renderCalendar();
@@ -2304,7 +2295,6 @@
       const course = currentCourse;
       const idx = currentLessonIndex;
       const lessons = course.lessons;
-      const total = lessons.length;
       const completed = S.lessons[course.id] || 0;
       const stepDots = document.getElementById('step-dots');
       stepDots.innerHTML = lessons.map((_, i) =>
@@ -2330,16 +2320,13 @@
         `<div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;"><button class="btn btn-ghost btn-sm" onclick="prevLesson()" ${idx===0?'disabled':''}><i class="ti ti-chevron-left"></i> Previous</button><button class="btn btn-navy btn-sm" onclick="nextLesson()">Next <i class="ti ti-chevron-right"></i></button></div>`;
       content.innerHTML = html;
 
-      // Lesson nav
       const navList = document.getElementById('lesson-nav-list');
       navList.innerHTML = lessons.map((l, i) =>
         `<div style="padding:6px 8px;cursor:pointer;border-radius:var(--radius-sm);${i===idx?'background:var(--gray-100);font-weight:500;':''}${i<completed?'color:var(--secondary);':''}" onclick="openLessonView('${course.id}',${i})">${i+1}. ${l.t} ${i<completed?'✓':''}</div>`
       ).join('');
 
-      // Notes
       document.getElementById('lesson-notes').value = S.notes[course.id + '_' + idx] || '';
 
-      // Update progress if we're on a new lesson
       if (idx > (S.lessons[course.id] || 0)) {
         S.lessons[course.id] = idx;
         logActivity();
@@ -2357,7 +2344,6 @@
         renderLesson();
       } else {
         toast('🎉 You completed all lessons!');
-        // Mark as complete
         S.lessons[currentCourse.id] = currentCourse.lessons.length;
         saveState();
         recomputeXP();
@@ -2381,7 +2367,6 @@
       if (oi === ans) {
         el.classList.add('correct');
         toast('✅ Correct!');
-        // Mark lesson as done if not already
         if (currentCourse) {
           const idx = currentLessonIndex;
           if (idx > (S.lessons[currentCourse.id] || 0)) {
@@ -2470,21 +2455,21 @@
         toast('Application submitted!');
         logActivity();
         renderOpps();
-        // Add to schedule as a reminder
         const opp = OPPORTUNITIES.find(o => o.id === id);
         if (opp) {
           const now = new Date();
-          const day = (now.getDay() + 2) % 7;
+          const followDate = new Date(now);
+          followDate.setDate(followDate.getDate() + 2);
+          const dateStr = followDate.toISOString().slice(0, 10);
           S.schedule.push({
             id: 'apply_' + Date.now(),
-            day,
+            date: dateStr,
             time: '08:00',
             duration: 30,
             title: 'Follow up: ' + opp.title,
             desc: 'Check application status for ' + opp.org,
             type: 'opp',
-            color: 'accent',
-            fromOpp: true
+            color: 'accent'
           });
           saveState();
           renderCalendar();
@@ -2519,7 +2504,6 @@
               </div>
             </div>`
       ).join('');
-      // Update badge
       document.getElementById('msg-badge').innerText = S.posts.length;
     }
 
@@ -2558,7 +2542,7 @@
     window.postToFeed = postToFeed;
 
     // ============================================================
-    //  CALENDAR
+    //  CALENDAR (improved: events have specific dates, not repeating)
     // ============================================================
     let calDate = new Date();
     let selectedColor = 'secondary';
@@ -2580,44 +2564,65 @@
         new Date(year, month).toLocaleString('default', { month: 'long', year: 'numeric' });
 
       const grid = document.getElementById('calendar-grid');
+      // We'll build a weekly view: from Sunday to Saturday of the week containing the 1st day of month
+      // Actually, we want to show the current month's days in a weekly grid?
+      // Let's display a monthly grid with days, but we want to show events by date.
+      // Simpler: show a monthly grid with day numbers and events listed under each day.
+      // But we have a time-based view. Let's keep the time-grid but show only for the current week.
+      // That might be confusing. Let's switch to a day-based monthly grid with events listed.
+      // However, the user expects a calendar with time slots. We'll keep the time-grid but for the current week only.
+
+      // Get the start of the week (Sunday) for the current date
+      const startOfWeek = new Date(calDate);
+      startOfWeek.setDate(calDate.getDate() - calDate.getDay());
+      startOfWeek.setHours(0, 0, 0, 0);
+      const endOfWeek = new Date(startOfWeek);
+      endOfWeek.setDate(startOfWeek.getDate() + 6);
+
+      // Prepare week days
+      const weekDays = [];
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(startOfWeek);
+        d.setDate(startOfWeek.getDate() + i);
+        weekDays.push(d);
+      }
+
       const hours = ['6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00',
-        '18:00', '19:00'
+        '18:00', '19:00', '20:00'
       ];
-      const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
       // Build header
       let html = `<div class="cell time-label"></div>`;
-      for (let i = 0; i < 7; i++) {
-        const d = new Date(year, month, 1 + i - firstDay);
+      weekDays.forEach((d, idx) => {
         const isToday = d.toDateString() === today.toDateString();
+        const dayName = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][idx];
         html +=
-          `<div class="cell day-header ${isToday?'today':''}">${dayNames[i]} ${d.getDate()}</div>`;
-      }
+          `<div class="cell day-header ${isToday?'today':''}">${dayName}<br><span style="font-size:10px;">${d.getDate()}</span></div>`;
+      });
 
-      // Build rows per hour
+      // For each hour, for each day, find events
       hours.forEach(h => {
         html += `<div class="cell time-label">${h}</div>`;
-        for (let d = 0; d < 7; d++) {
-          const dayOffset = d - firstDay;
-          const date = new Date(year, month, 1 + dayOffset);
-          const dateStr = date.toISOString().slice(0, 10);
-          const isToday = date.toDateString() === today.toDateString();
-          const isCurrentMonth = date.getMonth() === month && date.getFullYear() === year;
-
-          // Find events for this day
-          const dayEvents = S.schedule.filter(e => e.day === d && date.getMonth() === month && date.getFullYear() ===
-            year);
-          // Filter by search
-          let filteredEvents = dayEvents;
+        weekDays.forEach((d, colIdx) => {
+          const dateStr = d.toISOString().slice(0, 10);
+          const eventsOnDay = S.schedule.filter(e => e.date === dateStr);
+          // Filter by query
+          let filtered = eventsOnDay;
           if (query) {
-            filteredEvents = dayEvents.filter(e => e.title.toLowerCase().includes(query) || e.desc.toLowerCase().includes(
-              query));
+            filtered = eventsOnDay.filter(e => e.title.toLowerCase().includes(query) || e.desc.toLowerCase()
+              .includes(query));
           }
+          // Check if any event matches this hour (based on time)
+          const eventsAtThisHour = filtered.filter(e => {
+            const eventHour = parseInt(e.time.split(':')[0]);
+            return eventHour === parseInt(h.split(':')[0]);
+          });
 
-          html += `<div class="cell ${isToday?'today':''} ${!isCurrentMonth?'opacity-50':''}" style="opacity:${isCurrentMonth?1:0.5}">`;
-          if (filteredEvents.length > 0) {
+          const isToday = d.toDateString() === today.toDateString();
+          html += `<div class="cell ${isToday?'today':''}">`;
+          if (eventsAtThisHour.length > 0) {
             html += `<div class="event-items">`;
-            filteredEvents.forEach(ev => {
+            eventsAtThisHour.forEach(ev => {
               const colorMap = {
                 secondary: 'var(--secondary)',
                 accent: 'var(--accent)',
@@ -2630,13 +2635,13 @@
                 `<div class="event-item" style="background:${bg}20;border-left:2px solid ${bg};" onclick="editEvent('${ev.id}')">
                       <span class="event-dot ${ev.color||'secondary'}"></span>
                       <span>${ev.title}</span>
-                      <span style="font-size:7px;color:var(--t3);margin-left:auto;">${ev.time||''}</span>
+                      <span style="font-size:7px;color:var(--t3);margin-left:auto;">${ev.time}</span>
                     </div>`;
             });
             html += `</div>`;
           }
           html += `</div>`;
-        }
+        });
       });
 
       grid.innerHTML = html;
@@ -2647,39 +2652,29 @@
 
     function renderUpcomingEvents(query) {
       const container = document.getElementById('upcoming-events-list');
-      const now = new Date();
-      const today = now.getDay();
-      let upcoming = S.schedule.filter(e => {
-        const eventDate = new Date();
-        eventDate.setDate(eventDate.getDate() + (e.day - today + 7) % 7);
-        // If event is today or future
-        const diff = (e.day - today + 7) % 7;
-        return diff >= 0;
-      });
+      const today = new Date();
+      const todayStr = today.toISOString().slice(0, 10);
+      let upcoming = S.schedule.filter(e => e.date >= todayStr);
       if (query) {
         upcoming = upcoming.filter(e => e.title.toLowerCase().includes(query) || e.desc.toLowerCase().includes(query));
       }
-      upcoming.sort((a, b) => {
-        const dA = (a.day - today + 7) % 7;
-        const dB = (b.day - today + 7) % 7;
-        if (dA !== dB) return dA - dB;
-        return a.time.localeCompare(b.time);
-      });
+      upcoming.sort((a, b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time));
 
       if (upcoming.length === 0) {
         container.innerHTML = '<div class="no-results"><i class="ti ti-calendar"></i>No upcoming events</div>';
         return;
       }
 
-      const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       container.innerHTML = upcoming.slice(0, 10).map(e => {
-        const dayName = dayNames[e.day];
+        const dateObj = new Date(e.date + 'T00:00:00');
+        const dayName = dateObj.toLocaleDateString('default', { weekday: 'short' });
+        const dateDisplay = dateObj.toLocaleDateString('default', { month: 'short', day: 'numeric' });
         const typeMap = { mentor: 'Mentorship', course: 'Course', opp: 'Opportunity', other: 'Other' };
         return `<div class="schedule-item">
                 <div class="time">${e.time||'TBD'}</div>
                 <div class="info">
                   <div class="title">${e.title}</div>
-                  <div class="desc">${dayName} · ${e.desc||''}</div>
+                  <div class="desc">${dayName} ${dateDisplay} · ${e.desc||''}</div>
                 </div>
                 <span class="type-badge ${e.type||'other'}">${typeMap[e.type]||e.type||'Other'}</span>
                 <div class="schedule-actions">
@@ -2690,83 +2685,76 @@
       }).join('');
     }
 
+    // ===== Edit / Delete Event =====
     function editEvent(id) {
       const event = S.schedule.find(e => e.id === id);
       if (!event) return;
-      // Populate modal
       document.getElementById('eventModalTitle').innerText = 'Edit Event';
       document.getElementById('event-title').value = event.title;
-      document.getElementById('event-day').value = event.day;
-      document.getElementById('event-time').value = event.time || '10:00';
+      document.getElementById('event-date').value = event.date;
+      document.getElementById('event-time').value = event.time;
       document.getElementById('event-duration').value = event.duration || 60;
       document.getElementById('event-type').value = event.type || 'other';
       document.getElementById('event-desc').value = event.desc || '';
-      // Color
       document.querySelectorAll('.color-option').forEach(c => {
         c.classList.toggle('selected', c.dataset.color === event.color);
       });
       selectedColor = event.color || 'secondary';
-
       window._editingEventId = id;
+      document.getElementById('deleteEventBtn').style.display = 'inline-flex';
+      document.getElementById('deleteEventBtn').onclick = function() {
+        if (confirm('Delete this event?')) {
+          deleteEvent(id);
+          document.getElementById('addEventModal').style.display = 'none';
+        }
+      };
       document.getElementById('addEventModal').style.display = 'flex';
     }
 
     function deleteEvent(id) {
-      if (confirm('Delete this event?')) {
-        S.schedule = S.schedule.filter(e => e.id !== id);
-        saveState();
-        renderCalendar();
-        toast('Event deleted.');
-      }
+      S.schedule = S.schedule.filter(e => e.id !== id);
+      saveState();
+      renderCalendar();
+      toast('Event deleted.');
     }
 
+    // ===== Add / Edit button =====
     document.getElementById('addEventBtn').addEventListener('click', function() {
-      // Youth can only edit existing events, not add new ones
-      toast('You can only edit or delete existing events from your schedule.');
-      // But we allow them to reschedule by opening the modal with empty fields
-      document.getElementById('eventModalTitle').innerText = 'Reschedule Event';
-      document.getElementById('event-title').value = '';
-      document.getElementById('event-day').value = new Date().getDay();
-      document.getElementById('event-time').value = '10:00';
-      document.getElementById('event-duration').value = 60;
-      document.getElementById('event-type').value = 'other';
-      document.getElementById('event-desc').value = '';
-      document.querySelectorAll('.color-option').forEach(c => c.classList.toggle('selected', c.dataset.color === 'secondary'));
-      selectedColor = 'secondary';
-      window._editingEventId = null;
-      document.getElementById('addEventModal').style.display = 'flex';
+      // User can only edit existing events, not create new
+      toast('You can edit or delete existing events. To add new events, contact your mentors or enroll in courses.');
+      // Still, we can open the modal with empty fields for rescheduling? We'll allow editing only.
+      // Instead, we can show a list of events to select? Simpler: we just open the edit modal for the first upcoming event?
+      // Better: let the user click on an event in the calendar to edit. The button is just a shortcut.
+      // We'll keep it as is.
     });
 
     document.getElementById('submitEvent').addEventListener('click', function() {
       const id = window._editingEventId;
+      if (!id) {
+        toast('You cannot create new events. Please edit an existing one.');
+        return;
+      }
       const title = document.getElementById('event-title').value.trim();
-      const day = parseInt(document.getElementById('event-day').value);
+      const date = document.getElementById('event-date').value;
       const time = document.getElementById('event-time').value;
       const duration = parseInt(document.getElementById('event-duration').value);
       const type = document.getElementById('event-type').value;
       const desc = document.getElementById('event-desc').value.trim();
 
-      if (!title) { toast('Please enter a title.'); return; }
+      if (!title || !date || !time) { toast('Please fill title, date, and time.'); return; }
 
-      if (id) {
-        // Editing existing event
-        const event = S.schedule.find(e => e.id === id);
-        if (event) {
-          event.title = title;
-          event.day = day;
-          event.time = time;
-          event.duration = duration;
-          event.type = type;
-          event.desc = desc;
-          event.color = selectedColor;
-          saveState();
-          renderCalendar();
-          toast('Event updated!');
-          document.getElementById('addEventModal').style.display = 'none';
-        }
-      } else {
-        // Creating new event - only allowed if it's from a mentor or course
-        toast('You cannot create new events. Events are synced from your mentors and courses.');
+      const event = S.schedule.find(e => e.id === id);
+      if (event) {
+        event.title = title;
+        event.date = date;
+        event.time = time;
+        event.duration = duration;
+        event.type = type;
+        event.desc = desc;
+        event.color = selectedColor;
+        saveState();
+        renderCalendar();
+        toast('Event updated!');
         document.getElementById('addEventModal').style.display = 'none';
       }
     });
@@ -2775,13 +2763,14 @@
       document.getElementById('addEventModal').style.display = 'none';
     });
 
+    // ===== Cal navigation =====
     document.getElementById('cal-prev').addEventListener('click', function() {
-      calDate.setMonth(calDate.getMonth() - 1);
+      calDate.setDate(calDate.getDate() - 7);
       renderCalendar();
     });
 
     document.getElementById('cal-next').addEventListener('click', function() {
-      calDate.setMonth(calDate.getMonth() + 1);
+      calDate.setDate(calDate.getDate() + 7);
       renderCalendar();
     });
 
@@ -2804,7 +2793,6 @@
       document.getElementById('d-streak').innerText = computeStreak();
       document.getElementById('d-xp').innerText = S.xp;
 
-      // Continue learning
       const dashCourses = document.getElementById('dash-courses');
       const enrolledCourses = COURSES.filter(c => S.enrolled.includes(c.id));
       if (enrolledCourses.length === 0) {
@@ -2824,9 +2812,8 @@
         }).join('');
       }
 
-      // Today's schedule
-      const today = new Date().getDay();
-      const todayEvents = S.schedule.filter(e => e.day === today);
+      const today = new Date().toISOString().slice(0, 10);
+      const todayEvents = S.schedule.filter(e => e.date === today);
       const scheduleDiv = document.getElementById('today-schedule');
       if (todayEvents.length === 0) {
         scheduleDiv.innerHTML = '<div class="card-sm" style="text-align:center;color:var(--t3);">No events for today.</div>';
@@ -2843,7 +2830,6 @@
         ).join('');
       }
 
-      // Recommended
       const recDiv = document.getElementById('recommended');
       const recommended = COURSES.filter(c => !S.enrolled.includes(c.id)).slice(0, 3);
       if (recommended.length === 0) {
@@ -2861,7 +2847,6 @@
         ).join('');
       }
 
-      // Activity chart
       renderActivityChart('act-chart');
     }
 
@@ -2888,7 +2873,6 @@
         ).join('');
       }
 
-      // Skills progress
       const skillsList = document.getElementById('skills-list');
       const skills = {};
       COURSES.forEach(c => {
@@ -2928,7 +2912,6 @@
         document.getElementById('s-name').value = user.name;
       }
       document.getElementById('s-school').value = S.school || '';
-      // Notifications
       const notifList = document.getElementById('notif-list');
       notifList.innerHTML = `
             <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--bdr);">
@@ -2954,7 +2937,6 @@
 
       const user = getSession();
       if (user && name) {
-        // Update user in users array
         const users = getUsers();
         const found = users.find(u => u.email === user.email);
         if (found) {
