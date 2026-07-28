@@ -7,280 +7,1316 @@
   <link rel="stylesheet" href="https://unpkg.com/tabler-icons@latest/iconfont/tabler-icons.min.css" />
   <style>
     /* ===== RESET & VARIABLES ===== */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     :root {
-      --primary: #1E3A5F; --primary-dark: #0F2B45; --secondary: #2A9D8F; --secondary-light: #EAF8F5;
-      --accent: #E9C46A; --gray-50: #F8F9FA; --gray-100: #F1F3F5; --gray-200: #E9ECEF;
-      --gray-600: #6C757D; --gray-800: #343A40; --white: #FFFFFF;
-      --shadow: 0 4px 12px rgba(0,0,0,0.05); --radius-lg: 16px; --radius-md: 12px; --radius-sm: 8px;
-      --teal: #0F6E56; --teal2: #1D9E75; --teal-l: #E1F5EE; --bdr: rgba(0,0,0,0.12);
-      --bdr2: rgba(0,0,0,0.22); --t1: #111; --t2: #555; --t3: #888;
+      --primary: #1E3A5F;
+      --primary-dark: #0F2B45;
+      --secondary: #2A9D8F;
+      --secondary-light: #EAF8F5;
+      --accent: #E9C46A;
+      --gray-50: #F8F9FA;
+      --gray-100: #F1F3F5;
+      --gray-200: #E9ECEF;
+      --gray-300: #DEE2E6;
+      --gray-600: #6C757D;
+      --gray-800: #343A40;
+      --white: #FFFFFF;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --shadow-hover: 0 8px 28px rgba(0, 0, 0, 0.10);
+      --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.12);
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --teal: #0F6E56;
+      --teal2: #1D9E75;
+      --teal-l: #E1F5EE;
+      --bdr: rgba(0, 0, 0, 0.06);
+      --bdr2: rgba(0, 0, 0, 0.12);
+      --t1: #111;
+      --t2: #555;
+      --t3: #888;
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
     body {
       font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-      background: var(--gray-50); color: var(--t1); padding: 12px;
+      background: #f0f2f5;
+      color: var(--t1);
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      margin: 0;
+      padding: 0;
     }
     .wrap {
-      display: flex; gap: 0; background: var(--white); border: 0.5px solid var(--bdr);
-      border-radius: var(--radius-lg); overflow: hidden; min-height: 680px;
+      display: flex;
+      gap: 0;
+      background: var(--white);
+      overflow: hidden;
+      min-height: 100vh;
+      width: 100%;
+      box-shadow: none;
     }
+
     /* ===== SIDEBAR ===== */
     .sidebar {
-      width: 210px; flex-shrink: 0; background: var(--primary); display: flex; flex-direction: column;
+      width: 230px;
+      flex-shrink: 0;
+      background: var(--primary);
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+      z-index: 10;
     }
+    .sidebar::-webkit-scrollbar {
+      width: 3px;
+    }
+    .sidebar::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+
     .logo {
-      padding: 20px 18px 16px; color: #fff; font-size: 16px; font-weight: 500;
-      border-bottom: 0.5px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 10px;
+      padding: 24px 20px 18px;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: -0.3px;
     }
-    .logo i { font-size: 20px; color: #9FE1CB; }
-    .nav-section { padding: 12px 0 0; }
+    .logo i {
+      font-size: 24px;
+      color: #9FE1CB;
+    }
+    .logo small {
+      display: block;
+      font-size: 10px;
+      opacity: 0.4;
+      font-weight: 400;
+      margin-top: 1px;
+      letter-spacing: 0.02em;
+    }
+    .nav-section {
+      padding: 16px 0 0;
+    }
     .nav-label {
-      font-size: 10px; color: rgba(255,255,255,0.35); padding: 0 18px 6px; letter-spacing: 0.08em;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.3);
+      padding: 0 20px 8px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
     }
     .nav-item {
-      display: flex; align-items: center; gap: 10px; padding: 9px 18px;
-      color: rgba(255,255,255,0.6); cursor: pointer; font-size: 13px; border: none;
-      background: none; width: 100%; text-align: left; font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 20px;
+      color: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      font-size: 13px;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+      transition: all var(--transition);
+      border-left: 3px solid transparent;
+      font-weight: 450;
     }
-    .nav-item i { font-size: 18px; }
-    .nav-item:hover { background: rgba(255,255,255,0.07); color: #fff; }
-    .nav-item.active { background: rgba(159,225,203,0.15); color: #9FE1CB; }
-    .badge-dot { background: #9FE1CB; color: #085041; font-size: 10px; padding: 1px 6px; border-radius: 10px; margin-left: auto; }
-    .badge-dot.danger { background: #dc3545; color: #fff; }
+    .nav-item i {
+      font-size: 18px;
+      width: 22px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .nav-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+    }
+    .nav-item.active {
+      background: rgba(159, 225, 203, 0.10);
+      color: #9FE1CB;
+      border-left-color: #9FE1CB;
+    }
+    .badge-dot {
+      background: #9FE1CB;
+      color: #085041;
+      font-size: 10px;
+      padding: 1px 8px;
+      border-radius: 12px;
+      margin-left: auto;
+      font-weight: 600;
+    }
+    .badge-dot.danger {
+      background: #dc3545;
+      color: #fff;
+    }
+    .badge-dot.danger.pulse {
+      animation: pulse-badge 1.2s ease-in-out infinite;
+    }
+    @keyframes pulse-badge {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.12);
+      }
+    }
+
     .sidebar-footer {
-      margin-top: auto; padding: 14px 18px; border-top: 0.5px solid rgba(255,255,255,0.1);
+      margin-top: auto;
+      padding: 16px 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
     .sidebar-footer .back-main {
-      display: flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.5);
-      font-size: 12px; text-decoration: none; padding: 8px 0;
-      border-top: 1px solid rgba(255,255,255,0.05); margin-top: 8px; cursor: pointer;
-      background: none; border-left: none; border-right: none; border-bottom: none;
-      width: 100%; font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 12px;
+      padding: 8px 0;
+      margin-top: 8px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      font-family: inherit;
+      transition: color var(--transition);
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      padding-top: 12px;
     }
-    .sidebar-footer .back-main:hover { color: #fff; }
+    .sidebar-footer .back-main:hover {
+      color: #fff;
+    }
     .user-chip {
-      display: flex; align-items: center; gap: 9px; cursor: pointer;
-      background: none; border: none; width: 100%; padding: 0; font-family: inherit; text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      padding: 4px 0;
+      font-family: inherit;
+      text-align: left;
+      border-radius: var(--radius-sm);
+      transition: background var(--transition);
+    }
+    .user-chip:hover {
+      background: rgba(255, 255, 255, 0.04);
     }
     .user-chip .av {
-      width: 34px; height: 34px; border-radius: 50%; background: var(--secondary);
-      display: flex; align-items: center; justify-content: center; font-size: 12px;
-      font-weight: 500; color: #fff; text-transform: uppercase;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      text-transform: uppercase;
+      flex-shrink: 0;
     }
-    .user-chip .info { flex: 1; min-width: 0; }
-    .user-chip .name { font-size: 13px; color: #fff; font-weight: 500; }
-    .user-chip .role { font-size: 11px; color: rgba(255,255,255,0.4); }
-    .user-chip i { color: rgba(255,255,255,0.3); }
+    .user-chip .info {
+      flex: 1;
+      min-width: 0;
+    }
+    .user-chip .name {
+      font-size: 13px;
+      color: #fff;
+      font-weight: 500;
+    }
+    .user-chip .role {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.4);
+    }
+    .user-chip i {
+      color: rgba(255, 255, 255, 0.2);
+      transition: color var(--transition);
+      font-size: 16px;
+    }
+    .user-chip:hover i {
+      color: #fff;
+    }
+
     /* ===== MAIN ===== */
-    .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: #f4f6f9;
+    }
     .topbar {
-      padding: 14px 22px; border-bottom: 0.5px solid var(--bdr); background: var(--white);
-      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      padding: 16px 32px;
+      border-bottom: 1px solid var(--bdr);
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
     }
-    .topbar h1 { font-size: 17px; font-weight: 500; flex: 1; }
+    .topbar h1 {
+      font-size: 19px;
+      font-weight: 600;
+      flex: 1;
+      color: var(--primary);
+      letter-spacing: -0.3px;
+    }
     .search-box {
-      display: flex; align-items: center; gap: 8px; background: var(--gray-100);
-      border: 0.5px solid var(--bdr); border-radius: var(--radius-sm); padding: 6px 12px; width: 200px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gray-100);
+      border: 1px solid var(--bdr);
+      border-radius: 40px;
+      padding: 6px 16px;
+      width: 240px;
+      transition: all var(--transition);
     }
-    .search-box input { background: transparent; border: none; font-size: 13px; outline: none; width: 100%; font-family: inherit; }
+    .search-box:focus-within {
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 4px rgba(42, 157, 143, 0.08);
+      background: #fff;
+    }
+    .search-box input {
+      background: transparent;
+      border: none;
+      font-size: 13px;
+      outline: none;
+      width: 100%;
+      font-family: inherit;
+      color: var(--t1);
+      padding: 4px 0;
+    }
+    .search-box input::placeholder {
+      color: var(--t3);
+    }
+    .search-box i {
+      color: var(--t3);
+      font-size: 16px;
+    }
     .topbar-btn {
-      background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm);
-      padding: 7px 14px; font-size: 13px; font-weight: 500; cursor: pointer;
-      display: flex; align-items: center; gap: 6px; font-family: inherit;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 40px;
+      padding: 8px 20px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+      transition: all var(--transition);
     }
-    .topbar-btn:hover { background: var(--primary-dark); }
-    .content { flex: 1; overflow-y: auto; padding: 22px; background: var(--gray-50); }
-    .screen { display: none; }
-    .screen.active { display: block; }
-    /* ===== GRIDS ===== */
-    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
-    .grid3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 16px; }
-    .grid4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 16px; }
-    /* ===== CARDS ===== */
-    .card { background: var(--white); border: 0.5px solid var(--bdr); border-radius: var(--radius-md); padding: 16px; }
-    .card-sm { background: var(--white); border: 0.5px solid var(--bdr); border-radius: var(--radius-md); padding: 14px; }
-    .stat-card { background: var(--gray-100); border-radius: var(--radius-sm); padding: 14px; text-align: center; }
-    .stat-num { font-size: 26px; font-weight: 500; }
-    .stat-lbl { font-size: 12px; color: var(--t2); margin-top: 3px; }
-    .sec-title {
-      font-size: 13px; font-weight: 500; color: var(--t2); text-transform: uppercase;
-      letter-spacing: 0.06em; margin-bottom: 12px;
+    .topbar-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(30, 58, 95, 0.2);
     }
-    .badge { font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 6px; }
-    .badge-success { background: var(--secondary-light); color: var(--teal); }
-    .badge-warning { background: #FFF3CD; color: #856404; }
-    .badge-danger { background: #FCEBEB; color: #501313; }
-    .badge-info { background: #E8EBF4; color: var(--primary); }
-    .tag { font-size: 11px; padding: 2px 8px; border-radius: 6px; background: var(--gray-100); color: var(--t2); }
-    .pill-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
-    .pill {
-      background: var(--gray-100); border: 0.5px solid var(--bdr); border-radius: 20px;
-      padding: 6px 14px; font-size: 13px; cursor: pointer; color: var(--t2); font-family: inherit;
+    .topbar-btn:active {
+      transform: translateY(0);
     }
-    .pill.active { background: var(--primary); color: #fff; border-color: var(--primary); }
-    .row-item {
-      background: var(--white); border: 0.5px solid var(--bdr); border-radius: var(--radius-md);
-      padding: 14px 16px; display: flex; align-items: center; gap: 14px; margin-bottom: 8px; cursor: pointer;
-      transition: background 0.2s;
+
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 28px 32px 32px;
+      background: #f4f6f9;
     }
-    .row-item:hover { background: var(--gray-100); }
-    .icon-box {
-      width: 44px; height: 44px; border-radius: var(--radius-sm); display: flex;
-      align-items: center; justify-content: center; flex-shrink: 0;
+    .screen {
+      display: none;
+      animation: fadeIn 0.3s ease;
     }
-    .item-info { flex: 1; }
-    .item-info h4 { font-size: 14px; font-weight: 500; }
-    .item-info p { font-size: 12px; color: var(--t2); }
+    .screen.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ===== BUTTONS ===== */
     .btn {
-      border-radius: var(--radius-sm); padding: 7px 16px; font-size: 13px; font-weight: 500;
-      cursor: pointer; border: 0.5px solid var(--bdr2); background: var(--white);
-      display: inline-flex; align-items: center; gap: 6px; font-family: inherit;
+      border-radius: 40px;
+      padding: 8px 22px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+      transition: all var(--transition);
+      line-height: 1.4;
+      text-decoration: none;
     }
-    .btn-navy { background: var(--primary); color: #fff; border-color: var(--primary); }
-    .btn-navy:hover { background: var(--primary-dark); }
-    .btn-teal { background: var(--teal-l); color: #085041; border-color: #9FE1CB; }
-    .btn-teal.done { background: var(--secondary); color: #fff; }
-    .btn-sm { padding: 5px 12px; font-size: 12px; }
-    .btn-full { width: 100%; justify-content: center; }
-    .btn-danger { background: #dc3545; color: #fff; border-color: #dc3545; }
-    .btn-danger:hover { background: #c82333; }
-    .btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
-    .btn-outline:hover { background: var(--primary); color: #fff; }
-    .btn-success { background: var(--secondary); color: #fff; border-color: var(--secondary); }
-    .btn-success:hover { background: #1a7a6e; }
+    .btn:active {
+      transform: scale(0.97);
+    }
+    .btn-navy {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-navy:hover {
+      background: var(--primary-dark);
+      box-shadow: 0 4px 14px rgba(30, 58, 95, 0.25);
+      transform: translateY(-1px);
+    }
+    .btn-teal {
+      background: var(--teal-l);
+      color: #085041;
+      border: 1px solid #9FE1CB;
+    }
+    .btn-teal:hover {
+      background: #c8ece2;
+      box-shadow: 0 4px 14px rgba(42, 157, 143, 0.15);
+      transform: translateY(-1px);
+    }
+    .btn-teal.done {
+      background: var(--secondary);
+      color: #fff;
+      border-color: var(--secondary);
+    }
+    .btn-teal.done:hover {
+      background: #1a7a6e;
+    }
+    .btn-sm {
+      padding: 4px 14px;
+      font-size: 12px;
+    }
+    .btn-full {
+      width: 100%;
+      justify-content: center;
+    }
+    .btn-danger {
+      background: #dc3545;
+      color: #fff;
+    }
+    .btn-danger:hover {
+      background: #c82333;
+      box-shadow: 0 4px 14px rgba(220, 53, 69, 0.25);
+      transform: translateY(-1px);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+    .btn-outline:hover {
+      background: var(--primary);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--t2);
+    }
+    .btn-ghost:hover {
+      background: var(--gray-100);
+    }
+    .btn-success {
+      background: var(--secondary);
+      color: #fff;
+    }
+    .btn-success:hover {
+      background: #1a7a6e;
+      box-shadow: 0 4px 14px rgba(42, 157, 143, 0.25);
+      transform: translateY(-1px);
+    }
+    .btn-warning {
+      background: #FFF3CD;
+      color: #856404;
+      border: 1px solid #FFEEBB;
+    }
+    .btn-warning:hover {
+      background: #FFEAA7;
+      transform: translateY(-1px);
+    }
+
+    /* ===== GRIDS ===== */
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    .grid3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .grid4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    /* ===== CARDS ===== */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--bdr);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      transition: all var(--transition);
+    }
+    .card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+    .card-sm {
+      background: var(--white);
+      border: 1px solid var(--bdr);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      box-shadow: var(--shadow);
+      transition: all var(--transition);
+    }
+    .card-sm:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+    .stat-card {
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      padding: 18px 14px;
+      text-align: center;
+      border: 1px solid var(--bdr);
+      transition: all var(--transition);
+      box-shadow: var(--shadow);
+    }
+    .stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+    .stat-num {
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
+    .stat-lbl {
+      font-size: 12px;
+      color: var(--t2);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+    .sec-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--t2);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+    .tag {
+      font-size: 11px;
+      padding: 2px 10px;
+      border-radius: 12px;
+      background: var(--gray-100);
+      color: var(--t2);
+      display: inline-block;
+      font-weight: 500;
+    }
+    .tag-white {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+    .pill-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .pill {
+      background: var(--gray-100);
+      border: 1px solid var(--bdr);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12px;
+      cursor: pointer;
+      color: var(--t2);
+      font-family: inherit;
+      transition: all var(--transition);
+      font-weight: 500;
+    }
+    .pill:hover {
+      background: var(--gray-200);
+    }
+    .pill.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .row-item {
+      background: var(--white);
+      border: 1px solid var(--bdr);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .row-item:hover {
+      background: var(--gray-50);
+      box-shadow: var(--shadow);
+      transform: translateX(2px);
+    }
+    .icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 20px;
+    }
+    .item-info {
+      flex: 1;
+    }
+    .item-info h4 {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .item-info p {
+      font-size: 12px;
+      color: var(--t2);
+    }
+
     /* ===== FORMS ===== */
-    .form-row { margin-bottom: 14px; }
-    .form-row label { font-size: 12px; font-weight: 500; display: block; margin-bottom: 5px; }
-    .form-row input, .form-row textarea, .form-row select {
-      width: 100%; border: 0.5px solid var(--bdr2); border-radius: var(--radius-sm);
-      padding: 8px 12px; font-size: 13px; background: var(--white); font-family: inherit;
+    .form-row {
+      margin-bottom: 14px;
     }
-    .form-row input:focus, .form-row textarea:focus, .form-row select:focus {
-      outline: none; border-color: var(--secondary); box-shadow: 0 0 0 3px rgba(42,157,143,0.15);
+    .form-row label {
+      font-size: 12px;
+      font-weight: 500;
+      display: block;
+      margin-bottom: 4px;
+      color: var(--t2);
     }
+    .form-row input,
+    .form-row textarea,
+    .form-row select {
+      width: 100%;
+      border: 1px solid var(--bdr2);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      font-size: 13px;
+      background: var(--white);
+      font-family: inherit;
+      transition: all var(--transition);
+      color: var(--t1);
+    }
+    .form-row input:focus,
+    .form-row textarea:focus,
+    .form-row select:focus {
+      outline: none;
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 4px rgba(42, 157, 143, 0.08);
+    }
+    .form-row textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
     /* ===== TOAST ===== */
     .toast {
-      position: fixed; bottom: 24px; right: 24px; background: var(--primary); color: #fff;
-      padding: 10px 16px; border-radius: var(--radius-sm); font-size: 13px; display: flex;
-      gap: 8px; opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 1000; align-items: center;
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: var(--primary);
+      color: #fff;
+      padding: 14px 22px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+      z-index: 1000;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+      border-left: 4px solid var(--accent);
     }
-    .toast.show { opacity: 1; }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .toast i {
+      font-size: 18px;
+      color: var(--accent);
+    }
+
     /* ===== MODALS ===== */
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 1000; }
-    .modal-content { background: #fff; max-width: 550px; width: 90%; border-radius: var(--radius-lg); padding: 1.5rem; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
-    #authModal .modal-content { max-width: 400px; }
-    #authModal .auth-header { text-align: center; margin-bottom: 1.8rem; }
-    #authModal .auth-header i { font-size: 2.8rem; color: var(--accent); background: var(--primary); padding: 0.5rem; border-radius: 50%; margin-bottom: 0.5rem; }
-    #authModal .auth-header h2 { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
-    #authModal .auth-header p { color: var(--gray-600); font-size: 0.9rem; margin-top: 0.2rem; }
-    #authModal .toggle-text { text-align: center; margin-top: 1.2rem; font-size: 0.9rem; color: var(--gray-600); }
-    #authModal .toggle-text a { color: var(--secondary); font-weight: 500; cursor: pointer; text-decoration: none; }
-    #authModal .toggle-text a:hover { text-decoration: underline; }
-    #authModal .btn-auth { width: 100%; padding: 0.7rem; background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-top: 0.5rem; font-family: inherit; }
-    #authModal .btn-auth:hover { background: var(--primary-dark); }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.45);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      backdrop-filter: blur(4px);
+    }
+    .modal-content {
+      background: #fff;
+      max-width: 550px;
+      width: 90%;
+      border-radius: var(--radius-lg);
+      padding: 1.8rem;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.2);
+      animation: modalIn 0.25s ease;
+    }
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    #authModal .modal-content {
+      max-width: 400px;
+    }
+    #authModal .auth-header {
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+    #authModal .auth-header i {
+      font-size: 2.8rem;
+      color: var(--accent);
+      background: var(--primary);
+      padding: 0.6rem;
+      border-radius: 50%;
+      margin-bottom: 0.6rem;
+    }
+    #authModal .auth-header h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    #authModal .auth-header p {
+      color: var(--gray-600);
+      font-size: 0.9rem;
+      margin-top: 0.2rem;
+    }
+    #authModal .toggle-text {
+      text-align: center;
+      margin-top: 1.2rem;
+      font-size: 0.9rem;
+      color: var(--gray-600);
+    }
+    #authModal .toggle-text a {
+      color: var(--secondary);
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    #authModal .toggle-text a:hover {
+      text-decoration: underline;
+    }
+    #authModal .btn-auth {
+      width: 100%;
+      padding: 0.7rem;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background var(--transition);
+      margin-top: 0.5rem;
+      font-family: inherit;
+    }
+    #authModal .btn-auth:hover {
+      background: var(--primary-dark);
+    }
+
     /* ===== CALENDAR ===== */
-    .calendar-wrap { background: var(--white); border: 0.5px solid var(--bdr); border-radius: var(--radius-md); overflow: hidden; }
-    .calendar-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: var(--primary); color: #fff; }
-    .calendar-header h3 { font-size: 16px; font-weight: 500; }
-    .calendar-header .cal-nav { display: flex; gap: 8px; }
+    .calendar-wrap {
+      background: var(--white);
+      border: 1px solid var(--bdr);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .calendar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 22px;
+      background: var(--primary);
+      color: #fff;
+    }
+    .calendar-header h3 {
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .calendar-header .cal-nav {
+      display: flex;
+      gap: 6px;
+    }
     .calendar-header .cal-nav button {
-      background: rgba(255,255,255,0.15); border: none; color: #fff; width: 32px; height: 32px;
-      border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
-      font-size: 16px; transition: background 0.2s; font-family: inherit;
+      background: rgba(255, 255, 255, 0.10);
+      border: none;
+      color: #fff;
+      padding: 4px 14px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+      transition: background var(--transition);
+      font-family: inherit;
     }
-    .calendar-header .cal-nav button:hover { background: rgba(255,255,255,0.25); }
-    .calendar-grid { display: grid; grid-template-columns: 60px repeat(7,1fr); font-size: 12px; }
-    .calendar-grid .cell { padding: 6px 4px; border-bottom: 0.5px solid var(--bdr); border-right: 0.5px solid var(--bdr); min-height: 60px; position: relative; cursor: pointer; transition: background 0.15s; }
-    .calendar-grid .cell:hover { background: var(--gray-50); }
-    .calendar-grid .cell.time-label { background: var(--gray-50); font-weight: 500; color: var(--t3); text-align: center; font-size: 10px; border-right: 0.5px solid var(--bdr); padding: 6px 2px; cursor: default; }
-    .calendar-grid .cell.time-label:hover { background: var(--gray-50); }
-    .calendar-grid .cell.day-header { background: var(--gray-50); font-weight: 600; color: var(--t2); text-align: center; padding: 8px 4px; border-bottom: 1px solid var(--bdr); cursor: default; }
-    .calendar-grid .cell.day-header:hover { background: var(--gray-50); }
-    .calendar-grid .cell.today { background: var(--secondary-light); }
-    .calendar-grid .cell .event-dot { display: block; width: 6px; height: 6px; border-radius: 50%; margin: 1px auto; }
-    .calendar-grid .cell .event-label { font-size: 7px; line-height: 1.2; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 2px; cursor: default; }
-    .calendar-grid .cell .avail-indicator { position: absolute; top: 2px; right: 2px; width: 8px; height: 8px; border-radius: 50%; background: var(--secondary); border: 1px solid #fff; }
-    .calendar-grid .cell .busy-indicator { position: absolute; top: 2px; right: 2px; width: 8px; height: 8px; border-radius: 50%; background: #dc3545; border: 1px solid #fff; }
-    /* ===== SCHEDULE ITEM ===== */
+    .calendar-header .cal-nav button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: 56px repeat(7, 1fr);
+      font-size: 12px;
+      overflow-x: auto;
+    }
+    .calendar-grid .cell {
+      padding: 6px 4px;
+      border-bottom: 1px solid var(--bdr);
+      border-right: 1px solid var(--bdr);
+      min-height: 64px;
+      position: relative;
+      transition: background var(--transition);
+      cursor: pointer;
+    }
+    .calendar-grid .cell:hover {
+      background: var(--gray-50);
+    }
+    .calendar-grid .cell.time-label {
+      background: var(--gray-50);
+      font-weight: 500;
+      color: var(--t3);
+      text-align: center;
+      font-size: 10px;
+      border-right: 1px solid var(--bdr);
+      padding: 6px 2px;
+      cursor: default;
+    }
+    .calendar-grid .cell.time-label:hover {
+      background: var(--gray-50);
+    }
+    .calendar-grid .cell.day-header {
+      background: var(--gray-50);
+      font-weight: 600;
+      color: var(--t2);
+      text-align: center;
+      padding: 8px 4px;
+      border-bottom: 2px solid var(--bdr);
+      font-size: 12px;
+      cursor: default;
+    }
+    .calendar-grid .cell.day-header:hover {
+      background: var(--gray-50);
+    }
+    .calendar-grid .cell.today {
+      background: var(--secondary-light);
+    }
+    .calendar-grid .cell .event-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin: 1px 1px;
+    }
+    .calendar-grid .cell .event-dot.danger {
+      background: #dc3545;
+    }
+    .calendar-grid .cell .event-dot.accent {
+      background: var(--accent);
+    }
+    .calendar-grid .cell .event-dot.secondary {
+      background: var(--secondary);
+    }
+    .calendar-grid .cell .event-label {
+      font-size: 7px;
+      line-height: 1.2;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding: 0 2px;
+      cursor: default;
+      color: var(--t2);
+    }
+    .calendar-grid .cell .avail-indicator {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--secondary);
+      border: 1px solid #fff;
+    }
+    .calendar-grid .cell .busy-indicator {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #dc3545;
+      border: 1px solid #fff;
+    }
+
+    /* ===== SCHEDULE ITEMS ===== */
     .schedule-item {
-      display: flex; align-items: center; gap: 12px; padding: 10px 12px;
-      background: var(--white); border: 0.5px solid var(--bdr); border-radius: var(--radius-sm);
-      margin-bottom: 6px; transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: var(--white);
+      border: 1px solid var(--bdr);
+      border-radius: var(--radius-sm);
+      margin-bottom: 6px;
+      transition: all var(--transition);
     }
-    .schedule-item:hover { background: var(--gray-50); }
-    .schedule-item .time { font-weight: 600; font-size: 12px; color: var(--primary); min-width: 56px; }
-    .schedule-item .info { flex: 1; }
-    .schedule-item .info .title { font-size: 13px; font-weight: 500; }
-    .schedule-item .info .desc { font-size: 11px; color: var(--t3); }
-    .schedule-item .type-badge { font-size: 9px; text-transform: uppercase; letter-spacing: 0.04em; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
-    .schedule-item .type-badge.mentor { background: var(--secondary-light); color: var(--teal); }
-    .schedule-item .type-badge.course { background: #E8EBF4; color: var(--primary); }
-    .schedule-item .type-badge.opp { background: #FFF3CD; color: #856404; }
-    .schedule-item .type-badge.other { background: var(--gray-100); color: var(--t2); }
-    .schedule-item .type-badge.available { background: var(--secondary-light); color: var(--teal); }
-    .schedule-item .type-badge.busy { background: #FCEBEB; color: #501313; }
+    .schedule-item:hover {
+      background: var(--gray-50);
+      box-shadow: var(--shadow);
+    }
+    .schedule-item .time {
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--primary);
+      min-width: 56px;
+    }
+    .schedule-item .info {
+      flex: 1;
+    }
+    .schedule-item .info .title {
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .schedule-item .info .desc {
+      font-size: 11px;
+      color: var(--t3);
+    }
+    .schedule-item .type-badge {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 2px 10px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+    .schedule-item .type-badge.mentor {
+      background: var(--secondary-light);
+      color: var(--teal);
+    }
+    .schedule-item .type-badge.course {
+      background: #E8EBF4;
+      color: var(--primary);
+    }
+    .schedule-item .type-badge.opp {
+      background: #FFF3CD;
+      color: #856404;
+    }
+    .schedule-item .type-badge.other {
+      background: var(--gray-100);
+      color: var(--t2);
+    }
+    .schedule-item .type-badge.available {
+      background: var(--secondary-light);
+      color: var(--teal);
+    }
+    .schedule-item .type-badge.busy {
+      background: #FCEBEB;
+      color: #501313;
+    }
+    .schedule-item .schedule-actions {
+      display: flex;
+      gap: 4px;
+    }
+    .schedule-item .schedule-actions button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--t3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: all var(--transition);
+      font-size: 14px;
+    }
+    .schedule-item .schedule-actions button:hover {
+      background: var(--gray-100);
+      color: var(--t1);
+    }
+    .schedule-item .schedule-actions button.danger:hover {
+      color: #dc3545;
+      background: #FCEBEB;
+    }
+
     /* ===== MENTEE CARD ===== */
     .mentee-card {
-      display: flex; align-items: center; gap: 12px; padding: 12px 14px;
-      background: var(--white); border: 0.5px solid var(--bdr); border-radius: var(--radius-md);
-      margin-bottom: 8px; transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      background: var(--white);
+      border: 1px solid var(--bdr);
+      border-radius: var(--radius-md);
+      margin-bottom: 8px;
+      transition: all var(--transition);
     }
-    .mentee-card:hover { background: var(--gray-50); }
-    .mentee-card .mentee-av { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; color: #fff; font-size: 14px; flex-shrink: 0; }
-    .mentee-card .mentee-info { flex: 1; }
-    .mentee-card .mentee-info .name { font-weight: 500; font-size: 14px; }
-    .mentee-card .mentee-info .detail { font-size: 12px; color: var(--t3); }
-    .mentee-card .mentee-info .tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px; }
+    .mentee-card:hover {
+      background: var(--gray-50);
+      box-shadow: var(--shadow);
+      transform: translateX(2px);
+    }
+    .mentee-card .mentee-av {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #fff;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .mentee-card .mentee-info {
+      flex: 1;
+    }
+    .mentee-card .mentee-info .name {
+      font-weight: 500;
+      font-size: 14px;
+    }
+    .mentee-card .mentee-info .detail {
+      font-size: 12px;
+      color: var(--t3);
+    }
+    .mentee-card .mentee-info .tags {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
     /* ===== REQUEST CARD ===== */
     .request-card {
-      background: var(--white); border: 0.5px solid var(--bdr); border-radius: var(--radius-md);
-      padding: 14px 16px; margin-bottom: 8px; border-left: 3px solid var(--accent);
+      background: var(--white);
+      border: 1px solid var(--bdr);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 10px;
+      border-left: 4px solid var(--accent);
+      transition: all var(--transition);
     }
-    .request-card .request-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-    .request-card .request-header .name { font-weight: 600; font-size: 14px; }
-    .request-card .request-header .date { font-size: 11px; color: var(--t3); }
-    .request-card .request-body { font-size: 13px; color: var(--t2); margin-bottom: 8px; }
-    .request-card .request-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .request-card:hover {
+      box-shadow: var(--shadow-hover);
+    }
+    .request-card .request-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .request-card .request-header .name {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--t1);
+    }
+    .request-card .request-header .date {
+      font-size: 11px;
+      color: var(--t3);
+    }
+    .request-card .request-body {
+      font-size: 13px;
+      color: var(--t2);
+      margin-bottom: 10px;
+    }
+    .request-card .request-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .request-card.accepted {
+      border-left-color: var(--secondary);
+    }
+    .request-card.declined {
+      border-left-color: var(--gray-600);
+      opacity: 0.7;
+    }
+
     /* ===== PROFILE ===== */
     .profile-hero {
-      background: var(--primary); border-radius: var(--radius-md); padding: 22px;
-      display: flex; align-items: center; gap: 18px; margin-bottom: 16px; flex-wrap: wrap;
+      background: var(--primary);
+      border-radius: var(--radius-md);
+      padding: 28px 30px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      box-shadow: var(--shadow-hover);
     }
-    .profile-av { width: 72px; height: 72px; border-radius: 50%; background: var(--secondary); display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 500; color: #fff; text-transform: uppercase; }
-    .profile-hero .profile-info h2 { color: #fff; font-size: 20px; }
-    .profile-hero .profile-info p { color: rgba(255,255,255,0.7); font-size: 13px; }
-    .profile-hero .profile-info .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
-    .profile-hero .profile-info .tags .tag { background: rgba(255,255,255,0.15); color: #fff; }
+    .profile-av {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 600;
+      color: #fff;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    .profile-hero .profile-info h2 {
+      color: #fff;
+      font-size: 22px;
+      font-weight: 600;
+    }
+    .profile-hero .profile-info p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+    }
+    .profile-hero .profile-info .tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+    .profile-hero .profile-info .tags .tag {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+
     /* ===== AVAILABILITY TOGGLE ===== */
-    .avail-toggle { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: var(--gray-50); border-radius: var(--radius-sm); border: 0.5px solid var(--bdr); }
-    .avail-toggle .toggle-track { width: 40px; height: 22px; background: var(--gray-200); border-radius: 12px; cursor: pointer; position: relative; transition: background 0.2s; flex-shrink: 0; }
-    .avail-toggle .toggle-track.active { background: var(--secondary); }
-    .avail-toggle .toggle-track .toggle-thumb { width: 18px; height: 18px; background: #fff; border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
-    .avail-toggle .toggle-track.active .toggle-thumb { transform: translateX(18px); }
-    .avail-toggle .avail-label { font-size: 13px; font-weight: 500; }
+    .avail-toggle {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: var(--gray-50);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--bdr);
+    }
+    .avail-toggle .toggle-track {
+      width: 44px;
+      height: 24px;
+      background: var(--gray-300);
+      border-radius: 12px;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.3s;
+      flex-shrink: 0;
+    }
+    .avail-toggle .toggle-track.active {
+      background: var(--secondary);
+    }
+    .avail-toggle .toggle-track .toggle-thumb {
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    }
+    .avail-toggle .toggle-track.active .toggle-thumb {
+      transform: translateX(20px);
+    }
+    .avail-toggle .avail-label {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* ===== AVAILABILITY SLOT ===== */
+    .avail-slot {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 8px 4px 12px;
+      background: var(--secondary-light);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      margin-bottom: 4px;
+      border: 1px solid rgba(42, 157, 143, 0.15);
+    }
+    .avail-slot .slot-time {
+      flex: 1;
+    }
+    .avail-slot .slot-remove {
+      background: none;
+      border: none;
+      color: var(--t3);
+      cursor: pointer;
+      padding: 0 4px;
+      font-size: 16px;
+      transition: color var(--transition);
+    }
+    .avail-slot .slot-remove:hover {
+      color: #dc3545;
+    }
+
+    /* ===== SUGGEST OPPORTUNITY ===== */
+    .suggest-opp-item {
+      background: var(--gray-50);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      margin-bottom: 6px;
+      border: 1px solid var(--bdr);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .suggest-opp-item .opp-title {
+      font-weight: 500;
+      font-size: 13px;
+    }
+    .suggest-opp-item .opp-desc {
+      font-size: 12px;
+      color: var(--t3);
+    }
+
     /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .sidebar {
+        width: 200px;
+      }
+      .grid4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
     @media (max-width: 768px) {
-      .sidebar { width: 180px; }
-      .wrap { flex-direction: column; }
-      .grid2 { grid-template-columns: 1fr; }
-      .grid3 { grid-template-columns: 1fr; }
-      .grid4 { grid-template-columns: 1fr 1fr; }
-      .topbar { flex-wrap: wrap; }
-      .search-box { width: 100%; }
-      .calendar-grid { font-size: 10px; grid-template-columns: 40px repeat(7,1fr); }
-      .calendar-grid .cell { min-height: 40px; padding: 4px 2px; }
-      .calendar-grid .cell .event-label { font-size: 6px; }
-      .calendar-header h3 { font-size: 13px; }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .wrap {
+        flex-direction: column;
+      }
+      .topbar {
+        padding: 12px 16px;
+      }
+      .search-box {
+        width: 100%;
+      }
+      .content {
+        padding: 16px;
+      }
+      .grid2 {
+        grid-template-columns: 1fr;
+      }
+      .grid3 {
+        grid-template-columns: 1fr;
+      }
+      .grid4 {
+        grid-template-columns: 1fr 1fr;
+      }
+      .calendar-grid {
+        font-size: 10px;
+        grid-template-columns: 40px repeat(7, 1fr);
+      }
+      .calendar-grid .cell {
+        min-height: 44px;
+        padding: 4px 2px;
+      }
+      .calendar-header h3 {
+        font-size: 13px;
+      }
+      .calendar-header .cal-nav button {
+        font-size: 11px;
+        padding: 3px 10px;
+      }
+      .profile-hero {
+        flex-direction: column;
+        text-align: center;
+      }
+      #authModal .auth-header i {
+        font-size: 2.2rem;
+      }
     }
     @media (max-width: 480px) {
-      .sidebar { width: 100%; }
-      .wrap { border-radius: 0; }
-      .calendar-grid { grid-template-columns: 30px repeat(7,1fr); font-size: 8px; }
-      .calendar-grid .cell { min-height: 30px; padding: 2px 1px; }
-      .calendar-grid .cell.time-label { font-size: 7px; padding: 4px 1px; }
-      .calendar-grid .cell .event-dot { width: 4px; height: 4px; }
-      .calendar-grid .cell .event-label { display: none; }
-      .profile-hero { flex-direction: column; text-align: center; }
+      .sidebar {
+        width: 100%;
+      }
+      .calendar-grid {
+        grid-template-columns: 30px repeat(7, 1fr);
+        font-size: 8px;
+      }
+      .calendar-grid .cell {
+        min-height: 34px;
+        padding: 2px 1px;
+      }
+      .calendar-grid .cell.time-label {
+        font-size: 7px;
+        padding: 4px 1px;
+      }
+      .calendar-grid .cell .event-label {
+        display: none;
+      }
+      .grid4 {
+        grid-template-columns: 1fr 1fr;
+      }
+      .stat-num {
+        font-size: 22px;
+      }
     }
   </style>
 </head>
@@ -290,7 +1326,7 @@
   <div class="wrap">
     <!-- SIDEBAR -->
     <aside class="sidebar">
-      <div class="logo"><i class="ti ti-star"></i><span>SkillBridge<small style="display:block;font-size:11px;opacity:.5">Mentor</small></span></div>
+      <div class="logo"><i class="ti ti-star"></i><span>SkillBridge<small>Mentor</small></span></div>
       <div class="nav-section">
         <div class="nav-label">Main</div>
         <button class="nav-item active" data-screen="dashboard"><i class="ti ti-layout-dashboard"></i> Dashboard</button>
@@ -321,7 +1357,7 @@
     <div class="main">
       <div class="topbar">
         <h1 id="page-title">Dashboard</h1>
-        <div class="search-box"><i class="ti ti-search"></i><input type="text" placeholder="Search mentees…" id="global-search"></div>
+        <div class="search-box"><i class="ti ti-search"></i><input type="text" placeholder="Search mentees…" id="global-search" /></div>
         <button class="topbar-btn" id="topbar-action"><i class="ti ti-calendar"></i> <span>Manage Schedule</span></button>
       </div>
       <div class="content">
@@ -363,7 +1399,9 @@
         <!-- ===== MENTEES ===== -->
         <div class="screen" id="screen-mentees">
           <h2>My Mentees</h2>
-          <div class="search-bar" style="max-width:400px;margin:12px 0 16px;"><i class="ti ti-search"></i><input type="text" id="menteeSearch" placeholder="Search mentees…"></div>
+          <div style="margin:12px 0 16px;max-width:400px;">
+            <div class="search-box" style="width:100%;"><i class="ti ti-search"></i><input type="text" id="menteeSearch" placeholder="Search mentees…" /></div>
+          </div>
           <div id="mentees-list"></div>
         </div>
 
@@ -371,7 +1409,7 @@
         <div class="screen" id="screen-calendar">
           <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.8rem;margin-bottom:1rem;">
             <h2>Your Schedule</h2>
-            <button class="btn btn-primary" id="addAppointmentBtn"><i class="ti ti-plus"></i> Add Appointment</button>
+            <button class="btn btn-navy" id="addAppointmentBtn"><i class="ti ti-plus"></i> Add Appointment</button>
           </div>
           <div class="calendar-wrap">
             <div class="calendar-header">
@@ -386,10 +1424,10 @@
           </div>
           <div style="margin-top:1.5rem;">
             <div class="sec-title">Legend</div>
-            <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;">
-              <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--secondary);vertical-align:middle;margin-right:4px;"></span> Available</span>
-              <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#dc3545;vertical-align:middle;margin-right:4px;"></span> Busy / Appointment</span>
-              <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--accent);vertical-align:middle;margin-right:4px;"></span> Pending / Request</span>
+            <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;">
+              <span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:var(--secondary);vertical-align:middle;margin-right:6px;"></span> Available</span>
+              <span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#dc3545;vertical-align:middle;margin-right:6px;"></span> Busy / Appointment</span>
+              <span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:var(--accent);vertical-align:middle;margin-right:6px;"></span> Pending / Request</span>
             </div>
           </div>
         </div>
@@ -399,9 +1437,9 @@
           <h2>Manage Your Availability</h2>
           <p style="color:var(--t3);margin-bottom:1rem;">Set your available time slots for each day. Youth will see these when requesting mentorship.</p>
           <div class="grid2" id="availability-grid"></div>
-          <div style="margin-top:1.5rem;">
+          <div style="margin-top:1.5rem;display:flex;gap:10px;flex-wrap:wrap;">
             <button class="btn btn-navy" id="saveAvailabilityBtn"><i class="ti ti-check"></i> Save Availability</button>
-            <button class="btn btn-outline" id="resetAvailabilityBtn" style="margin-left:8px;">Reset All</button>
+            <button class="btn btn-outline" id="resetAvailabilityBtn">Reset All</button>
           </div>
         </div>
 
@@ -414,7 +1452,7 @@
               <p id="p-title">Mentor · Not logged in</p>
               <div class="tags" id="p-tags"></div>
             </div>
-            <div style="margin-left:auto;"><button class="btn btn-sm" style="background:rgba(255,255,255,0.1);color:#fff;" id="profileAuthBtn"><i class="ti ti-login"></i> Login</button></div>
+            <div style="margin-left:auto;"><button class="btn btn-sm" style="background:rgba(255,255,255,0.12);color:#fff;" id="profileAuthBtn"><i class="ti ti-login"></i> Login</button></div>
           </div>
           <div class="grid2">
             <div>
@@ -426,9 +1464,9 @@
             <div>
               <div class="sec-title">Statistics</div>
               <div class="card">
-                <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--bdr);"><span>Total Mentees</span><strong id="stat-mentees">0</strong></div>
-                <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--bdr);"><span>Mentorship Sessions</span><strong id="stat-sessions">0</strong></div>
-                <div style="display:flex;justify-content:space-between;padding:6px 0;"><span>Average Rating</span><strong id="stat-rating">⭐ 4.8</strong></div>
+                <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bdr);"><span>Total Mentees</span><strong id="stat-mentees">0</strong></div>
+                <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bdr);"><span>Mentorship Sessions</span><strong id="stat-sessions">0</strong></div>
+                <div style="display:flex;justify-content:space-between;padding:8px 0;"><span>Average Rating</span><strong id="stat-rating">⭐ 4.8</strong></div>
               </div>
               <div class="sec-title" style="margin-top:14px;">Suggested Opportunities</div>
               <div class="card" id="suggested-opps">
@@ -445,19 +1483,19 @@
             <div>
               <div class="sec-title">Profile Settings</div>
               <div class="card">
-                <div class="form-row"><label>Full Name</label><input type="text" id="s-name" value="Guest"></div>
-                <div class="form-row"><label>Title / Role</label><input type="text" id="s-title" placeholder="e.g., Senior Software Engineer"></div>
-                <div class="form-row"><label>Company / Organization</label><input type="text" id="s-company" placeholder="e.g., Google"></div>
+                <div class="form-row"><label>Full Name</label><input type="text" id="s-name" value="Guest" /></div>
+                <div class="form-row"><label>Title / Role</label><input type="text" id="s-title" placeholder="e.g., Senior Software Engineer" /></div>
+                <div class="form-row"><label>Company / Organization</label><input type="text" id="s-company" placeholder="e.g., Google" /></div>
                 <div class="form-row"><label>Bio / About</label><textarea id="s-bio" rows="3" placeholder="Tell mentees about yourself..."></textarea></div>
-                <div class="form-row"><label>Expertise (comma separated)</label><input type="text" id="s-expertise" placeholder="e.g., Web Dev, Python, Career Growth"></div>
+                <div class="form-row"><label>Expertise (comma separated)</label><input type="text" id="s-expertise" placeholder="e.g., Web Dev, Python, Career Growth" /></div>
                 <button class="btn btn-navy btn-sm" onclick="saveMentorSettings()"><i class="ti ti-check"></i> Save Profile</button>
               </div>
             </div>
             <div>
               <div class="sec-title">Preferences</div>
               <div class="card">
-                <div class="form-row"><label>Session Duration (minutes)</label><input type="number" id="s-session-duration" value="60" min="15" step="15"></div>
-                <div class="form-row"><label>Max Mentees</label><input type="number" id="s-max-mentees" value="10" min="1"></div>
+                <div class="form-row"><label>Session Duration (minutes)</label><input type="number" id="s-session-duration" value="60" min="15" step="15" /></div>
+                <div class="form-row"><label>Max Mentees</label><input type="number" id="s-max-mentees" value="10" min="1" /></div>
                 <div class="avail-toggle" style="margin-top:8px;">
                   <div class="toggle-track active" id="autoAcceptToggle" onclick="toggleAutoAccept()">
                     <div class="toggle-thumb"></div>
@@ -468,8 +1506,8 @@
               </div>
               <div class="sec-title" style="margin-top:14px;">Notifications</div>
               <div class="card" id="notif-list">
-                <div>Email notifications: On</div>
-                <div>Request alerts: On</div>
+                <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--bdr);"><span>Email notifications</span><span class="badge badge-success">On</span></div>
+                <div style="display:flex;justify-content:space-between;padding:6px 0;"><span>Request alerts</span><span class="badge badge-success">On</span></div>
               </div>
             </div>
           </div>
@@ -491,8 +1529,8 @@
         <p>Sign in with your approved mentor account</p>
       </div>
       <form id="login-form">
-        <div class="form-group"><label>Email</label><input type="email" id="login-email" placeholder="you@example.com" required></div>
-        <div class="form-group"><label>Password</label><input type="password" id="login-password" placeholder="••••••••" required></div>
+        <div class="form-row"><label>Email</label><input type="email" id="login-email" placeholder="you@example.com" required /></div>
+        <div class="form-row"><label>Password</label><input type="password" id="login-password" placeholder="••••••••" required /></div>
         <button type="submit" class="btn-auth">Log In</button>
         <p class="toggle-text" style="margin-top:1rem;font-size:0.85rem;">Need a mentor account? <a href="index.html" style="color:var(--secondary);">Contact the admin</a></p>
       </form>
@@ -503,15 +1541,15 @@
   <div id="appointmentModal" class="modal">
     <div class="modal-content">
       <h3>Schedule Appointment</h3>
-      <div class="form-row"><label>Title *</label><input type="text" id="app-title" placeholder="e.g., Career Guidance Session"></div>
+      <div class="form-row"><label>Title *</label><input type="text" id="app-title" placeholder="e.g., Career Guidance Session" /></div>
       <div class="form-row"><label>Mentee</label><select id="app-mentee"><option value="">Select a mentee…</option></select></div>
       <div class="form-row"><label>Day</label><select id="app-day"><option value="0">Sunday</option><option value="1" selected>Monday</option><option value="2">Tuesday</option><option value="3">Wednesday</option><option value="4">Thursday</option><option value="5">Friday</option><option value="6">Saturday</option></select></div>
-      <div class="form-row"><label>Time</label><input type="time" id="app-time" value="10:00"></div>
-      <div class="form-row"><label>Duration (minutes)</label><input type="number" id="app-duration" value="60" min="15" step="15"></div>
+      <div class="form-row"><label>Time</label><input type="time" id="app-time" value="10:00" /></div>
+      <div class="form-row"><label>Duration (minutes)</label><input type="number" id="app-duration" value="60" min="15" step="15" /></div>
       <div class="form-row"><label>Description</label><textarea id="app-desc" rows="2" placeholder="What will this session cover?"></textarea></div>
       <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px;">
-        <button class="btn" id="closeAppModal">Cancel</button>
-        <button class="btn btn-primary" id="submitAppointment">Schedule</button>
+        <button class="btn btn-ghost" id="closeAppModal">Cancel</button>
+        <button class="btn btn-navy" id="submitAppointment">Schedule</button>
       </div>
     </div>
   </div>
@@ -520,14 +1558,14 @@
   <div id="suggestOppModal" class="modal">
     <div class="modal-content">
       <h3>Suggest Opportunity to Mentees</h3>
-      <div class="form-row"><label>Title *</label><input type="text" id="suggest-title" placeholder="e.g., Frontend Developer at Fintech"></div>
-      <div class="form-row"><label>Company</label><input type="text" id="suggest-company"></div>
+      <div class="form-row"><label>Title *</label><input type="text" id="suggest-title" placeholder="e.g., Frontend Developer at Fintech" /></div>
+      <div class="form-row"><label>Company</label><input type="text" id="suggest-company" /></div>
       <div class="form-row"><label>Description</label><textarea id="suggest-desc" rows="3"></textarea></div>
-      <div class="form-row"><label>Link</label><input type="text" id="suggest-link" placeholder="https://example.com/apply"></div>
+      <div class="form-row"><label>Link</label><input type="text" id="suggest-link" placeholder="https://example.com/apply" /></div>
       <div class="form-row"><label>Send to</label><select id="suggest-mentee"><option value="">All mentees</option></select></div>
       <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px;">
-        <button class="btn" id="closeSuggestModal">Cancel</button>
-        <button class="btn btn-primary" id="submitSuggestion">Suggest</button>
+        <button class="btn btn-ghost" id="closeSuggestModal">Cancel</button>
+        <button class="btn btn-navy" id="submitSuggestion">Suggest</button>
       </div>
     </div>
   </div>
@@ -537,15 +1575,20 @@
     //  SHARED AUTH (same as index.html)
     // ============================================================
     function getUsers() { return JSON.parse(localStorage.getItem('sb_users')) || []; }
+
     function saveUsers(users) { localStorage.setItem('sb_users', JSON.stringify(users)); }
+
     function getSession() { return JSON.parse(localStorage.getItem('sb_auth_user')); }
+
     function setSession(user) { localStorage.setItem('sb_auth_user', JSON.stringify(user)); }
+
     function clearSession() { localStorage.removeItem('sb_auth_user'); }
 
     // ============================================================
     //  MENTOR DATA (shared with admin and youth)
     // ============================================================
     function getMentors() { return JSON.parse(localStorage.getItem('sb_mentors')) || []; }
+
     function saveMentors(mentors) { localStorage.setItem('sb_mentors', JSON.stringify(mentors)); }
 
     function getCurrentMentor() {
@@ -580,7 +1623,8 @@
       const t = document.getElementById('toast');
       document.getElementById('toast-msg').innerText = msg;
       t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 2200);
+      clearTimeout(t._timer);
+      t._timer = setTimeout(() => t.classList.remove('show'), 2400);
     }
 
     function toggleAuthModal() {
@@ -599,7 +1643,7 @@
       const users = getUsers();
       const user = users.find(u => u.email === email && u.password === password);
       if (!user) { toast('Invalid email or password.'); return; }
-      
+
       // Check if approved mentor
       const mentors = getMentors();
       const mentor = mentors.find(m => m.email === email && m.approved === true);
@@ -666,10 +1710,12 @@
         }
         // Profile about
         if (document.getElementById('profile-about')) {
-          document.getElementById('profile-about').innerHTML = `<p>${mentor.about || 'No bio set.'}</p><p style="font-size:12px;color:var(--t3);">${mentor.company || ''}</p>`;
+          document.getElementById('profile-about').innerHTML =
+            `<p>${mentor.about || 'No bio set.'}</p><p style="font-size:12px;color:var(--t3);">${mentor.company || ''}</p>`;
         }
         if (document.getElementById('profile-expertise')) {
-          document.getElementById('profile-expertise').innerHTML = (mentor.expertise || []).map(e => `<span class="tag">${e}</span>`).join(' ') || '<p style="color:var(--t3);">No expertise set.</p>';
+          document.getElementById('profile-expertise').innerHTML = (mentor.expertise || []).map(e =>
+            `<span class="tag">${e}</span>`).join(' ') || '<p style="color:var(--t3);">No expertise set.</p>';
         }
         if (document.getElementById('stat-mentees')) {
           document.getElementById('stat-mentees').innerText = (mentor.mentees || []).length;
@@ -681,11 +1727,12 @@
           const opps = mentor.suggestedOpps || [];
           if (opps.length > 0) {
             oppContainer.innerHTML = opps.map(o =>
-              `<div class="suggest-opp-item"><div class="opp-info"><div class="title">${o.title}</div><div class="desc">${o.company || ''} ${o.desc || ''}</div></div><span class="badge badge-info">${o.sentTo || 'All mentees'}</span></div>`
-            ).join('') +
-            `<button class="btn btn-navy btn-sm" style="margin-top:8px;" onclick="suggestOpportunity()"><i class="ti ti-plus"></i> Suggest Opportunity</button>`;
+                `<div class="suggest-opp-item"><div><div class="opp-title">${o.title}</div><div class="opp-desc">${o.company || ''} ${o.desc || ''}</div></div><span class="badge badge-info">${o.sentTo || 'All mentees'}</span></div>`
+              ).join('') +
+              `<button class="btn btn-navy btn-sm" style="margin-top:8px;" onclick="suggestOpportunity()"><i class="ti ti-plus"></i> Suggest Opportunity</button>`;
           } else {
-            oppContainer.innerHTML = '<p style="color:var(--t3);">Suggest opportunities to your mentees.</p><button class="btn btn-navy btn-sm" style="margin-top:8px;" onclick="suggestOpportunity()"><i class="ti ti-plus"></i> Suggest Opportunity</button>';
+            oppContainer.innerHTML =
+              '<p style="color:var(--t3);">Suggest opportunities to your mentees.</p><button class="btn btn-navy btn-sm" style="margin-top:8px;" onclick="suggestOpportunity()"><i class="ti ti-plus"></i> Suggest Opportunity</button>';
           }
         }
       } else {
@@ -717,9 +1764,12 @@
         const pending = mentor.requests.filter(r => r.status === 'pending').length;
         badge.innerText = pending;
         badge.style.display = pending > 0 ? 'inline' : 'none';
+        if (pending > 0) badge.classList.add('pulse');
+        else badge.classList.remove('pulse');
       } else {
         badge.innerText = '0';
         badge.style.display = 'none';
+        badge.classList.remove('pulse');
       }
     }
 
@@ -734,10 +1784,29 @@
       const target = document.getElementById(`screen-${screen}`);
       if (target) target.classList.add('active');
       const titles = {
-        dashboard: 'Dashboard', requests: 'Requests', mentees: 'Mentees',
-        calendar: 'Calendar', availability: 'Availability', profile: 'Profile', settings: 'Settings'
+        dashboard: 'Dashboard',
+        requests: 'Requests',
+        mentees: 'Mentees',
+        calendar: 'Calendar',
+        availability: 'Availability',
+        profile: 'Profile',
+        settings: 'Settings'
       };
       document.getElementById('page-title').innerText = titles[screen] || screen;
+      // Update search placeholder
+      const searchInput = document.getElementById('global-search');
+      const placeholders = {
+        dashboard: 'Search mentees, requests...',
+        requests: 'Search requests...',
+        mentees: 'Search mentees...',
+        calendar: 'Search events...',
+        availability: 'Search...',
+        profile: 'Search...',
+        settings: 'Search...'
+      };
+      searchInput.placeholder = placeholders[screen] || 'Search...';
+      searchInput.value = '';
+
       if (screen === 'dashboard') renderDashboard();
       else if (screen === 'requests') renderRequests();
       else if (screen === 'mentees') renderMentees();
@@ -753,6 +1822,25 @@
     });
 
     document.getElementById('topbar-action').onclick = () => { navTo('calendar'); };
+
+    // ===== GLOBAL SEARCH =====
+    document.getElementById('global-search').addEventListener('input', (e) => {
+      const q = e.target.value.trim().toLowerCase();
+      const activeScreen = document.querySelector('.screen.active');
+      if (!activeScreen) return;
+      const screenId = activeScreen.id.replace('screen-', '');
+      if (screenId === 'mentees') {
+        renderMentees(q);
+      } else if (screenId === 'requests') {
+        renderRequests(q);
+      } else if (screenId === 'dashboard') {
+        renderDashboard();
+      } else if (screenId === 'calendar') {
+        renderCalendar();
+      } else if (screenId === 'availability') {
+        renderAvailability();
+      }
+    });
 
     // ============================================================
     //  RENDER FUNCTIONS
@@ -775,33 +1863,46 @@
       const today = new Date().getDay();
       const appointments = (mentor.appointments || []).filter(a => a.day === today);
       const availSlots = Object.values(mentor.availability || {}).reduce((sum, slots) => sum + slots.length, 0);
-      
+
       document.getElementById('d-mentees').innerText = mentees.length;
       document.getElementById('d-requests').innerText = pending.length;
       document.getElementById('d-appointments').innerText = appointments.length;
       document.getElementById('d-availability').innerText = availSlots;
-      
+
       // Recent requests
       const dashReqs = document.getElementById('dash-requests');
-      dashReqs.innerHTML = pending.slice(0,3).length ? pending.slice(0,3).map(r => 
-        `<div class="row-item" onclick="navTo('requests')"><div class="icon-box" style="background:var(--accent);color:#fff;font-weight:600;">${r.name.charAt(0)}</div><div class="item-info"><h4>${r.name}</h4><p>${r.reason||''}</p></div><span class="badge badge-warning">Pending</span></div>`
+      dashReqs.innerHTML = pending.slice(0, 3).length ? pending.slice(0, 3).map(r =>
+        `<div class="row-item" onclick="navTo('requests')">
+          <div class="icon-box" style="background:var(--accent);color:#fff;font-weight:600;font-size:16px;">${r.name.charAt(0).toUpperCase()}</div>
+          <div class="item-info"><h4>${r.name}</h4><p>${r.reason || 'Would like mentorship'}</p></div>
+          <span class="badge badge-warning" style="background:#FFF3CD;color:#856404;padding:2px 10px;border-radius:10px;font-size:11px;">Pending</span>
+        </div>`
       ).join('') : '<div class="card-sm" style="text-align:center;color:var(--t3);">No pending requests.</div>';
-      
+
       // Today's schedule
       const dashSchedule = document.getElementById('dash-schedule');
-      dashSchedule.innerHTML = appointments.length ? appointments.map(a => 
+      dashSchedule.innerHTML = appointments.length ? appointments.map(a =>
         `<div class="schedule-item"><span class="time">${a.time}</span><div class="info"><div class="title">${a.title}</div><div class="desc">${a.menteeName||''}</div></div><span class="type-badge mentor">Mentor</span></div>`
       ).join('') : '<div class="card-sm" style="text-align:center;color:var(--t3);">No appointments today.</div>';
     }
 
-    function renderRequests() {
+    function renderRequests(filter) {
       const mentor = getCurrentMentor();
-      if (!mentor) { document.getElementById('requests-list').innerHTML = '<div class="card" style="text-align:center;padding:2rem;color:var(--t3);">Login to view requests.</div>'; return; }
-      const requests = mentor.requests || [];
+      if (!mentor) {
+        document.getElementById('requests-list').innerHTML =
+          '<div class="card" style="text-align:center;padding:2rem;color:var(--t3);">Login to view requests.</div>';
+        return;
+      }
+      let requests = mentor.requests || [];
+      const searchVal = document.getElementById('global-search').value.trim().toLowerCase();
+      if (searchVal) {
+        requests = requests.filter(r => r.name.toLowerCase().includes(searchVal) || (r.reason || '').toLowerCase()
+          .includes(searchVal));
+      }
       const pending = requests.filter(r => r.status === 'pending');
       const others = requests.filter(r => r.status !== 'pending');
       document.getElementById('request-count').innerText = pending.length + ' pending';
-      
+
       let html = '';
       if (pending.length === 0 && others.length === 0) {
         html = '<div class="card" style="text-align:center;padding:2rem;color:var(--t3);">No mentorship requests yet.</div>';
@@ -809,7 +1910,7 @@
         if (pending.length > 0) {
           html += `<div class="sec-title" style="margin-top:8px;">Pending (${pending.length})</div>`;
           html += pending.map(r =>
-            `<div class="request-card" style="border-left-color:var(--accent);">
+            `<div class="request-card">
               <div class="request-header"><span class="name">${r.name}</span><span class="date">${new Date(r.date).toLocaleDateString()}</span></div>
               <div class="request-body">${r.reason || 'Would like to have you as a mentor.'}</div>
               <div class="request-actions">
@@ -822,10 +1923,10 @@
         if (others.length > 0) {
           html += `<div class="sec-title" style="margin-top:16px;">History (${others.length})</div>`;
           html += others.map(r =>
-            `<div class="request-card" style="border-left-color:${r.status === 'accepted' ? 'var(--secondary)' : 'var(--gray-600)'};">
+            `<div class="request-card ${r.status}">
               <div class="request-header"><span class="name">${r.name}</span><span class="date">${new Date(r.date).toLocaleDateString()}</span></div>
               <div class="request-body">${r.reason || ''}</div>
-              <span class="badge ${r.status === 'accepted' ? 'badge-success' : 'badge-danger'}">${r.status}</span>
+              <span class="badge ${r.status === 'accepted' ? 'badge-success' : 'badge-danger'}" style="background:${r.status === 'accepted' ? 'var(--secondary-light)' : '#FCEBEB'};color:${r.status === 'accepted' ? 'var(--teal)' : '#501313'};padding:2px 12px;border-radius:10px;font-size:11px;">${r.status}</span>
             </div>`
           ).join('');
         }
@@ -901,28 +2002,34 @@
     // ============================================================
     //  MENTEES
     // ============================================================
-    function renderMentees(filter = '') {
+    function renderMentees(filter) {
       const mentor = getCurrentMentor();
-      if (!mentor) { document.getElementById('mentees-list').innerHTML = '<div class="card" style="text-align:center;padding:2rem;color:var(--t3);">Login to see your mentees.</div>'; return; }
-      const mentees = (mentor.mentees || []).filter(m =>
-        m.name.toLowerCase().includes(filter.toLowerCase()) ||
-        (m.email || '').toLowerCase().includes(filter.toLowerCase())
+      if (!mentor) {
+        document.getElementById('mentees-list').innerHTML =
+          '<div class="card" style="text-align:center;padding:2rem;color:var(--t3);">Login to see your mentees.</div>';
+        return;
+      }
+      const searchVal = filter !== undefined ? filter : document.getElementById('menteeSearch').value.trim().toLowerCase();
+      let mentees = (mentor.mentees || []).filter(m =>
+        m.name.toLowerCase().includes(searchVal) ||
+        (m.email || '').toLowerCase().includes(searchVal)
       );
       if (mentees.length === 0) {
-        document.getElementById('mentees-list').innerHTML = '<div class="card" style="text-align:center;padding:2rem;color:var(--t3);">No mentees yet. Accept requests to start mentoring!</div>';
+        document.getElementById('mentees-list').innerHTML =
+          '<div class="card" style="text-align:center;padding:2rem;color:var(--t3);">No mentees yet. Accept requests to start mentoring!</div>';
         return;
       }
       document.getElementById('mentees-list').innerHTML = mentees.map(m =>
         `<div class="mentee-card">
-          <div class="mentee-av" style="background:var(--secondary);">${m.name.charAt(0).toUpperCase()}</div>
+          <div class="mentee-av" style="background:${['var(--secondary)','var(--accent)','var(--primary)','#6C757D'][Math.floor(Math.random()*4)]};">${m.name.charAt(0).toUpperCase()}</div>
           <div class="mentee-info">
             <div class="name">${m.name}</div>
             <div class="detail">${m.email || ''} · Joined ${new Date(m.joined).toLocaleDateString()}</div>
             <div class="tags"><span class="tag">Progress: ${m.progress || 0}%</span></div>
           </div>
           <div style="display:flex;gap:6px;">
-            <button class="btn btn-outline btn-sm" onclick="scheduleWithMentee('${m.email}')"><i class="ti ti-calendar"></i></button>
-            <button class="btn btn-danger btn-sm" onclick="removeMentee('${m.email}')"><i class="ti ti-trash"></i></button>
+            <button class="btn btn-outline btn-sm" onclick="scheduleWithMentee('${m.email}')" title="Schedule session"><i class="ti ti-calendar"></i></button>
+            <button class="btn btn-danger btn-sm" onclick="removeMentee('${m.email}')" title="Remove mentee"><i class="ti ti-trash"></i></button>
           </div>
         </div>`
       ).join('');
@@ -964,7 +2071,11 @@
 
     function renderCalendar() {
       const mentor = getCurrentMentor();
-      if (!mentor) { document.getElementById('calendar-grid').innerHTML = '<div class="card" style="text-align:center;padding:2rem;color:var(--t3);">Login to view calendar.</div>'; return; }
+      if (!mentor) {
+        document.getElementById('calendar-grid').innerHTML =
+          '<div class="card" style="text-align:center;padding:2rem;color:var(--t3);">Login to view calendar.</div>';
+        return;
+      }
       const year = calDate.getFullYear();
       const month = calDate.getMonth();
       const firstDay = new Date(year, month, 1).getDay();
@@ -977,19 +2088,22 @@
       document.getElementById('cal-month-year').innerText =
         new Date(year, month).toLocaleString('default', { month: 'long', year: 'numeric' });
 
-      const hours = ['6:00','7:00','8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00'];
+      const hours = ['6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00',
+        '18:00', '19:00'
+      ];
       let grid = document.getElementById('calendar-grid');
       let html = '';
 
       html += `<div class="cell time-label"></div>`;
       for (let d = 0; d < 7; d++) {
-        const dayName = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d];
+        const dayName = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d];
         const isToday = d === today.getDay() && month === todayMonth && year === todayYear;
-        html += `<div class="cell day-header${isToday?' today':''}">${dayName}</div>`;
+        html += `<div class="cell day-header${isToday ? ' today' : ''}">${dayName}</div>`;
       }
 
       const appointments = mentor.appointments || [];
       const availability = mentor.availability || {};
+      const requests = (mentor.requests || []).filter(r => r.status === 'pending');
 
       for (let h = 0; h < hours.length; h++) {
         html += `<div class="cell time-label">${hours[h]}</div>`;
@@ -1012,13 +2126,22 @@
             return startH === hourNum;
           });
 
-          html += `<div class="cell${isToday?' today':''}" data-day="${d}" data-hour="${h}" onclick="onCellClick(${d}, '${hours[h]}')">`;
+          // Check pending requests for this day/time
+          const pendingReqs = requests.filter(r => {
+            const reqDay = new Date(r.date).getDay();
+            return reqDay === d;
+          });
+
+          html += `<div class="cell${isToday ? ' today' : ''}" data-day="${d}" data-hour="${h}" onclick="onCellClick(${d}, '${hours[h]}')">`;
           if (isValid) {
             if (matchingApps.length > 0) {
               matchingApps.forEach(a => {
-                html += `<div class="event-dot" style="background:#dc3545;"></div>`;
-                html += `<div class="event-label">${a.title.substring(0,12)}</div>`;
+                html += `<div class="event-dot danger"></div>`;
+                html += `<div class="event-label">${a.title.substring(0,14)}</div>`;
               });
+            } else if (pendingReqs.length > 0) {
+              html += `<div class="event-dot accent"></div>`;
+              html += `<div class="event-label">${pendingReqs.length} pending</div>`;
             } else if (isAvailable) {
               html += `<div class="avail-indicator"></div>`;
             }
@@ -1035,17 +2158,24 @@
       document.getElementById('appointmentModal').style.display = 'flex';
     }
 
-    document.getElementById('cal-prev').onclick = () => { calDate.setMonth(calDate.getMonth()-1); renderCalendar(); };
-    document.getElementById('cal-next').onclick = () => { calDate.setMonth(calDate.getMonth()+1); renderCalendar(); };
-    document.getElementById('cal-today').onclick = () => { calDate = new Date(); renderCalendar(); };
+    document.getElementById('cal-prev').onclick = () => { calDate.setMonth(calDate.getMonth() - 1);
+      renderCalendar(); };
+    document.getElementById('cal-next').onclick = () => { calDate.setMonth(calDate.getMonth() + 1);
+      renderCalendar(); };
+    document.getElementById('cal-today').onclick = () => { calDate = new Date();
+      renderCalendar(); };
 
     // ============================================================
     //  AVAILABILITY
     // ============================================================
     function renderAvailability() {
       const mentor = getCurrentMentor();
-      if (!mentor) { document.getElementById('availability-grid').innerHTML = '<div class="card" style="text-align:center;padding:2rem;color:var(--t3);">Login to manage availability.</div>'; return; }
-      const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      if (!mentor) {
+        document.getElementById('availability-grid').innerHTML =
+          '<div class="card" style="text-align:center;padding:2rem;color:var(--t3);">Login to manage availability.</div>';
+        return;
+      }
+      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       const avail = mentor.availability || {};
       let html = '';
       for (let d = 0; d < 7; d++) {
@@ -1054,16 +2184,16 @@
           <div class="sec-title">${days[d]}</div>
           <div id="avail-slots-${d}">
             ${slots.length === 0 ? '<p style="color:var(--t3);font-size:12px;">No slots set</p>' : ''}
-            ${slots.map((slot, idx) => `<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;font-size:13px;">
-              <span>${slot}</span>
-              <button class="btn btn-sm btn-danger" onclick="removeAvailabilitySlot(${d}, ${idx})"><i class="ti ti-x"></i></button>
+            ${slots.map((slot, idx) => `<div class="avail-slot">
+              <span class="slot-time">${slot}</span>
+              <button class="slot-remove" onclick="removeAvailabilitySlot(${d}, ${idx})" title="Remove slot">&times;</button>
             </div>`).join('')}
           </div>
-          <div style="display:flex;gap:6px;margin-top:8px;">
-            <input type="time" id="avail-start-${d}" value="09:00" style="width:80px;padding:4px 6px;border:0.5px solid var(--bdr);border-radius:var(--radius-sm);font-size:12px;">
+          <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
+            <input type="time" id="avail-start-${d}" value="09:00" style="width:90px;padding:6px 8px;border:1px solid var(--bdr2);border-radius:var(--radius-sm);font-size:12px;">
             <span style="font-size:12px;align-self:center;">to</span>
-            <input type="time" id="avail-end-${d}" value="17:00" style="width:80px;padding:4px 6px;border:0.5px solid var(--bdr);border-radius:var(--radius-sm);font-size:12px;">
-            <button class="btn btn-sm btn-navy" onclick="addAvailabilitySlot(${d})"><i class="ti ti-plus"></i> Add</button>
+            <input type="time" id="avail-end-${d}" value="17:00" style="width:90px;padding:6px 8px;border:1px solid var(--bdr2);border-radius:var(--radius-sm);font-size:12px;">
+            <button class="btn btn-navy btn-sm" onclick="addAvailabilitySlot(${d})"><i class="ti ti-plus"></i> Add</button>
           </div>
         </div>`;
       }
@@ -1142,7 +2272,8 @@
       document.getElementById('appointmentModal').style.display = 'flex';
     };
 
-    document.getElementById('closeAppModal').onclick = () => { document.getElementById('appointmentModal').style.display = 'none'; };
+    document.getElementById('closeAppModal').onclick = () => { document.getElementById('appointmentModal').style.display =
+        'none'; };
 
     document.getElementById('submitAppointment').onclick = () => {
       const mentor = getCurrentMentor();
@@ -1159,7 +2290,11 @@
       const mentee = (mentor.mentees || []).find(m => m.email === menteeEmail);
       mentor.appointments.push({
         id: 'app_' + Date.now(),
-        day, time, duration, title, desc,
+        day,
+        time,
+        duration,
+        title,
+        desc,
         menteeName: mentee ? mentee.name : '',
         menteeEmail: menteeEmail || ''
       });
@@ -1192,7 +2327,8 @@
       document.getElementById('suggestOppModal').style.display = 'flex';
     }
 
-    document.getElementById('closeSuggestModal').onclick = () => { document.getElementById('suggestOppModal').style.display = 'none'; };
+    document.getElementById('closeSuggestModal').onclick = () => { document.getElementById('suggestOppModal').style.display =
+        'none'; };
 
     document.getElementById('submitSuggestion').onclick = () => {
       const mentor = getCurrentMentor();
@@ -1207,7 +2343,10 @@
       if (!mentor.suggestedOpps) mentor.suggestedOpps = [];
       mentor.suggestedOpps.push({
         id: 'sug_' + Date.now(),
-        title, company, desc, link,
+        title,
+        company,
+        desc,
+        link,
         sentTo: menteeEmail || 'All mentees',
         date: new Date().toISOString()
       });
@@ -1269,20 +2408,6 @@
       toggle.classList.toggle('active');
       toast(toggle.classList.contains('active') ? 'Auto-accept enabled' : 'Auto-accept disabled');
     }
-
-    // ============================================================
-    //  SEARCH
-    // ============================================================
-    document.getElementById('global-search').addEventListener('input', (e) => {
-      const q = e.target.value.toLowerCase();
-      if (q.length < 2) return;
-      const mentor = getCurrentMentor();
-      if (mentor && (mentor.mentees || []).some(m => m.name.toLowerCase().includes(q) || (m.email||'').toLowerCase().includes(q))) {
-        navTo('mentees');
-        document.getElementById('menteeSearch').value = q;
-        renderMentees(q);
-      }
-    });
 
     // ============================================================
     //  INIT
