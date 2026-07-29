@@ -122,6 +122,44 @@ Because all platforms use the same `localStorage` keys, data is automatically sh
 
 ## Getting Started
 
+
+# SkillBridge Africa Admin Dashboard
+
+A fully responsive admin dashboard for managing users, mentors, opportunities, and community posts on the SkillBridge Africa platform.
+
+## Live Demo
+[Live URL](https://drive.google.com/file/d/1dbhYIAqd6tqZmECW422mtuPMxKzya-s0/view?usp=sharing)
+
+## Features
+- Admin authentication
+- Dashboard with real‑time statistics
+- User management (view, delete)
+- Mentor application approval/rejection
+- Opportunities & community post moderation
+- Context‑aware search
+- Reports with visual charts
+
+## How to Run Locally
+1. Clone the repository:
+   git clone https://github.com/your-username/your-repo-name.git
+2. Open the folder and double‑click `admin.html`, or open it with a live server (no build tools required).
+3. Log in using the default admin credentials:
+   - **Email:** m.byusa@alustudent.com
+   - **Password:** SkillBridgeAfrica@1
+
+## Tech Stack
+- HTML5, CSS3, vanilla JavaScript
+- LocalStorage for data persistence (prototype)
+
+## Project Structure
+- `admin.html` – The entire application (all screens included)
+
+## SRS Document
+[Software Requirements Specification](link-to-srs)
+
+## License
+MIT
+
 1. **Clone or download** the project files. You should have these HTML files:
    - `index.html` (homepage)
    - `youth.html` (youth platform)
