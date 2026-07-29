@@ -77,7 +77,7 @@
     }
     .topbar h1 { font-size: 20px; font-weight: 600; flex: 1; }
     .search-box {
-      display: flex; align-items: center; background: var(--gray-100); border-radius: var(--radius-sm);
+      position: relative; display: flex; align-items: center; background: var(--gray-100); border-radius: var(--radius-sm);
       border: 1px solid transparent; padding: 8px 14px; gap: 8px; transition: all var(--transition);
       max-width: 280px; flex: 1;
     }
@@ -183,7 +183,6 @@
 </head>
 <body>
   <div class="wrap">
-    <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="logo"><i class="ti ti-shield"></i><span>SkillBridge<small style="display:block;font-size:12px;opacity:0.7">Admin</small></span></div>
       <div class="nav-section">
@@ -210,7 +209,6 @@
       </div>
     </aside>
 
-    <!-- MAIN -->
     <div class="main">
       <div class="topbar">
         <h1 id="page-title">Dashboard</h1>
@@ -223,28 +221,19 @@
         <button class="btn btn-danger" id="logoutBtn"><i class="ti ti-logout"></i> Logout</button>
       </div>
       <div class="content" id="contentArea">
-
-        <!-- AUTH SCREEN -->
         <div id="auth-screen" class="auth-container">
           <div class="auth-card">
             <i class="ti ti-shield main-icon"></i>
             <h2>Admin Login</h2>
             <p style="color:var(--t3); margin-bottom:1.5rem;">Enter credentials to access dashboard</p>
             <form id="adminLoginForm">
-              <div class="form-group">
-                <label>Email</label>
-                <input type="email" id="admin-email" value="m.byusa@alustudent.com" required>
-              </div>
-              <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="admin-password" value="SkillBridgeAfrica@1" required>
-              </div>
+              <div class="form-group"><label>Email</label><input type="email" id="admin-email" value="m.byusa@alustudent.com" required></div>
+              <div class="form-group"><label>Password</label><input type="password" id="admin-password" value="SkillBridgeAfrica@1" required></div>
               <button type="submit" class="btn-auth">Log In</button>
             </form>
           </div>
         </div>
 
-        <!-- DASHBOARD SCREEN -->
         <div class="screen" id="screen-dashboard">
           <div class="grid4" id="stats-grid">
             <div class="stat-card"><div class="stat-num" id="stat-users">0</div><div class="stat-lbl">Total Users</div></div>
@@ -253,76 +242,17 @@
             <div class="stat-card"><div class="stat-num" id="stat-opps">0</div><div class="stat-lbl">Opportunities</div></div>
           </div>
           <div class="grid2">
-            <div class="card">
-              <div class="sec-title" style="font-weight:600; margin-bottom:12px;">Recent Mentor Applications</div>
-              <div id="dash-pending-mentors"></div>
-            </div>
-            <div class="card">
-              <div class="sec-title" style="font-weight:600; margin-bottom:12px;">Recent Activity</div>
-              <div id="dash-activity"></div>
-            </div>
+            <div class="card"><div style="font-weight:600; margin-bottom:12px;">Recent Mentor Applications</div><div id="dash-pending-mentors"></div></div>
+            <div class="card"><div style="font-weight:600; margin-bottom:12px;">Recent Activity</div><div id="dash-activity"></div></div>
           </div>
         </div>
 
-        <!-- USERS SCREEN -->
-        <div class="screen" id="screen-users">
-          <h2 style="margin-bottom: 1rem;">All Users</h2>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Actions</th></tr></thead>
-              <tbody id="users-table-body"></tbody>
-            </table>
-          </div>
-        </div>
+        <div class="screen" id="screen-users"><h2 style="margin-bottom:1rem;">All Users</h2><div class="table-wrap"><table><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Actions</th></tr></thead><tbody id="users-table-body"></tbody></table></div></div>
+        <div class="screen" id="screen-mentors"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.8rem;margin-bottom:1rem;"><h2>Mentor Applications & Management</h2><span id="pending-mentor-count" style="font-size:14px;color:var(--t3);">0 pending</span></div><div class="table-wrap"><table><thead><tr><th>Name</th><th>Email</th><th>Expertise</th><th>Status</th><th>Actions</th></tr></thead><tbody id="mentors-table-body"></tbody></table></div></div>
+        <div class="screen" id="screen-opportunities"><h2 style="margin-bottom:1rem;">All Opportunities</h2><div class="table-wrap"><table><thead><tr><th>Title</th><th>Company</th><th>Type</th><th>Posted By</th><th>Actions</th></tr></thead><tbody id="opps-table-body"></tbody></table></div></div>
+        <div class="screen" id="screen-courses"><h2 style="margin-bottom:1rem;">All Courses</h2><div class="table-wrap"><table><thead><tr><th>Title</th><th>Instructor</th><th>Category</th><th>Duration</th><th>Actions</th></tr></thead><tbody id="courses-table-body"></tbody></table></div></div>
+        <div class="screen" id="screen-community"><h2 style="margin-bottom:1rem;">Community Posts</h2><div class="table-wrap"><table><thead><tr><th>Author</th><th>Content</th><th>Likes</th><th>Comments</th><th>Actions</th></tr></thead><tbody id="posts-table-body"></tbody></table></div></div>
 
-        <!-- MENTORS SCREEN -->
-        <div class="screen" id="screen-mentors">
-          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.8rem;margin-bottom:1rem;">
-            <h2>Mentor Applications & Management</h2>
-            <span id="pending-mentor-count" style="font-size:14px;color:var(--t3);">0 pending</span>
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Name</th><th>Email</th><th>Expertise</th><th>Status</th><th>Actions</th></tr></thead>
-              <tbody id="mentors-table-body"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- OPPORTUNITIES SCREEN -->
-        <div class="screen" id="screen-opportunities">
-          <h2 style="margin-bottom: 1rem;">All Opportunities</h2>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Title</th><th>Company</th><th>Type</th><th>Posted By</th><th>Actions</th></tr></thead>
-              <tbody id="opps-table-body"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- COURSES SCREEN -->
-        <div class="screen" id="screen-courses">
-          <h2 style="margin-bottom: 1rem;">All Courses</h2>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Title</th><th>Instructor</th><th>Category</th><th>Duration</th><th>Actions</th></tr></thead>
-              <tbody id="courses-table-body"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- COMMUNITY SCREEN -->
-        <div class="screen" id="screen-community">
-          <h2 style="margin-bottom: 1rem;">Community Posts</h2>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Author</th><th>Content</th><th>Likes</th><th>Comments</th><th>Actions</th></tr></thead>
-              <tbody id="posts-table-body"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- CALENDAR SCREEN -->
         <div class="screen" id="screen-calendar">
           <div class="calendar-header">
             <button class="btn btn-outline btn-sm" id="prevMonthBtn"><i class="ti ti-chevron-left"></i></button>
@@ -333,21 +263,14 @@
           <div style="margin-top: 1rem; font-size: 13px; color: var(--t3);">Click on an event to delete or move it.</div>
         </div>
 
-        <!-- REPORTS SCREEN -->
         <div class="screen" id="screen-reports">
           <h2 style="margin-bottom: 1rem;">Reports & Insights</h2>
           <div class="grid2">
-            <div class="card">
-              <div class="sec-title" style="font-weight:600;">User Growth</div>
-              <div id="user-growth-chart" style="height:200px;display:flex;align-items:flex-end;gap:8px;padding-top:12px;"></div>
-            </div>
-            <div class="card">
-              <div class="sec-title" style="font-weight:600;">Mentor Status</div>
-              <div id="mentor-status-chart" style="height:200px;display:flex;align-items:flex-end;gap:8px;padding-top:12px;"></div>
-            </div>
+            <div class="card"><div style="font-weight:600;">User Growth</div><div id="user-growth-chart" style="height:200px;display:flex;align-items:flex-end;gap:8px;padding-top:12px;"></div></div>
+            <div class="card"><div style="font-weight:600;">Mentor Status</div><div id="mentor-status-chart" style="height:200px;display:flex;align-items:flex-end;gap:8px;padding-top:12px;"></div></div>
           </div>
           <div class="card" style="margin-top:16px;">
-            <div class="sec-title" style="font-weight:600;">Platform Summary</div>
+            <div style="font-weight:600;">Platform Summary</div>
             <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;">
               <div><strong>Total Users:</strong> <span id="r-users">0</span></div>
               <div><strong>Total Mentors:</strong> <span id="r-mentors">0</span></div>
@@ -359,14 +282,12 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 
   <div class="toast" id="toast"><i class="ti ti-check"></i> <span id="toast-msg"></span></div>
 
-  <!-- Event edit modal -->
   <div id="eventModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);align-items:center;justify-content:center;z-index:2000;">
     <div class="card" style="max-width:400px;width:90%;padding:1.5rem;background:white;">
       <h3 id="eventModalTitle">Edit Event</h3>
@@ -381,33 +302,51 @@
   </div>
 
   <script>
+    // ===== SAFE LOCAL STORAGE HELPERS =====
+    function safeParse(key, fallback = []) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch (e) {
+        console.warn(`Corrupted data for key "${key}". Resetting to fallback.`, e);
+        return fallback;
+      }
+    }
+    function safeSet(key, value) {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+      } catch (e) {
+        console.error(`Failed to save "${key}" to localStorage.`, e);
+      }
+    }
+
     // ==================== AUTH & STORAGE ====================
     const ADMIN_EMAIL = 'm.byusa@alustudent.com';
     const ADMIN_PASSWORD = 'SkillBridgeAfrica@1';
 
-    function getUsers() { return JSON.parse(localStorage.getItem('sb_users')) || []; }
-    function saveUsers(u) { localStorage.setItem('sb_users', JSON.stringify(u)); }
-    function getSession() { return JSON.parse(localStorage.getItem('sb_auth_user')); }
-    function setSession(u) { localStorage.setItem('sb_auth_user', JSON.stringify(u)); }
+    function getUsers() { return safeParse('sb_users', []); }
+    function saveUsers(u) { safeSet('sb_users', u); }
+    function getSession() { return safeParse('sb_auth_user', null); }
+    function setSession(u) { safeSet('sb_auth_user', u); }
     function clearSession() { localStorage.removeItem('sb_auth_user'); }
 
     const MENTORS_KEY = 'sb_mentors';
-    function getMentorsArray() { return JSON.parse(localStorage.getItem(MENTORS_KEY)) || []; }
-    function saveMentorsArray(arr) { localStorage.setItem(MENTORS_KEY, JSON.stringify(arr)); }
+    function getMentorsArray() { return safeParse(MENTORS_KEY, []); }
+    function saveMentorsArray(arr) { safeSet(MENTORS_KEY, arr); }
 
     const OPP_KEY = 'sb_opps';
     const POST_KEY = 'sb_posts';
     const COURSES_KEY = 'sb_courses';
     const EVENTS_KEY = 'sb_events';
 
-    function getOpportunities() { return JSON.parse(localStorage.getItem(OPP_KEY)) || []; }
-    function saveOpportunities(d) { localStorage.setItem(OPP_KEY, JSON.stringify(d)); }
-    function getCommunityPosts() { return JSON.parse(localStorage.getItem(POST_KEY)) || []; }
-    function saveCommunityPosts(d) { localStorage.setItem(POST_KEY, JSON.stringify(d)); }
-    function getCourses() { return JSON.parse(localStorage.getItem(COURSES_KEY)) || []; }
-    function saveCourses(d) { localStorage.setItem(COURSES_KEY, JSON.stringify(d)); }
-    function getEvents() { return JSON.parse(localStorage.getItem(EVENTS_KEY)) || []; }
-    function saveEvents(d) { localStorage.setItem(EVENTS_KEY, JSON.stringify(d)); }
+    function getOpportunities() { return safeParse(OPP_KEY, []); }
+    function saveOpportunities(d) { safeSet(OPP_KEY, d); }
+    function getCommunityPosts() { return safeParse(POST_KEY, []); }
+    function saveCommunityPosts(d) { safeSet(POST_KEY, d); }
+    function getCourses() { return safeParse(COURSES_KEY, []); }
+    function saveCourses(d) { safeSet(COURSES_KEY, d); }
+    function getEvents() { return safeParse(EVENTS_KEY, []); }
+    function saveEvents(d) { safeSet(EVENTS_KEY, d); }
 
     function toast(msg) {
       const t = document.getElementById('toast');
@@ -437,8 +376,9 @@
 
     function checkAuth() {
       const sess = getSession();
-      if (sess && sess.role === 'admin' && sess.email === ADMIN_EMAIL) showDashboard();
-      else {
+      if (sess && sess.role === 'admin' && sess.email === ADMIN_EMAIL) {
+        showDashboard();
+      } else {
         document.getElementById('auth-screen').style.display = 'flex';
         document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
       }
@@ -446,9 +386,10 @@
 
     function showDashboard() {
       document.getElementById('auth-screen').style.display = 'none';
-      document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
-      document.getElementById('screen-dashboard').style.display = 'block';
-      document.getElementById('screen-dashboard').classList.add('active');
+      document.querySelectorAll('.screen').forEach(s => { s.style.display = 'none'; s.classList.remove('active'); });
+      const dashboard = document.getElementById('screen-dashboard');
+      dashboard.style.display = 'block';
+      dashboard.classList.add('active');
       document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
       document.querySelector('.nav-item[data-screen="dashboard"]').classList.add('active');
       document.getElementById('page-title').innerText = 'Dashboard';
@@ -456,7 +397,9 @@
       document.getElementById('sidebarName').innerText = 'Admin';
       document.getElementById('sidebarRole').innerText = 'Administrator';
       document.getElementById('sidebarAuthIcon').className = 'ti ti-logout';
-      document.getElementById('sidebarUserBtn').onclick = () => { if(confirm('Logout?')){clearSession();location.reload();} };
+      document.getElementById('sidebarUserBtn').onclick = () => {
+        if (confirm('Logout?')) { clearSession(); location.reload(); }
+      };
       updateSearchPlaceholder('dashboard');
       refreshAll();
     }
@@ -468,15 +411,14 @@
       document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
       const navBtn = document.querySelector(`.nav-item[data-screen="${screen}"]`);
       if (navBtn) navBtn.classList.add('active');
-      document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
+      document.querySelectorAll('.screen').forEach(s => { s.style.display = 'none'; s.classList.remove('active'); });
       const target = document.getElementById(`screen-${screen}`);
       if (target) { target.style.display = 'block'; target.classList.add('active'); }
-      const titles = {
+      document.getElementById('page-title').innerText = {
         dashboard:'Dashboard', users:'Users', mentors:'Mentors',
         opportunities:'Opportunities', courses:'Courses', community:'Community',
         calendar:'Calendar', reports:'Reports'
-      };
-      document.getElementById('page-title').innerText = titles[screen] || screen;
+      }[screen] || screen;
       updateSearchPlaceholder(screen);
       if (screen === 'dashboard') refreshDashboard();
       else if (screen === 'users') renderUsers();
@@ -498,16 +440,7 @@
 
     function updateSearchPlaceholder(screen) {
       const input = document.getElementById('searchInput');
-      const map = {
-        dashboard: 'Search everything...',
-        users: 'Search users...',
-        mentors: 'Search mentors...',
-        opportunities: 'Search opportunities...',
-        courses: 'Search courses...',
-        community: 'Search posts...',
-        calendar: 'Search events...',
-        reports: ''
-      };
+      const map = { dashboard:'Search everything...', users:'Search users...', mentors:'Search mentors...', opportunities:'Search opportunities...', courses:'Search courses...', community:'Search posts...', calendar:'Search events...', reports:'' };
       input.placeholder = map[screen] || 'Search...';
       if (screen === 'reports') input.placeholder = 'Search disabled on reports';
     }
@@ -533,15 +466,10 @@
 
     function globalSearch(query) {
       const results = [];
-      // Users
       getUsers().forEach(u => { if (u.name?.toLowerCase().includes(query) || u.email?.toLowerCase().includes(query)) results.push({ type:'User', title:`${u.name} (${u.email})`, screen:'users', id: u.email }); });
-      // Mentors
       getMentorsArray().forEach(m => { if (m.name?.toLowerCase().includes(query) || m.email?.toLowerCase().includes(query)) results.push({ type:'Mentor', title:`${m.name} (${m.email})`, screen:'mentors', id: m.email }); });
-      // Opportunities
       getOpportunities().forEach(o => { if (o.title?.toLowerCase().includes(query) || o.company?.toLowerCase().includes(query)) results.push({ type:'Opportunity', title:o.title, screen:'opportunities', id: o.id }); });
-      // Courses
       getCourses().forEach(c => { if (c.title?.toLowerCase().includes(query) || c.instructor?.toLowerCase().includes(query)) results.push({ type:'Course', title:c.title, screen:'courses', id: c.id }); });
-      // Posts
       getCommunityPosts().forEach(p => { if (p.content?.toLowerCase().includes(query) || p.author?.toLowerCase().includes(query)) results.push({ type:'Post', title:p.content?.substring(0,50), screen:'community', id: p.id }); });
 
       if (results.length === 0) {
@@ -559,12 +487,9 @@
         searchDropdown.innerHTML = html;
         document.querySelectorAll('.result-item').forEach(el => {
           el.addEventListener('click', function() {
-            const scr = this.dataset.screen;
-            const id = this.dataset.id;
-            navTo(scr);
+            navTo(this.dataset.screen);
             searchInput.value = '';
             searchDropdown.classList.remove('show');
-            // optionally highlight row if possible (later)
           });
         });
       }
@@ -573,22 +498,20 @@
 
     function filterTable(query) {
       const screen = currentScreen;
-      let tbodyId, rows;
+      let tbodyId;
       switch(screen) {
         case 'users': tbodyId = 'users-table-body'; break;
         case 'mentors': tbodyId = 'mentors-table-body'; break;
         case 'opportunities': tbodyId = 'opps-table-body'; break;
         case 'courses': tbodyId = 'courses-table-body'; break;
         case 'community': tbodyId = 'posts-table-body'; break;
-        case 'calendar': /* search events */ renderCalendar(query); return;
+        case 'calendar': renderCalendar(query); return;
         default: return;
       }
       const tbody = document.getElementById(tbodyId);
       if (!tbody) return;
-      const rows = tbody.querySelectorAll('tr');
-      rows.forEach(row => {
-        const text = row.textContent.toLowerCase();
-        row.style.display = text.includes(query) ? '' : 'none';
+      tbody.querySelectorAll('tr').forEach(row => {
+        row.style.display = row.textContent.toLowerCase().includes(query) ? '' : 'none';
       });
     }
 
@@ -704,14 +627,12 @@
       const opps = getOpportunities();
       const tbody = document.getElementById('opps-table-body');
       if(opps.length===0){ tbody.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--t3);">No opportunities.</td></tr>'; return; }
-      tbody.innerHTML = opps.map(o =>
-        `<tr><td>${o.title}</td><td>${o.company}</td><td><span class="badge badge-info">${o.type}</span></td><td>${o.postedBy||'N/A'}</td><td><button class="btn btn-danger btn-sm" onclick="deleteOpportunity('${o.id}')"><i class="ti ti-trash"></i></button></td></tr>`
-      ).join('');
+      tbody.innerHTML = opps.map(o => `<tr><td>${o.title}</td><td>${o.company}</td><td><span class="badge badge-info">${o.type}</span></td><td>${o.postedBy||'N/A'}</td><td><button class="btn btn-danger btn-sm" onclick="deleteOpportunity('${o.id}')"><i class="ti ti-trash"></i></button></td></tr>`).join('');
     }
     function deleteOpportunity(id) {
       if(!confirm('Delete this opportunity?')) return;
-      let opps = getOpportunities().filter(o => o.id !== id);
-      saveOpportunities(opps); renderOpportunities(); refreshDashboard(); toast('Opportunity deleted.');
+      saveOpportunities(getOpportunities().filter(o => o.id !== id));
+      renderOpportunities(); refreshDashboard(); toast('Opportunity deleted.');
     }
 
     // ==================== COURSES ====================
@@ -719,14 +640,12 @@
       const courses = getCourses();
       const tbody = document.getElementById('courses-table-body');
       if(courses.length===0){ tbody.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--t3);">No courses.</td></tr>'; return; }
-      tbody.innerHTML = courses.map(c =>
-        `<tr><td>${c.title}</td><td>${c.instructor||'N/A'}</td><td>${c.category||''}</td><td>${c.duration||''}</td><td><button class="btn btn-danger btn-sm" onclick="deleteCourse('${c.id}')"><i class="ti ti-trash"></i></button></td></tr>`
-      ).join('');
+      tbody.innerHTML = courses.map(c => `<tr><td>${c.title}</td><td>${c.instructor||'N/A'}</td><td>${c.category||''}</td><td>${c.duration||''}</td><td><button class="btn btn-danger btn-sm" onclick="deleteCourse('${c.id}')"><i class="ti ti-trash"></i></button></td></tr>`).join('');
     }
     function deleteCourse(id) {
       if(!confirm('Delete this course?')) return;
-      let courses = getCourses().filter(c => c.id !== id);
-      saveCourses(courses); renderCourses(); refreshDashboard(); toast('Course deleted.');
+      saveCourses(getCourses().filter(c => c.id !== id));
+      renderCourses(); refreshDashboard(); toast('Course deleted.');
     }
 
     // ==================== COMMUNITY ====================
@@ -734,14 +653,12 @@
       const posts = getCommunityPosts();
       const tbody = document.getElementById('posts-table-body');
       if(posts.length===0){ tbody.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--t3);">No posts.</td></tr>'; return; }
-      tbody.innerHTML = posts.map(p =>
-        `<tr><td>${p.author||'Unknown'}</td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${p.content||''}</td><td>${p.likes||0}</td><td>${(p.comments||[]).length}</td><td><button class="btn btn-danger btn-sm" onclick="deletePost('${p.id}')"><i class="ti ti-trash"></i></button></td></tr>`
-      ).join('');
+      tbody.innerHTML = posts.map(p => `<tr><td>${p.author||'Unknown'}</td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${p.content||''}</td><td>${p.likes||0}</td><td>${(p.comments||[]).length}</td><td><button class="btn btn-danger btn-sm" onclick="deletePost('${p.id}')"><i class="ti ti-trash"></i></button></td></tr>`).join('');
     }
     function deletePost(id) {
       if(!confirm('Delete this post?')) return;
-      let posts = getCommunityPosts().filter(p => p.id !== id);
-      saveCommunityPosts(posts); renderCommunity(); refreshDashboard(); toast('Post deleted.');
+      saveCommunityPosts(getCommunityPosts().filter(p => p.id !== id));
+      renderCommunity(); refreshDashboard(); toast('Post deleted.');
     }
 
     // ==================== CALENDAR ====================
@@ -754,41 +671,29 @@
       document.getElementById('calendarMonthTitle').innerText = new Date(calYear, calMonth).toLocaleString('default', { month:'long', year:'numeric' });
       const grid = document.getElementById('calendarGrid');
       const daysInMonth = new Date(calYear, calMonth+1, 0).getDate();
-      const firstDay = new Date(calYear, calMonth, 1).getDay(); // 0=Sun
-      const events = getEvents().filter(ev => {
-        if (filter) return ev.title?.toLowerCase().includes(filter);
-        return true;
-      });
+      const firstDay = new Date(calYear, calMonth, 1).getDay();
+      const events = getEvents().filter(ev => filter ? ev.title?.toLowerCase().includes(filter) : true);
       let html = '';
-      const dayHeaders = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-      dayHeaders.forEach(d => html += `<div class="cal-day-header">${d}</div>`);
+      ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].forEach(d => html += `<div class="cal-day-header">${d}</div>`);
       for (let i = 0; i < firstDay; i++) html += '<div class="cal-day"></div>';
       for (let d = 1; d <= daysInMonth; d++) {
         const dateStr = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-        const todayStr = new Date().toISOString().slice(0,10);
-        const isToday = dateStr === todayStr;
+        const isToday = dateStr === new Date().toISOString().slice(0,10);
         let dayEvents = events.filter(ev => ev.start?.startsWith(dateStr));
         let eventsHtml = dayEvents.map(ev => {
           const time = ev.start?.slice(11,16) || '';
           return `<div class="event-chip ${ev.type==='course'?'course':''}" data-eventid="${ev.id}" title="${ev.title} ${time}">${time?time+' ':''}${ev.title}</div>`;
         }).join('');
-        html += `<div class="cal-day${isToday?' today':''}">
-          <div class="day-num">${d}</div>${eventsHtml}
-        </div>`;
+        html += `<div class="cal-day${isToday?' today':''}"><div class="day-num">${d}</div>${eventsHtml}</div>`;
       }
       grid.innerHTML = html;
       document.querySelectorAll('.event-chip').forEach(chip => {
-        chip.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const evId = chip.dataset.eventid;
-          openEventModal(evId);
-        });
+        chip.addEventListener('click', (e) => { e.stopPropagation(); openEventModal(chip.dataset.eventid); });
       });
     }
 
     function openEventModal(eventId) {
-      const events = getEvents();
-      const ev = events.find(e => e.id === eventId);
+      const ev = getEvents().find(e => e.id === eventId);
       if (!ev) return;
       currentEventId = eventId;
       document.getElementById('eventModalTitle').innerText = ev.title;
@@ -812,8 +717,7 @@
     });
     document.getElementById('deleteEventBtn').addEventListener('click', () => {
       if (!currentEventId || !confirm('Delete this event?')) return;
-      let events = getEvents().filter(e => e.id !== currentEventId);
-      saveEvents(events);
+      saveEvents(getEvents().filter(e => e.id !== currentEventId));
       document.getElementById('eventModal').style.display = 'none';
       renderCalendar();
       toast('Event deleted.');
@@ -821,7 +725,6 @@
     document.getElementById('cancelEventBtn').addEventListener('click', () => {
       document.getElementById('eventModal').style.display = 'none';
     });
-
     document.getElementById('prevMonthBtn').addEventListener('click', () => {
       calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCalendar();
     });
