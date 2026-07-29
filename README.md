@@ -141,7 +141,7 @@ A fully responsive admin dashboard for managing users, mentors, opportunities, a
 
 ## How to Run Locally
 1. Clone the repository:
-   git clone https://github.com/your-username/your-repo-name.git
+   git clone https://github.com/BYUSAA/skillbridge_africa
 2. Open the folder and double‑click `admin.html`, or open it with a live server (no build tools required).
 3. Log in using the default admin credentials:
    - **Email:** m.byusa@alustudent.com
